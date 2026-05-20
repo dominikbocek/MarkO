@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <title>Výsledky podle okrsků pro </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- d3.js -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <!-- popisek mapy -->
+    <script src="script.js"></script>
+    <!-- společné pro okrskové vítěze i samostatné mapy -->
+    <script src="/společné/protektorát.js" defer></script>
+    <script src="/společné/stáhnout_mapu.js" defer></script>
+    <link rel="stylesheet" href="/společné/styl.css">
+    <!-- specifické pro volby, pouze pro okrskové vítěze -->
+    <script src="legenda.js" defer></script>
+    <script src="parametry.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <!-- ikony -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body id="body">
+    <section>
+      <figure>
+        <div style="width: 100%;">
+          <svg id="mapa" viewbox="0 -200 1450 750"></svg>
+          <svg id="sudety" viewbox="0 -200 1450 750"></svg>
+        </div>
+      </figure>
+      <div id="sudety-prepinac">
+        <input type="checkbox" name="zobrazit-sudety" id="zobrazit-sudety" onchange="document.querySelector('#sudety').style.display = this.checked ? 'inline' : 'none'; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - Sudety'} else {nazev = nazev.replace(' - Sudety', '')}">
+        <label for="zobrazit-sudety">Zobrazit Sudety</label>
+      </div>
+      <button tabindex="1">
+        <svg stroke-linejoin="round" stroke-linecap="round" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+          <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
+          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+          <path d="M7 11l5 5l5 -5"></path>
+          <path d="M12 4l0 12"></path>
+        </svg>
+        <span>Stáhnout obrázek</span>
+      </button>
+      <a id="datahub" style="display: none; z-index: 1;position: absolute;right: 0px;bottom: 0;" target="_blank" href="https://datahub.natur.cuni.cz" style="display: none;"><img height="30px" src="/UK.svg"></a>
+    </section>
+    <script>
+      //vykreslení mapy
+      var svg = d3.select("#mapa"),
+      width = +svg.attr("width"),
+      height = +svg.attr("height");
+
+      var projection = d3.geoMercator()
+          .center([15.34, 49.75]) //střed ČR
+          .scale(8000) // měřítko, nastavíme dle potřeb
+          //.translate([560, (height / 2)])
+
+      var path = d3.geoPath()
+          .projection(projection);
+
+      d3.json(data, function(error, data) {
+        d3.json(strany, function(err, parties) {
+          if (error) throw error;
+
+          var subunits = topojson.feature(data, data.objects.tracts) // obce
+
+          // vykreslíme obce
+          svg.selectAll(".subunit")
+              .data(subunits.features)
+              .enter().append("path")
+              .attr("class", function(d) { return "subunit " + d.id; })
+              //.attr("fill", function(d) { return color(d.properties.hustota); })
+              .attr("fill", function(d) {
+                let mx = 0
+                let px = ''
+                for (let i = 1; i <= 200; i++) {// v případě, že počet subjektů převýší uvedené číslo, je potřeba ho zvýšit, jinak budou subjekty nad limitem ignorovány
+                  let v = parseInt(d.properties[ i.toString() ])
+                  if (v > mx) {
+                    mx = v
+                    px = i
+                  }
+                }
+                if (px == '') {
+                    return "#aaa"
+                } else {
+                  return parties[px]['color']
+                }
+              })
+              .attr("stroke", "#888")
+              .attr("stroke-width", "0.25")
+              .attr("stroke-linejoin", "round")
+              .attr("d", path)
+        })
+      });
+
+      //popisek
+      var g = svg.append("g")
+        .attr("class", "key")
+        .attr("transform", `translate(300,480)`);
+
+      g.append("text")
+        .attr("class", "caption")
+        //.attr("x", x.range()[0])
+        .attr("y", 50)
+        .attr("fill", "#000")
+        .attr("font-size", "20px")
+        .attr("font-style", "italic")
+        .attr("text-anchor", "start")
+        .attr("font-family", "serif")
+        .text("Mapa volebních výsledků pro " + nazev);
+
+      document.querySelector("title").innerText += nazev
+    </script>
+  </body>
+</html>

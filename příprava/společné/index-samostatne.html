@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <title>Mapy volebních výsledků podle</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- d3.js -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <!-- popisek mapy -->
+    <script src="../script.js"></script>
+    <!-- společné pro okrskové vítěze i samostatné mapy -->
+    <script src="/společné/protektorát.js" defer></script>
+    <script src="/společné/stáhnout_mapu.js" defer></script>
+    <link rel="stylesheet" href="/společné/styl.css">
+    <!-- specifické pro volby, pouze pro samostatné mapy -->
+    <script src="../menu.js" defer></script>
+    <script src="script.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <!-- ikony -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+      body {
+        font-family: 'Source Serif 4', serif;
+      }
+    </style>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const hledanastrana = urlParams.get('strana');
+      const rozsah = (urlParams.get('rozsah') === null) ? "standard" : urlParams.get('rozsah');
+    </script>
+  </head>
+  <body id="body">
+    <section>
+      <figure>
+        <div style="width: 100%;">
+          <svg xmlns="http://www.w3.org/2000/svg" id="mapa" viewbox="0 -150 1450 750"></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" id="sudety" viewbox="0 -150 1450 750"></svg>
+        </div>
+      </figure>
+      <div id="sudety-prepinac">
+        <input type="checkbox" name="zobrazit-sudety" id="zobrazit-sudety" onchange="document.querySelector('#sudety').style.display = this.checked ? 'inline' : 'none'; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - Sudety'} else {nazev = nazev.replace(' - Sudety', '')}">
+        <label for="zobrazit-sudety">Zobrazit Sudety</label>
+      </div>
+      <button tabindex="1">
+        <svg stroke-linejoin="round" stroke-linecap="round" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+          <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
+          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+          <path d="M7 11l5 5l5 -5"></path>
+          <path d="M12 4l0 12"></path>
+        </svg>
+        <span>Stáhnout obrázek</span>
+      </button>
+      <select id="vyber" onchange="location.href='?strana=' + this.value">
+        <option disabled selected style="display: none">vyber</option>
+      </select>
+      <select id="rozsah" onchange="location.href='?strana=' + hledanastrana + '&rozsah=' + this.value">
+        <option disabled selected style="display: none">Vyber procentuální rozsah</option>
+        <option value="velmimale">Velmi malé</option>
+        <option value="male">Malé</option>
+        <option value="standard">Standard</option>
+        <option value="velke">Velké</option>
+      </select>
+      <a id="datahub" style="display: none; z-index: 1;position: absolute;right: 0px;bottom: 0;" target="_blank" href="https://datahub.natur.cuni.cz"><img height="30px" src="/UK.svg"></a>
+    </section>
+    <script>
+      var standard = d3.scaleThreshold()
+        //.domain([0, 10, 20, 30, 40, 50])
+        .domain([0, 4, 8, 12, 16, 20, 24, 28, 32])
+        .range(d3.schemeOrRd[9]);
+
+      var male = d3.scaleThreshold()
+        //.domain([0, 10, 20, 30, 40, 50])
+        .domain([0, 5, 10, 15, 20, 25])
+        .range(d3.schemeOrRd[6]);
+
+      var velmimale = d3.scaleThreshold()
+        //.domain([0, 10, 20, 30, 40, 50])
+        .domain([0, 2, 4, 6, 8, 10])
+        .range(d3.schemeOrRd[6]);
+
+      var velke = d3.scaleThreshold()
+        //.domain([0, 10, 20, 30, 40, 50])
+        .domain([0, 10, 20, 30, 40, 50])
+        .range(d3.schemeOrRd[6]);
+
+      // vykreslení mapy
+      var svg = d3.select("#mapa"),
+          width = +svg.attr("width"),
+          height = +svg.attr("height");
+
+          var projection = d3.geoMercator()
+              .center([15.34, 49.75]) //střed ČR
+              .scale(7500) // měřítko, nastavíme dle potřeb
+
+      var path = d3.geoPath()
+          .projection(projection);
+
+      // měřítko - barevná škála
+      // rozsah procentuálního zisku hlasů
+      var color = eval(rozsah)
+      if(color !== velmimale && color !== male && color !== standard && color !== velke) {color = standard}
+
+
+    //legenda
+      var x = d3.scaleLinear()
+        .domain([0, color.domain()[color.domain().length - 1]])
+        .rangeRound([100, 750]);
+
+      var g = svg.append("g")
+        .attr("class", "key")
+        .attr("transform", `translate(100,570)`);
+
+      g.selectAll("rect")
+      .data(color.range().map(function(d) {
+          d = color.invertExtent(d);
+          if (d[0] == null) d[0] = x.domain()[0];
+          if (d[1] == null) d[1] = x.domain()[1];
+          return d;
+        }))
+      .enter().append("rect")
+        .attr("height", 8)
+        .attr("x", function(d) { return x(d[0]); })
+        .attr("width", function(d) { return x(d[1]) - x(d[0]); })
+        .attr("fill", function(d) { return color(d[0]); });
+
+      g.append("text")
+        .attr("class", "caption")
+        .attr("x", x.range()[0])
+        .attr("y", -6)
+        .attr("fill", "#000")
+        .attr("text-anchor", "start")
+        .attr("font-weight", "bold")
+        .text("Procentuální zisk ve volebních okrscích");
+
+        g.call(d3.axisBottom(x)
+          .tickSize(13)
+          .tickValues(color.domain()))
+          .attr("transform", "translate(100, 520)")
+        .select(".domain")
+          .remove();
+
+      d3.json(hledanastrana + ".csv-volebni_okrsky-simple-data-topo.json", function(error, data) {
+        if (error && urlParams.get('strana') !== null) {
+          console.error('Chyba při načítání dat:', error);
+          document.querySelector("svg").innerHTML = "<text x='50%' y='50%' text-anchor='middle' transform='translate(-50,-50)' fill='red' font-size='16'>Chyba při načítání dat. Soubor pravděpodobně neexistuje.</text>";
+          return;
+        } else if (error && urlParams.get('strana') === null) {
+          console.error('Chyba při načítání dat:', error);
+          document.querySelector("svg").innerHTML = "<text x='50%' y='50%' text-anchor='middle' transform='translate(-50,-50)' fill='black' font-size='16'>Vyberte ze seznamu níže požadovaný subjekt.</text>";
+          return;
+        }
+
+      var subunits = topojson.feature(data, data.objects.tracts) // obce
+
+      // vykreslíme obce
+      svg.selectAll(".subunit")
+          .data(subunits.features)
+        .enter().append("path")
+          .attr("class", function(d) { return "subunit " + d.id; })
+          .attr("fill", function(d) { return color(d.properties.PROCENTA); })
+          .attr("stroke", "#888")
+          .attr("stroke-width", "0.25")
+          .attr("stroke-linejoin", "round")
+          .attr("d", path)
+    });
+
+    // popisek menu
+    var popisek = document.getElementById("vyber").querySelector("option")
+    var nadpis = document.querySelector("title")
+    switch(nazev.substring(0,2)) {
+        case "sn":
+          popisek.innerText += " stranu/hnutí/koalici"
+          nadpis.innerHTML += " kandidujících stran/hnutí/koalic"
+          break;
+        case "kr":
+          popisek.innerText += " stranu/hnutí/koalici"
+          nadpis.innerHTML += " kandidujících stran/hnutí/koalic"
+          break;
+        case "pr":
+          popisek.innerText += " kandidáta/„koalici“"
+          nadpis.innerHTML += " kandidátů/„koalic“"
+      }
+    </script>
+  </body>
+</html>
