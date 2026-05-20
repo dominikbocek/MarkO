@@ -75,7 +75,7 @@ Nejsem blázen, abych se trápil vytvářeném plnohodnotné aplikace a platil s
 
 #### Jak to vlastně funguje?
 
-Práci se statistikami má na starosti python knihovna pandas. NodeJS se pak stará o propojení statistických dat a informacích o okrscích a lokální serverové pozadí. A všechno je to dohromady slepeno pomocí Bashe.
+Práci se statistikami má na starosti python knihovna pandas. NodeJS se pak stará o propojení statistických dat a informací o okrscích a lokální serverové pozadí. A všechno je to dohromady slepeno pomocí Bashe.
 ## Varování
 
 Tak jako u jiných aplikací je i tento výplod dodáván tak, jak leží a běží bez záruky na cokoliv. I přesto, že byl testován nespočetněkrát, není vyloučeno, že obsahuje chyby.
