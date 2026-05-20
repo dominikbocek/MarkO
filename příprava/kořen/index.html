@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>MarkO - program na vytváření volebních map</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <!-- ikony -->
+        <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+        <link rel="manifest" href="/icons/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="menu.css">
+        <style>
+            * {
+                color: light-dark(#212529, white);
+            }
+
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+                background: url("mapa.png");
+                background-size: 250%;
+                background-repeat: no-repeat;
+                background-position: 20% 55%;
+                background-attachment: fixed;
+            }
+
+            main {
+                width: inherit;
+                height: inherit;
+                display: flex;
+                position: relative;
+                z-index: 0;
+                background: light-dark(rgb(255 255 255 / 80%), rgb(0 0 0 / 80%));
+                background-attachment: fixed;
+            }
+
+            #faze0 {
+                text-align: center;
+            }
+
+            #faze0 button {
+                margin-top: 20px;
+            }
+
+            #faze3 {
+                position: relative;
+            }
+
+            #faze4 {
+                position: relative;
+            }
+
+            /* Skrytí všech sekcí kromě první */
+            #volby section:not(:first-child) {
+                display: none;
+            }
+
+            section {
+                margin: auto;
+            }
+
+            select {
+                appearance: none;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+            }
+            *:disabled {
+                cursor: not-allowed !important;
+            }
+
+            button {
+                border: solid light-dark(#212529, white) !important;
+                pointer-events: auto !important;
+                color: light-dark(#212529, white) !important;
+            }
+            button:hover:not(button:disabled,.close), #pagination button:active:not(button:disabled,.close), #pagination button:focus:not(button:disabled,.close) {
+                background: light-dark(#212529, white) !important;
+                color: light-dark(white, #212529) !important;
+            }
+
+            #pagination button:hover i {
+                color: light-dark(white, #212529) !important;
+                background: transparent;
+            }
+
+            label {
+                margin-left: 8px;
+            }
+
+            #alerty {
+                position: fixed;
+                max-width: 630px;
+                left: 20px;
+                top: 20px;
+                width: calc(100% - 40px);
+                z-index: 2;
+            }
+
+            #alerty > div > span, #alerty > div > button span {
+                color: #212529;
+            }
+
+            .seznam {
+                padding-left: 0;
+                margin: auto;
+                width: fit-content;
+            }
+
+            #faze4 > i, #faze3 h2 i {
+                cursor: pointer;
+                left: -65px;
+                position: absolute;
+            }
+
+            .close {
+                background: transparent;
+                color: gray;
+                border: none !important;
+                position: absolute;
+                right: 8px;
+                top: 5px;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                line-height: 1;
+            }
+
+            nav a {
+                color: light-dark(#212529, white);
+                text-decoration: none;
+            }
+
+            #zkratkak30, #zkratkak8 {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="alerty">
+            <div id="uspech" class="alert alert-success" role="alert" style="display: none;">
+                <!-- oznámení o úspěšném vytvoření okrskové map/y -->
+                <span></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" onclick="$('#uspech').fadeOut()">&times;</span>
+                </button>
+            </div>
+            <div id="info" class="alert alert-info" role="alert" style="display: none;">
+                <!-- oznámení o existující mapě -->
+                <span></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" onclick="$('#info').fadeOut()">&times;</span>
+                </button>
+            </div>
+            <div id="selhani" class="alert alert-danger" role="alert" style="display: none;">
+                <!-- chybová hlášení -->
+                <span></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" onclick="$('#selhani').fadeOut()">&times;</span>
+                </button>
+            </div>
+        </div>
+        <nav>
+            <a href="/" style="position: fixed;font-size: 30px;font-weight: bold;left: 50%;transform: translateX(-50%); z-index: 1;">MarkO</a>
+            <div style="position: absolute;right: 5px;">
+                <a href="/seznam_voleb" target="_blank"><i class="bi bi-list-ul"></i></a> 
+                <a href="/info.html" target="_blank"><i class="bi bi-info-circle-fill"></i></a>
+            </div>
+        </nav>
+        <main id="volby">
+            <section id="faze0">
+                <h1>Vítejte v&nbsp;programu MarkO!</h1>
+                <p style="display: none;">Nejprve klikněte na tlačítko "Začít" a vyberte volby, které chcete analyzovat. Poté budete mít možnost vytvořit mapu okrskových vítězů a následně se rozhodnout, zda chcete vytvořit mapy voličské podpory nebo koalice.</p>
+                <button onclick="spustit()" class="btn">Začít</button>
+            </section>
+            <section id="faze1"> <!-- vypsat volby -->
+                <h2>Vyberte si ze seznamu voleb</h2>
+                <div style="display: flex;align-items: center;justify-content: center;gap: 10px;box-sizing: border-box;">
+                    <select style="width: fit-content;display: inline;box-sizing: border-box;" class="form-select"></select>
+                    <button style="border: solid 1px;" class="btn">Vytvořit</button>
+                </div>
+            </section>
+            <section id="faze2"> <!-- pouze pro prezidentské volby -->
+                <h2>Vyberte kolo prezidentských voleb</h2>
+                <p class="vybrane_volby">vybrané volby:</p>
+                <div class="tlacitka">
+                    <button class="btn">1. kolo</button>
+                    <button class="btn">2. kolo</button>
+                </div>
+            </section>
+            <section id="faze3"> <!-- výběr mezi mapami voličské podpory a vytvořením koalic -->
+                <h2><i class="bi bi-arrow-left-circle-fill" style="display: none;" onclick="skryt_zobrazit(document.getElementById('vyber2'), document.getElementById('vyber1')); this.style.display = 'none';"></i>Další možnosti</h2>
+                <p class="vybrane_volby">vybrané volby:</p>
+                <p>Co chcete vytvořit?</p>
+                <div class="tlacitka">
+                    <div id="vyber1">
+                        <button class="btn" id="mapy_volicske_podpory">Mapy voličské podpory</button>
+                    </div>
+                    <div id="vyber2" style="display: none;"></div>
+                </div>
+            </section>
+            <section id="faze4" style="height: 100vh"> <!-- zpracování podle výběru výše -->
+                <i class="bi bi-arrow-left-circle-fill" style="top: 50px; font-size: 27px;"></i>
+                <div style="position: relative; top: 50px; height: calc(100% - 50px); overflow: auto;">
+                    <h2></h2>
+                    <p class="vybrane_volby">vybrané volby:</p>
+                    <input type="text" id="zkratkak30" class="form-control" maxlength="30" placeholder="zadejte název koalice (max. 30 písmen)" style="display: none;">
+                    <input type="text" id="zkratkak8" class="form-control" maxlength="8" placeholder="zadejte zkratku koalice (max. 8 písmen)" style="display: none;">
+                    <script>
+                        document.getElementById("zkratkak8").onbeforeinput = (event) => {var nepovoleneznaky = "\"'`;\\|{}"; if(nepovoleneznaky.includes(event.data)) {return false}}
+                        document.getElementById("zkratkak30").onbeforeinput = (event) => {var nepovoleneznaky = "\"'`;\\|{}"; if(nepovoleneznaky.includes(event.data)) {return false}}
+                    </script>
+                    <input type='checkbox' value='' class='form-check-input' id='vsechno' onchange="checkbox_vsechno()"><label for='vsechno'>všechno</label>
+                    <ul class="seznam"></ul>
+                    <div class="tlacitka">
+                        <div id="pagination" style="text-align: center; display: flex; justify-content: center; gap: 5px; margin-top: 10px;">
+                            <button class="dozadu btn"><i class="bi bi-chevron-double-left"></i></button>
+                            <div style="display: flex; gap: 5px;"></div>
+                            <button class="dopredu btn"><i class="bi bi-chevron-double-right"></i></button>
+                        </div>
+                        <button class="btn" id="vytvorit" disabled>Vytvořit</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script>
+            faze0 = document.getElementById("faze0")
+            faze1 = document.getElementById("faze1")
+            faze2 = document.getElementById("faze2")
+            faze3 = document.getElementById("faze3")
+            faze4 = document.getElementById("faze4")
+            nacitacianimace = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Čekejte...</span>'
+        function spustit() {
+            $.ajax({
+                type: "POST",
+                url: "/vypsat-volby",
+                data: {},
+                success: function(data) {
+                    data.forEach(element => {
+                    moznost = document.createElement("option")
+                    moznost.innerHTML = element
+                    moznost.value = element
+                    faze1.querySelector("button").onclick = function() {extrahovat(faze1.querySelector("select").value)}
+                    faze1.querySelector("select").appendChild(moznost)
+                    skryt_zobrazit(faze0, faze1)
+                    })
+                },
+                error: function(xhr, status, error) {
+                    var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
+                    console.error("Vyskytla se chyba ve funkci " + kandidujici_subjekty.name + ": " + error);
+                    document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                },
+                dataType: "json"
+            });
+        }
+
+        function extrahovat(volby) {
+            console.log(volby);
+            faze1.querySelector("button").innerHTML = nacitacianimace
+            faze1.querySelector("select").disabled = "true"
+            faze1.querySelector("button").disabled = "true"
+            $.ajax({
+                type: "POST",
+                url: "/extrahovat",
+                data: {volby: volby},
+                success: function(data) {
+                    var druhvoleb = data
+                    druhvoleb = druhvoleb.replace("\r", "")
+                    druhvoleb = druhvoleb.replace("\n", "")
+                    console.log(druhvoleb)
+                    if(druhvoleb !== "žádné") {
+                        if(druhvoleb == "prezident") {
+                            faze2.querySelector(".vybrane_volby").innerText += ` ${volby}`
+                            prvnikolo = faze2.querySelector(".tlacitka").getElementsByTagName("button")[0]
+                            druhekolo = faze2.querySelector(".tlacitka").getElementsByTagName("button")[1]
+                            prvnikolo.onclick = function() {
+                                prvnikolo.innerHTML = nacitacianimace;
+                                prvnikolo.disabled = "true";
+                                druhekolo.disabled = "true";
+                                $.when(vytvorit_mapy(volby, druhvoleb, "1")).done(function() {
+                                skryt_zobrazit(faze2, faze3);
+                                faze3.querySelector(".vybrane_volby").innerText += ` ${volby}, 1. kolo`
+                                faze4.querySelector(".vybrane_volby").innerText += ` ${volby}, 1. kolo`
+                                })
+                            }
+                            druhekolo.onclick = function() {
+                                druhekolo.innerHTML = nacitacianimace;
+                                druhekolo.disabled = "true";
+                                prvnikolo.disabled = "true";
+                                $.when(vytvorit_mapy(volby, druhvoleb, "2")).done(function() {
+                                skryt_zobrazit(faze2, faze3)
+                                faze3.querySelector(".vybrane_volby").innerText += ` ${volby}, 2. kolo`
+                                faze4.querySelector(".vybrane_volby").innerText += ` ${volby}, 2. kolo`
+                                })
+                            }
+                            skryt_zobrazit(faze1, faze2)
+
+                        } else {
+                            $.when(vytvorit_mapy(volby, druhvoleb)).done(function() {
+                            skryt_zobrazit(faze1, faze3)
+                            faze3.querySelector(".vybrane_volby").innerText += ` ${volby}`
+                            faze4.querySelector(".vybrane_volby").innerText += ` ${volby}`
+                            })
+                        }
+                    }
+                    else {
+                        console.error("Žádná volební data nebyla detekována.")
+                        document.getElementById("selhani").querySelector("span").innerText = "Žádná volební data nebyla detekována."; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
+                    console.error("Vyskytla se chyba ve funkci " + kandidujici_subjekty.name + ": " + error);
+                    document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                }
+            });
+        }
+
+        function vytvorit_mapy(volby, druh_voleb, kolo=".") {
+            return $.ajax({
+                type: "POST",
+                url: "/okrskove-mapy",
+                data: {volby: volby, kolo: kolo},
+                success: function(data) {
+                    if(data.startsWith("Vytvoření")) {document.getElementById("uspech").querySelector("span").innerHTML = data; $("#uspech").alert(); $("#uspech").fadeIn("slow");}
+                    else if (data.startsWith("Mapa")) {document.getElementById("info").querySelector("span").innerHTML = data; $("#info").alert(); $("#info").fadeIn("slow");}
+                    if(kolo !== "2") {
+                        const koalice = function(druh_map, seznam = "základ") {
+                            $.when(kandidujici_subjekty(volby, druh_voleb, druh_map, kolo, seznam)).done(function() {
+                                skryt_zobrazit(faze3, faze4)
+                                vytvorit = document.getElementById("vytvorit")
+                                vytvorit.onclick = function() {
+                                    vytvorit.innerHTML = nacitacianimace;
+                                    vytvorit.disabled = "true";
+                                    vytvorit_koalice(volby, druh_map, druh_voleb, window.identifikacniCisla, document.getElementById("zkratkak30").value, document.getElementById("zkratkak8").value)
+                                }
+                                faze4.querySelector(".tlacitka").appendChild(vytvorit)
+                                document.getElementById("zkratkak8").style.display = ""
+                                document.getElementById("zkratkak30").style.display = ""
+                            })
+                        }
+
+                        var normal = document.createElement("button")
+                        var normaltext = "Vytvořit koalice pro mapu okrskových vítězů"
+                        normal.classList.add("btn")
+                        normal.id = "normal"
+                        normal.style.marginRight = "5px"
+                        normal.innerText = normaltext
+                        normal.onclick = function() {
+                            normal.innerHTML = nacitacianimace;
+                            normal.disabled = "true";
+                            odstranit_checkbox_vsechno()
+                            document.getElementById("samostatne").disabled = "true" // zablokování druhé možnosti během načítání
+                            koalice("vítězné");
+                            faze4.querySelector("h2").innerHTML = normaltext
+                            faze4.querySelector("i").onclick = function() {skryt_zobrazit(faze4, faze3); document.getElementById('normal').innerText = normaltext; document.getElementById('normal').disabled = ''; document.getElementById('samostatne').disabled = ''}
+                        }
+
+                        var samostatne = document.createElement("button")
+                        var samostatnetext = "Vytvořit samostatné koalice"
+                        samostatne.classList.add("btn")
+                        samostatne.id = "samostatne"
+                        samostatne.innerText = samostatnetext
+                        samostatne.onclick = function() {
+                            samostatne.innerHTML = nacitacianimace;
+                            samostatne.disabled = "true";
+                            odstranit_checkbox_vsechno()
+                            document.getElementById("normal").disabled = "true" // zablokování druhé možnosti během načítání
+                            koalice("samostatné", "všechno");
+                            faze4.querySelector("h2").innerHTML = samostatnetext
+                            faze4.querySelector("i").onclick = function() {skryt_zobrazit(faze4, faze3); document.getElementById('samostatne').innerText = samostatnetext; document.getElementById('samostatne').disabled = ''; document.getElementById('normal').disabled = ''}
+                        }
+
+                        var rozcestnik = document.createElement("button")
+                        rozcestnik.classList.add("btn")
+                        rozcestnik.id = "rozcestnik"
+                        rozcestnik.innerText = "Vytvořit koalice"
+                        rozcestnik.onclick = function() {
+                            document.getElementById("vyber2").appendChild(normal);
+                            document.getElementById("vyber2").appendChild(samostatne);
+                            skryt_zobrazit(document.getElementById("vyber1"), document.getElementById("vyber2"))
+                            faze3.querySelector("h2").querySelector("i").style.display = "inline";
+                        }
+                        document.getElementById("vyber1").appendChild(rozcestnik)
+                    }
+                    var samostatne_mapy = document.getElementById("mapy_volicske_podpory")
+                    var samostatne_mapy_text = samostatne_mapy.innerText
+                    samostatne_mapy.onclick = function() {
+                        samostatne_mapy.innerHTML = window.nacitacianimace
+                        samostatne_mapy.disabled = "true"
+                        if(document.getElementById("rozcestnik") !== null) {document.getElementById("rozcestnik").disabled = "true"} // zablokování druhé možnosti během načítání
+                        document.getElementById("zkratkak8").style.display = "none"
+                        document.getElementById("zkratkak30").style.display = "none"
+                        if (kolo == "2") {
+                            $.when(samostatneMapy(volby, "", druh_voleb, kolo)).done(function() {
+                            document.getElementById("mapy_volicske_podpory").innerText = "Mapy voličské podpory"})
+                        }
+                        else {
+                        $.when(kandidujici_subjekty(volby, druh_voleb, "samostatné", kolo, "všechno")).done(function() {
+                            skryt_zobrazit(faze3, faze4)
+                            vytvorit = document.getElementById("vytvorit")
+                            faze4.querySelector("h2").innerHTML = "Vytvořit mapy voličské podpory"
+                            faze4.querySelector("i").onclick = function() {skryt_zobrazit(faze4, faze3); document.getElementById('mapy_volicske_podpory').innerText = samostatne_mapy_text; document.getElementById('mapy_volicske_podpory').disabled = ''; document.getElementById('rozcestnik').disabled = ''}
+                            vytvorit.onclick = function() {
+                                vytvorit.innerHTML = nacitacianimace;
+                                vytvorit.disabled = "true";
+                                samostatneMapy(volby, window.identifikacniCisla, druh_voleb, kolo)
+                            }
+                            faze4.querySelector(".tlacitka").appendChild(vytvorit)
+                        })}
+                    }
+                },
+                error: function(xhr, status, error) {
+                    var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
+                    console.error("Vyskytla se chyba ve funkci " + kandidujici_subjekty.name + ": " + error);
+                    document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                }
+            });
+        }
+
+        function kandidujici_subjekty(volby, druh_voleb, druh_map, kolo, seznam="základ") {//rozlišit pro samostatné mapy a pro okrskové vítěze
+            return $.ajax({
+                type: "POST",
+                url: "/kandidujici-subjekty",
+                data: {volby: volby, druh_voleb: druh_voleb, druh_map: druh_map, kolo: kolo, seznam: seznam},
+                success: function(data) {console.log(druh_voleb)
+                    console.log(data);
+                    //začátek navigace
+                    pager = {};
+                    pager.items = JSON.parse(data);
+                    pager.itemsPerPage = 20;
+                    pager.pocetStran = Math.ceil(pager["items"].length / pager["itemsPerPage"])
+                    if(pager.pocetStran == 1) {document.getElementById("pagination").querySelector(".dopredu").disabled = "true"; document.getElementById("pagination").querySelector(".dozadu").disabled = "true"}
+                    document.getElementById("pagination").querySelector("div").innerHTML = "" // vyčištění, aby se vyhnulo kolizi v případném výběru jiné možnosti
+                    for (let index = 0; index < pager.pocetStran; index++) {
+                        const element = `<button class="btn" onclick="pager.currentPage = ${index}; bindList('${druh_voleb}')">${index + 1}</button>`
+                        document.getElementById("pagination").querySelector("div").innerHTML += element
+                    }
+                    pagerInit(pager);
+                    $(function() {
+                        bindList(druh_voleb);
+                    });
+                    document.getElementById("pagination").querySelector(".dopredu").onclick = function() {nextPage(druh_voleb)}
+                    document.getElementById("pagination").querySelector(".dozadu").onclick = function() {prevPage(druh_voleb)}
+                    //konec navigace
+                },
+                error: function(xhr, status, error) {
+                    var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
+                    console.error("Vyskytla se chyba ve funkci " + kandidujici_subjekty.name + ": " + error);
+                    document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                }
+            })
+        }
+
+        function subjekty(polozka, volby) {
+                if(polozka.checked) {
+                    pager.items.find((item) => {
+                        if(Number(polozka.value) == Number(item["KSTRANA"]) || Number(polozka.value) == Number(item["CKAND"])) {item["checked"] = true}
+                })}
+                else {
+                    pager.items.find((item) => {
+                        if(Number(polozka.value) == Number(item["KSTRANA"]) || Number(polozka.value) == Number(item["CKAND"])) {item["checked"] = false}
+                })}
+
+                window.identifikacniCisla = [...new Set(pager.items.map((element) => {if(element["checked"]) {if(volby == "prezident") {return element["CKAND"]} else {return element["KSTRANA"]}}}))];
+                window.identifikacniCisla = window.identifikacniCisla.filter(function(x) { return x !== undefined; })
+                window.identifikacniCisla = window.identifikacniCisla.toString();
+                if(window.identifikacniCisla == "") {document.getElementById("vytvorit").disabled = "true"} else {document.getElementById("vytvorit").disabled = ""}
+                console.log(window.identifikacniCisla);
+            }
+
+        function samostatneMapy(volby, cisla, druh_voleb, kolo=".") {
+            return $.ajax({
+                type: "POST",
+                url: "/samostatne-mapy",
+                data: {volby: volby, cisla: cisla, druh_voleb: druh_voleb, kolo: kolo},
+                success: function(data) {
+                    console.log(data);
+                    document.getElementById("uspech").querySelector("span").innerHTML = data;
+                    $("#uspech").alert(); $("#uspech").fadeIn("slow");
+                    document.getElementById("vytvorit").remove()
+                },
+                error: function(xhr, status, error) {
+                    var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
+                    console.error("Vyskytla se chyba ve funkci " + kandidujici_subjekty.name + ": " + error);
+                    document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                }
+            });
+        }
+        
+        function vytvorit_koalice(volby, druh_map, druh_voleb, cisla, nazev_koalice, zkratka_koalice) {
+            if (nazev_koalice == "" || zkratka_koalice == "") {document.getElementById("selhani").querySelector("span").innerText = "Chybí některé požadované parametry."; $("#selhani").fadeIn("slow")} else {
+            $.ajax({
+                type: "POST",
+                url: "/koalice",
+                data: {volby: volby, cisla: cisla, druh_voleb: druh_voleb, druh_map: druh_map, nazev_koalice: nazev_koalice, zkratka_koalice: zkratka_koalice},
+                success: function(data) {
+                    console.log(data);
+                    document.getElementById("uspech").querySelector("span").innerHTML = data;
+                    $("#uspech").alert(); $("#uspech").fadeIn("slow");
+                    document.getElementById("vytvorit").remove()
+                },
+                error: function(xhr, status, error) {
+                    var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
+                    console.error("Vyskytla se chyba ve funkci " + kandidujici_subjekty.name + ": " + error);
+                    document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
+                }
+            });}
+        }
+
+        function checkbox_vsechno() {
+            let checkboxes = faze4.querySelector(".seznam").querySelectorAll('.subjekt');
+                    if(document.getElementById("vsechno").checked) {
+                        checkboxes.forEach(
+                            function(checkbox) {
+                                checkbox.checked = "true";
+                                checkbox.disabled = "true"
+                                window.identifikacniCisla = ""
+                                document.getElementById("vytvorit").disabled = ""
+                            }
+                        );
+                    } else {
+                        checkboxes.forEach(
+                            function(checkbox) {
+                                checkbox.checked = "";
+                                checkbox.disabled = ""
+                                document.getElementById("vytvorit").disabled = "true"
+                            }
+                        );
+                    }
+        }
+
+        function skryt_zobrazit(skryt, zobrazit) {
+            $(skryt).fadeOut(250);
+            setTimeout(function() {$(zobrazit).fadeIn();}, 250)
+        }
+        </script>
+        <script>
+            function bindList(volby) {
+                pgItems = pager.pagedItems[pager.currentPage];
+                $("#faze4 ul").empty(); //vyprázdnění
+                for(var i = 0; i < pgItems.length; i++){
+                    if(volby == "prezident"){
+                        checked = pgItems[i]["checked"] == true ? "checked": ""
+                        var option = $(`<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["CKAND"]}" class="form-check-input" id="${pgItems[i]["CKAND"]}"><label for="${pgItems[i]["CKAND"]}">${pgItems[i]["JMENO"]} ${pgItems[i]["PRIJMENI"]}</label><br>`);
+                        $("#faze4 ul").append(option);
+                    } else if(volby == "sněmovna" || "kraje") {
+                        checked = pgItems[i]["checked"] == true ? "checked": ""
+                        var option = $(`<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["KSTRANA"]}" class="form-check-input" id="${pgItems[i]["KSTRANA"]}"><label for="${pgItems[i]["KSTRANA"]}">${pgItems[i]["ZKRATKAK30"]} (${pgItems[i]["ZKRATKAK8"]})</label><br>`);
+                        $("#faze4 ul").append(option);
+                    }
+                }
+                let checkboxes = faze4.querySelectorAll('input[type=checkbox]');
+                    Array.from(checkboxes).forEach(
+                    checkbox => checkbox.onclick = function() {subjekty(this, volby)}
+                );
+                if(document.getElementById("vsechno") !== null && document.getElementById("vsechno").checked) {checkbox_vsechno()}
+            }
+
+            function prevPage(volby){
+            pager.prevPage();
+            bindList(volby);
+            }
+
+            function nextPage(volby){
+            pager.nextPage();
+            bindList(volby);
+            }
+
+            function pagerInit(p) {
+            p.pagedItems = [];
+            p.currentPage = 0;
+            if (p.itemsPerPage === undefined) {
+                p.itemsPerPage = 5;
+            }
+            p.prevPage = function () {
+            if (p.currentPage > 0) {
+                p.currentPage--;
+                }
+            };
+            p.nextPage = function () {
+                if (p.currentPage < p.pagedItems.length - 1) {
+                p.currentPage++;
+                }
+            };
+            init = function () {
+                for (var i = 0; i < p.items.length; i++) {
+                if (i % p.itemsPerPage === 0) {
+                    p.pagedItems[Math.floor(i / p.itemsPerPage)] = [p.items[i]];
+                } else {
+                    p.pagedItems[Math.floor(i / p.itemsPerPage)].push(p.items[i]);
+                }
+                }
+            };
+            init();
+            }
+
+            function odstranit_checkbox_vsechno() {
+                if(document.getElementById("vsechno") !== null) {
+                    document.getElementById("vsechno").remove()
+                    faze4.querySelector("label").remove()
+                }
+            }
+        </script>
+    </body>
+</html>
+
+<!-- Až zase bude nějaká krize, pamatujte, že politici se většinou chovají takhle: https://www.youtube.com/shorts/zM7mpwxWAHA
+A ti, kdo tvrdí opak a říkají, že mají řešení, tak si to nechtějí přiznat. 
+-->

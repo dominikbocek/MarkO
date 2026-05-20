@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Informace</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <!-- ikony -->
+        <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+        <link rel="manifest" href="/icons/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="menu.css">
+        <style>
+            * {
+                color: light-dark(#212529, white) !important;
+                background: light-dark(white, #212529) !important
+            }
+
+            main {
+                top: 50px;
+                position: relative;
+                padding: 2px 10vw;
+            }
+
+            main a {
+                text-decoration: underline;
+                color: #41caff !important;
+                font-weight: bold;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="/" style="position: fixed;font-size: 30px;font-weight: bold;left: 50%;transform: translateX(-50%); z-index: 1;">MarkO</a>
+            <div style="position: absolute;right: 5px;">
+                <a href="/seznam_voleb" target="_blank"><i class="bi bi-list-ul"></i></a> 
+                <a href="/info.html" target="_blank"><i class="bi bi-info-circle-fill"></i></a>
+            </div>
+        </nav>
+        <main>
+            <h1>Informace o programu</h1>
+            <section>
+                <h2>Co to umí?</h2>
+                <p>Dokáže to převést otevřená volební data do krásných a přehledných map (*pouze pro vybrané volby, viz níže), které si poté můžete stáhnout. Program umožňuje vytvoření dvou druhů map:
+                    <ul>
+                        <li>přehledovou mapu ČR s vyznačením vítězů v jednotlivých okrscích (aneb jak to znáte z volebního zpravodajství)</li>
+                        <li>mapu voličské podpory pro každý kandidující subjekt zvlášť</li>
+                    </ul>
+                    Můžete si také vytvářet vlastní „neoficiální koalice“ a zjistit, jakou by měly podporu a kde by případně vyhrály.
+                </p>
+                <i>* týká se pouze těchto voleb: sněmovní, krajské a prezidentské (obě kola)</i>
+                <p>Program také věnuje zvláštní pozornost rozdílům ve volebních výsledcích mezi územím bývalého Protektorátu Čechy a Morava a někdejším obsazeným pohraničím. Umožňuje zakreslit do map tuto fantomovou hranici a ukázat, jak ovlivňuje úspěch volebních subjektů.</p>
+            </section>
+            <section>
+                <h2>Co to neumí?</h2>
+                <p>Neumí to zpracovávat žádné z voleb, které nejsou ve výčtu, tzn. volby do obecních zastupitelstev, senátních voleb a voleb do Evropského parlamentu. Z povahy senátních a obecních voleb ani nedává smysl, aby to program umožňoval, a Evropské volby jsou pro českého voliče příliš bezvýznamné.</p>
+                <p>Nezpracovává to volební účast.</p>
+            </section>
+            <section>
+                <h2>Limity</h2>
+                <p>Program nedokáže zpracovávat volby před rokem 2006. Data pro legendu mapy jsou totiž zapsána v jiném formátu a není v mých silách upravovat kód i pro tyto volby. Už tak jsem nad tímhle strávil víc času než bylo zdrávo.</p>
+                <p>Program slouží pouze ke zpracovávání konečných výsledků, není určený pro „živé zpracovávání“.</p>
+            </section>
+            <section>
+                <h2>Známé problémy</h2>
+                <ul>
+                    <li>přednastavené barvy pro mapy okrskových vítězů byly vybrány zcela nahodile a nemají nic společného s běžnými barvami politických stran/hnutí/koalic a kandidátů; všechny druhy voleb mají nastavenou stejnou paletu</li>
+                    <li>při vytváření map dochází ke konverzi dat a v případě map voličské podpory zabírají dočasně více místa na disku; týká se především krajských voleb, kde může velikost složky až 10 GB</li>
+                    <li>stažené mapy mají formát PNG, což znamená, že mají průhledné pozadí; pokud máte na svém systému nastavený tmavý režim, tak z veškerého textu na obrázku uvidíte velké kulové</li>
+                    <li>u voleb staršího data (před rokem 2017) se vyskytují „tmavé fleky“, zejména v oblasti velkých měst; je to kvůli změnám rozložení okrsků (viz manuál)</li>
+                    <li>může se stát, že se v seznamu kandidujících subjektů vyskytne subjekt, který se nakonec voleb neúčastnil, a proto se v takovémto případě mapa nevykreslí</li>
+                    <li>zpracování je rychlejší na macOS než na ostatních systémech</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Licenční podmínky</h2>
+                <p>Volební statistiky nejsou standartní součástí programu. V archivačním souboru programu se nacházejí pouze z důvodu zvýšení uživatelského komfortu. Jejich využití podléhá <a href="https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu">licenčním podmínkám Českého statistického úřadu</a>.</p>
+                <p>Mapový podklad hranic Protektorátu Čechy a Morava se řídí licenčními podmínkami <a href="https://datahub.natur.cuni.cz/pages/licence">Mapového a datového centra Přírodovědecké fakulty Univerzity Karlovy</a> (<a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)</a>.</p>
+                <h4>Kostra programu</h4>
+                <p>Vykreslování map zajišťuje <a href="https://d3js.org">D3.js</a>. Licenční podmínky <a href="https://github.com/d3/d3/blob/main/LICENSE">zde</a>.</p>
+                <p>Vše za oponou řídí Python. Licenční podmínky <a href="https://docs.python.org/3/license.html">zde</a>.</p>
+                <p>Práci s daty má na starosti <a href="https://pandas.pydata.org/">pandas</a>. Licenční podmínky <a href="https://github.com/pandas-dev/pandas/blob/main/LICENSE">zde</a>.</p>
+                <p>Vizuální stránka je obstarána Bootstrapem. Licenční podmínky <a href="https://github.com/twbs/bootstrap/blob/v5.3.8/LICENSE">zde</a>.</p>
+                <p>Vrstvu kompatibility pro Windows tvoří <a href="https://gitforwindows.org/">Git for Windows</a>. Licenční podmínky <a href="https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses">zde</a>.</p>
+                <p>Fonty, pokud nejsou součástí Bootstrapu, se řídí licencí <a href="https://openfontlicense.org/open-font-license-official-text/"> SIL Open Font License, Version 1.1</a>.</p>
+                <h4>Licence k NodeJS knihovnám:</h4>
+                <ul>
+                    <li><a href="https://github.com/mbostock/ndjson-cli/blob/master/LICENSE.txt">ndjson-cli</a></li>
+                    <li><a href="https://github.com/topojson/topojson-server/blob/master/LICENSE">topojson-server</a></li>
+                    <li><a href="https://github.com/topojson/topojson-simplify/blob/master/LICENSE">topojson-simplify</a></li>
+                    <li><a href="https://github.com/topojson/topojson-client/blob/master/LICENSE">topojson-client</a></li>
+                    <li><a href="https://github.com/mbostock/shapefile/blob/master/LICENSE.txt">shapefile</a></li>
+                    <li><a href="https://github.com/d3/d3-dsv/blob/main/LICENSE">d3-dsv</a></li>
+                    <li><a href="https://github.com/expressjs/express/blob/master/LICENSE">Express JS</a></li>
+                    <li><a href="https://github.com/tj/commander.js/blob/master/LICENSE">Commander JS</a></li>
+                    <li><a href="https://www.apache.org/licenses/LICENSE-2.0">EJS</a></li>
+                </ul>
+                <p>Samotný program (tedy vše, co zbývá po odečtení výše uvedeného), je licencován pod <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3</a>.</p>
+            </section>
+            <section>
+                <h2>Zdroje</h2>
+                <h3>Data</h3>
+                <p>Český statistický úřad - portál <a href="https://volby.cz">volby.cz</a>, program není nijak spjat s ČSÚ.</p>
+                <h3>Kód</h2>
+                <ul>
+                    <li>inpirováno návodem na <a href="https://data.gov.cz/%C4%8Dl%C3%A1nky/mapa-s-v%C3%BDsledky-voleb-po-okrsc%C3%ADch">data.gov.cz</a></li>
+                    <li>komunita na StackOverflow</li>
+                    <li>ve výjimečných případech ChatGPT</li>
+                    <li>...a moje maličkost (ne vážně, jsem fakt prcek)</li>
+                </ul>
+                <h3>Uživatelské rozhraní</h3>
+                <ul>
+                    <li>základ (včetně ikon): <a href="https://getbootstrap.com/" target="_blank">Bootstrap verze 5.3.8</a></li>
+                    <li>fonty: <a href="https://fonts.google.com" target="_blank">Google Fonts</a></li>
+                    <li>favicon: <a href="https://www.flaticon.com/free-icons/democracy" title="democracy icons" target="_blank">Democracy icons created by Freepik - Flaticon</a></li>
+                    <li>globe: <a href="https://www.magnific.com/free-vector/globe-grid-earth_361053798.htm" target="_blank">Globe icon created by Freepik (Magnific)</a></li>
+                    <li><a href="https://www.flaticon.com/free-icons/invalid-vote" title="invalid vote icons" target="_blank">Invalid vote icon created by Freepik (Magnific) - Flaticon</a></li>
+                    <li>mapa Protektorátu Čechy a Morava: <a href="https://datahub.natur.cuni.cz/datasets/cuni::protektor%C3%A1t-%C4%8Dechy-a-morava-1942-1945/explore?layer=3&location=49.637403%2C15.660870%2C7" target="_blank">DataHub Mapové a datové centrum Přírodovědecké fakulty Univerzity Karlovy</a> (autor neuveden)</li>
+                </ul>
+            </section>
+        </main>
+    </body>
+</html>
