@@ -31,7 +31,7 @@ Extrahujte zip archiv. Ve složce příprava použijte instalační soubor podle
 
 Program lze používat buď z příkazového řádku nebo z prohlížeče. Zobrazení map je možné pouze v prohlížeči, odkud je možné mapy stahovat.
 
-V kořenové složce poté rozklikněte soubor MarkO.py. Případně v terminálu přejděte do složky public a zadejte příkaz:
+V kořenové složce po instalaci rozklikněte soubor MarkO.py. Případně v terminálu přejděte do složky public a zadejte příkaz:
 
 ```bash
   node index.js
@@ -45,8 +45,8 @@ Ve výchozím nastavení je server spuštěn na portu 80. Lze změnit takto:
 Můžete případně přidat možnost ```-g``` nebo ```--gui```, čímž automaticky spustíte program v prohlížeči. GUI verze je intuitivní a sama vás navede.
 
 CLI verze:
-1.  extrahujte vybrané satistiky z archivu sada.zip nebo si stáhněte data z webu [volby.cz](https://volby.cz) (viz manuál)
-2.  do stejné složky extrahujte data o rozložení okrsků z archivu okrsky.zip
+1. extrahujte vybrané satistiky z archivu sada.zip nebo si stáhněte data z webu [volby.cz](https://volby.cz) (viz manuál)
+2. do stejné složky extrahujte data o rozložení okrsků z archivu okrsky.zip
 3. do stejné složky extrahujte verzi programu pro dané volby
 4. přejděte v terminálu do dané složky a zadejte
 
