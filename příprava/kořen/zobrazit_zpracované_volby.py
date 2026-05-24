@@ -1,4 +1,7 @@
 import os
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
 path = "volby"
 seznam = []
 filtr_slozek = [f for f in os.listdir(path) if os.path.isdir(os.path.join(path, f))]
