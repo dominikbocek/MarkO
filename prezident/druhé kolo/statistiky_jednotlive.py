@@ -1,4 +1,8 @@
+import sys
 import pandas as pd
+
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
 
 # Load the data files
 popisky_df = pd.read_csv('statistics-popisky.csv')
