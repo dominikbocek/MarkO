@@ -41,7 +41,7 @@ app.post('/vypsat-volby', (req, res) => {
     exec('cd ../příprava/volby && python3 zobrazit_volby.py', (error, stdout, stderr) => {
         if (error) {
             console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('Chyba při spuštění skriptu');
+            return res.status(500).send('chyba při spuštění skriptu');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
@@ -56,12 +56,17 @@ app.post('/extrahovat', (req, res) => {
     exec(`cd ../příprava/volby && python3 extrahovat_volby.py --volby="${volby}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('Chyba při spuštění skriptu');
+            return res.status(500).send('chyba při spuštění skriptu');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
         }
-        res.send(`${stdout}`);
+        var bezenteru = stdout.replace("\r", "")
+        var bezenteru = bezenteru.replace("\n", "")
+        if(bezenteru == "žádné") {
+            return res.status(500).send('žádná volební data nebyla detekována');
+        }
+        res.send(`${bezenteru}`);
     });
 });
 
@@ -75,7 +80,7 @@ app.post('/okrskove-mapy', (req, res) => {
         exec(`cd "volby/${volby}/${prezident}" && bash ./volebni_mapy.sh -n`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-                return res.status(500).send('Chyba při spuštění skriptu');
+                return res.status(500).send('chyba při spuštění skriptu');
             }
             if (stderr) {
                 console.error(`stderr: ${stderr}`);
@@ -105,7 +110,7 @@ app.post('/kandidujici-subjekty', (req, res) => {
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('Chyba při spuštění skriptu');
+            return res.status(500).send('chyba při spuštění skriptu');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
@@ -128,7 +133,7 @@ app.post('/samostatne-mapy', (req, res) => {
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('Chyba při spuštění skriptu');
+            return res.status(500).send('chyba při spuštění skriptu');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
@@ -157,7 +162,7 @@ app.post('/koalice', (req, res) => {
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('Chyba při spuštění skriptu');
+            return res.status(500).send('chyba při spuštění skriptu');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
@@ -171,7 +176,7 @@ app.get("/seznam_voleb", (req, res) => {
     exec(`python3 zobrazit_zpracované_volby.py`, (error, stdout, stderr) => {
         if (error) {
             console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('Chyba při spuštění skriptu');
+            return res.status(500).send('chyba při spuštění skriptu');
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
