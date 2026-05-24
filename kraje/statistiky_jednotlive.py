@@ -2,6 +2,9 @@ import pandas as pd
 import argparse
 import sys
 
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
+
 # zpracování argumentů
 parser = argparse.ArgumentParser()
 parser.add_argument("--kstrana", action="store", dest="kstrana", default="0")
