@@ -2,11 +2,13 @@ import os
 import sys
 import subprocess
 
+os.chdir("public")
+
 def switch(action):
     if action==1:
-        subprocess.run(["node", "public/index.js", "--gui"])
+        subprocess.run(["node", "index.js", "--gui"])
     elif action==2:
-        subprocess.run(["node", "public/index.js"])
+        subprocess.run(["node", "index.js"])
     else:
         sys.exit("Nascheanou.")
 
