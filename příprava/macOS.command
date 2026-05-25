@@ -24,7 +24,7 @@ else
     osascript -e "do shell script \"installer -pkg python.pkg -target /\" with administrator privileges"
     osascript -e "do shell script \"pip3 install pandas\" with administrator privileges"
 fi
-cd $(dirname "$0")/../
+cd "$(dirname "$0")/../"
 mkdir public
 mkdir public/volby
 cp -r "příprava/icons" "public/icons"
