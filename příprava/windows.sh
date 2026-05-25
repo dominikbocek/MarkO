@@ -16,7 +16,7 @@ npm install -g topojson-client
 npm install -g shapefile
 npm install -g d3-dsv
 pip3 install pandas
-cd $(dirname "$0")/../
+cd "$(dirname "$0")/../"
 mkdir public
 mkdir public/volby
 cp -r "příprava/icons" "public/icons"
