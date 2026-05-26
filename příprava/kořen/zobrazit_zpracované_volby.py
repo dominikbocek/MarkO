@@ -12,4 +12,4 @@ for d in filtr_slozek:
         seznam.append(d + "/druhé kolo")
     if(os.path.isfile(path + "/" + d + "/volebni_okrsky-simple-data-topo.json")):
         seznam.append(d)
-print(seznam)
+print(sorted(seznam))
