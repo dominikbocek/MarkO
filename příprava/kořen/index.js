@@ -63,7 +63,7 @@ app.post('/extrahovat', (req, res) => {
         }
         var bezenteru = stdout.replace("\r", "")
         var bezenteru = bezenteru.replace("\n", "")
-        if(bezenteru == "žádné") {
+        if(bezenteru == "druh_voleb = 'žádné'") {
             return res.status(500).send('žádná volební data nebyla detekována');
         }
         res.send(`${bezenteru}`);
