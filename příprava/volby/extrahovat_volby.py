@@ -32,11 +32,11 @@ else:
 
 # symbolické odkazy pro program a volební data
 
-os.mkdir(f"public/volby/{volby}")
+subprocess.run(["mkdir", f"public/volby/{volby}"])
 
 if druh_voleb == "prezident":
-    os.mkdir(f"public/volby/{volby}/první kolo")
-    os.mkdir(f"public/volby/{volby}/druhé kolo")
+    subprocess.run(["mkdir", f"public/volby/{volby}/první kolo"])
+    subprocess.run(["mkdir", f"public/volby/{volby}/druhé kolo"])
     if not os.path.exists(f"public/volby/{volby}/volebni_mapy.sh") and not os.path.exists(f"public/volby/{volby}/první kolo/volebni_mapy.sh"): # ověření, jestli už nedošlo k extrakci
         for soubor in os.listdir(f"{druh_voleb}/první kolo"): # kopírování programu
             subprocess.run(["ln", f"{cwd}/{druh_voleb}/první kolo/{soubor}", f"{cwd}/public/volby/{volby}/první kolo/{soubor}"])
