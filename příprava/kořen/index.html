@@ -256,7 +256,7 @@
             faze4 = document.getElementById("faze4")
             nacitacianimace = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Čekejte...</span>'
         function spustit() {
-            var jmeno_funkce = this.name
+            var jmeno_funkce = spustit.name
             $.ajax({
                 type: "POST",
                 url: "/vypsat-volby",
@@ -272,14 +272,14 @@
                     })
                 },
                 error: function(xhr, status, error) {
-                    chyba(error, jmeno_funkce)
+                    chyba(xhr.responseText, jmeno_funkce)
                 },
                 dataType: "json"
             });
         }
 
         function extrahovat(volby) {
-            var jmeno_funkce = this.name
+            var jmeno_funkce = extrahovat.name
             console.log(volby);
             faze1.querySelector("button").innerHTML = nacitacianimace
             faze1.querySelector("select").disabled = "true"
@@ -305,8 +305,8 @@
                                 $(faze4 + ".vybrane_volby").innerText += ` ${volby}, ${kolo}. kolo`
                             })
                         }
-                        prvnikolo.click(function() {prezident_kolo(prvnikolo, "1")})
-                        druhekolo.click(function() {prezident_kolo(druhekolo, "2")})
+                        prvnikolo.onclick = function() {prezident_kolo(prvnikolo, "1")}
+                        druhekolo.onclick = function() {prezident_kolo(druhekolo, "2")}
                         skryt_zobrazit(faze1, faze2)
 
                     } else {
@@ -318,13 +318,13 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    chyba(error)
+                    chyba(xhr.responseText, jmeno_funkce)
                 }
             });
         }
 
         function vytvorit_mapy(volby, druh_voleb, kolo=".") {
-            var jmeno_funkce = this.name
+            var jmeno_funkce = vytvorit_mapy.name
             return $.ajax({
                 type: "POST",
                 url: "/okrskove-mapy",
@@ -419,13 +419,13 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    chyba(error)
+                    chyba(xhr.responseText, jmeno_funkce)
                 }
             });
         }
 
         function kandidujici_subjekty(volby, druh_voleb, druh_map, kolo, seznam="základ") {//rozlišit pro samostatné mapy a pro okrskové vítěze
-            var jmeno_funkce = this.name
+            var jmeno_funkce = kandidujici_subjekty.name
             return $.ajax({
                 type: "POST",
                 url: "/kandidujici-subjekty",
@@ -452,7 +452,7 @@
                     //konec navigace
                 },
                 error: function(xhr, status, error) {
-                    chyba(error)
+                    chyba(xhr.responseText, jmeno_funkce)
                 }
             })
         }
@@ -475,7 +475,7 @@
             }
 
         function samostatneMapy(volby, cisla, druh_voleb, kolo=".") {
-            var jmeno_funkce = this.name
+            var jmeno_funkce = samostatneMapy.name
             return $.ajax({
                 type: "POST",
                 url: "/samostatne-mapy",
@@ -487,13 +487,13 @@
                     document.getElementById("vytvorit").remove()
                 },
                 error: function(xhr, status, error) {
-                    chyba(error)
+                    chyba(xhr.responseText, jmeno_funkce)
                 }
             });
         }
         
         function vytvorit_koalice(volby, druh_map, druh_voleb, cisla, nazev_koalice, zkratka_koalice) {
-            var jmeno_funkce = this.name
+            var jmeno_funkce = vytvorit_koalice.name
             if (nazev_koalice == "" || zkratka_koalice == "") {document.getElementById("selhani").querySelector("span").innerText = "Chybí některé požadované parametry."; $("#selhani").fadeIn("slow")} else {
             $.ajax({
                 type: "POST",
@@ -506,7 +506,7 @@
                     document.getElementById("vytvorit").remove()
                 },
                 error: function(xhr, status, error) {
-                    chyba(error)
+                    chyba(xhr.responseText, jmeno_funkce)
                 }
             });}
         }
@@ -540,7 +540,7 @@
 
         function chyba(error, funkce) {
                     var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
-                    console.error("Vyskytla se chyba ve funkci " + funkce + ": " + error);
+                    console.error("Vyskytla se chyba ve funkci " + funkce);
                     document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
         }
         </script>
