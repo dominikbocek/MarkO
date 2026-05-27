@@ -54,17 +54,18 @@ app.post('/extrahovat', (req, res) => {
     req.body;
     volby = req.body.volby;
     exec(`cd ../příprava/volby && python3 extrahovat_volby.py --volby="${volby}"`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-            return res.status(500).send('chyba při spuštění skriptu');
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
         var bezenteru = stdout.replace("\r", "")
         var bezenteru = bezenteru.replace("\n", "")
-        if(bezenteru == "druh_voleb = 'žádné'") {
+
+        if (error) {
+            console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
+            if(error.message.includes("žádné")) {
             return res.status(500).send('žádná volební data nebyla detekována');
+            } else {return res.status(500).send('chyba při spuštění skriptu');}
+        }
+        
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
         }
         res.send(`${bezenteru}`);
     });
