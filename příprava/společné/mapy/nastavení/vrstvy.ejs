@@ -1,0 +1,34 @@
+<%
+const vrstvy = ["Sudety"]
+kespusteni = []
+
+function Sudety() {%>
+                    <div id="sudety-prepinac">
+                    <input type="checkbox" name="zobrazit-sudety" id="zobrazit-sudety" onchange="document.querySelector('.protektorat').style.display = this.checked ? 'inline' : 'none'; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - Sudety'} else {nazev = nazev.replace(' - Sudety', '')}">
+                    <label for="zobrazit-sudety">Zobrazit Sudety</label>
+                    </div>
+                <% }
+
+vrstvy.forEach(element => {
+    switch (element) {
+        case "Sudety":
+            if(info["druh"] !== "komunální") {
+                kespusteni.push(Sudety)
+            }
+            break;
+
+        default:
+            break;
+    }
+});
+
+if(kespusteni.length > 0) {
+    pocetnastaveni +=1
+    %>
+    <div>
+        <h3>Vrstvy</h3>
+        <% for (let index = 0; index < kespusteni.length; index++) {
+            kespusteni[index]()
+        }%>
+    </div>
+<% } %>
