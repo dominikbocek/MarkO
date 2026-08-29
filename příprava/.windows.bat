@@ -1,0 +1,1 @@
+SET PATH=%PATH%;%~dp0..\public\node_modules\.bin
