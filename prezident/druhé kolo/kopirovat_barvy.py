@@ -1,35 +1,25 @@
-import os
 import json
-import argparse
 
-# zpracování argumentů
-parser = argparse.ArgumentParser()
-parser.add_argument('--volby', action="store", dest='volby', required=True)
-argumenty = parser.parse_args()
-volby = argumenty.volby
-
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\druhé kolo")
-
-# načtení json souborů
+# Load both JSON files
 with open('vysledky_cr.json', 'r', encoding='utf-8') as f:
     vysledky = json.load(f)
 
 with open('candidates.json', 'r', encoding='utf-8') as f:
     parties = json.load(f)
 
-# dvě položky ze souboru vysledky_cr.json
-dve = vysledky[:2]
+# Get first 10 items from vysledky_cr.json
+first_10 = vysledky[:9]
 
-# spojení vlastnosti CKAND a barev
-color_map = {item['CKAND']: item['color'] for item in dve}
+# Create a mapping of VSTRANA to color
+color_map = {item['CKAND']: item['color'] for item in first_10}
 
-# aktualizace dat
+# Update parties.json with colors based on VSTRANA match
 for key, party in parties.items():
     ckand = party.get('CKAND')
     if ckand in color_map:
         party['color'] = color_map[ckand]
 
-# uložení aktualizovaných dat do souboru parties.json
+# Save updated parties.json
 with open('candidates.json', 'w', encoding='utf-8') as f:
     json.dump(parties, f, ensure_ascii=False, indent=2)
 
