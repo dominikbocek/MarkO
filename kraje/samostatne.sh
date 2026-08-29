@@ -42,6 +42,4 @@ source ./pomocne.sh
 # Hlavní program                                           #
 ############################################################
 
-source "../společné/kraje sněmovna prezident/samostatne/možnosti.sh"
-
 source "../společné/kraje sněmovna prezident/samostatne/společný základ.sh"

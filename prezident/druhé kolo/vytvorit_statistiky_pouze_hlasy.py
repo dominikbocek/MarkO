@@ -1,4 +1,5 @@
 import os
+import sys
 import pandas as pd
 import argparse
 
@@ -16,10 +17,16 @@ os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\
 # základní statistiky
 match zpracovani:
     case "okrsky":
-        data = pd.read_csv('statistics.csv')
+        soubor = 'statistics.csv'
+        novysoubor = "statistics-jenom-strany.csv"
     case "obce":
-        data = pd.read_csv('statistics-obce.csv')
+        soubor = 'statistics-obce.csv'
+        novysoubor = "statistics-obce-jenom-strany.csv"
+    case _:
+        sys.exit("Neplatná možnost!")
+
+data = pd.read_csv(soubor)
 
 # filtrování sloupců
 novy = data.drop(columns=["id", "VOL_SEZNAM", "PL_HL_CELK", "POCET_VS"])
-novy.to_csv("statistics-jenom-strany.csv", index=False)
+novy.to_csv(novysoubor, index=False)

@@ -10,16 +10,23 @@ sys.stderr.reconfigure(encoding='utf-8')
 parser = argparse.ArgumentParser()
 parser.add_argument('--volby', action="store", dest='volby', required=True)
 parser.add_argument("--kstrana", action="store", dest="kstrana", default="0")
+parser.add_argument("--zpracovani", action="store", dest="zpracovani", default="obce")
 argumenty = parser.parse_args()
+
 volby = argumenty.volby
+zpracovani = argumenty.zpracovani
 kstrana = argumenty.kstrana
 kstrana = kstrana.split(",")
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
 
 # načtení souborů
-popisky_df = pd.read_csv('statistics-popisky.csv')
-strany_df = pd.read_csv('statistics-jenom-strany.csv')
+if zpracovani == "okrsky":
+    popisky_df = pd.read_csv('statistics-popisky.csv')
+    strany_df = pd.read_csv('statistics-jenom-strany.csv')
+elif zpracovani == "obce":
+    popisky_df = pd.read_csv('statistics-obce-popisky.csv')
+    strany_df = pd.read_csv('statistics-obce-jenom-strany.csv')
 
 if kstrana == "0" or kstrana == [""]:
     strany = strany_df.columns
@@ -37,6 +44,9 @@ for col in strany:
     })
     
     # každá strana má přidělený svůj vlastní soubor se statistikou
-    filename = f'samostatné/{col}.csv'
+    if zpracovani == "okrsky":
+        filename = f'samostatné/{col}.csv'
+    if zpracovani == "obce":
+        filename = f'samostatné/{col}-obce.csv'
     output_df.to_csv(filename, index=False)
     print(f'Vytvořen soubor {filename}')

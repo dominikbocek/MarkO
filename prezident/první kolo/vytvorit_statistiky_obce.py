@@ -77,10 +77,22 @@ prvnisoucet.to_csv(soubor, index=False)
 
 tretifaze = pd.read_csv(soubor)
 
+#print(tretifaze["id"].drop_duplicates())
+#sys.exit()
+
 # obce
 obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\coco.csv", delimiter=";", encoding="cp1250")
 
-tretifaze["id"] = obce["OBEC_PREZ"] # jelikož v této fázi jsou obce seřazené jak v souboru coco.csv, tak v souboru statistics-obce.csv, není potřeba nic dalšího řešit
+for i, row in tretifaze.iterrows():
+    #print(tretifaze.index(i))
+    nove_id = obce[obce["OBEC"] == row["id"]]["OBEC_PREZ"].to_list()[0]
+    tretifaze.at[i, "id"] = nove_id
+
+#print(tretifaze[tretifaze["id"] == 555134])
+#print(tretifaze)
+#sys.exit()
+
+# tretifaze["id"] = obce["OBEC_PREZ"] # jelikož v této fázi jsou obce seřazené jak v souboru coco.csv, tak v souboru statistics-obce.csv, není potřeba nic dalšího řešit
 
 druhysoucet = (
     tretifaze

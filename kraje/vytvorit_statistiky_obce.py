@@ -1,6 +1,7 @@
 """Příprava statistických dat."""
 
 import os
+import sys
 import numpy as np
 import pandas as pd
 import argparse
@@ -69,8 +70,6 @@ prvnisoucet = (
     .sum()
 )
 
-print(prvnisoucet['VOL_SEZNAM'])
-
 druhafaze.drop(columns=['VOL_SEZNAM', 'PL_HL_CELK'], inplace=True)
 druhafaze.drop_duplicates(inplace=True)
 druhafaze.insert(len(druhafaze.columns), 'VOL_SEZNAM', prvnisoucet["VOL_SEZNAM"].values)
@@ -81,14 +80,28 @@ druhafaze["POCET_VS"] = POCET_VS
 
 druhafaze.to_csv(soubor, index=False)
 
+#sys.exit("konec")
+
 # 3. fáze: druhý součet (přiřazení id statutárních obcí k jejich samosprávným částem a součet statistik)
 
 tretifaze = pd.read_csv(soubor)
 
+#print(tretifaze["id"].drop_duplicates())
+#sys.exit()
+
 # obce
 obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\coco.csv", delimiter=";", encoding="cp1250")
 
-tretifaze["id"] = obce["OBEC_PREZ"] # jelikož v této fázi jsou obce seřazené jak v souboru coco.csv, tak v souboru statistics-obce.csv, není potřeba nic dalšího řešit
+for i, row in tretifaze.iterrows():
+    #print(tretifaze.index(i))
+    nove_id = obce[obce["OBEC"] == row["id"]]["OBEC_PREZ"].to_list()[0]
+    tretifaze.at[i, "id"] = nove_id
+
+#print(tretifaze[tretifaze["id"] == 555134])
+#print(tretifaze)
+#sys.exit()
+
+# tretifaze["id"] = obce["OBEC_PREZ"] # jelikož v této fázi jsou obce seřazené jak v souboru coco.csv, tak v souboru statistics-obce.csv, není potřeba nic dalšího řešit
 
 druhysoucet = (
     tretifaze

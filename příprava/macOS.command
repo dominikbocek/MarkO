@@ -18,17 +18,10 @@ else
     osascript -e "do shell script \"installer -pkg python.pkg -target /\" with administrator privileges"
     osascript -e "do shell script \"pip3 install pandas\" with administrator privileges"
 fi
-cd "$(dirname "$0")/../"
-mkdir public
-mkdir public/volby
-cp -r "příprava/icons" "public/icons"
-cp -r "příprava/společné" "public/společné"
-cp -r "příprava/kořen/." "public"
-cd public
+cd "$(dirname "$0")/../public"
 osascript -e "do shell script \"npm install\" with administrator privileges"
 PATH=$PATH:"$(pwd)/node_modules/.bin"
 cp ../příprava/volby/MarkO.py ../.MarkO.py
 cd ..
-echo 'cd "$(dirname "$(realpath "$0")")"
-python3 .MarkO.py' > MarkO.command
+echo 'python3 .MarkO.py' > MarkO.command
 chmod +x MarkO.command

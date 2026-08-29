@@ -17,9 +17,11 @@ zpracovani = argumenty.zpracovani
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
 
 soubor = ""
+novysoubor = ""
 
 match zpracovani:
   case "okrsky":
+    novysoubor = "statistics-jenom-strany.csv"
     match koalice:
       case "ne":
         soubor = "statistics.csv"
@@ -28,6 +30,7 @@ match zpracovani:
       case _:
         sys.exit("Neplatná možnost!")
   case "obce":
+    novysoubor = "statistics-obce-jenom-strany.csv"
     match koalice:
       case "ne":
         soubor = "statistics-obce.csv"
@@ -44,4 +47,4 @@ data = pd.read_csv(soubor)
 
 # funkce drop(), která slouží k odstranění řádků a sloupců ze souboru
 novy = data.drop(columns=["id", "VOL_SEZNAM", "PL_HL_CELK", "POCET_VS"])
-novy.to_csv("statistics-jenom-strany.csv", index=False)
+novy.to_csv(novysoubor, index=False)

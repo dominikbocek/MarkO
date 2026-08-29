@@ -53,14 +53,16 @@ case $1 in
       exit;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky
       Overeni "$2"
-      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data-topo.json"; then
-         echo "Chybí soubor $adresar_voleb/volebni_okrsky-simple-data-topo.json"
+      if ! test -f "$adresar_voleb/statistics.csv"; then
+         echo "Chybí soubor $adresar_voleb/statistics.csv"
          echo "Pro vytvoření samostatných map kandidujících subjektů je potřeba nejprve zpracovat data v normálním režimu pomocí příkazu bash ./volebni_mapy.sh -n"
          exit
       fi
       mkdir -p "$adresar_voleb/samostatné"
-      python3 "$adresar_instalace/pouze_hlasy.py" --volby "$2" --zpracovani $(less "$adresar_voleb/použité statistiky.txt")
-      python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani $(less "$adresar_voleb/použité statistiky.txt")
+      python3 "$adresar_instalace/vytvorit_statistiky_pouze_hlasy.py" --volby "$2" --zpracovani "obce"
+      python3 "$adresar_instalace/vytvorit_statistiky_pouze_hlasy.py" --volby "$2" --zpracovani "okrsky"
+	   python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani "obce"
+      python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani "okrsky"
       ;;
    *) # neplatná možnost
       echo "Neplatná možnost: $1"
@@ -69,15 +71,5 @@ case $1 in
       exit;;
 esac
 
-if [ "$1" == "-n" ]; then
-   cd "$adresar_voleb"
-   python3 "$adresar_instalace/statistiky_jednotlive.py" --volby "$2"
-   for f in ./samostatné/*.csv; do
-      csv2json -n $f > $f.ndjson
-      ndjson-join --left 'd.id' volebni_okrsky-simple.ndjson $f.ndjson | ndjson-map 'Object.assign(d[0], Object.assign(d[0].properties, d[1]))' > $f-volebni_okrsky-simple-data.ndjson
-      cat $f-volebni_okrsky-simple-data.ndjson | ndjson-reduce 'p.features.push(d), p' '{type: "FeatureCollection", features: []}' > $f-volebni_okrsky-simple-data.json
-      geo2topo tracts=$f-volebni_okrsky-simple-data.json > $f-volebni_okrsky-simple-data-topo.json
-   done
-   cd "samostatné"
-   rm -v !(*volebni_okrsky-simple-data-topo.json)
-fi
+python3 "$adresar_instalace/vytvorit_statistiky_jednotlive.py" --volby "$2" --zpracovani "okrsky"
+python3 "$adresar_instalace/vytvorit_statistiky_jednotlive.py" --volby "$2" --zpracovani "obce"

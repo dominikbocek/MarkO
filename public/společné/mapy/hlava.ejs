@@ -1,0 +1,56 @@
+<!-- zde začíná sekce společná pro všechny druhy map -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- d3.js -->
+    <script src="/node_modules/d3/dist/d3.min.js"></script>
+    <script src="/node_modules/d3-scale-chromatic/dist/d3-scale-chromatic.min.js"></script>
+    <script src="/node_modules/topojson-client/dist/topojson-client.min.js"></script>
+    <script src="/node_modules/topojson-server/dist/topojson-server.min.js"></script>
+    <!-- další pomocné soubory -->
+    <link rel="stylesheet" href="/společné/mapy/css/styly.css">
+    <link rel="stylesheet" href="/společné/mapy/css/načítání.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <!-- není potřeba v hlavní mapě, zdroj: https://github.com/susielu/d3-legend/blob/master/d3-legend.js -->
+    <script src="/d3-legend.js"></script>
+    <!-- ikony -->
+    <%- include('../icons.ejs'); %>
+    <!-- zde končí sekce společná pro všechny druhy map -->
+    <%- include("../soubory.ejs") %>
+    <script src="<%- urllegenda %>" defer></script>
+    <% if(typzobrazeni == "samostatné") {%>
+    <!-- specifické pro volby, pouze pro samostatné mapy -->
+    <% if(info["lokalita"]["druh"] == "obec" && info["druh"] !== "komunální") {%>
+    <script src="../../../samostatné/seznam.js"></script>
+    <%} else {%>
+      <script src="seznam.js"></script>
+    <%} %>
+    <%} %>
+    <script>
+      const parametry = {}
+      parametry.typzobrazeni = "<%- typzobrazeni %>"
+      parametry.druh = "<%- info["druh"] %>"
+      parametry.lokalita = "<%- info["lokalita"]["druh"] %>"
+      parametry.id_obce = "<%- info["lokalita"]["KODZASTUP"] %>" // primárně pro komunální volby, ale mohlo by se v budoucnu hodit pro ostatní
+    </script>
+    <script src="<%- urlparametry %>"></script>
+    <%
+    if(info["lokalita"]["druh"] == "obec" && info["druh"] !== "komunální") {
+      %><script>
+          parametry.legendazdroj = "data:application/json;base64,<%- legenda %>"
+        </script><%
+    }
+    %>
+    <!-- stahování -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.js" integrity="sha512-4W7+nCTcMQMFBnTRwvixN7il649NCqZiBfJ7WvzU7gxF12zOnaKwVYTSIzwrjy/cy+CPQxn2lAIVZIes+rPp2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/downloadjs@1.4.7/download.min.js "></script>
+    <script src="/společné/mapy/js/stáhnout_mapu.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    <!-- tailwind css -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/tailwindcss@4.3.3/dist/lib.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@4.3.3/index.min.css"> -->
