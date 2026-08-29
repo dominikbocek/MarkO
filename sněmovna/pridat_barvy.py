@@ -1,30 +1,20 @@
-import os
-import sys
-import csv
 import json
+import csv
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--volby', action="store", dest="volby", required=True)
 parser.add_argument('--koalice', action="store", dest='koalice', default="ne")
 argumenty = parser.parse_args()
-volby = argumenty.volby
 koalice = argumenty.koalice
 soubor = ""
-
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
-
-match koalice:
-    case "ne":
-        soubor = "vysledky_cr.json"
-    case "ano":
-        soubor = "vysledky_cr2.json"
-    case _:
-        sys.exit("Neplatná možnost!")
+if koalice == "ne":
+  soubor = "vysledky_cr.json"
+elif koalice == "ano":
+  soubor = "vysledky_cr2.json"
 
 # Načti barvy z CSV souboru
 barvy = []
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\barvy.csv", 'r') as f:
+with open('barvy.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         barvy = [barva.strip() for barva in row]
