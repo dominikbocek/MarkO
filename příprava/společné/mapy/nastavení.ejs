@@ -1,0 +1,24 @@
+<%
+pocetnastaveni = 0
+function nastaveni(soubor, podminka = true) {
+    if(podminka) {
+        return include(`nastavení/${soubor}`)
+    }
+}
+
+souborynastaveni.forEach(element => {
+    switch (element) {
+        case "vrstvy.ejs":%>
+            <%- nastaveni(element) %>
+            <% break;
+        case "legenda.ejs":%>
+            <%- nastaveni(element, typzobrazeni=="samostatné"||typzobrazeni=="účast"?true:false) %>
+            <% break;
+        default:
+            break;
+    }
+});
+
+if(pocetnastaveni == 0) {%>
+    <p>Pro tuto mapu nejsou dostupná žádná nastavení.</p>
+<%} %>

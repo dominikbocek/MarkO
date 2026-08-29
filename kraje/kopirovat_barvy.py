@@ -1,19 +1,29 @@
+import os
+import sys
 import json
 import argparse
 
 # zpracování argumentů
 parser = argparse.ArgumentParser()
+parser.add_argument('--volby', action="store", dest="volby", required=True)
 parser.add_argument('--koalice', action="store", dest='koalice', default="ne")
 argumenty = parser.parse_args()
+volby = argumenty.volby
 koalice = argumenty.koalice
 soubor = ""
 vysledky = ""
-if koalice == "ne":
-  soubor = "parties.json"
-  vysledky = "vysledky_cr.json"
-elif koalice == "ano":
-  soubor = "parties2.json"
-  vysledky = "vysledky_cr2.json"
+
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
+
+match koalice:
+    case "ne":
+        soubor = "parties.json"
+        vysledky = "vysledky_cr.json"
+    case "ano":
+        soubor = "parties2.json"
+        vysledky = "vysledky_cr2.json"
+    case _:
+        sys.exit("Neplatná možnost!")
 
 # načtení obou souborů JSON
 with open(vysledky, 'r', encoding='utf-8') as f:
