@@ -1,0 +1,36 @@
+html {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    height: inherit;
+    width: inherit;
+    background-image: url('/grid.svg');
+    background-attachment: fixed;
+    background-color: light-dark(rgb(255, 255, 255), #07071e) !important;
+    background-size: auto;
+    background-repeat: repeat;
+    transition: all 0.15s;
+}
+
+main {
+    background: light-dark(rgba(0, 0, 0, 0.1), rgb(0 0 0 / 57%));
+}
+
+:root[data-theme="dark"] {
+    main {
+        color: white;
+    }
+}
+
+:root[data-theme="light"] {
+    main {
+        color: black;
+        background: rgba(229, 229, 229, 0.49);
+    }
+}
+
+nav {
+    z-index: 2 !important;
+}

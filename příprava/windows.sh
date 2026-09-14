@@ -10,10 +10,15 @@ else
 fi
 winget install -e --id python
 pip3 install pandas
-cd "$(dirname "$0")/../public"
+cd "$(dirname "$0")/../"
+mkdir public
+mkdir public/volby
+cp -r "příprava/icons" "public/icons"
+cp -r "příprava/společné" "public/společné"
+cp -r "příprava/kořen/." "public"
+cd public
 npm install
-cd "../příprava"
-.windows.bat # není potřeba zaplevelovat proměnnou PATH, stačí, když se to nastrká do základních bash souborů; možná bude potřeba vytvořit konfigurační soubor, v němž by bylo napsáno, zda se používá python3 nebo python, na aliasy bych se moc nespoléhal
-cp volby/MarkO.py ../.MarkO.py
+.windows.bat
+cp ../příprava/volby/MarkO.py ../.MarkO.py
 cd ..
 echo "python3 .MarkO.py" > MarkO.bat

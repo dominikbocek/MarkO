@@ -5,90 +5,19 @@ const fs = require('fs');
 const { exec, execSync } = require('child_process');
 const vysledky_obce_ostatni_volby = require("./obce.js")
 const pomocnefunkce = require("./pomocne.js")
+const chyby = require("./chyby.js")
 
 /////////////////////////////////////
 // SEKCE ZOBRAZENÍ VÝSLEDKŮ VOLEB //
 ///////////////////////////////////
 
-// dasboard s výsledky voleb
-
-const prehled = express.Router({ mergeParams: true })
-
-prehled.get("/prehled", (req, res, next) => {
-    let info = pomocnefunkce.nacistJSON(req.params.volby)
-
-    if (info == null) {
-        return next()
-    }
-
-    if((info["druh"] == "prezidentské" && (req.params.kolo == undefined || (req.params.kolo !== "první kolo" && req.params.kolo !== "druhé kolo"))) || (info["druh"] !== "prezidentské" && req.params.kolo !== undefined) || (info["druh"] == "komunální") && req.params.obec == undefined) {
-        return next()
-    }
-
-    if(req.params.obec == undefined) {
-        return res.render(`${cwd()}/společné/volby/volby.ejs`, { info })
-    }
-
-    let info_obec = execSync(`python3 "${cwd()}/../společné/vypsat_obce.py" --kodobec ${req.params.obec} --json ano`, (error, stdout, stderr) => {
-        if (error) {
-            chyba(error)
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
-    })
-
-    try {
-        info_obec = JSON.parse(info_obec.toString()) // pokud obec neexistuje v seznamu, prehled se nezobrazí
-    } catch (error) {
-        return next()
-    }
-
-    return res.render(`${cwd()}/společné/volby/volby.ejs`, { info })
-})
-
-// Rozcestník obcí pro zobrazení výsledků za jednotlivé obce
-
-const obce = express.Router({mergeParams: true})
-
-obce.get('/obce/', (req, res, next) => {
-
-    if(pomocnefunkce.urllomitka('/obce/', req, res) !== 0) {
-        return
-    }
-
-    let info = pomocnefunkce.nacistJSON(req.params.volby, next)
-
-    if(info == null) {
-        return next()
-    }
-
-    if((info["druh"] == "prezidentské" && (req.params.kolo == undefined || (req.params.kolo !== "první kolo" && req.params.kolo !== "druhé kolo"))) || (info["druh"] !== "prezidentské" && req.params.kolo !== undefined)) {
-        return next()
-    }
-
-    let seznam_obci = execSync(`python3 "${cwd()}/../společné/vypsat_obce.py" --json ano`, (error, stdout, stderr) => {
-        if (error) {
-            chyba(error)
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
-    })
-
-    seznam_obci = seznam_obci.toString().split("\n")
-
-    return res.render(`${cwd()}/společné/volby/obce.ejs`, {seznam_obci})
-})
-
-
-/////////////////////////
-// prezidentské volby //
-///////////////////////
-
-function prezident(url, typzobrazeni) {
+function snemovna_kraje_prezident(url, typzobrazeni) {
     return router.get(url, (req, res, next) => {
         req.acceptsCharsets('utf-8')
+
+        if(pomocnefunkce.urllomitka(url, req, res) !== 0) {
+            return
+        }
 
         let info = pomocnefunkce.nacistJSON(req.params.volby) // existují volby v seznamu?
 
@@ -96,30 +25,60 @@ function prezident(url, typzobrazeni) {
             return next()
         }
 
-        if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {// byly volby zpracovány?
-            return next();
-        }
+        switch (info["druh"]) {
+            case "krajské":
+            case "sněmovní":
+                if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {// byly volby zpracovány?
+                    return next();
+                }
 
-        if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
-            return next();
-        }
+                if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/samostatné`)) {
+                    return next();
+                }
 
+                break;
+            case "prezidentské":
+                if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {// byly volby zpracovány?
+                    return next();
+                }
+
+                if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
+                    return next();
+                }
+                break;
+            default:
+                return next()
+                //break;
+        }
 
         info.lokalita = {druh: "stát"}
+
         const souborynastaveni = fs.readdirSync(`${cwd()}/společné/mapy/nastavení`)
-        return res.render(`${cwd()}/společné/mapa.html`, {volby:req.params.volby, info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni});
-        
+        return res.render(`${cwd()}/společné/mapa.html`, {volby:req.params.volby, info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni});       
     });
 }
 
-prezident('/:volby/:kolo/', "normální")
-prezident('/:volby/:kolo/samostatn%C3%A9/', "samostatné")
-prezident('/:volby/:kolo/ucast', "účast")
+/////////////////////////
+// prezidentské volby //
+///////////////////////
 
-router.use("/:volby/:kolo/", obce)
-router.use("/:volby/:kolo/", prehled)
-router.use("/:volby/:kolo/obce/:obec/", prehled)
+snemovna_kraje_prezident('/:volby/:kolo/vitez', "normální")
+snemovna_kraje_prezident('/:volby/:kolo/samostatn%C3%A9/', "samostatné")
+snemovna_kraje_prezident('/:volby/:kolo/ucast', "účast")
+
 router.use("/:volby/:kolo/", vysledky_obce_ostatni_volby)
+router.use("/:volby/:kolo/", pomocnefunkce.prehled)
+
+///////////////////////////////
+// krajské a sněmovní volby //
+/////////////////////////////
+
+snemovna_kraje_prezident('/:volby/vitez', "normální")
+snemovna_kraje_prezident('/:volby/samostatn%C3%A9/', "samostatné")
+snemovna_kraje_prezident('/:volby/ucast', "účast")
+
+router.use("/:volby/", vysledky_obce_ostatni_volby) // i pro komunální volby
+router.use("/:volby/", pomocnefunkce.prehled)
 
 //////////////////////
 // komunální volby //
@@ -131,34 +90,13 @@ router.use("/:volby/:kolo/", vysledky_obce_ostatni_volby)
 const mapy = router.get('/:volby/obce/:obec/mapy', (req, res, next) => {
     req.acceptsCharsets('utf-8')
     if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
-        let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`, (error, stdout, stderr) => {
-            if (error) {
-                chyba(error)
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-        })
+        let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
 
-        let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obec}" --json ano`, (error, stdout, stderr) => {
-            if (error) {
-                chyba(error)
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-        })
+        let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obec}" --json ano`)
 
         let info = pomocnefunkce.nacistJSON(req.params.volby)
 
-        let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`, (error, stdout, stderr) => {
-            if (error) {
-                chyba(error)
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-        })
+        let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
 
         seznam_obvodu = eval(seznam_obvodu.toString())
 
@@ -176,28 +114,16 @@ const mapy = router.get('/:volby/obce/:obec/mapy', (req, res, next) => {
     return next();
 })
 
+// tyhle dvě věci by se daly sjednotit
+
 //komunální zastupitelstva - samosprávné obvody/městské části
 
 const mapy_obvody = router.get('/:volby/obce/:obec/:obvod/mapy', (req, res, next) => {
     req.acceptsCharsets('utf-8')
     if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
-        let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obvod}"`, (error, stdout, stderr) => {
-            if (error) {
-                chyba(error)
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-        })
+        let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obvod}"`)
 
-        let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obvod}" --json ano`, (error, stdout, stderr) => {
-            if (error) {
-                chyba(error)
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-        })
+        let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obvod}" --json ano`)
 
         let info = pomocnefunkce.nacistJSON(req.params.volby)
 
@@ -220,15 +146,8 @@ function obvod(url, typzobrazeni) {
         if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
             let info = pomocnefunkce.nacistJSON(req.params.volby)
 
-            //title a popisek mapy
-            let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obvod}" --json ano`, (error, stdout, stderr) => {
-                if (error) {
-                    chyba(error)
-                }
-                if (stderr) {
-                    console.error(`stderr: ${stderr}`);
-                }
-            })
+            //title a popisek mapy; generické volby, nejsou potřeba, ale chceme přístup k seznamu voleb, který je pořád stejný, nutno dořešit
+            let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat "obec" --hledanahodnota "${req.params.obvod}" --json ano`)
 
             info_obec = JSON.parse(info_obec.toString())
 
@@ -243,47 +162,9 @@ function obvod(url, typzobrazeni) {
     })
 }
 
-obvod('/:volby/obce/:obec/:obvod/', "normální")
+obvod('/:volby/obce/:obec/:obvod/vitez', "normální")
 obvod('/:volby/obce/:obec/:obvod/ucast', "účast")
 obvod('/:volby/obce/:obec/:obvod/samostatn%C3%A9/', "samostatné")
-
-///////////////////////////////
-// krajské a sněmovní volby //
-/////////////////////////////
-
-function kraje_a_snemovna(url, typzobrazeni) {
-    return router.get(url, (req, res, next) => {
-        req.acceptsCharsets('utf-8')
-
-        let info = pomocnefunkce.nacistJSON(req.params.volby) // existují volby v seznamu?
-
-        if(info == null) {
-            return next()
-        }
-
-        if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`)) {// byly volby zpracovány?
-            return next();
-        }
-
-        if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/samostatné`)) {
-            return next();
-        }
-        
-        info.lokalita = {druh: "stát"}
-
-        const souborynastaveni = fs.readdirSync(`${cwd()}/společné/mapy/nastavení`)
-        return res.render(`${cwd()}/společné/mapa.html`, {volby:req.params.volby,info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni});
-    })
-}
-
-kraje_a_snemovna('/:volby/', "normální")
-kraje_a_snemovna('/:volby/samostatn%C3%A9', "samostatné")
-kraje_a_snemovna('/:volby/ucast', "účast")
-
-router.use("/:volby/", obce) // i pro komunální volby
-router.use("/:volby/", prehled)
-router.use("/:volby/obce/:obec/", prehled)
-router.use("/:volby/", vysledky_obce_ostatni_volby) // i pro komunální volby
 
 
 /////////////////////////////////
@@ -294,14 +175,7 @@ function vypsat_seznam(res, next, slozka) {
     if (!fs.existsSync(slozka)) {
         return next()
     }
-    var seznam = execSync(`cd "${slozka}" && python3 "${cwd()}/společné/mapy/menu/menu-samostatné.py"`,(error, stdout, stderr) => {
-            if (error) {
-                chyba(error)
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-        })
+    var seznam = execSync(`cd "${slozka}" && python3 "${cwd()}/společné/mapy/menu/menu-samostatné.py"`)
     
     seznam = seznam.toString()
     return res.type("text/javascript").send(seznam)
@@ -325,23 +199,9 @@ router.get('/:volby/obce/:obec/:obvod/samostatn%C3%A9/seznam.js', (req, res, nex
 ///////////////
 
 router.get('/:volby/obce/:obec/seznam_obvodu.js', (req, res, next) => {
-    let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`, (error, stdout, stderr) => {
-        if (error) {
-            chyba(error)
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
-    })
+    let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
 
-    let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`, (error, stdout, stderr) => {
-        if (error) {
-            chyba(error)
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
-    })
+    let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
 
     seznam_obvodu = eval(seznam_obvodu.toString())
 
@@ -350,7 +210,6 @@ router.get('/:volby/obce/:obec/seznam_obvodu.js', (req, res, next) => {
     return res.type("text/javascript").render(`${cwd()}/společné/mapy/vykreslení/obvody.ejs`, {seznam_obvodu, seznam_nazvu_obvodu})
 })
 
-const chyby = require("./chyby.js")
-router.use(chyby)
+router.use(chyby.router)
 
 module.exports = router;

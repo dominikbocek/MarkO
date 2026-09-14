@@ -152,7 +152,7 @@ figure > div > i {
   stroke-width: 2px;
 }
 
-.protektorat {
+.protektorat, .okresy1950, .okresy1960 {
   display: none;
   stroke: #ffffff;
   stroke-width: 2px;

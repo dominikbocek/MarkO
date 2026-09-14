@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Vyhledávání obcí - <%= info["název"] %> | MarkO
+    </title>
+    <script src="/node_modules/d3/dist/d3.min.js"></script>
+    <link href="/společné/volby/tailwind/tailadmin/build/style.css" rel="stylesheet">
+    <script defer src="/společné/volby/tailwind/tailadmin/build/bundle.js"></script>
+  </head>
+  <body
+    x-data="{ page: 'obce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark bg-gray-900': darkMode === true}"
+  >
+    <!-- ===== Preloader Start ===== -->
+    <%- include("./partials/preloader.html") %>
+    <!-- ===== Preloader End ===== -->
+
+    <!-- ===== Page Wrapper Start ===== -->
+    <div class="flex h-screen overflow-hidden">
+      <!-- ===== Sidebar Start ===== -->
+      <%- include("./partials/sidebar.html") %>
+      <!-- ===== Sidebar End ===== -->
+
+      <!-- ===== Content Area Start ===== -->
+      <div
+        class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
+      >
+        <!-- Small Device Overlay Start -->
+        <%- include('./partials/overlay.html') %>
+        <!-- Small Device Overlay End -->
+
+        <!-- ===== Header Start ===== -->
+        <%- include('./partials/header.html') %>
+        <!-- ===== Header End ===== -->
+
+        <!-- ===== Main Content Start ===== -->
+        <main>
+          <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
+            <!-- Breadcrumb Start -->
+            <div x-data="{ pageName: `Blank Page`}">
+              <%- include("./partials/breadcrumb.html") %>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <div
+              class="min-h-screen rounded-2xl border border-gray-200 bg-white px-5 py-7 dark:border-gray-800 dark:bg-white/[0.03] xl:px-10 xl:py-12"
+            >
+              <div class="mx-auto w-full max-w-[630px] text-center">
+                <h3
+                  class="mb-4 text-theme-xl font-semibold text-gray-800 dark:text-white/90 sm:text-2xl"
+                >
+                  Výsledky po obcích
+                </h3>
+
+                <p
+                  class="text-sm text-gray-500 dark:text-gray-400 sm:text-base"
+                >
+                  Zde si můžete zobrazit výsledky za jednotlivé obce.
+                </p>
+                  <script type="module">
+                    const data = await d3.dsv(";", "/kvcoco.csv")
+
+                    function vyhledat(text) {
+                      const vysledky = data.filter(function(element) {return element["NAZEVZAST"].startsWith(text)})
+                      let seznam_element = document.getElementById("vysledek")
+                      seznam_element.innerHTML = ""
+                      vysledky.forEach(vysledek => {
+                            let polozka = document.createElement("li")
+                            let odkaz = document.createElement("a")
+                            odkaz.href = vysledek["KODZASTUP"]
+                            odkaz.innerHTML = vysledek["NAZEVZAST"]
+                            polozka.append(odkaz)
+                            seznam_element.append(polozka)
+                          });
+                      }
+
+                    document.getElementById("search-input").oninput = function() {vyhledat(this.value)}
+                  </script>
+                <div class="">
+                  <form>
+                    <div class="relative">
+                      <span class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2">
+                        <svg class="fill-gray-500 dark:fill-gray-400" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.04175 9.37363C3.04175 5.87693 5.87711 3.04199 9.37508 3.04199C12.8731 3.04199 15.7084 5.87693 15.7084 9.37363C15.7084 12.8703 12.8731 15.7053 9.37508 15.7053C5.87711 15.7053 3.04175 12.8703 3.04175 9.37363ZM9.37508 1.54199C5.04902 1.54199 1.54175 5.04817 1.54175 9.37363C1.54175 13.6991 5.04902 17.2053 9.37508 17.2053C11.2674 17.2053 13.003 16.5344 14.357 15.4176L17.177 18.238C17.4699 18.5309 17.9448 18.5309 18.2377 18.238C18.5306 17.9451 18.5306 17.4703 18.2377 17.1774L15.418 14.3573C16.5365 13.0033 17.2084 11.2669 17.2084 9.37363C17.2084 5.04817 13.7011 1.54199 9.37508 1.54199Z" fill=""></path>
+                        </svg>
+                      </span>
+                      <input id="search-input" type="text" style="padding-left: 50px; padding-right: 20px;" placeholder="zadejte název obce" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-200 bg-transparent py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden xl:w-[430px] dark:border-gray-800 dark:bg-white/[0.03] dark:text-white/90 dark:placeholder:text-white/30">
+                    </div>
+                  </form>
+                </div>
+                <ul id="vysledek"></ul>
+              </div>
+            </div>
+          </div>
+        </main>
+        <!-- ===== Main Content End ===== -->
+      </div>
+      <!-- ===== Content Area End ===== -->
+    </div>
+    <!-- ===== Page Wrapper End ===== -->
+  </body>
+</html>

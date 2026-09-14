@@ -1,11 +1,25 @@
 <%
-const vrstvy = ["Sudety"]
+const vrstvy = ["Sudety", "okresy1950", "okresy1960"]
 kespusteni = []
 
 function Sudety() {%>
                     <div id="sudety-prepinac">
                     <input type="checkbox" name="zobrazit-sudety" id="zobrazit-sudety" onchange="document.querySelector('.protektorat').style.display = this.checked ? 'inline' : 'none'; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - Sudety'} else {nazev = nazev.replace(' - Sudety', '')}">
                     <label for="zobrazit-sudety">Zobrazit Sudety</label>
+                    </div>
+                <% }
+
+function Okresy1950() {%>
+                    <div id="okresy1950-prepinac">
+                    <input type="checkbox" name="zobrazit-okresy1950" id="zobrazit-okresy1950" onchange="if(this.checked) {d3.selectAll('.okresy1950').style('display', 'inline')} else {d3.selectAll('.okresy1950').style('display', 'none')}; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - okresy 1950'} else {nazev = nazev.replace(' - okresy 1950', '')}">
+                    <label for="zobrazit-okresy1950">Zobrazit okresy z roku 1950</label>
+                    </div>
+                <% }
+
+function Okresy1960() {%>
+                    <div id="okresy1960-prepinac">
+                    <input type="checkbox" name="zobrazit-okresy1960" id="zobrazit-okresy1960" onchange="if(this.checked) {d3.selectAll('.okresy1960').style('display', 'inline')} else {d3.selectAll('.okresy1960').style('display', 'none')}; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - okresy 1960'} else {nazev = nazev.replace(' - okresy 1960', '')}">
+                    <label for="zobrazit-okresy1960">Zobrazit okresy z roku 1960</label>
                     </div>
                 <% }
 
@@ -16,7 +30,15 @@ vrstvy.forEach(element => {
                 kespusteni.push(Sudety)
             }
             break;
-
+        case "okresy1950":
+            if(info["druh"] !== "komunální") {
+                kespusteni.push(Okresy1950)
+            }
+            break;
+        case "okresy1960":
+            if(info["druh"] !== "komunální") {
+                kespusteni.push(Okresy1960)
+            }
         default:
             break;
     }

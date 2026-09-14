@@ -2,6 +2,7 @@ import os
 import sys
 import csv
 import json
+import shutil
 import pandas as pd
 import argparse
 
@@ -13,16 +14,26 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--volby', action="store", dest="volby", required=True)
 parser.add_argument('--kodobec', action="store", dest="kodobec", type=int, default=0)
 parser.add_argument('--dosouboru', action="store", dest="dosouboru", default=False)
+parser.add_argument('--koalice', action="store", dest="koalice", default="ne")
+
 argumenty = parser.parse_args()
 volby = argumenty.volby
 kodobec = argumenty.kodobec
 dosouboru = argumenty.dosouboru
+koalice = argumenty.koalice
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
 
 soubor = "candidates.csv"
-statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
 souborjson = "vysledky_cr.json"
+
+match koalice:
+    case "ano":
+        statistiky = "statistics-obce2.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+    case "ne":
+        statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+    case _:
+        sys.exit("Neplatná možnost!")
 
 data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8')
 if kodobec > 0:
@@ -72,6 +83,9 @@ for i in range(min(10, len(vysledky_sorted))):
 if dosouboru:
     with open(souborjson, 'w', encoding='utf-8') as jsonfile:
         json.dump(vysledky_sorted, jsonfile, ensure_ascii=False, indent=2)
+
+    if not os.path.exists("vysledky_cr2.json"):
+        shutil.copy(souborjson, "vysledky_cr2.json")
 
     print("Soubor " + souborjson +  " byl úspěšně vytvořen.")
 else:

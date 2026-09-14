@@ -33,16 +33,9 @@
       parametry.typzobrazeni = "<%- typzobrazeni %>"
       parametry.druh = "<%- info["druh"] %>"
       parametry.lokalita = "<%- info["lokalita"]["druh"] %>"
-      parametry.id_obce = "<%- info["lokalita"]["KODZASTUP"] %>" // primárně pro komunální volby, ale mohlo by se v budoucnu hodit pro ostatní
+      parametry.id_obce = "<% console.log(info); if(info.lokalita.druh == 'obec') {%><%= info['lokalita']['KODZASTUP'] %><%} else if(info.lokalita.druh == 'obvod') {%><%= info['lokalita']['OBEC'] %><%} %>" // primárně pro komunální volby, ale mohlo by se v budoucnu hodit pro ostatní
     </script>
     <script src="<%- urlparametry %>"></script>
-    <%
-    if(info["lokalita"]["druh"] == "obec" && info["druh"] !== "komunální") {
-      %><script>
-          parametry.legendazdroj = "data:application/json;base64,<%- legenda %>"
-        </script><%
-    }
-    %>
     <!-- stahování -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.js" integrity="sha512-4W7+nCTcMQMFBnTRwvixN7il649NCqZiBfJ7WvzU7gxF12zOnaKwVYTSIzwrjy/cy+CPQxn2lAIVZIes+rPp2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/downloadjs@1.4.7/download.min.js "></script>

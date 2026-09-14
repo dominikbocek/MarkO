@@ -6,11 +6,11 @@ export async function vykresleni() {
 
   const svg = d3.select("#mapa g")
 
-  let data = await nactenimapy(parametry.data)
-  let strany = await nactenistran(parametry.legendazdroj)
-  let csv = await nacteni_csv(parametry.statistiky)
+  window.data = await nactenimapy(parametry.data)
+  window.strany = await nactenistran(parametry.legendazdroj)
+  window.csv = await nacteni_csv(parametry.statistiky)
 
-  const subunits = await vykresleni_zaklad(data, csv)
+  window.subunits = await vykresleni_zaklad(data, csv)
 
   var projection = d3.geoMercator()
     //.center(d3.geoCentroid(subunits)) //střed ČR

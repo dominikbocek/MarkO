@@ -5,6 +5,8 @@ const { Command } = require('commander');
 const program = new Command();
 const app = express();
 const { createGeoJSONImage } = require("./společné/mapy/js/geojson2png.js")
+const chyby = require("./routes/chyby.js")
+
 app.engine('html', require('ejs').renderFile);
 app.enable("strict routing");
 
@@ -78,7 +80,7 @@ app.post("/stahnout", async (req, res, next) => {
     let popisek = req.body.popisek
     execSync(`bash "${__dirname}/../společné/geojson.sh" "${soubor}" "${tmpgeojson}"`, (error, stdout, stderr) => {
         if (error) {
-            chyba(error)
+            chyby.chyba(error)
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
@@ -100,8 +102,7 @@ app.post("/stahnout", async (req, res, next) => {
 //  Zachytávání chyb  //
 ///////////////////////
 
-const chyby = require("./routes/chyby.js")
-app.use(chyby)
+app.use(chyby.router)
 
 // Spuštění serveru
 app.listen(port, () => {

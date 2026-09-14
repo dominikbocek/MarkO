@@ -35,15 +35,16 @@
             MENU
           </span>
         </h3>
-
+        
         <ul class="flex flex-col gap-4 mb-6">
+          <% if(locals.info) {%>
           <!-- Menu Item Dashboard -->
           <li>
             <a
               href="#"
               @click.prevent="selected = (selected === 'Dashboard' ? '':'Dashboard')"
               class="menu-item group"
-              :class=" (selected === 'Dashboard') || (page === 'ecommerce' || page === 'analytics' || page === 'marketing' || page === 'crm' || page === 'stocks') ? 'menu-item-active' : 'menu-item-inactive'"
+              :class=" (selected === 'Dashboard') || (page === 'obce' || page === 'volby') ? 'menu-item-active' : 'menu-item-inactive'"
             >
               <svg
                 :class="(selected === 'Dashboard') || (page === 'ecommerce' || page === 'analytics' || page === 'marketing' || page === 'crm' || page === 'stocks') ? 'menu-item-icon-active'  :'menu-item-icon-inactive'"
@@ -119,17 +120,17 @@
             <!-- Dropdown Menu End -->
           </li>
           <!-- Menu Item Dashboard -->
+          <%} %>
 
           <!-- Menu Item Calendar -->
           <li>
             <a
               href="/volby"
-              @click="selected = (selected === 'Calendar' ? '':'Calendar')"
               class="menu-item group"
-              :class=" (selected === 'Calendar') && (page === 'calendar') ? 'menu-item-active' : 'menu-item-inactive'"
+              :class=" (page === 'seznam') ? 'menu-item-active' : 'menu-item-inactive'"
             >
               <svg
-                :class="(selected === 'Calendar') && (page === 'calendar') ? 'menu-item-icon-active'  :'menu-item-icon-inactive'"
+                :class="(page === 'seznam') ? 'menu-item-icon-active'  :'menu-item-icon-inactive'"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"

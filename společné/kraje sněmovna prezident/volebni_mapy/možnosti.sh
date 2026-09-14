@@ -23,7 +23,7 @@ case $1 in
       ;;
    -s) # vypíše volební subjekty
       Overeni "$2"
-      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data-topo.json"; then
+      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data.json"; then
          echo "Pro zobrazení kandidujících subjektů musí nejprve proběhnout zpracování dat ve standartním režimu (možnost -n)."
          exit
       fi
@@ -31,11 +31,11 @@ case $1 in
       exit;;
    -k) # uvoří koalice
       Overeni "$2"
-      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data-topo.json"; then
+      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data.json"; then
          echo "Pro vznik koalic musí nejprve proběhnout zpracování dat ve standartním režimu (možnost -n)."
          exit
       fi
-      odpoved="$(python3 "$adresar_instalace/vytvorit_koalice.py" --volby "$2" --koalice "$3" --nazevkoalice "$4" --zkratka "$5" --zpracovani $(less "$adresar_voleb/použité statistiky.txt"))"
+      odpoved="$(python3 "$adresar_instalace/vytvorit_koalice.py" --volby "$2" --koalice "$3" --nazevkoalice "$4" --zkratka "$5")"
       if [ "$odpoved" != "ok" ]; then exit; fi
       if [ "$2" == "" ] || [ "$3" == "" ] || [ "$4" == "" ]; then echo "Nezadali jste potřebné parametry."; exit; fi
       ;;

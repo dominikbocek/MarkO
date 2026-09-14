@@ -22,8 +22,8 @@ if zpracovani == "okrsky":
     popisky_df = pd.read_csv('statistics-popisky.csv')
     strany_df = pd.read_csv('statistics-jenom-strany.csv')
 elif zpracovani == "obce":
-    popisky_df = pd.read_csv('statistics-obce-popisky.csv')
-    strany_df = pd.read_csv('statistics-obce-jenom-strany.csv')
+    popisky_df = pd.read_csv('statistics-obce-popisky.csv', dtype={"id": str})
+    strany_df = pd.read_csv('statistics-obce-jenom-strany.csv', dtype={"id": str})
 
 # procházení sloupců v strany_df
 for col in strany_df.columns:

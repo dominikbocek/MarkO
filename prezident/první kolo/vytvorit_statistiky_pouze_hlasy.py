@@ -34,7 +34,7 @@ match zpracovani:
       case "ne":
         soubor = "statistics-obce.csv"
       case "ano":
-        soubor = "statistics-univerzal.csv"
+        soubor = "statistics-obce-univerzal.csv"
       case _:
         sys.exit("Neplatná možnost!")
 

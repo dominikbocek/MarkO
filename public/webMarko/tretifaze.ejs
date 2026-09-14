@@ -1,0 +1,59 @@
+
+<i class="bi bi-arrow-left-circle-fill" style="top: 50px; font-size: 27px; display: none;"></i> <!-- nutno změnit -->
+<div style="position: relative; /*top: 50px;*/ height: calc(100vh - 101px); overflow: auto;">
+    <h2>Vyberte ze seznamu volební subjekty</h2>
+    <p class="vybrane_volby">vybrané volby: <%= volby %></p>
+    <% if(vytvorit == "koalice") {%>
+    <form id="koalice" hx-post="/koalice" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:#vytvorit">
+        <input type="hidden" name="volby" value="<%- volby %>">
+        <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
+        <input type="hidden" name="druh_map" value="<%- druh_map %>">
+        <input type="hidden" name="cisla">
+        <input type="text" id="zkratkak30" class="form-control" maxlength="30" placeholder="zadejte název koalice (max. 30 písmen)">
+        <input type="text" id="zkratkak8" class="form-control" maxlength="8" placeholder="zadejte zkratku koalice (max. 8 písmen)">
+    </form>
+    <script>
+        document.getElementById("zkratkak8").onbeforeinput = (event) => {var nepovoleneznaky = "\"'`;\\|{}"; if(nepovoleneznaky.includes(event.data)) {return false}}
+        document.getElementById("zkratkak30").onbeforeinput = (event) => {var nepovoleneznaky = "\"'`;\\|{}"; if(nepovoleneznaky.includes(event.data)) {return false}}
+    </script>
+    <%} %>
+    <% if(vytvorit == "samostatné") {%>
+    <form hx-post="/samostatne-mapy" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:form">
+        <input type="hidden" name="druh_map" value="<%- druh_map %>">
+        <input type="hidden" name="volby" value="<%- volby %>">
+        <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
+        <input type="hidden" name="cisla">
+    </form>
+    <%} %>
+    <input type='checkbox' value='' class='form-check-input' id='vsechno' onchange="checkbox_vsechno()"><label for='vsechno'>všechno</label>
+    <ul class="seznam"></ul>
+    <div class="tlacitka">
+        <div id="pagination" style="text-align: center; display: flex; justify-content: center; gap: 5px; margin-top: 10px;">
+            <button class="dozadu btn"><i class="bi bi-chevron-double-left"></i></button>
+            <div style="display: flex; gap: 5px;"></div>
+            <button class="dopredu btn"><i class="bi bi-chevron-double-right"></i></button>
+        </div>
+        <button class="btn" id="vytvorit" disabled>Vytvořit</button>
+    </div>
+</div>
+<script>
+    seznam_subjektu = <%- subjekty %>
+    // navigace
+    pager = {};
+    druh_voleb = '<%= info["druh"] %>'
+    pager.items = seznam_subjektu;
+    pager.itemsPerPage = 20;
+    pager.pocetStran = Math.ceil(pager["items"].length / pager["itemsPerPage"])
+    if(pager.pocetStran == 1) {document.getElementById("pagination").querySelector(".dopredu").disabled = "true"; document.getElementById("pagination").querySelector(".dozadu").disabled = "true"}
+    document.getElementById("pagination").querySelector("div").innerHTML = "" // vyčištění, aby se vyhnulo kolizi v případném výběru jiné možnosti
+    for (let index = 0; index < pager.pocetStran; index++) {
+        const element = `<button class="btn" onclick="pager.currentPage = ${index}; bindList(druh_voleb)">${index + 1}</button>`
+        document.getElementById("pagination").querySelector("div").innerHTML += element
+    }
+    pagerInit(pager);
+    $(function() {
+        bindList(druh_voleb);
+    });
+    document.getElementById("pagination").querySelector(".dopredu").onclick = function() {nextPage(druh_voleb)}
+    document.getElementById("pagination").querySelector(".dozadu").onclick = function() {prevPage(druh_voleb)}
+</script>

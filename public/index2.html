@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+  <style>
+    @layer base {
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      main>:first-child {
+        margin-top: 0 !important;
+      }
+
+      main>:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    id="tailwind-config">tailwind.config = { "darkMode": "class", "theme": { "extend": { "colors": { "error-container": "#ffdad6", "secondary-container": "#c4dcff", "tertiary": "#006c40", "surface-tint": "#0057ce", "surface-container-lowest": "#ffffff", "inverse-surface": "#2d3135", "tertiary-container": "#198754", "surface-container-low": "#f1f4f9", "on-tertiary": "#ffffff", "secondary-fixed-dim": "#b0c8eb", "surface-dim": "#d7dadf", "on-primary-container": "#ffffff", "primary-fixed-dim": "#b1c5ff", "on-primary-fixed-variant": "#00419e", "inverse-primary": "#b1c5ff", "on-secondary-fixed-variant": "#314865", "surface-container-highest": "#e0e3e8", "surface-variant": "#e0e3e8", "error": "#ba1a1a", "on-primary-fixed": "#001946", "on-secondary": "#ffffff", "primary-fixed": "#dae2ff", "on-secondary-container": "#49617f", "on-error-container": "#93000a", "primary-container": "#0d6efd", "on-surface-variant": "#424655", "on-surface": "#181c20", "background": "#f7f9ff", "secondary": "#49607e", "tertiary-fixed-dim": "#77da9f", "tertiary-fixed": "#93f7ba", "secondary-fixed": "#d2e4ff", "surface-container": "#ebeef3", "outline-variant": "#c2c6d8", "on-tertiary-container": "#ffffff", "on-tertiary-fixed": "#002110", "surface-bright": "#f7f9ff", "surface": "#f7f9ff", "inverse-on-surface": "#eef1f6", "primary": "#0057cd", "on-primary": "#ffffff", "on-background": "#181c20", "outline": "#727787", "on-error": "#ffffff", "on-secondary-fixed": "#001c37", "on-tertiary-fixed-variant": "#00522f", "surface-container-high": "#e5e8ee" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xxs": "0.125rem", "space-sm": "0.5rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "gutter-mobile": "1rem", "space-2xl": "2rem", "space-lg": "1.25rem", "space-base": "1rem", "space-3xl": "3rem", "space-md": "0.75rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-xl": ["Inter"], "headline-sm": ["Inter"], "stat-num": ["Inter"], "headline-xl-mobile": ["Inter"], "body-md": ["Inter"], "headline-md": ["Inter"], "label-sm": ["Inter"], "body-sm": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"] }, "fontSize": { "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-lg-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "stat-num": ["24px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }] } } } };</script>
+</head>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface">
+  <header class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-28 max-w-7xl mx-auto px-gutter-mobile lg:px-gutter-desktop flex flex-col justify-between py-space-xs">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-space-md"><img alt="VolebníMapy.cz Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VioV0QsVPGOFuOkwco3T6XhgAmpr3rIsR05gQ9wxw2ntLk54NOaHOdKiWrhQBgHHT6b1Ult51iW_pSQ-y0LFisQN0ktsCujQ7uW8-QlXXJs5jlOPSKMWoxKM-m0qTWjnJXauf_fTZmOViFSGfN7poKkcM8IRDtOFTTLrdnttJKksC7yteZvVZWPpf_QWTpx9jXawQYzZZziaa57VH4-r6Sn6sHTsqkA-i8lqIjvr2Vdq04KLPHb12ZNo1D">
+          <div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight">VolebníMapy.cz</span><span class="font-body-sm text-body-sm text-on-surface-variant">Generátor volebních map ČR</span></div>
+        </div>
+        <div class="flex items-center gap-space-base">
+          <nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm rounded-lg"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dokumentace-dat-csu" href="#">Dokumentace dat ČSÚ</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="metodika-a-napoveda" href="#">Metodika a nápověda</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="github" href="#">GitHub</a></nav>
+          
+        </div>
+      </div>
+      <nav class="flex items-center justify-center gap-space-sm sm:gap-space-base pt-space-xs pb-space-xxs overflow-x-auto" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm rounded-lg"><a aria-current="page" class="inline-flex items-center gap-space-xs px-space-md py-space-xs transition-colors whitespace-nowrap bg-primary-container text-on-primary-container font-headline-sm rounded-lg" data-path="uvod" href="#"><span class="w-5 h-5 rounded-full font-label-sm text-label-sm flex items-center justify-center bg-primary text-on-primary">1</span>Úvod</a><span class="text-outline-variant font-label-sm">→</span><a class="inline-flex items-center gap-space-xs px-space-md py-space-xs text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap font-label-md text-label-md" data-path="vyber-voleb" href="#"><span class="w-5 h-5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center justify-center">2</span>Výběr
+          voleb</a><span class="text-outline-variant font-label-sm">→</span><a class="inline-flex items-center gap-space-xs px-space-md py-space-xs text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap font-label-md text-label-md" data-path="typ-mapy" href="#"><span class="w-5 h-5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center justify-center">3</span>Typ
+          mapy</a><span class="text-outline-variant font-label-sm">→</span><a class="inline-flex items-center gap-space-xs px-space-md py-space-xs text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap font-label-md text-label-md" data-path="vysledna-mapa-a-export" href="#"><span class="w-5 h-5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center justify-center">4</span>Výsledná
+          mapa &amp; Export</a></nav>
+    </div>
+  </header>
+  <main class="w-full pt-28 bg-surface min-h-[calc(100vh-14rem)]">
+    <div class="flex flex-col w-full">
+      <!-- Interactive Hero Section with Split Data Canvas & Gradient Ambience -->
+      <section class="relative w-full overflow-hidden bg-surface py-space-3xl px-gutter-mobile lg:px-gutter-desktop">
+        <!-- Ambient Blur Background Accents -->
+        <div class="absolute -top-24 left-1/4 w-96 h-96 rounded-full bg-secondary-container opacity-40 blur-3xl pointer-events-none">
+        </div>
+        <div class="absolute top-1/3 right-10 w-80 h-80 rounded-full bg-tertiary-fixed opacity-30 blur-3xl pointer-events-none">
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-space-2xl items-center">
+          <!-- Left Column: Copy & Actions -->
+          <div class="lg:col-span-7 flex flex-col items-start gap-space-lg">
+            <!-- Verification Pill Badge -->
+            <div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-high shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+              <span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider">Ověřený zdroj dat ČSÚ •
+                volby.cz</span>
+            </div>
+            <!-- Main Headline -->
+            <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight leading-tight">
+              Vytvářejte profesionální <span class="text-primary underline decoration-primary-fixed-dim decoration-4 underline-offset-8">volební
+                mapy</span> Česka během pár kliknutí
+            </h1>
+            <!-- Subtitle -->
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+              Aplikace automaticky načítá otevřená data Českého statistického úřadu a transformuje je do vysoce přesných
+              publikačních mapových výstupů a interaktivních embedů vhodných pro redakce, datové novináře, analytiky i
+              samosprávy.
+            </p>
+            <!-- CTA Action Buttons -->
+            <div class="flex flex-wrap items-center gap-space-md pt-space-xs w-full sm:w-auto">
+              <a class="inline-flex items-center justify-center gap-space-sm px-space-xl py-3 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm hover:opacity-95 shadow-md hover:shadow-lg transition-all transform active:scale-95" data-path="vyber-voleb" href="#">
+                <span>Spustit aplikaci a vybrat volby</span>
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </a>
+              <a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container transition-colors" href="#galerie-sablon">
+                <span class="material-symbols-outlined text-[18px] text-secondary">map</span>
+                <span>Přehled zpracovaných voleb</span>
+              </a>
+              
+            </div>
+            <!-- Meta Assurance Tags -->
+            
+          </div>
+          <!-- Right Column: Interactive Vector Map Preview Mockup Card -->
+          
+        </div>
+      </section>
+      <!-- Quick Key Metrics Bar (Oficiální rozsah a autorita ČSÚ) -->
+      <section class="w-full bg-surface-container-low py-space-xl px-gutter-mobile lg:px-gutter-desktop shadow-sm">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-space-lg">
+          <!-- Metric Item 1 -->
+          <div class="flex flex-col gap-space-xxs bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between text-on-surface-variant">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider">Kraje</span>
+              <span class="material-symbols-outlined text-[20px] text-primary">account_tree</span>
+            </div>
+            <span class="font-stat-num text-stat-num text-on-surface">14 krajů</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Včetně hl. m. Prahy (NUTS 3)</span>
+          </div>
+          <!-- Metric Item 2 -->
+          <div class="flex flex-col gap-space-xxs bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between text-on-surface-variant">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider">Okresy</span>
+              <span class="material-symbols-outlined text-[20px] text-secondary">grid_view</span>
+            </div>
+            <span class="font-stat-num text-stat-num text-on-surface">77 okresů</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Kompletní územní topologie ČR</span>
+          </div>
+          <!-- Metric Item 3 -->
+          <div class="flex flex-col gap-space-xxs bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between text-on-surface-variant">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider">Obce</span>
+              <span class="material-symbols-outlined text-[20px] text-tertiary">location_city</span>
+            </div>
+            <span class="font-stat-num text-stat-num text-on-surface">6 258 obcí</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Detailní mikro-geografická data</span>
+          </div>
+          <!-- Metric Item 4 -->
+          <div class="flex flex-col gap-space-xxs bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between text-on-surface-variant">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider">Datový zdroj</span>
+              <span class="material-symbols-outlined text-[20px] text-tertiary-container">verified</span>
+            </div>
+            <span class="font-stat-num text-stat-num text-on-surface">Oficiální data ČSÚ</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Přímo ze serverů volby.cz</span>
+          </div>
+        </div>
+      </section>
+      <!-- Showcase Gallery of Map Templates (3 Bootstrap-style Cards) -->
+      <section class="w-full bg-surface py-space-3xl px-gutter-mobile lg:px-gutter-desktop" id="galerie-sablon">
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-2xl">
+          <!-- Section Heading -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-base">
+            <div class="flex flex-col gap-space-xxs">
+              <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Předpřipravené
+                výstupy</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">Ukázková galerie šablon map</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                Vyberte si ze standardizovaných kartografických modelů přizpůsobených pro redakční publikaci, analýzu
+                volebního chování nebo interaktivní zpravodajství.
+              </p>
+            </div>
+            
+          </div>
+          <!-- 3 Bootstrap-inspired Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
+            <!-- Card 1: Kartogram vítězných stran -->
+            <div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+              <!-- Card Image Thumbnail with badges -->
+              <div class="relative w-full h-48 bg-surface-container-high overflow-hidden flex items-center justify-center">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Stylized vector map illustration of the Czech Republic showing winning political parties by districts in distinct colors of royal blue, cyan, and red with clean cartographic borders" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz19N8z2Br0NoNu4Qbkg3tiyzKgXXevZYRJ7IwnBF8uT4L25itD_EgH82ORwQBWZphdqE1PhEuj6TqlDruXKdt00EaahuCxKYMeI6u-d_ljBobCdsmfQtOpU9iIpVzwxegm1w1NJSakwup1O_iR5YBiF4JcIwFG4nknsV6y7FeXI21b5Ol75g926VohXlI-1AePmT9jBP46j9008WJLjlZLUUbbAkfd_DoVJUmBzKH-0MwiGU3E5pTYQ">
+                <!-- Popular Badge -->
+                <div class="absolute top-space-sm left-space-sm px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm shadow-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[12px]">star</span>
+                  <span>Populární</span>
+                </div>
+                <!-- Resolution Tag -->
+                <div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface font-label-sm text-[11px] backdrop-blur-sm">
+                  SVG • 300 DPI
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="p-space-lg flex flex-col flex-grow justify-between gap-space-md">
+                <div class="flex flex-col gap-space-xs">
+                  <!-- Meta Tags -->
+                  <div class="flex items-center gap-space-xs flex-wrap font-label-sm text-label-sm">
+                    <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">Okresy
+                      ČR</span>
+                    <span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">Sněmovní
+                      volby</span>
+                  </div>
+                  <h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                    Kartogram vítězných stran v okresech
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Přehledná mapa dominantních politických subjektů v každém ze 77 okresů. Automaticky aplikuje
+                    oficiální stranické barvy a generuje přehlednou legendu.
+                  </p>
+                </div>
+                <!-- Card Action Footer -->
+                <div class="pt-space-sm flex items-center justify-between">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">Aktualizováno: 2024</span>
+                  <a class="inline-flex items-center gap-space-xxs px-space-md py-space-xs rounded bg-surface-container text-on-surface hover:bg-primary-container hover:text-on-primary-container font-headline-sm text-headline-sm transition-colors" data-path="vyber-voleb" href="#">
+                    <span>Použít šablonu</span>
+                    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Card 2: Heatmapa volební účasti po obcích -->
+            <div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+              <!-- Card Image Thumbnail with badges -->
+              <div class="relative w-full h-48 bg-surface-container-high overflow-hidden flex items-center justify-center">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High detail choropleth heat map visualization of voter turnout across 6000 Czech municipalities with smooth continuous color ramp gradient from pale green to deep emerald green" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_M8A0OaVHVB11YsigfA-RCACEfHRq252fAOqJsmTiyVKCvVJf0oRwBXnsbVhnwnBN8jADImmISB3KI1h8aDYpKtJ-wjKJwLjzlBdB0UoquSH7kRVdnM-oGhqWdjWhP3u2f-q_f7eT0-OtzPZ2llANAeyb_7st_mV77UjBce4wFuUoxyCdEZyiz_NG7MdRizobPx8FVYIirwsTpBJSCBFiXFnpmHXov2P-KPY8l8Xjo8piayZh73sJ5A">
+                <!-- Popular Badge -->
+                <div class="absolute top-space-sm left-space-sm px-2.5 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm shadow-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[12px]">trending_up</span>
+                  <span>Populární</span>
+                </div>
+                <!-- Resolution Tag -->
+                <div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface font-label-sm text-[11px] backdrop-blur-sm">
+                  Obce (6 258)
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="p-space-lg flex flex-col flex-grow justify-between gap-space-md">
+                <div class="flex flex-col gap-space-xs">
+                  <!-- Meta Tags -->
+                  <div class="flex items-center gap-space-xs flex-wrap font-label-sm text-label-sm">
+                    <span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-semibold">Všechny
+                      obce</span>
+                    <span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">Prezidentské
+                      volby</span>
+                  </div>
+                  <h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                    Heatmapa volební účasti po obcích
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Detailní kontinuální gradient odrážející volební mobilizaci ve všech 6 258 obcích ČR. Umožňuje
+                    detekci volebních periferií i nadprůměrně aktivních regionů.
+                  </p>
+                </div>
+                <!-- Card Action Footer -->
+                <div class="pt-space-sm flex items-center justify-between">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">Aktualizováno: 2024</span>
+                  <a class="inline-flex items-center gap-space-xxs px-space-md py-space-xs rounded bg-surface-container text-on-surface hover:bg-primary-container hover:text-on-primary-container font-headline-sm text-headline-sm transition-colors" data-path="vyber-voleb" href="#">
+                    <span>Použít šablonu</span>
+                    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Card 3: Kartodiagram zisku mandátů -->
+            <div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+              <!-- Card Image Thumbnail with badges -->
+              <div class="relative w-full h-48 bg-surface-container-high overflow-hidden flex items-center justify-center">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Cartodiagram map of Czech Republic regions showing overlaid circular donut charts representing parliamentary seat allocation by party with clear editorial styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNmC_u0bjD7FDJV2ZONGRD4CQpWql98OUoRdQRycsu6b8gISH2WiDlKYWzAXAfhZy92AFFl35gLb1qrdn401dnXDpTXXkZaY8l_hL5o2n-5kQpzqqN0KOW6wQYK6qNq7FufojpGSHSLoXXI-sm8KXlxt9Zfc0arzW7i-xlQXXCX65S4rO7_DpOZkeoq_q7Xpi0ObUKk464a-iSmDjyfYxEWw5onQY2ijjyQJUZnWuMVAaLfLlD7NT4Og">
+                <!-- Popular Badge -->
+                <div class="absolute top-space-sm left-space-sm px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm shadow-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[12px]">analytics</span>
+                  <span>Doporučeno</span>
+                </div>
+                <!-- Resolution Tag -->
+                <div class="absolute bottom-space-sm right-space-sm px-2 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface font-label-sm text-[11px] backdrop-blur-sm">
+                  Vektor + Interakce
+                </div>
+              </div>
+              <!-- Card Body -->
+              <div class="p-space-lg flex flex-col flex-grow justify-between gap-space-md">
+                <div class="flex flex-col gap-space-xs">
+                  <!-- Meta Tags -->
+                  <div class="flex items-center gap-space-xs flex-wrap font-label-sm text-label-sm">
+                    <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">14
+                      Krajů</span>
+                    <span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">Mandáty &amp;
+                      Procenta</span>
+                  </div>
+                  <h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+                    Kartodiagram zisku mandátů
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Kombinace regionální mapy s koláčovými grafy reprezentujícími přepočet hlasů na mandáty podle
+                    d'Hondtovy metody pro krajské a parlamentní volby.
+                  </p>
+                </div>
+                <!-- Card Action Footer -->
+                <div class="pt-space-sm flex items-center justify-between">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">Aktualizováno: 2024</span>
+                  <a class="inline-flex items-center gap-space-xxs px-space-md py-space-xs rounded bg-surface-container text-on-surface hover:bg-primary-container hover:text-on-primary-container font-headline-sm text-headline-sm transition-colors" data-path="vyber-voleb" href="#">
+                    <span>Použít šablonu</span>
+                    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- How it Works: 3 Simple Steps Section -->
+      <section class="w-full bg-surface-container-low py-space-3xl px-gutter-mobile lg:px-gutter-desktop">
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-2xl">
+          <!-- Section Title -->
+          <div class="text-center max-w-2xl mx-auto flex flex-col gap-space-xxs">
+            <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Intuitivní
+              průvodce</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Jak to funguje ve 3 jednoduchých krocích</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Příprava publikačního kartogramu nezabere víc než 60 vteřin. Nemusíte stahovat složité GIS nástroje ani
+              ručně čistit data.
+            </p>
+          </div>
+          <!-- 3 Steps Grid with Connecting Logic -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl relative">
+            <!-- Step 1 -->
+            <div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md relative z-10">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container font-stat-num text-stat-num flex items-center justify-center shadow-sm">
+                  1
+                </div>
+                <span class="material-symbols-outlined text-secondary text-[28px]">database</span>
+              </div>
+              <div class="flex flex-col gap-space-xs">
+                <h3 class="font-headline-md text-headline-md text-on-surface">Výběr voleb z databáze</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Zvolte typ voleb (prezidentské, sněmovní, senátní, krajské, komunální či evropské) a konkrétní volební
+                  rok. Aplikace automaticky synchronizuje oficiální sadu výsledků ČSÚ.
+                </p>
+              </div>
+              <ul class="font-body-sm text-body-sm text-on-surface-variant flex flex-col gap-1 pt-space-xs">
+                <li class="flex items-center gap-space-xxs">
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">check</span>
+                  Historická data od roku 1996 po současnost
+                </li>
+                <li class="flex items-center gap-space-xxs">
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">check</span>
+                  Možnost nahrání vlastního CSV souboru
+                </li>
+              </ul>
+            </div>
+            <!-- Step 2 -->
+            <div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md relative z-10">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container font-stat-num text-stat-num flex items-center justify-center shadow-sm">
+                  2
+                </div>
+                <span class="material-symbols-outlined text-secondary text-[28px]">palette</span>
+              </div>
+              <div class="flex flex-col gap-space-xs">
+                <h3 class="font-headline-md text-headline-md text-on-surface">Volba kartografického stylu</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Nastavte granularitu (kraje, okresy, obce), zvolte barevnou paletu, dynamické škálování, ohraničení
+                  regionů, zobrazení popisků a zkomponujte vysvětlující legendu mapy.
+                </p>
+              </div>
+              <ul class="font-body-sm text-body-sm text-on-surface-variant flex flex-col gap-1 pt-space-xs">
+                <li class="flex items-center gap-space-xxs">
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">check</span>
+                  Kontrastní palety pro tisk i digitální obrazovky
+                </li>
+                <li class="flex items-center gap-space-xxs">
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">check</span>
+                  Filtry podle politických stran a koalic
+                </li>
+              </ul>
+            </div>
+            <!-- Step 3 -->
+            <div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md relative z-10">
+              <div class="flex items-center justify-between">
+                <div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container font-stat-num text-stat-num flex items-center justify-center shadow-sm">
+                  3
+                </div>
+                <span class="material-symbols-outlined text-secondary text-[28px]">file_download</span>
+              </div>
+              <div class="flex flex-col gap-space-xs">
+                <h3 class="font-headline-md text-headline-md text-on-surface">Export do SVG/PNG/Embed</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Stáhněte si vektorovou grafiku pro grafické editory (Illustrator, Figma), rastr ve vysokém tiskovém
+                  rozlišení nebo získejte iframe kód pro vložení na váš web či blog.
+                </p>
+              </div>
+              <ul class="font-body-sm text-body-sm text-on-surface-variant flex flex-col gap-1 pt-space-xs">
+                <li class="flex items-center gap-space-xxs">
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">check</span>
+                  Plně responzivní interaktivní embed kód
+                </li>
+                <li class="flex items-center gap-space-xxs">
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">check</span>
+                  Zahrnutá data a metodika v metadatech výstupu
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Action Callout Box -->
+          <div class="bg-surface-container-highest rounded-xl p-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
+            <div class="flex items-center gap-space-base">
+              <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0">
+                <span class="material-symbols-outlined text-[22px]">bolt</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-headline-sm text-headline-sm text-on-surface">Chcete mapu vytvořit okamžitě?</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">Přejděte přímo do volebního katalogu a
+                  začněte výběrem roku a typu voleb.</span>
+              </div>
+            </div>
+            <a class="inline-flex items-center gap-space-xs px-space-xl py-space-sm rounded-lg bg-primary text-on-primary font-headline-sm text-headline-sm hover:opacity-95 whitespace-nowrap shadow-sm" data-path="vyber-voleb" href="#">
+              <span>Otevřít průvodce</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- Technical Integrity & Methodology Banner -->
+      
+      <script>
+        // Visual indicator active step synchronization with top shell navigation
+        document.addEventListener('DOMContentLoaded', () => {
+          const topStepLinks = document.querySelectorAll('header nav a[data-path]');
+          topStepLinks.forEach(link => {
+            if (link.getAttribute('data-path') === 'uvod') {
+              link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-headline-sm', 'rounded-lg');
+              link.classList.remove('text-on-surface-variant');
+              const badge = link.querySelector('span');
+              if (badge) {
+                badge.classList.remove('bg-surface-container-highest', 'text-on-surface');
+                badge.classList.add('bg-primary', 'text-on-primary');
+              }
+            }
+          });
+        });
+      </script>
+    </div>
+  </main>
+  <footer class="w-full bg-surface-container-low py-space-2xl shadow-[0_-1px_8px_rgba(0,0,0,0.02)]">
+    <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter-desktop flex flex-col md:flex-row items-center justify-between gap-space-lg">
+      <div class="flex flex-col text-center md:text-left gap-space-xxs">
+        <p class="font-headline-sm text-headline-sm text-on-surface">VolebníMapy.cz</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">Oficiální otevřená data Českého statistického úřadu
+          (volby.cz) | Licence Creative Commons CC BY 4.0</p>
+      </div>
+      <div class="flex items-center gap-space-lg"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="metodika-a-napoveda" href="#">Metodika výpočtů</a><span class="text-outline-variant">•</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="kontakt-a-podpora" href="#">Kontakt &amp; Podpora</a><span class="text-outline-variant">•</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="dokumentace-dat-csu" href="#">API a zdroje</a></div>
+    </div>
+  </footer>
+
+
+
+
+</body>
+
+</html>

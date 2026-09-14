@@ -34,8 +34,7 @@ router.use((err, req, res, next) => {
 function chyba(error) {
     if(global.options.debug) {
         console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
-        //console.log(error)
     }
 }
 
-module.exports = router;
+module.exports = {router, chyba}

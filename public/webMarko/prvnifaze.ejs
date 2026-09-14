@@ -1,0 +1,14 @@
+<h2>Vyberte si ze seznamu voleb</h2>
+<div style="display: flex;align-items: center;justify-content: center;gap: 10px;box-sizing: border-box;">
+    <form>
+        <select id="seznamvoleb" name="volby">
+        <%
+        seznamvoleb = JSON.parse(locals.seznamvoleb)
+        seznamvoleb.forEach(element => {
+            %><option><%- element %></option><%
+        });
+        %>
+        </select>
+        <button class="btn" hx-post="/okrskove-mapy" hx-target="#faze0" hx-target-error="#selhani">Potvrdit</button>
+    </form>
+</div>

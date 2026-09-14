@@ -1,0 +1,78 @@
+<% if(info["druh"] == "prezidentské") {%>
+<!-- pouze pro prezidentské volby -->
+<h2>Vyberte kolo prezidentských voleb</h2>
+<form hx-post="/okrskove-mapy" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:form .tlacitka button">
+    <input type="hidden" name="volby" value="<%- volby %>">
+    <input type="hidden" name="kolo">
+    <p class="vybrane_volby">vybrané volby: <%- volby %></p>
+    <div class="tlacitka">
+        <button class="btn" type="button" onclick="document.getElementsByName('kolo')[0].value = '1'">1. kolo</button>
+        <button class="btn" type="button" onclick="document.getElementsByName('kolo')[0].value = '2'">2. kolo</button>
+    </div>
+</form>
+<%} %>
+
+<% if(info["druh"] == "komunální") {%>
+<!-- pouze pro komunální volby, pozn. bez samosprávných částí -->
+<h3>Vyberte obec</h3>
+<p class="vybrane_volby">vybrané volby: <%- volby %></p>
+<div class="container">
+    <div>
+        <div>
+            <div style="position: relative;">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute;top: 12px;left: 10px;color: #9ca3af;"></i>
+                <input id="hledatobec" type="text" name="obec" class="form-control form-input" placeholder="začni hledat" style="padding: 6px 12px 6px 35px;">
+            </div>
+        </div>
+    </div>
+</div>
+<form id="vytvorit_mapu_obce">
+    <input type="hidden" name="volby" value="<%- volby %>">
+    <div id="seznamobci">
+
+    </div>
+    <button type="submit" hx-post="/okrskove-mapy" hx-target="#faze0" hx-target-error="#selhani">potvrdit</button>
+</form>
+<script type="module">
+    const data = await d3.dsv(";", "/kvcoco.csv")
+
+    function vyhledat(text) {
+        const vysledky = data.filter(function(element) {return element["NAZEVZAST"].startsWith(text)})
+        let seznam_element = document.getElementById("seznamobci")
+        seznam_element.innerHTML = ""
+        if(text == "") {return 0}
+        for (let i = 0; i < 3; i++) {
+            if(vysledky[i] == undefined) {break}
+            let polozka = document.createElement("label")
+            let obec = document.createElement("input")
+            polozka.htmlFor = vysledky[i]["KODZASTUP"]
+            polozka.innerText = vysledky[i]["NAZEVZAST"]
+            polozka.setAttribute("hx-post", "/okrskove-mapy")
+            obec.type = "radio"
+            obec.id = vysledky[i]["KODZASTUP"]
+            obec.classList.add("obec")
+            obec.name = "obec"
+            obec.value = vysledky[i]["KODZASTUP"]
+            seznam_element.append(obec)
+            seznam_element.append(polozka)
+        };
+    }
+
+    document.getElementById("hledatobec").oninput = function() {vyhledat(this.value)}
+</script>
+<!-- samosprávné městské části -->
+<h3>Vyberte, zda chcete zpracovat celou obec, nebo její část</h3>
+<script>
+    const vybranaobec = <%= obec %>
+</script>
+<form id="vytvorit_mapu_obce"><!-- skryté -->
+    <input type="hidden" name="obec">
+</form>
+<form>
+    <label for="celek">celá obec</label><input type="radio" name="vyber" id="cast" value="celek" onclick="document.getElementById('vytvorit_mapu_obce').querySelector('input').value = vybranaobec">
+    <label for="cast">vybrat část obce</label><input type="radio" name="vyber" id="cast" value="část">
+</form>
+<select name="casti" id="casti">
+    <!-- sem přijde seznam samosprávných městských částí -->
+</select>
+<%} %>

@@ -12,6 +12,9 @@
             <div style="display: flex; width: 95%; margin: auto;">
               <svg id="mapa" style="width: 75%; cursor: all-scroll; box-sizing: border-box; border: solid #818181 2px; border-radius: 5px; height: fit-content; padding: 10px; background: #dfdfdf85;" viewBox="0 0 1450 750">
                 <g id="vysledky"></g>
+                <g id="protektorat"></g>
+                <g id="okresy1950"></g>
+                <g id="okresy1960"></g>
                 <foreignObject xmlns="http://www.w3.org/1999/xhtml" x="985" y="0" height="70" width="460">
                   <style>
                     #doleva, #doprava, #nahoru, #dolu {
@@ -109,9 +112,9 @@
       import { vykresleni } from '<%- urlvykresleni%>'
       import { infobox } from "/společné/mapy/info/info základ.js"
       import { info } from '<%- urlinfo%>'
-      import { sudety } from "/společné/mapy/protektorát/protektorát.js"
+      import * as mapy from "/společné/mapy/protektorát/protektorát.js"
       import * as Zoom from "/společné/mapy/js/zoom.js"
-      <% if (info["druh"] == "komunální") {%>import { obvody } from "./seznam_obvodu.js"
+      <% if (info["druh"] == "komunální" && info.lokalita.druh == "obec") {%>import { obvody } from "./seznam_obvodu.js"
       
       window.obvody = obvody
       <%} %>
@@ -122,7 +125,9 @@
       vykresleni()
       .then(function({subunits, strany}) {
         infobox(subunits, strany, info)
-        sudety(subunits)
+        mapy.sudety(subunits)
+        mapy.okresy1950(subunits)
+        mapy.okresy1960(subunits)
         Zoom.svg
 	    .call(Zoom.zoom);
         document.getElementById("nacitani").style.display = "none"; document.getElementById("prohlizec").style.visibility = "visible";
@@ -131,20 +136,21 @@
         document.getElementById("nacitani").style.display = "none"; document.getElementById("prohlizec").style.visibility = "visible";
       })
     </script>
-    <% if(typzobrazeni == "normální" || typzobrazeni == "účast") {%>
     <script>
     //popisek
     function Popisek(popisek) {
       document.getElementById("popisek").innerText = `Mapa volebních výsledků pro ${popisek}`
     }
-
-    parametry.popisek = `<% if(info["lokalita"] == undefined) {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, <%- info["název"] %>`
+    </script>
+    
+    <% if(typzobrazeni == "normální" || typzobrazeni == "účast") {%><script>
+    parametry.popisek = `<% if(info["lokalita"]["druh"] == "stát") {console.log("ČR") %>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, <%- info["název"] %>`
     Popisek(parametry.popisek)
     </script><%} else {%>
     <script type="module">
       //popisek
       import { menu } from "<%- urlmenu %>"
 
-      menu().then(function(popisek) {parametry.popisek = `<% if(info["lokalita"] == undefined) {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, ${popisek}, <%- info["název"] %>`; Popisek(parametry.popisek)})
+      menu().then(function(popisek) {parametry.popisek = `<% if(info["lokalita"]["druh"] == "stát") {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, ${popisek}, <%- info["název"] %>`; Popisek(parametry.popisek)})
     </script>
     <% } %>

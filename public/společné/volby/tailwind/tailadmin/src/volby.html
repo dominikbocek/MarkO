@@ -8,14 +8,15 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
-      eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template
+      <%= info["název"] %> | MarkO
     </title>
-    <script src="http://localhost:80/node_modules/d3/dist/d3.min.js"></script>
-    <script src="http://localhost:80/node_modules/@observablehq/plot/dist/plot.umd.min.js"></script>
-    <link rel="icon" href="favicon.ico"><link href="/společné/volby/tailwind/tailadmin/build/style.css" rel="stylesheet"></head>
+    <script src="/node_modules/d3/dist/d3.min.js"></script>
+    <script src="/node_modules/@observablehq/plot/dist/plot.umd.min.js"></script>
+    <link rel="icon" href="favicon.ico"><link href="/společné/volby/tailwind/tailadmin/build/style.css" rel="stylesheet">
+    <script defer src="/společné/volby/tailwind/tailadmin/build/bundle.js"></script>
   </head>
   <body
-    x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': true, 'scrollTop': false }"
+    x-data="{ page: 'volby', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': true, 'scrollTop': false }"
     x-init="
          darkMode = JSON.parse(localStorage.getItem('darkMode'));
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
@@ -83,6 +84,5 @@
       <!-- ===== Content Area End ===== -->
     </div>
     <!-- ===== Page Wrapper End ===== -->
-    <script defer src="/společné/volby/tailwind/tailadmin/build/bundle.js"></script></body>
   </body>
 </html>

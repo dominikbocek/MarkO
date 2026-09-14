@@ -4,12 +4,10 @@ import sys
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--volby', action="store", dest='volby', required=True)
 parser.add_argument('--vyhledat', action="store", dest='vyhledat', required=True)
 parser.add_argument('--hledanahodnota', action="store", dest='hodnota', required=True)
 parser.add_argument('--json', action="store", dest='json', required=False, default="ne")
 argumenty = parser.parse_args()
-volby = argumenty.volby
 vyhledat = argumenty.vyhledat
 hodnota = argumenty.hodnota
 json = argumenty.json or "ne"
@@ -21,7 +19,7 @@ elif vyhledat == "kód":
 elif vyhledat != "":
     sys.exit(f"Neplatná možnost: {vyhledat}")
 
-df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kzcoco.csv", delimiter=";", encoding="cp1250")
+df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\coco.csv", delimiter=";", encoding="cp1250")
 
 seznam_obci = df[["OBEC", "NAZEVOBCE"]]
 seznam_obci.drop_duplicates(inplace=True)

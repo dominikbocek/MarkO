@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="640">
+<!-- původně z https://gist.github.com/pepelsbey/4281530 -->
+	<defs>
+		<style>
+			.square {
+				fill:none;
+				stroke:#99C8DC;
+				stroke-width:1;
+				}
+			.stroke {
+				stroke:#3491B9;
+				}
+		</style>
+		<g id="square">
+			<!-- Square -->
+			<rect x="-0.5" y="-0.5" width="128" height="128" class="square"/>
+			<!-- Vertical -->
+			<path d="M 15.5,0 V 127" class="stroke"/>
+			<path d="M 31.5,0 V 127" class="stroke"/>
+			<path d="M 47.5,0 V 127" class="stroke"/>
+			<path d="M 63.5,0 V 127" class="stroke"/>
+			<path d="M 79.5,0 V 127" class="stroke"/>
+			<path d="M 95.5,0 V 127" class="stroke"/>
+			<path d="M 111.5,0 V 127" class="stroke"/>
+			<!-- Horizontal -->
+			<path d="M 0,15.5 H 127" class="stroke"/>
+			<path d="M 0,31.5 H 127" class="stroke"/>
+			<path d="M 0,47.5 H 127" class="stroke"/>
+			<path d="M 0,63.5 H 127" class="stroke"/>
+			<path d="M 0,79.5 H 127" class="stroke"/>
+			<path d="M 0,95.5 H 127" class="stroke"/>
+			<path d="M 0,111.5 H 127" class="stroke"/>
+		</g>
+		<g id="row">
+			<use xlink:href="#square" x="0"/>
+			<use xlink:href="#square" x="128"/>
+			<use xlink:href="#square" x="256"/>
+			<use xlink:href="#square" x="384"/>
+			<use xlink:href="#square" x="512"/>
+			<use xlink:href="#square" x="640"/>
+			<use xlink:href="#square" x="768"/>
+			<use xlink:href="#square" x="896"/>
+		</g>
+	</defs>
+	<use xlink:href="#row" y="0"/>
+	<use xlink:href="#row" y="128"/>
+	<use xlink:href="#row" y="256"/>
+	<use xlink:href="#row" y="384"/>
+	<use xlink:href="#row" y="512"/>
+</svg>

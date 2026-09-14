@@ -1,6 +1,5 @@
 import argparse
 import pandas as pd
-import shutil
 import sys
 import os
 
@@ -23,30 +22,28 @@ zkratka = argumenty.zkratka
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
 
-statistiky_vsechno = "statistics-univerzal.csv"
+seznam_stran = "candidates-univerzal.csv"
     
 koalice = koalice.split(",")
 
-if not os.path.exists("candidates-univerzal.csv"):
-    shutil.copyfile("candidates.csv", "candidates-univerzal.csv")
-strany = pd.read_csv("candidates-univerzal.csv", delimiter=",", encoding='utf-8')
-kstrana_vstrana = int(strany["CKAND"].iloc[-1] + 1)
-a = pd.DataFrame([[kstrana_vstrana, nazevkoalice, zkratka]],
-                       columns=['CKAND', 'JMENO', 'PRIJMENI'])
-a.to_csv('candidates-univerzal.csv', mode='a', index=False, header=False, encoding='utf-8')
+strany = pd.read_csv(seznam_stran, delimiter=",", encoding='utf-8')
+kstrana_vstrana = int(len(strany) + 1)
+a = pd.DataFrame([[kstrana_vstrana, nazevkoalice, zkratka]], columns=['CKAND', 'JMENO', 'PRIJMENI'])
+strany = pd.concat([strany, a])
+strany.to_csv(seznam_stran, index=False, encoding='utf-8')
 
-if os.path.exists(statistiky_vsechno):
+def statistiky(zpracovani):
+    match zpracovani:
+        case "obce":
+            statistiky_vsechno = "statistikcs-univerzal-obce.csv"
+        case "okrsky":
+            statistiky_vsechno = "statistics-univerzal.csv"
+        case _:
+            sys.exit("Neplatná možnost!")
+
     universal = pd.read_csv(statistiky_vsechno)
-    id_universal = universal.pop('id')
-    vol_seznam_universal = universal.pop("VOL_SEZNAM")
-    pl_hl_celk_universal = universal.pop("PL_HL_CELK")
-    pocet_vs_universal = universal.pop("POCET_VS")
-    universal[len(universal.columns) + 1] = universal[koalice].sum(axis=1)
-    universal.insert(0, id_universal.name, id_universal)
-    universal.insert(len(universal.columns), vol_seznam_universal.name, vol_seznam_universal)
-    universal.insert(len(universal.columns), pl_hl_celk_universal.name, pl_hl_celk_universal)
-    universal.insert(len(universal.columns), pocet_vs_universal.name, pocet_vs_universal)
-    universal["POCET_VS"] = universal["POCET_VS"] + 1
+    universal[len(strany)] = universal[koalice].sum(axis=1)
+    universal["POCET_VS"] = len(strany)
     universal.to_csv(statistiky_vsechno, index=False)
     
 print(kstrana_vstrana)

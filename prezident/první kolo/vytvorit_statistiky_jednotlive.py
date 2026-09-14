@@ -25,8 +25,8 @@ if zpracovani == "okrsky":
     popisky_df = pd.read_csv('statistics-popisky.csv')
     strany_df = pd.read_csv('statistics-jenom-strany.csv')
 elif zpracovani == "obce":
-    popisky_df = pd.read_csv('statistics-obce-popisky.csv')
-    strany_df = pd.read_csv('statistics-obce-jenom-strany.csv')
+    popisky_df = pd.read_csv('statistics-obce-popisky.csv', dtype={"id": str})
+    strany_df = pd.read_csv('statistics-obce-jenom-strany.csv', dtype={"id": str})
 
 if kstrana == "0" or kstrana == [""]:
     strany = strany_df.columns

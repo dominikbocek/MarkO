@@ -15,19 +15,19 @@ seznam = []
 if cesta == "ne":
     filtr_slozek = [f for f in os.listdir(path) if os.path.isdir(os.path.join(path, f))]
     for d in filtr_slozek:
-        if(os.path.isfile(f"{path}/{d}/první kolo/volebni_okrsky-simple-data-topo.json")):
+        if(os.path.isfile(f"{path}/{d}/první kolo/statistics.csv")):
             seznam.append(f"{d} (první kolo)")
-        if(os.path.isfile(f"{path}/{d}/druhé kolo/volebni_okrsky-simple-data-topo.json")):
+        if(os.path.isfile(f"{path}/{d}/druhé kolo/statistics.csv")):
             seznam.append(f"{d} (druhé kolo)")
-        if(os.path.isfile(f"{path}/{d}/volebni_okrsky-simple-data-topo.json")):
+        if(os.path.isfile(f"{path}/{d}/statistics.csv")):
             seznam.append(d)
 else:
     filtr_slozek = [f for f in os.listdir(path) if os.path.isdir(os.path.join(path, f))]
     for d in filtr_slozek:
-        if(os.path.isfile(f"{path}/{d}/první kolo/volebni_okrsky-simple-data-topo.json")):
+        if(os.path.isfile(f"{path}/{d}/první kolo/statistics.csv")):
             seznam.append(f"{d}/první kolo")
-        if(os.path.isfile(f"{path}/{d}/druhé kolo/volebni_okrsky-simple-data-topo.json")):
+        if(os.path.isfile(f"{path}/{d}/druhé kolo/statistics.csv")):
             seznam.append(f"{d}/druhé kolo")
-        if(os.path.isfile(f"{path}/{d}/volebni_okrsky-simple-data-topo.json")):
+        if(os.path.isfile(f"{path}/{d}/statistics.csv")):
             seznam.append(d)
 print(sorted(seznam))

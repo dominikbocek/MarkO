@@ -1,0 +1,25 @@
+<h2>
+    <i class="bi bi-arrow-left-circle-fill" style="display: none;" onclick="skryt_zobrazit(document.getElementById('vyber2'), document.getElementById('vyber1')); this.style.display = 'none';"></i>
+    Další možnosti
+</h2>
+<p class="vybrane_volby">vybrané volby: <%= volby %></p>
+<p>Co chcete vytvořit?</p>
+<div class="tlacitka">
+    <div id="vyber1"><!-- mapy voličské podpory (pro všechny volby) -->
+        <form hx-post="/kandidujici-subjekty" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:form button">
+            <input type="hidden" name="volby" value="<%- volby %>">
+            <input type="hidden" name="vytvorit">
+            <input type="hidden" name="druh_map">
+            <% if(info["druh"] == "komunální") {%><input type="hidden" name="obec" value="<%= obec %>"><%} %>
+            <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
+            <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'samostatné'; document.getElementsByName('druh_map')[0].value = 'samostatné';">Mapy voličské podpory</button>
+            <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'koalice'; document.getElementsByName('druh_map')[0].value = 'vítězné';">Koalice pro mapu vítězů</button>
+            <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'koalice'; document.getElementsByName('druh_map')[0].value = 'vítězné';">Koalice pro mapy voličské podpory</button>
+        </form>
+    </div>
+    <div id="vyber2" style="display: none;"></div><!-- koalice, včetně samostatných, jsem líný pro to dělat extra sekci, uvidím (s výjimkou druhého kola prezidentských voleb a komunálních voleb, kde jsou jen dva kandidující subjekty) -->
+</div>
+
+<div id="uspech" hx-swap-oob="afterbegin">
+    <span><%- zprava %></span>
+</div>
