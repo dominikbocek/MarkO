@@ -37,8 +37,25 @@ program.parse();
 
 const bodyParser = require('body-parser')
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json())
+
+app.use(express.urlencoded({
+    extended: false,
+    limit: "2000mb"
+}));
+
+app.use(express.json({
+    limit: "2000mb"
+}));
+
+app.use(express.text({
+    limit: "2000mb"
+}));
+
+app.use(express.raw({
+    limit: "2000mb"
+}));
 
 // zachytávání základních url adres
 
@@ -52,41 +69,19 @@ app.get("/info", (req, res, next) => {
 
 app.use(express.static(__dirname))
 
-// webová verze programu
-
-const webMarko = require("./routes/webMarkO.js")
-
-app.use(webMarko)
-
 // ostatní věci
 
 app.post("/stahnout", async (req, res, next) => {
 
-    function makeid(length) {
-        var result           = '';
-        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-
-    let soubor = __dirname+req.body.soubor
-    let tmpgeojson = `${__dirname}/../společné/tmp/${makeid(20)}.geojson`
-    let barvy = __dirname+req.body.barvy
-    let legenda = __dirname+req.body.legenda
-    let druh = req.body.druh
+    let volby = req.body.volby
+    let data = req.body.data
     let popisek = req.body.popisek
-    execSync(`bash "${__dirname}/../společné/geojson.sh" "${soubor}" "${tmpgeojson}"`, (error, stdout, stderr) => {
-        if (error) {
-            chyby.chyba(error)
-        }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
-    })
-    const vysledek = createGeoJSONImage(tmpgeojson, barvy, legenda, druh, popisek)
+    let druh = req.body.druh
+    let typzobrazeni = req.body.typzobrazeni
+    let rozsah = req.body.rozsah
+    let legenda = function() {if(druh == "sněmovní" || druh == "krajské" || druh == "prezidentské") {return `${__dirname}/volby/${volby}/vysledky_cr.json`} else if(druh == "komunální") {return `${__dirname}/volby/${volby}/obce/${lokalita}/vysledky_cr_${lokalita}.json`}}
+
+    const vysledek = createGeoJSONImage(data, legenda(), druh, typzobrazeni, rozsah, popisek)
     vysledek.then(function(obrazek) {
         res.set({
             "Content-Type": "image/png",
@@ -94,9 +89,14 @@ app.post("/stahnout", async (req, res, next) => {
             "Content-Length": obrazek.length
         });
         res.send(obrazek)
-        fs.unlinkSync(tmpgeojson)
     })
 })
+
+// webová verze programu
+
+const webMarko = require("./routes/webMarkO.js")
+
+app.use(webMarko)
 
 /////////////////////////
 //  Zachytávání chyb  //

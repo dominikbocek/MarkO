@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import argparse
 
@@ -10,7 +11,7 @@ volby = argumenty.volby
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}")
 
-with open("info.json") as soubor:
+with open("info.json", encoding="utf-8") as soubor:
     info = json.load(soubor)
     if info["druh"] == "sněmovní":
         print('("pscoco.csv" "psrkl.csv" "pst4.csv" "pst4p.csv")')

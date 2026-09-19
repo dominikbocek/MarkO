@@ -32,10 +32,8 @@ function vyberverzi(info, res) {
     let verzeprogramu
     switch (info["druh"]) {
         case "krajské":
-            verzeprogramu = "kraje"
-            break;
         case "sněmovní":
-            verzeprogramu = "sněmovna"
+            verzeprogramu = "kraje a sněmovna"
             break;
         case "prezidentské":
             verzeprogramu = "prezident"

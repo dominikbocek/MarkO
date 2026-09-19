@@ -31,7 +31,7 @@ Overeni() {
       echo "Nezadali jste žádné volby."
       exit
    fi
-   local seznam_souboru="$(python3 ./soubory.py --volby '$2')"
+   eval local seznam_souboru=$(python3 ./soubory.py --volby "sněmovní volby 2025")
    for i in "${seznam_souboru[@]}"; do
       if ! test -f "../sada/$sada/$i"; then
          echo "Soubor $i neexistuje. Program nemůže pokračovat."

@@ -152,10 +152,8 @@ legenda.get("/vysledky_cr.json", (req, res, next) => {
     let verze
     switch (info["druh"]) {
         case "sněmovní":
-            verze = "sněmovna"
-            break;
         case "krajské":
-            verze = "kraje"
+            verze = "kraje a sněmovna"
             break;
         case "prezidentské":
             if(req.params.kolo == "první kolo") {

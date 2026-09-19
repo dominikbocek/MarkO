@@ -20,7 +20,6 @@ body {
 
 body > section, #prohlizec {
   height: inherit;
-  background: #e4e9f7;
   /*background: rgba(235, 255, 255, 0.9);*/ /*pozn. pouze figure; tmavý režim rgba(30,30,30,0.9) */
 }
 
@@ -28,6 +27,8 @@ figure > div > i {
   display: block;
   text-align: center;
 }
+
+/* tlačítko stažení */
 
 /* From Uiverse.io by portseif */ 
 #stahnout {
@@ -72,19 +73,11 @@ figure > div > i {
   top: -1px;
 }
 
+/* konec stylů tlačítka stažení */
+
 #sudety-prepinac {
   margin-top: 10px;
   text-align: end;
-}
-
-#vyber {
-  position: absolute;
-  left: 76px;
-  bottom: 0;
-}
-
-#vyber select {
-  display: block;
 }
 
 #nastroje {
@@ -122,7 +115,7 @@ figure > div > i {
   gap: 10px;
 }
 
-#zoom button, svg button {
+/*#zoom button, svg button {
   padding: 13px 25px;
   border-radius: 8px;
   border: solid 2px rgb(210,210,210);
@@ -130,19 +123,19 @@ figure > div > i {
   background: rgba(240,240,255,1);
   cursor: pointer;
   font-size: 16px;
-}
+}*/
 
 :modal {
-  background-color: #f4f4f4;
-  border: 2px solid #ababab;
+  background-color: #fff;
   border-radius: 5px;
   margin: auto;
+  border: none;
+  box-shadow: black 17px 20px 20px 0px;
 }
 
 /* sekce pro mapu */
 
 .subunit {
-  stroke: #888;
   stroke-width: 0.25px;
   stroke-linejoin: round;
 }
@@ -152,24 +145,39 @@ figure > div > i {
   stroke-width: 2px;
 }
 
-.protektorat, .okresy1950, .okresy1960 {
+#protektorat, #okresy1950, #okresy1960 {
   display: none;
-  stroke: #ffffff;
+}
+
+.protektorat, .okresy1950, .okresy1960 {
   stroke-width: 2px;
   stroke-linejoin: round;
 }
 
-/* sekce pro nastavení mapy */
-
-#nastaveni::backdrop {
-  background: rgba(100,100,100,0.3);
-  backdrop-filter: blur(10px) grayscale(1);
+dialog {
+  padding: 10px;
 }
 
-#nastaveni form {
-  padding: 5px 7px;
+/* sekce pro nastavení mapy */
+
+dialog::backdrop {
+  background: rgba(100,100,100,0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: black 17px 20px 20px 0px;
 }
 
 #nastaveni form div {
   margin-top: 10px;
+}
+
+:root[data-theme="dark"] {
+  body > section, #prohlizec {
+    background: #0f1720;
+  }
+}
+
+:root[data-theme="light"] {
+  body > section, #prohlizec {
+    background: #e4e9f7;
+  }
 }

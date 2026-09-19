@@ -35,7 +35,7 @@ strany.to_csv(seznam_stran, index=False, encoding='utf-8')
 def statistiky(zpracovani):
     match zpracovani:
         case "obce":
-            statistiky_vsechno = "statistikcs-univerzal-obce.csv"
+            statistiky_vsechno = "statistics-obce-univerzal.csv"
         case "okrsky":
             statistiky_vsechno = "statistics-univerzal.csv"
         case _:
@@ -45,5 +45,8 @@ def statistiky(zpracovani):
     universal[len(strany)] = universal[koalice].sum(axis=1)
     universal["POCET_VS"] = len(strany)
     universal.to_csv(statistiky_vsechno, index=False)
+
+statistiky("obce")
+statistiky("okrsky")
     
 print(kstrana_vstrana)

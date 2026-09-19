@@ -7,60 +7,71 @@
         <p>Tak zas po přetočení...</p>
       </div>
       <figure id="prohlizec" style="visibility: hidden;">
+        <style>
+          #doleva, #doprava, #nahoru, #dolu {
+            display: grid;
+            justify-content: center;
+            align-content: center;
+          }
+
+          #nahoru, #dolu {
+            height: 100%;
+          }
+
+          #mapa-orientace button {
+            background: white;
+          }
+        </style>
+        <div style="display: flex; align-items: center; gap: 10px; flex-direction: row-reverse; position: absolute; float: right; width: 100%;">
+          <div id="kompas" style="position: relative;right: 0;width: 65px;height: 65px;border-radius: 45px;background: rgb(255, 255, 255);border: solid black 3px;background: white;display: inline-block; box-sizing: border-box;">            
+            <div style="display: flex;justify-content: space-around;position: relative;transform: translateY(-50%);top: 50%;">
+              <div id="doleva" title="doleva">
+                <i class="fa-solid fa-angle-left"></i>
+              </div>
+              <div id="doprava" title="doprava">
+                <i class="fa-solid fa-angle-right"></i>
+              </div>
+            </div>            
+            <div style="display: grid; justify-content: center; position: absolute; top: 0; transform: translateX(-50%); width: fit-content; left: 50%; height: 100%;">
+              <div id="nahoru" title="nahoru">
+                <i class="fa-solid fa-angle-up"></i>
+              </div>
+              <div id="dolu" title="dolů">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+          </div>
+          <section id="mapa-orientace" style="display: inline-flex;gap: 10px;">                  
+            <button id="stahnout" class="btn"><i class="bi bi-download"></i></button>
+            <button class="btn" onclick="document.getElementById('nastaveni').showModal()"><i class="bi bi-gear"></i></button>
+            <button id="zoom-in" class="btn"><i class="bi bi-zoom-in"></i></button>
+            <button id="zoom-out" class="btn"><i class="bi bi-zoom-out"></i></button>
+            <button id="reset-zoom" class="btn">Reset</button>
+          </section>
+        </div>
         <div id="kontejner-mapy" style="width: 100%; height: inherit; display: flex; align-items: center;">
           <div style="width: 100%;">
-            <div style="display: flex; width: 95%; margin: auto;">
-              <svg id="mapa" style="width: 75%; cursor: all-scroll; box-sizing: border-box; border: solid #818181 2px; border-radius: 5px; height: fit-content; padding: 10px; background: #dfdfdf85;" viewBox="0 0 1450 750">
+            <div style="display: flex; width: 100%; height: 100vh; margin: auto;">
+              <svg id="mapa" style="width: 100%; height: 100%; cursor: all-scroll; box-sizing: border-box; padding: 10px; /*background: #dfdfdf85;*/" viewBox="0 0 1450 750">
                 <g id="vysledky"></g>
-                <foreignObject xmlns="http://www.w3.org/1999/xhtml" x="985" y="0" height="70" width="460">
-                  <style>
-                    #doleva, #doprava, #nahoru, #dolu {
-                      display: grid;
-                      justify-content: center;
-                      align-content: center;
-                    }
-
-                    #nahoru, #dolu {
-                      height: 100%;
-                    }
-                  </style>
-                  <div style="display: flex; align-items: center; gap: 10px; flex-direction: row-reverse;">
-                    <div id="kompas" style="position: relative;right: 0;width: 65px;height: 65px;border-radius: 45px;background: rgb(255, 255, 255);border: solid black 3px;background: white;display: inline-block; box-sizing: border-box;">            
-                      <div style="display: flex;justify-content: space-around;position: relative;transform: translateY(-50%);top: 50%;">
-                        <div id="doleva" title="doleva">
-                          <i class="fa-solid fa-angle-left"></i>
-                        </div>
-                        <div id="doprava" title="doprava">
-                          <i class="fa-solid fa-angle-right"></i>
-                        </div>
-                      </div>            
-                      <div style="display: grid; justify-content: center; position: absolute; top: 0; transform: translateX(-50%); width: fit-content; left: 50%; height: 100%;">
-                        <div id="nahoru" title="nahoru">
-                          <i class="fa-solid fa-angle-up"></i>
-                        </div>
-                        <div id="dolu" title="dolů">
-                          <i class="fa-solid fa-angle-down"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <section id="mapa-orientace" style="display: inline-flex;gap: 10px;">                  
-                      <div id="zoom" style="display: inline-flex; width: fit-content;">
-                        <button id="zoom-in">+</button>
-                        <button id="zoom-out">-</button>
-                        <button id="reset-zoom">Reset</button>
-                      </div>
-                      <button onclick="document.getElementById('nastaveni').showModal()">Nastavení</button>
-                    </section>
-                  </div>         
-                </foreignObject>
-                <foreignObject x="1370" y="680" height="70" width="100">
-                  <button onclick="document.getElementById('info').showModal()">Info</button>
-                </foreignObject>
+                <g id="protektorat"></g>
+                <g id="okresy1950"></g>
+                <g id="okresy1960"></g>
               </svg>
-              <svg id="legenda" viewBox="0 0 450 600" style="width: 25%;"></svg>
             </div>
           </div>
         </div>
+        <div id="vyber" style="margin: auto; margin-top: 10px; position: absolute; bottom: 0;">
+          <!-- začátek sekce pouze pro samostatné mapy -->
+          <% if(typzobrazeni == "samostatné") {%>
+          <select id="seznam" class="form-select" onchange="location.href='?strana=' + this.value" style="width: 160px;">
+            <option disabled selected style="display: none">vyber</option>
+          </select><% } %>
+          <!-- konec sekce pouze pro samostatné mapy -->
+        </div>
+        <button class="btn" onclick="document.getElementById('info').showModal()" style="position: absolute; right: 0; bottom: 0; font-size: 40px; color: white; line-height: 1; border: none; background: none;">
+          <i class="bi bi-info-circle-fill"></i>
+        </button>
         <dialog id="nastaveni" closedby="any">
           <form method="dialog">
             <header>
@@ -72,19 +83,25 @@
             </section>
           </form>
         </dialog>
-        <dialog id="info" closedby="any">
+        <dialog id="info" closedby="any" open> <!-- open pouze z důvodu správného zobrazení legendy -->
           <form method="dialog">
             <header>
               <h2>Info</h2>
+            </header>
+            <section>
+              <p id="popisek" style="font-style: italic; text-align: center;"></p>
+            </section>
+            <header>
+              <h2>Legenda</h2>
               <section>
-                <p id="popisek" style="font-style: italic; text-align: center;"></p>
-                <button>Zavřít</button>
+                <svg id="legenda" viewBox="0 0 600 300" style="/*width: 25%; border-left: solid lightgrey 1px;*/"></svg>
               </section>
+              <button>Zavřít</button>
             </header>
           </form>
         </dialog>
-        <div id="nastroje">
-          <button id="stahnout" tabindex="2" onclick="stahnout('<%- info['název'] %>')">
+        <!-- <div id="nastroje">
+          <button id="stahnout" tabindex="2">
             <svg stroke-linejoin="round" stroke-linecap="round" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
               <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
               <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
@@ -93,25 +110,17 @@
             </svg>
             <span>Stáhnout obrázek</span>
           </button>
-        </div>
+        </div> -->
       </figure>
-      <div id="vyber">
-        <!-- začátek sekce pouze pro samostatné mapy -->
-        <% if(typzobrazeni == "samostatné") {%>
-        <select id="seznam" onchange="location.href='?strana=' + this.value">
-          <option disabled selected style="display: none">vyber</option>
-        </select><% } %>
-        <!-- konec sekce pouze pro samostatné mapy -->
-      </div>
     </section>
     <!-- vykreslení mapy -->
     <script type="module">
       import { vykresleni } from '<%- urlvykresleni%>'
       import { infobox } from "/společné/mapy/info/info základ.js"
       import { info } from '<%- urlinfo%>'
-      import { sudety } from "/společné/mapy/protektorát/protektorát.js"
+      import * as mapy from "/společné/mapy/protektorát/protektorát.js"
       import * as Zoom from "/společné/mapy/js/zoom.js"
-      <% if (info["druh"] == "komunální") {%>import { obvody } from "./seznam_obvodu.js"
+      <% if (info["druh"] == "komunální" && info.lokalita.druh == "obec") {%>import { obvody } from "./seznam_obvodu.js"
       
       window.obvody = obvody
       <%} %>
@@ -119,33 +128,37 @@
 
       if(parametry.typzobrazeni == "samostatné") {if(parametry.hledanastrana == null) {document.getElementById("nacitani").style.display = "none"; document.getElementById("prohlizec").style.visibility = "visible"}}
 
-      vykresleni()
+      vykresleni(d3.select("#mapa g"), parametry.druh)
       .then(function({subunits, strany}) {
         infobox(subunits, strany, info)
-        sudety(subunits)
-        Zoom.svg
-	    .call(Zoom.zoom);
-        document.getElementById("nacitani").style.display = "none"; document.getElementById("prohlizec").style.visibility = "visible";
+        mapy.sudety(subunits)
+        mapy.okresy1950(subunits)
+        mapy.okresy1960(subunits)
+        document.getElementById("stahnout").onclick = function() {stahnout(subunits)}
       })
-      .catch(function() {
+      .catch(function(error) {
+        console.error(error)
+        document.getElementById("stahnout").remove()
+      })
+      .finally(function() {
         document.getElementById("nacitani").style.display = "none"; document.getElementById("prohlizec").style.visibility = "visible";
       })
     </script>
-    <% if(typzobrazeni == "normální" || typzobrazeni == "účast") {%>
     <script>
     //popisek
     function Popisek(popisek) {
       document.getElementById("popisek").innerText = `Mapa volebních výsledků pro ${popisek}`
     }
-
-    parametry.popisek = `<% if(info["lokalita"] == undefined) {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, <%- info["název"] %>`
+    </script>
+    
+    <% if(typzobrazeni == "normální" || typzobrazeni == "účast") {%><script>
+    parametry.popisek = `<% if(info["lokalita"]["druh"] == "stát") {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, <%- info["název"] %>`
     Popisek(parametry.popisek)
     </script><%} else {%>
     <script type="module">
       //popisek
       import { menu } from "<%- urlmenu %>"
-      import { Popisek } from "/společné/mapy/js/popisek.js"
 
-      menu().then(function(popisek) {parametry.popisek = `<% if(info["lokalita"] == undefined) {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, ${popisek}, <%- info["název"] %>`; Popisek(parametry.popisek)})
+      menu().then(function(popisek) {parametry.popisek = `<% if(info["lokalita"]["druh"] == "stát") {%>ČR<%} else {%><%- info["lokalita"]["NAZEVZAST"]%><% }; %>, ${popisek}, <%- info["název"] %>`; Popisek(parametry.popisek)})
     </script>
     <% } %>

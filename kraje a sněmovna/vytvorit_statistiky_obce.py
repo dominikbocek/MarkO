@@ -5,7 +5,7 @@ import json
 import numpy as np
 import pandas as pd
 import argparse
-import vytvorit_seznam_subjektu
+import subprocess
 
 # zpracování argumentů
 parser = argparse.ArgumentParser()
@@ -17,8 +17,8 @@ soubor = "statistics-obce.csv"
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}")
 
-with open("info.json") as soubor:
-    info = json.load(soubor)
+with open("info.json", encoding="utf-8") as jsonsoubor:
+    info = json.load(jsonsoubor)
     if info["druh"] == "sněmovní":
         seznam_id = "pst4.csv"
         seznam_vysledku = "pst4p.csv"
@@ -40,7 +40,8 @@ os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{vo
 
 # strany
 parties = pd.read_csv("parties.csv", dtype={"STAVREG": str, "KSTRANA": str})
-bezregistrace = vytvorit_seznam_subjektu.seznam()
+bezregistrace = subprocess.run(["python3", f"{os.path.dirname(os.path.realpath(__file__))}\\vytvorit_seznam_subjektu.py", "--volby", f"{volby}", "--dosouboru", "False"], capture_output=True, text=True).stdout
+bezregistrace = eval(bezregistrace)
 parties = parties[["KSTRANA", "VSTRANA"]]
 
 s = statistics[['id', 'VOL_SEZNAM', 'PL_HL_CELK']]

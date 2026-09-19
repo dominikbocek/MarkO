@@ -14,7 +14,7 @@
             <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
             <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'samostatné'; document.getElementsByName('druh_map')[0].value = 'samostatné';">Mapy voličské podpory</button>
             <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'koalice'; document.getElementsByName('druh_map')[0].value = 'vítězné';">Koalice pro mapu vítězů</button>
-            <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'koalice'; document.getElementsByName('druh_map')[0].value = 'vítězné';">Koalice pro mapy voličské podpory</button>
+            <button class="btn" type="button" onclick="document.getElementsByName('vytvorit')[0].value = 'koalice'; document.getElementsByName('druh_map')[0].value = 'samostatné';">Koalice pro mapy voličské podpory</button>
         </form>
     </div>
     <div id="vyber2" style="display: none;"></div><!-- koalice, včetně samostatných, jsem líný pro to dělat extra sekci, uvidím (s výjimkou druhého kola prezidentských voleb a komunálních voleb, kde jsou jen dva kandidující subjekty) -->

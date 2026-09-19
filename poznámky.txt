@@ -1,0 +1,7 @@
+Poznámky k vydání
+- krajské a snìmovní volby zpracovává jedna verze
+- upraven mechanismus vykreslování
+- upraven mechanismus stahování
+- vylepšena grafická stránka zobrazení map
+- webMarko pro krajské, snìmovní a prezidentské volby jsou plnì funkèní
+- webMarko má nedokonèené grafické rozhraní, obzvláštì komunální volby

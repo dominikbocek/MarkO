@@ -1,56 +1,71 @@
 <%
-const vrstvy = ["Sudety", "okresy1950", "okresy1960"]
-kespusteni = []
+const vrstvy = [
+    {
+        "název": "Sudety",
+        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "oblast": "stát",
+        "selector": "protektorat"
+    },
 
-function Sudety() {%>
-                    <div id="sudety-prepinac">
-                    <input type="checkbox" name="zobrazit-sudety" id="zobrazit-sudety" onchange="document.querySelector('.protektorat').style.display = this.checked ? 'inline' : 'none'; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - Sudety'} else {nazev = nazev.replace(' - Sudety', '')}">
-                    <label for="zobrazit-sudety">Zobrazit Sudety</label>
-                    </div>
-                <% }
+    {
+        "název": "okresy 1950",
+        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "oblast": "stát",
+        "selector": "okresy1950"
+    },
 
-function Okresy1950() {%>
-                    <div id="okresy1950-prepinac">
-                    <input type="checkbox" name="zobrazit-okresy1950" id="zobrazit-okresy1950" onchange="if(this.checked) {d3.selectAll('.okresy1950').style('display', 'inline')} else {d3.selectAll('.okresy1950').style('display', 'none')}; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - okresy 1950'} else {nazev = nazev.replace(' - okresy 1950', '')}">
-                    <label for="zobrazit-okresy1950">Zobrazit okresy z roku 1950</label>
-                    </div>
-                <% }
+    {
+        "název": "okresy1960",
+        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "oblast": "stát",
+        "selector": "okresy1960"
+    }
+]
 
-function Okresy1960() {%>
-                    <div id="okresy1960-prepinac">
-                    <input type="checkbox" name="zobrazit-okresy1960" id="zobrazit-okresy1960" onchange="if(this.checked) {d3.selectAll('.okresy1960').style('display', 'inline')} else {d3.selectAll('.okresy1960').style('display', 'none')}; document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - okresy 1960'} else {nazev = nazev.replace(' - okresy 1960', '')}">
-                    <label for="zobrazit-okresy1960">Zobrazit okresy z roku 1960</label>
-                    </div>
-                <% }
+let kespusteni = []
+
 
 vrstvy.forEach(element => {
-    switch (element) {
-        case "Sudety":
-            if(info["druh"] !== "komunální") {
-                kespusteni.push(Sudety)
-            }
-            break;
-        case "okresy1950":
-            if(info["druh"] !== "komunální") {
-                kespusteni.push(Okresy1950)
-            }
-            break;
-        case "okresy1960":
-            if(info["druh"] !== "komunální") {
-                kespusteni.push(Okresy1960)
-            }
-        default:
-            break;
+    if(element.volby.indexOf(info["druh"]) >= 0) {
+        kespusteni.push(element)
     }
 });
 
 if(kespusteni.length > 0) {
     pocetnastaveni +=1
     %>
+    <script>
+        function zpracovatvrstvu() {
+            // reset zobrazení
+            <% kespusteni.forEach(element => {
+                %>document.getElementById("<%= element['selector'] %>").style.display = 'none';<%
+            }) %>
+
+            switch (document.getElementById("vrstvy").value) {
+                <% kespusteni.forEach(element => {
+                    %>case "<%= element['název'] %>":
+                    if(document.getElementById("skryt-zobrazit").checked) {
+                        document.getElementById('<%= element["selector"] %>').style.display = 'inline'
+                    } else {
+                        document.getElementById('<%= element["selector"] %>').style.display = 'none'
+                    }
+                    document.getElementById("vrstvy").setAttribute("data-selector", '<%= element["selector"] %>')
+                    //document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - okresy 1960'} else {nazev = nazev.replace(' - okresy 1960', '')}
+                    break;<%
+                }); %>
+            }
+        }
+    </script>
     <div>
         <h3>Vrstvy</h3>
-        <% for (let index = 0; index < kespusteni.length; index++) {
-            kespusteni[index]()
-        }%>
+        <select id="vrstvy" class="form-select" style="display: block;">
+            <option value="" selected disabled style="display: none;">vyber vrstvu</option>
+            <% kespusteni.forEach(element => {
+                %><option value="<%= element["název"] %>"><%= element["název"] %></option><%
+            }) %>
+        </select>
+        <input type="color" id="barva" value="white" onchange="let barva = this.value; d3.select(`.${document.getElementById('vrstvy').getAttribute('data-selector')}`).attr('stroke', this.value);"><label for="barva">barva ohraničení vrstvy</label>
+        <br>
+        <input type="checkbox" id="skryt-zobrazit" onchange="zpracovatvrstvu()"><label for="skryt-zobrazit">zobrazit vrstvu</label>
     </div>
 <% } %>

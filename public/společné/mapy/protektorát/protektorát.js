@@ -22,6 +22,7 @@ export async function sudety(subunitsCR) {
     .attr("class", function(d) { return "protektorat" })
     .attr("fill", "none")
     .attr("d", path)
+    .attr("stroke", "white") // výchozí barva, lze změnit v nastavení
 }
 
 // okresy 1950
@@ -64,4 +65,5 @@ export async function okresy1960(subunitsCR) {
     .attr("class", function(d) { return "okresy1960" })
     .attr("fill", "none")
     .attr("d", path)
+    .attr("stroke", "white") // výchozí barva, lze změnit v nastavení
 }

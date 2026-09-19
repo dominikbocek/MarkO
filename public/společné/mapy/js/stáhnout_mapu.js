@@ -1,12 +1,14 @@
-function stahnout(soubor) {
-      $.ajax({
+function stahnout(subunits) {
+
+      return $.ajax({
             type: "POST",
             url: "/stahnout",
             data: {
-                  soubor: decodeURI(location.pathname)+parametry.data,
-                  barvy: decodeURI(location.pathname)+parametry.strany,
-                  legenda: decodeURI(location.pathname)+parametry.legendazdroj,
+                  volby: parametry.volby,
+                  data: JSON.stringify(subunits),
                   druh: parametry.druh,
+                  typzobrazeni: parametry.typzobrazeni,
+                  rozsah: parametry.rozsah,
                   popisek: parametry.popisek
                   },
             xhrFields: {

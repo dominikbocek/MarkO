@@ -9,8 +9,8 @@
         <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
         <input type="hidden" name="druh_map" value="<%- druh_map %>">
         <input type="hidden" name="cisla">
-        <input type="text" id="zkratkak30" class="form-control" maxlength="30" placeholder="zadejte název koalice (max. 30 písmen)">
-        <input type="text" id="zkratkak8" class="form-control" maxlength="8" placeholder="zadejte zkratku koalice (max. 8 písmen)">
+        <input type="text" name="nazev_koalice" id="zkratkak30" class="form-control" maxlength="30" placeholder="zadejte název koalice (max. 30 písmen)">
+        <input type="text" name="zkratka_koalice" id="zkratkak8" class="form-control" maxlength="8" placeholder="zadejte zkratku koalice (max. 8 písmen)">
     </form>
     <script>
         document.getElementById("zkratkak8").onbeforeinput = (event) => {var nepovoleneznaky = "\"'`;\\|{}"; if(nepovoleneznaky.includes(event.data)) {return false}}
@@ -18,7 +18,7 @@
     </script>
     <%} %>
     <% if(vytvorit == "samostatné") {%>
-    <form hx-post="/samostatne-mapy" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:form">
+    <form hx-post="/samostatne-mapy" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:#vytvorit">
         <input type="hidden" name="druh_map" value="<%- druh_map %>">
         <input type="hidden" name="volby" value="<%- volby %>">
         <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>

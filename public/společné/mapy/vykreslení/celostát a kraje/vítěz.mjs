@@ -1,16 +1,29 @@
-import { nactenimapy, nactenistran, nacteni_csv } from "/společné/mapy/vykreslení/načtení.js"
-import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
+import { legenda_normalni } from "../../legendy/legenda-normalni.mjs"
 
-export async function vykresleni() {
+export async function vykresleni(svg, druhvoleb, geojson = null, stranyjson = null) {
   // vykreslení mapy
 
-  const svg = d3.select("#mapa g")
+  let d3, legendaelement, nacteni, vykresleni_zaklad, data, strany, csv, subunits
 
-  window.data = await nactenimapy(parametry.data)
-  window.strany = await nactenistran(parametry.legendazdroj)
-  window.csv = await nacteni_csv(parametry.statistiky)
+  await (async() => {
+    if(typeof(window) == "undefined") {// běžíme na serveru
+      d3 = await import("d3")
+      subunits = geojson
+      strany = stranyjson
+      legendaelement = svg
+    } else {
+      d3 = window.d3
+      legendaelement = d3.select("#legenda")
+      nacteni = await import("/společné/mapy/vykreslení/načtení.js")
+      vykresleni_zaklad = await import("/společné/mapy/vykreslení/vykreslení.js")
 
-  window.subunits = await vykresleni_zaklad(data, csv)
+      data = await nacteni.nactenimapy(parametry.data)
+      strany = await nacteni.nactenistran(parametry.legendazdroj)
+      csv = await nacteni.nacteni_csv(parametry.statistiky)
+
+      subunits = await vykresleni_zaklad.vykresleni_zaklad(data, csv)
+    }
+  })()
 
   var projection = d3.geoMercator()
     //.center(d3.geoCentroid(subunits)) //střed ČR
@@ -39,7 +52,8 @@ export async function vykresleni() {
         return "#aaa"
       } else {
         let identifikator
-        switch (parametry.druh) {
+
+        switch (druhvoleb) {
           case "prezidentské":
             identifikator = "CKAND"
             break;
@@ -52,18 +66,17 @@ export async function vykresleni() {
           default:
             break;
         }
-        window.vitezny_subjekt = strany.filter(function(element) {return Number(element[identifikator]) == px})
+
+        let vitezny_subjekt = strany.filter(function(element) {return Number(element[identifikator]) == px})
         return vitezny_subjekt[0]['color']
       }
     })
     .attr("d", path)
+    .attr("stroke", "#888")
+    .attr("stroke-width", "0.25px")
+    .attr("stroke-linejoin", "round")
 
-  window.onresize = function() {
-    projection.fitExtent([[0, 0], [1450, 750]], subunits);
-    svg.selectAll(".subunit")
-      .attr("d", path)
-  }
-
+  legenda_normalni(legendaelement, strany, druhvoleb)
 
   return {
     subunits: subunits,

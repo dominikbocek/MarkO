@@ -38,7 +38,7 @@ for col in strany:
     # vytvoření datové struktury zahrnující id, okrskové výsledky, celkový počet platných hlasů a procentuální výsledek
     output_df = pd.DataFrame({
         'id': popisky_df['id'].astype(str),
-        col: strany_df[col],
+        col: strany_df[col].astype(str),
         'PL_HL_CELK': popisky_df['PL_HL_CELK'],
         'PROCENTA': (strany_df[col] / popisky_df['PL_HL_CELK']) * 100
     })

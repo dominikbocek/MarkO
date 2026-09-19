@@ -24,14 +24,15 @@ koalice = argumenty.koalice
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
 
-soubor = "parties.csv"
-souborjson = "vysledky_cr.json"
-
 match koalice:
     case "ano":
         statistiky = "statistics-obce2.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+        souborjson = "vysledky_cr2.json"
+        soubor = "parties2.csv"
     case "ne":
         statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+        souborjson = "vysledky_cr.json"
+        soubor = "parties.csv"
     case _:
         sys.exit("Neplatná možnost!")
 

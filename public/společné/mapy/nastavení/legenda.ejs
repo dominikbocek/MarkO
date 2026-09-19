@@ -1,6 +1,6 @@
 <div>
                 <h3>Legenda</h3>
-                <select id="rozsah" onchange="location.href='?<% if(typzobrazeni != "účast") {%>strana=' + parametry.hledanastrana + '&<% } %>rozsah=' + this.value">
+                <select id="rozsah" class="form-select" onchange="location.href='?<% if(typzobrazeni != "účast") {%>strana=' + parametry.hledanastrana + '&<% } %>rozsah=' + this.value">
                   <option disabled selected style="display: none">Vyber procentuální rozsah</option>
                   <option value="velmimale">Velmi malý (0 - 10 %)</option>
                   <option value="male">Malý (0 - 25 %)</option>

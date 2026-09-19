@@ -28,8 +28,8 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" id="rezim">
-            <button style="border: solid #818181 1px !important; line-height: 1; padding: 7px; border-radius: 25px; box-sizing: unset;" class="nav-link" onclick="prepnout_rezim()">
+        <li class="nav-item">
+            <button id="rezim" style="border: solid #818181 1px !important; line-height: 1; padding: 7px; border-radius: 25px; box-sizing: unset;" class="nav-link" onclick="prepnout_rezim()">
                 <i></i>
             </button>
         </li>
@@ -37,46 +37,6 @@
     </div>
   </div>
 </nav>
-
-<script>
-    document.querySelector("body").onload = function() {
-        let tmavyrezim = localStorage.getItem("darkMode")
-        if(tmavyrezim == null) {
-            if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.getElementById("rezim").querySelector("button i").classList.add("bi-sun")
-                document.querySelector(':root').setAttribute("data-theme", "dark")
-                localStorage.setItem("darkMode", "true")
-            } else {
-                document.getElementById("rezim").querySelector("button i").classList.add("bi-moon")
-                document.querySelector(':root').setAttribute("data-theme", "light")
-                localStorage.setItem("darkMode", "false")
-            }
-        } else if(tmavyrezim == "true") {
-            document.getElementById("rezim").querySelector("button i").classList.add("bi-sun")
-            document.documentElement.style.colorScheme = "dark" /*dočasná zpětná kompatibilita*/
-            document.querySelector(':root').setAttribute("data-theme", "dark")
-        } else if(tmavyrezim == "false") {
-            document.getElementById("rezim").querySelector("button i").classList.add("bi-moon")
-            document.documentElement.style.colorScheme = "light" /*dočasná zpětná kompatibilita*/
-            document.querySelector(':root').setAttribute("data-theme", "light")
-        }
-    }
-
-    function prepnout_rezim() {
-        let tmavyrezim = localStorage.getItem("darkMode")
-        if(tmavyrezim == "false") {
-            document.getElementById("rezim").querySelector("button i").classList.replace("bi-moon", "bi-sun")
-            document.documentElement.style.colorScheme = "dark" /*dočasná zpětná kompatibilita*/
-            document.querySelector(':root').setAttribute("data-theme", "dark")
-            localStorage.setItem("darkMode", "true")
-        } else if(tmavyrezim == "true") {
-            document.getElementById("rezim").querySelector("button i").classList.replace("bi-sun", "bi-moon")
-            document.documentElement.style.colorScheme = "light" /*dočasná zpětná kompatibilita*/
-            document.querySelector(':root').setAttribute("data-theme", "light")
-            localStorage.setItem("darkMode", "false")
-        }
-    }
-</script>
 
 <style>
     @media (min-width: 768px) {
@@ -116,7 +76,7 @@
             background: white;
         }
 
-        #rezim button {
+        #rezim {
             margin-left: 10px;
         }
     }
@@ -153,7 +113,7 @@
             box-shadow: #0088ff 0px 0px 10px 10px;
         }
 
-        #rezim button {
+        #rezim {
             background: white;
             color: black !important;
         }
@@ -179,7 +139,7 @@
             font-weight: bold;
         }
 
-        #rezim button {
+        #rezim {
             background: black;
             color: white !important;
         }
