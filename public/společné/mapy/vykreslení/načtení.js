@@ -1,5 +1,4 @@
 const svg = document.getElementById("mapa")
-const legenda = document.querySelector("#legenda")
 let hlaska = function(text) {return `<text x='50%' y='50%' text-anchor='middle' transform='translate(-50,-50)' fill='red' font-size='16'>${text}</text>`}
 
 function chyba(hlaseni, url) {

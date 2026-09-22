@@ -4,12 +4,8 @@ function stahnout(subunits) {
             type: "POST",
             url: "/stahnout",
             data: {
-                  volby: parametry.volby,
-                  data: JSON.stringify(subunits),
-                  druh: parametry.druh,
-                  typzobrazeni: parametry.typzobrazeni,
-                  rozsah: parametry.rozsah,
-                  popisek: parametry.popisek
+                  svg: document.getElementById("mapa").outerHTML,
+                  legenda: document.getElementById("legenda").innerHTML // není potřeba tag svg, jenom jeho vnitřek
                   },
             xhrFields: {
                   responseType: "blob"

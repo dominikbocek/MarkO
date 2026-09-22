@@ -19,11 +19,19 @@
           }
 
           #mapa-orientace button {
-            background: white;
+            background: transparent;
+            color: black;
           }
         </style>
-        <div style="display: flex; align-items: center; gap: 10px; flex-direction: row-reverse; position: absolute; float: right; width: 100%;">
-          <div id="kompas" style="position: relative;right: 0;width: 65px;height: 65px;border-radius: 45px;background: rgb(255, 255, 255);border: solid black 3px;background: white;display: inline-block; box-sizing: border-box;">            
+        <div id="nastroje" style="display: flex; align-items: center; gap: 10px; position: absolute; margin: 6px 10px; width: auto; right: 0; background: rgba(240,240,255,0.5); padding: 5px; border-radius: 40px; color: black; border: solid 1px rgb(220,220,220);">
+          <button id="stahnout" class="btn"><i class="bi bi-download"></i></button>
+          <button class="btn" onclick="document.getElementById('nastaveni').style.visibility = 'visible'"><i class="bi bi-gear"></i></button>
+          <section id="mapa-orientace" style="display: inline-flex;gap: 10px;">
+            <button id="zoom-in" class="btn"><i class="bi bi-zoom-in"></i></button>
+            <button id="zoom-out" class="btn"><i class="bi bi-zoom-out"></i></button>
+            <button id="reset-zoom" class="btn">Reset</button>
+          </section>
+          <div id="kompas" style="position: relative;right: 0;width: 55px;height: 55px;border-radius: 45px;background: rgb(255, 255, 255);border: solid black 3px;background: white;display: inline-block; box-sizing: border-box;">            
             <div style="display: flex;justify-content: space-around;position: relative;transform: translateY(-50%);top: 50%;">
               <div id="doleva" title="doleva">
                 <i class="fa-solid fa-angle-left"></i>
@@ -41,28 +49,15 @@
               </div>
             </div>
           </div>
-          <section id="mapa-orientace" style="display: inline-flex;gap: 10px;">                  
-            <div id="zoom" style="display: inline-flex; width: fit-content;">
-              <button id="stahnout" class="btn"><i class="bi bi-download"></i></button>
-              <button class="btn" onclick="document.getElementById('nastaveni').showModal()"><i class="bi bi-gear"></i></button>
-              <button id="zoom-in" class="btn"><i class="bi bi-zoom-in"></i></button>
-              <button id="zoom-out" class="btn"><i class="bi bi-zoom-out"></i></button>
-              <button id="reset-zoom" class="btn">Reset</button>
-            </div>
-          </section>
         </div>
-        <div id="kontejner-mapy" style="width: 100%; height: inherit; display: flex; align-items: center;">
-          <div style="width: 100%;">
-            <div style="display: flex; width: 100%; height: 100vh; margin: auto;">
-              <svg id="mapa" style="width: 75%; height: 100%; cursor: all-scroll; box-sizing: border-box; padding: 10px; /*background: #dfdfdf85;*/" viewBox="0 0 1450 750">
-                <g id="vysledky"></g>
-                <g id="protektorat"></g>
-                <g id="okresy1950"></g>
-                <g id="okresy1960"></g>
-              </svg>
-              <svg id="legenda" viewBox="0 0 450 600" style="width: 25%; /*border-left: solid lightgrey 1px;*/"></svg>
-            </div>
-          </div>
+        <div id="kontejner-mapy" style="width: 100%; height: 100vh;">
+          <svg xmlns="http://www.w3.org/2000/svg" id="mapa" style="width: 100%; height: 100%; cursor: all-scroll; box-sizing: border-box; padding: 10px; /*background: #dfdfdf85;*/" viewBox="0 0 1450 750">
+            <g id="vysledky"></g>
+            <% const vrstvy = JSON.parse(include('vrstvy/vrstvy.json')) %>
+            <% vrstvy.forEach(element => {%>
+              <g id='<%- element["selector"] %>' style="display: none;"></g><%
+            }); %>
+          </svg>
         </div>
         <div id="vyber" style="margin: auto; margin-top: 10px; position: absolute; bottom: 0;">
           <!-- začátek sekce pouze pro samostatné mapy -->
@@ -72,30 +67,34 @@
           </select><% } %>
           <!-- konec sekce pouze pro samostatné mapy -->
         </div>
-        <button class="btn" onclick="document.getElementById('info').showModal()" style="position: absolute; right: 0; bottom: 0; font-size: 40px; color: white; line-height: 1; border: none; background: none;">
-          <i class="bi bi-info-circle-fill"></i>
+        <button class="btn" onclick="document.getElementById('info').style.visibility = 'visible'" style="position: absolute; right: 0; bottom: 0; color: white; line-height: 1; border: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16" style="zoom: 4;background: black;border-radius: 8px;">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"></path>
+          </svg>
         </button>
-        <dialog id="nastaveni" closedby="any">
-          <form method="dialog">
-            <header>
-              <h2>Nastavení</h2>
-            </header>
-            <section>
-              <%- include('nastavení.ejs') %>
-              <button>Zavřít</button>
-            </section>
-          </form>
+        <dialog id="nastaveni" open>
+          <header>
+            <h2>Nastavení</h2>
+          </header>
+          <section>
+            <%- include('nastavení.ejs') %>
+            <button onclick="document.getElementById('nastaveni').style.visibility = 'hidden'">Zavřít</button>
+          </section>
         </dialog>
-        <dialog id="info" closedby="any">
-          <form method="dialog">
-            <header>
-              <h2>Info</h2>
-            </header>
+        <dialog id="info" open> <!-- open pouze z důvodu správného zobrazení legendy, u ostatních kvůli konzistenci -->
+          <header>
+            <h2>Info</h2>
+          </header>
+          <section>
+            <p id="popisek" style="font-style: italic; text-align: center;"></p>
+          </section>
+          <header>
+            <h2>Legenda</h2>
             <section>
-              <p id="popisek" style="font-style: italic; text-align: center;"></p>
-              <button>Zavřít</button>
+              <svg id="legenda" viewBox="0 0 600 300" style="/*width: 25%; border-left: solid lightgrey 1px;*/"></svg>
             </section>
-          </form>
+            <button onclick="document.getElementById('info').style.visibility = 'hidden'">Zavřít</button>
+          </header>
         </dialog>
         <!-- <div id="nastroje">
           <button id="stahnout" tabindex="2">
@@ -115,7 +114,7 @@
       import { vykresleni } from '<%- urlvykresleni%>'
       import { infobox } from "/společné/mapy/info/info základ.js"
       import { info } from '<%- urlinfo%>'
-      import * as mapy from "/společné/mapy/protektorát/protektorát.js"
+      import { vykreslit_vrstvu } from "/společné/mapy/vrstvy/vrstvy.js"
       import * as Zoom from "/společné/mapy/js/zoom.js"
       <% if (info["druh"] == "komunální" && info.lokalita.druh == "obec") {%>import { obvody } from "./seznam_obvodu.js"
       
@@ -128,9 +127,9 @@
       vykresleni(d3.select("#mapa g"), parametry.druh)
       .then(function({subunits, strany}) {
         infobox(subunits, strany, info)
-        mapy.sudety(subunits)
-        mapy.okresy1950(subunits)
-        mapy.okresy1960(subunits)
+        vrstvyjson.forEach(element => {
+          vykreslit_vrstvu(subunits, element)
+        });
         document.getElementById("stahnout").onclick = function() {stahnout(subunits)}
       })
       .catch(function(error) {

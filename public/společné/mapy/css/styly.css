@@ -31,7 +31,7 @@ figure > div > i {
 /* tlačítko stažení */
 
 /* From Uiverse.io by portseif */ 
-#stahnout {
+/*#stahnout {
   background-color: #ffffff;
   border: 1px solid rgb(209, 213, 219);
   border-radius: 0.5rem;
@@ -71,20 +71,13 @@ figure > div > i {
 #stahnout > svg {
   position: relative;
   top: -1px;
-}
+}*/
 
 /* konec stylů tlačítka stažení */
 
 #sudety-prepinac {
   margin-top: 10px;
   text-align: end;
-}
-
-#nastroje {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 0;
 }
 
 #navigace {
@@ -125,11 +118,29 @@ figure > div > i {
   font-size: 16px;
 }*/
 
-:modal {
+dialog {
   background-color: #fff;
   border-radius: 5px;
-  margin: auto;
   border: none;
+  box-shadow: black 17px 20px 20px 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 10px;
+  visibility: hidden;
+}
+
+:root[data-theme="dark"] {
+  dialog {
+    background-color: #121212;
+    color: white;
+  }
+}
+
+dialog::backdrop {
+  background: rgba(100,100,100,0.3);
+  backdrop-filter: blur(10px);
   box-shadow: black 17px 20px 20px 0px;
 }
 
@@ -145,26 +156,12 @@ figure > div > i {
   stroke-width: 2px;
 }
 
-#protektorat, #okresy1950, #okresy1960 {
-  display: none;
-}
-
 .protektorat, .okresy1950, .okresy1960 {
   stroke-width: 2px;
   stroke-linejoin: round;
 }
 
-dialog {
-  padding: 10px;
-}
-
 /* sekce pro nastavení mapy */
-
-dialog::backdrop {
-  background: rgba(100,100,100,0.3);
-  backdrop-filter: blur(10px);
-  box-shadow: black 17px 20px 20px 0px;
-}
 
 #nastaveni form div {
   margin-top: 10px;
@@ -180,4 +177,37 @@ dialog::backdrop {
   body > section, #prohlizec {
     background: #e4e9f7;
   }
+}
+
+#tooltip1, #tooltip2 {
+  position: absolute;
+  visibility: hidden;
+  background: white;
+  border: solid #222 1px;
+  padding: 5px;
+  border-radius: 10px;
+  transform: translate(0,0);
+}
+
+#tooltip1 {
+  z-index: 1;
+}
+
+:root[data-theme="dark"] {
+  #tooltip1, #tooltip2 {
+    background: #121212;
+  }
+}
+
+:root[data-theme="dark"] {
+  svg g {
+    fill: white;
+  }
+}
+
+#tooltip1 button, #tooltip2 button {
+  filter: invert();
+  position: absolute;
+  top: 3px;
+  right: 3px;
 }

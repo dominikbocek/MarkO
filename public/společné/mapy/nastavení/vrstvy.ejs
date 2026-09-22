@@ -1,71 +1,62 @@
 <%
-const vrstvy = [
-    {
-        "název": "Sudety",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
-        "oblast": "stát",
-        "selector": "protektorat"
-    },
 
-    {
-        "název": "okresy 1950",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
-        "oblast": "stát",
-        "selector": "okresy1950"
-    },
+var groupBy = function(xs, key) {
+  return xs.reduce(function(rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
 
-    {
-        "název": "okresy1960",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
-        "oblast": "stát",
-        "selector": "okresy1960"
-    }
-]
+const vrstvy = JSON.parse(include('../vrstvy/vrstvy.json'))
 
-let kespusteni = []
+let kezobrazeni = []
+
+console.log(info)
 
 
 vrstvy.forEach(element => {
-    if(element.volby.indexOf(info["druh"]) >= 0) {
-        kespusteni.push(element)
+    if(element.volby.indexOf(info["druh"]) >= 0 && element.oblast.indexOf(info.lokalita.druh) >= 0) {
+        kezobrazeni.push(element)
     }
 });
 
-if(kespusteni.length > 0) {
+if(kezobrazeni.length > 0) {
     pocetnastaveni +=1
     %>
     <script>
         function zpracovatvrstvu() {
             // reset zobrazení
-            <% kespusteni.forEach(element => {
+            <% kezobrazeni.forEach(element => {
                 %>document.getElementById("<%= element['selector'] %>").style.display = 'none';<%
             }) %>
 
             switch (document.getElementById("vrstvy").value) {
-                <% kespusteni.forEach(element => {
+                <% kezobrazeni.forEach(element => {
                     %>case "<%= element['název'] %>":
-                    if(document.getElementById("skryt-zobrazit").checked) {
                         document.getElementById('<%= element["selector"] %>').style.display = 'inline'
-                    } else {
-                        document.getElementById('<%= element["selector"] %>').style.display = 'none'
-                    }
-                    document.getElementById("vrstvy").setAttribute("data-selector", '<%= element["selector"] %>')
+                        document.getElementById("vrstvy").setAttribute("data-selector", '<%= element["selector"] %>')
                     //document.querySelector('#datahub').style.display = this.checked ? 'inline' : 'none'; if(this.checked) {nazev += ' - okresy 1960'} else {nazev = nazev.replace(' - okresy 1960', '')}
-                    break;<%
+                        break;<%
                 }); %>
+                    default:
+                        break;
             }
         }
+    
+    let vrstvyjson = JSON.parse('<%- JSON.stringify(kezobrazeni) %>') //sesumírovat všechny selectory
     </script>
     <div>
         <h3>Vrstvy</h3>
-        <select id="vrstvy" class="form-select" style="display: block;">
+        <select id="vrstvy" class="form-select" style="display: block;" onchange="zpracovatvrstvu()">
             <option value="" selected disabled style="display: none;">vyber vrstvu</option>
-            <% kespusteni.forEach(element => {
+            <option value="žádná">žádná</option>
+            <% kezobrazeni.forEach(element => {
                 %><option value="<%= element["název"] %>"><%= element["název"] %></option><%
             }) %>
         </select>
-        <input type="color" id="barva" value="white" onchange="let barva = this.value; d3.select(`.${document.getElementById('vrstvy').getAttribute('data-selector')}`).attr('stroke', this.value);"><label for="barva">barva ohraničení vrstvy</label>
-        <br>
-        <input type="checkbox" id="skryt-zobrazit" onchange="zpracovatvrstvu()"><label for="skryt-zobrazit">zobrazit vrstvu</label>
+        <div>
+            <input type="color" id="barva" value="white" onchange="d3.selectAll(`.${document.getElementById('vrstvy').getAttribute('data-selector')}`).attr('stroke', this.value);">
+            <label for="barva">barva ohraničení vrstvy</label>
+        </div>
     </div>
 <% } %>

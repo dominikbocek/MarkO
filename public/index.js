@@ -4,7 +4,7 @@ const { exec, execSync } = require('child_process');
 const { Command } = require('commander');
 const program = new Command();
 const app = express();
-const { createGeoJSONImage } = require("./společné/mapy/js/geojson2png.js")
+const { exportdoPNG } = require("./společné/mapy/js/svg2png.js")
 const chyby = require("./routes/chyby.js")
 
 app.engine('html', require('ejs').renderFile);
@@ -73,15 +73,10 @@ app.use(express.static(__dirname))
 
 app.post("/stahnout", async (req, res, next) => {
 
-    let volby = req.body.volby
-    let data = req.body.data
-    let popisek = req.body.popisek
-    let druh = req.body.druh
-    let typzobrazeni = req.body.typzobrazeni
-    let rozsah = req.body.rozsah
-    let legenda = function() {if(druh == "sněmovní" || druh == "krajské" || druh == "prezidentské") {return `${__dirname}/volby/${volby}/vysledky_cr.json`} else if(druh == "komunální") {return `${__dirname}/volby/${volby}/obce/${lokalita}/vysledky_cr_${lokalita}.json`}}
+    let svg = req.body.svg
+    let legenda = req.body.legenda
 
-    const vysledek = createGeoJSONImage(data, legenda(), druh, typzobrazeni, rozsah, popisek)
+    const vysledek = exportdoPNG(svg, legenda)
     vysledek.then(function(obrazek) {
         res.set({
             "Content-Type": "image/png",

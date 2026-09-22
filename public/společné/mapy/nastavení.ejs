@@ -1,18 +1,15 @@
 <%
 pocetnastaveni = 0
-function nastaveni(soubor, podminka = true) {
-    if(podminka) {
-        return include(`nastavení/${soubor}`)
-    }
-}
 
 souborynastaveni.forEach(element => {
     switch (element) {
         case "vrstvy.ejs":%>
-            <%- nastaveni(element) %>
+            <%- include(`nastavení/${element}`) %>
             <% break;
         case "legenda.ejs":%>
-            <%- nastaveni(element, typzobrazeni=="samostatné"||typzobrazeni=="účast"?true:false) %>
+            <% if(typzobrazeni=="samostatné"||typzobrazeni=="účast"?true:false) {%>
+                <%- include(`nastavení/${element}`) %>
+            <% } %>
             <% break;
         default:
             break;

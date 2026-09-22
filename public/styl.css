@@ -8,23 +8,27 @@ body {
     width: inherit;
     background-image: url('/grid.svg');
     background-attachment: fixed;
-    background-color: light-dark(rgb(255, 255, 255), #07071e) !important;
     background-size: auto;
     background-repeat: repeat;
     transition: all 0.15s;
 }
 
-main {
-    background: light-dark(rgba(0, 0, 0, 0.1), rgb(0 0 0 / 57%));
-}
-
 :root[data-theme="dark"] {
+    body {
+        background-color: #07071e !important;
+    }
+
     main {
         color: white;
+        background: rgb(0 0 0 / 57%);
     }
 }
 
 :root[data-theme="light"] {
+    body {
+        background-color: rgb(255, 255, 255) !important;
+    }
+
     main {
         color: black;
         background: rgba(229, 229, 229, 0.49);

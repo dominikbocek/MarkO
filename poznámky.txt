@@ -1,7 +1,8 @@
 Poznámky k vydání
-- krajské a snìmovní volby zpracovává jedna verze
-- upraven mechanismus vykreslování
-- upraven mechanismus stahování
-- vylepšena grafická stránka zobrazení map
-- webMarko pro krajské, snìmovní a prezidentské volby jsou plnì funkèní
+- zlepšen mechanismus zpracování vrstev
+- pøidány moduly do package.json, aby se zmenšila závislost na CDN
+- mechanismus vykreslování vrácen k pøedchozí verzi z dùvodu nepotøebnosti mechanismu pro server
+- pøedìlán a zjednodušen mechanismus stahování
+- vylepšena grafická stránka zobrazení map (tmavý režim, tooltip, dialogová okna a další)
+- webMarko má bug ve zpracování druhého kola prezidentských voleb (samostatné mapy)
 - webMarko má nedokonèené grafické rozhraní, obzvláštì komunální volby

@@ -1,14 +1,12 @@
-export let tooltip = d3.select("figure div")
-    .append("div")
-    .style("position", "absolute")
-    .style("visibility", "hidden")
-    .style("background", "white")
-    .style("border", "solid #222 1px")
-    .style("padding", "5px")
-    .style("top", "0")
-    .style("right", "0")
-    .style("width", "400px")
-    .style("height", "100svh")
+export let tooltip = d3.select("#prohlizec")
+    .append("dialog")
+    .attr("id", "tooltip1")
+    .attr("open", "true")
+
+export let tooltip2 = d3.select("#prohlizec")
+    .append("dialog")
+    .attr("id", "tooltip2")
+    .attr("open", "true")
 
 export function infobox(subunits, strany, info) {
     let mapa = d3.select("#mapa")
@@ -16,12 +14,20 @@ export function infobox(subunits, strany, info) {
     mapa.selectAll(".subunit")
     .data(subunits.features)
     .on("mouseover", function (event, d) {
-        tooltip.style("visibility", "visible");
+        tooltip2.style("visibility", "visible");
+        //tooltip.style("top", (event.offsetY-30)+"px").style("left",(event.offsetX)+"px")
+        tooltip2.style("top", (event.offsetY-10)+"px").style("left",(event.offsetX+10)+"px")
 
-        info(d, strany)
+        info(event, d, strany)
+    })
+    .on("click", function(event, d) {
+        tooltip.style("visibility", "visible");
+        tooltip.style("top", (event.offsetY-10)+"px").style("left",(event.offsetX+10)+"px")
+
+        info(event, d, strany)
     })
     //.on("mousemove", function (d) {tooltip.style("top", (event.offsetY-10)+"px").style("left",(event.offsetX+30)+"px")})
-    .on("mouseout", function () {tooltip.style("visibility", "hidden")});
+    .on("mouseout", function () {tooltip2.style("visibility", "hidden")});
 }
 
 export function infonazev(d) {
@@ -48,7 +54,6 @@ export function infonazev2(d, obvody) {
         //console.log(obvody[element])
         if(obvody[seznam_obvodu[i]][1] == d.id.split("-")[0]) {
             return obvody[seznam_obvodu[i]][0]
-            break
         }
     }
 }

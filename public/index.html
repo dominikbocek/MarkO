@@ -46,26 +46,9 @@
                 -moz-appearance: none;
                 -webkit-appearance: none;
             }
-            select option {
-                background-color: light-dark(white, #212529);
-            }
+
             *:disabled {
                 cursor: not-allowed !important;
-            }
-
-            button {
-                border: solid light-dark(#212529, white) !important;
-                pointer-events: auto !important;
-                color: light-dark(#212529, white) !important;
-            }
-            button:hover:not(button:disabled,.close), #pagination div button:focus:not(button:disabled,.close) {
-                background: light-dark(#212529, white) !important;
-                color: light-dark(white, #212529) !important;
-            }
-
-            #pagination button.dopredu:hover:not(button:disabled,.close) i, #pagination button.dozadu:hover:not(button:disabled,.close) i {
-                color: light-dark(white, #212529) !important;
-                background: transparent;
             }
 
             label {
@@ -118,11 +101,51 @@
                 h1 {
                     color: yellow; text-shadow: 0 0 20px yellow;
                 }
+
+                select option {
+                    background-color: #212529;
+                }
+
+                button {
+                    border: solid white !important;
+                    pointer-events: auto !important;
+                    color: white !important;
+                }
+
+                button:hover:not(button:disabled,.close), #pagination div button:focus:not(button:disabled,.close) {
+                    background: white !important;
+                    color: #212529 !important;
+                }
+
+                #pagination button.dopredu:hover:not(button:disabled,.close) i, #pagination button.dozadu:hover:not(button:disabled,.close) i {
+                    color: #212529 !important;
+                    background: transparent;
+                }
             }
 
             :root[data-theme="light"] {
                 h1 {
                     color: black;
+                }
+
+                select option {
+                    background-color: white;
+                }
+
+                button {
+                    border: solid #212529 !important;
+                    pointer-events: auto !important;
+                    color: #212529 !important;
+                }
+
+                button:hover:not(button:disabled,.close), #pagination div button:focus:not(button:disabled,.close) {
+                    background: #212529 !important;
+                    color: white !important;
+                }
+
+                #pagination button.dopredu:hover:not(button:disabled,.close) i, #pagination button.dozadu:hover:not(button:disabled,.close) i {
+                    color: white !important;
+                    background: transparent;
                 }
             }
         </style>

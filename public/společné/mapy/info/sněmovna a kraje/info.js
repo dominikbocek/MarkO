@@ -1,6 +1,6 @@
-import { infonazev, tooltip } from "/společné/mapy/info/info základ.js"
+import { infonazev, tooltip, tooltip2 } from "/společné/mapy/info/info základ.js"
 
-export function info(d, strany) {
+export function info(event, d, strany) {
   let hlasy = []
 
   for (let i = 1; i <= parseInt(d.properties.POCET_VS); i++) {
@@ -28,14 +28,17 @@ export function info(d, strany) {
     "tretimisto": tretimisto
   }
 
-  //console.log(strany)
-  //console.log(udaje)
+  if(event.type == "click") {
+    tooltip.html(`<b>${udaje["nazev"]}</b><br>`
+    +(udaje["pocet_stran"]==null?"Data nejsou dostupná":
+      `Volební účast: ${udaje["ucast"]}<br>
+      Vítěz: ${udaje["prvnimisto"]["strana"]} (${udaje["prvnimisto"]["podil"]})<br>
+      Druhé místo: ${udaje["druhemisto"]["strana"]} (${udaje["druhemisto"]["podil"]})<br>
+      `+(udaje["pocet_stran"]>2?`Třetí místo: ${udaje["tretimisto"]["strana"]} (${udaje["tretimisto"]["podil"]})`:""))+`<button type="button" onclick="document.getElementById('tooltip1').style.visibility = 'hidden'" class="btn-close" aria-label="Close"></button>`
+    );
+  }
 
-  tooltip.html(`<b>${udaje["nazev"]}</b><br>`
-  +(udaje["pocet_stran"]==null?"Data nejsou dostupná":
-    `Volební účast: ${udaje["ucast"]}<br>
-    Vítěz: ${udaje["prvnimisto"]["strana"]} (${udaje["prvnimisto"]["podil"]})<br>
-    Druhé místo: ${udaje["druhemisto"]["strana"]} (${udaje["druhemisto"]["podil"]})<br>
-    `+(udaje["pocet_stran"]>2?`Třetí místo: ${udaje["tretimisto"]["strana"]} (${udaje["tretimisto"]["podil"]})`:"")
-  ));
+  if(event.type == "mouseover") {
+    tooltip2.html(`<b>${udaje["nazev"]}</b>`)
+  }
 }
