@@ -52,11 +52,12 @@ if %errorLevel% NEQ 0 (
 )
 
 start cmd /c pip3 install pandas
+start cmd /c pip3 install geopandas
 copy "%cd%\příprava\volby\MarkO.py" "%cd%\.MarkO.py"
 echo @echo off >> MarkO.bat
 echo cls >> MarkO.bat
 if %opravneni% == standard (
-    setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\..\public\node_modules\.bin"
+    setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\public\node_modules\.bin"
 )
 echo python3 .MarkO.py >> MarkO.bat
 echo Program MarkO byl úspěšně nainstalován.

@@ -15,6 +15,7 @@ fi
 curl -o python.pkg https://www.python.org/ftp/python/3.14.5/python-3.14.5-macos11.pkg
 osascript -e "do shell script \"installer -pkg python.pkg -target /\" with administrator privileges"
 osascript -e "do shell script \"pip3 install pandas\" with administrator privileges"
+osascript -e "do shell script \"pip3 install geopandas\" with administrator privileges"
 cd "$(dirname "$0")/../public"
 osascript -e "do shell script \"npm install\" with administrator privileges"
 PATH=$PATH:"$(pwd)/node_modules/.bin"

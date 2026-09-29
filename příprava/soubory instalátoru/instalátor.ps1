@@ -124,7 +124,7 @@ $Rozlouceni = New-Object $LabelObject
 $Rozlouceni.Text = "Díky za vyzkoušení programu! Instalace započne za 5 sekund."
 $Rozlouceni.AutoSize = $true
 $Rozlouceni.Location = New-Object System.Drawing.Point(20,20)
-$Rozlouceni.Font = "Verdana,20px,style=Bold"
+$Rozlouceni.Font = "Verdana,16px"
 
 $ZaverecnaObrazovka.Controls.AddRange(@($Rozlouceni))
 
@@ -146,8 +146,15 @@ function spustitInstalaci{
     $PanelLicence.Visible = $false
     $ZaverecnaObrazovka.Visible = $true
     $Global:InstalaceBezi = $true
-    Start-Sleep -Seconds 5 # odpočet
-    $Instalator.Close()
+    $casovac = New-Object System.Windows.Forms.Timer
+    $casovac.Interval = 5000 # 5 sekund
+
+    $casovac.Add_Tick({
+        $casovac.Stop()
+        $Instalator.Close()
+    })
+
+    $casovac.Start()
 }
 
 $Global:exit = 0

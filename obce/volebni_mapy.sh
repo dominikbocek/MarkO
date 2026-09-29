@@ -228,7 +228,7 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
          obeckod="$kodstatut"
          mkdir -p "$obec/"
       fi
-      node "$adresar_instalace/../public/ogr2ogr.js" -i "$obec/VO_P.shp" "$obec/okrsky.shp"
+      python3 "$adresar_okrsku/../společné/reprojekce.py" --vstup "$obec/VO_P.shp" --vystup "$obec/okrsky.shp" > /dev/null
       shp2json -n --encoding=utf-8 "$obec/okrsky.shp" > volebni_okrsky.ndjson
       python3 "$adresar_instalace/přečíslování.py" --volby "$2" --obec "$4"
       mv "volebni_okrsky_nove.ndjson" "volebni_okrsky.ndjson"
@@ -252,7 +252,7 @@ if [ "$1" == "-S" ]; then
    # zde řešíme přípravu statistických dat
    if $(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "jestatut"); then # statutární město s městskými částmi/obvody
       if [ "$3" == "RÚIAN" ]; then
-         node "$adresar_instalace/../public/ogr2ogr.js" -i "$obec/MOMC_P.shp" -o "$obec/obvody.shp"
+         python3 "$adresar_okrsku/../společné/reprojekce.py" --vstup "$obec/MOMC_P.shp" --vystup "$obec/obvody.shp" > /dev/null
          shp2json -n --encoding=utf-8 "$obec/obvody.shp" > obvody.ndjson
       else
          python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"

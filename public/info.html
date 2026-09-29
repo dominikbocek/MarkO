@@ -5,13 +5,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-        <!-- Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <!-- ikony -->
         <%- include('společné/icons.ejs'); %>
         <!-- <meta name="color-scheme" content="light dark"> -->
+        <!-- Bootstrap -->
+        <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+        <!-- vlastní styly -->
         <link rel="stylesheet" href="/styl.css">
+        <script src="/společné/light-dark.js" defer></script>
         <style>
             main {
                 overflow: auto;
@@ -45,12 +48,12 @@
                             </ul>
                             Můžete si také vytvářet vlastní „neoficiální koalice“ a zjistit, jakou by měly podporu a kde by případně vyhrály.
                         <p></p>
-                        <i>* týká se pouze těchto voleb: sněmovní, krajské a prezidentské (obě kola)</i>
+                        <i>* týká se pouze těchto voleb: sněmovní, krajské, komunální a prezidentské (obě kola)</i>
                         <p>Program také věnuje zvláštní pozornost rozdílům ve volebních výsledcích mezi územím bývalého Protektorátu Čechy a Morava a někdejším obsazeným pohraničím. Umožňuje zakreslit do map tuto fantomovou hranici a ukázat, jak ovlivňuje úspěch volebních subjektů.</p>
                     </section>
                     <section>
                         <h2>Co to neumí?</h2>
-                        <p>Neumí to zpracovávat žádné z voleb, které nejsou ve výčtu, tzn. volby do obecních zastupitelstev, senátních voleb a voleb do Evropského parlamentu. Z povahy senátních a obecních voleb ani nedává smysl, aby to program umožňoval, a Evropské volby jsou pro českého voliče příliš bezvýznamné.</p>
+                        <p>Neumí to zpracovávat žádné z voleb, které nejsou ve výčtu, tzn. senátní volby a volby do Evropského parlamentu. Z povahy senátních a obecních voleb ani nedává smysl, aby to program umožňoval, a Evropské volby jsou pro českého voliče příliš bezvýznamné.</p>
                         <p>Nezpracovává to volební účast.</p>
                     </section>
                     <section>
@@ -62,37 +65,12 @@
                         <h2>Známé problémy</h2>
                         <ul>
                             <li>přednastavené barvy pro mapy okrskových vítězů byly vybrány zcela nahodile a nemají nic společného s běžnými barvami politických stran/hnutí/koalic a kandidátů; všechny druhy voleb mají nastavenou stejnou paletu</li>
-                            <li>při vytváření map dochází ke konverzi dat a v případě map voličské podpory zabírají dočasně více místa na disku; týká se především krajských voleb, kde může velikost složky až 10 GB</li>
                             <li>stažené mapy mají formát PNG, což znamená, že mají průhledné pozadí; pokud máte na svém systému nastavený tmavý režim, tak z veškerého textu na obrázku uvidíte velké kulové</li>
+                            <li>před stažením mapy se ujistěte, že nemáte nastavené přiblížení, jinak se to propíše do výsledného obrázku</li>
                             <li>u voleb staršího data (před rokem 2017) se vyskytují „tmavé fleky“, zejména v oblasti velkých měst; je to kvůli změnám rozložení okrsků (viz manuál)</li>
                             <li>může se stát, že se v seznamu kandidujících subjektů vyskytne subjekt, který se nakonec voleb neúčastnil, a proto se v takovémto případě mapa nevykreslí</li>
                             <li>zpracování je rychlejší na macOS než na ostatních systémech</li>
                         </ul>
-                    </section>
-                    <section>
-                        <h2>Licenční podmínky</h2>
-                        <p>Volební statistiky nejsou standartní součástí programu. V archivačním souboru programu se nacházejí pouze z důvodu zvýšení uživatelského komfortu. Jejich využití podléhá <a href="https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu">licenčním podmínkám Českého statistického úřadu</a>.</p>
-                        <p>Mapový podklad hranic Protektorátu Čechy a Morava se řídí licenčními podmínkami <a href="https://datahub.natur.cuni.cz/pages/licence">Mapového a datového centra Přírodovědecké fakulty Univerzity Karlovy</a> (<a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</p>
-                        <h4>Kostra programu</h4>
-                        <p>Vykreslování map zajišťuje <a href="https://d3js.org">D3.js</a>. Licenční podmínky <a href="https://github.com/d3/d3/blob/main/LICENSE">zde</a>.</p>
-                        <p>Vše za oponou řídí Python. Licenční podmínky <a href="https://docs.python.org/3/license.html">zde</a>.</p>
-                        <p>Práci s daty má na starosti <a href="https://pandas.pydata.org/">pandas</a>. Licenční podmínky <a href="https://github.com/pandas-dev/pandas/blob/main/LICENSE">zde</a>.</p>
-                        <p>Vizuální stránka je obstarána Bootstrapem. Licenční podmínky <a href="https://github.com/twbs/bootstrap/blob/v5.3.8/LICENSE">zde</a>.</p>
-                        <p>Vrstvu kompatibility pro Windows tvoří <a href="https://gitforwindows.org/">Git for Windows</a>. Licenční podmínky <a href="https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses">zde</a>.</p>
-                        <p>Fonty, pokud nejsou součástí Bootstrapu, se řídí licencí <a href="https://openfontlicense.org/open-font-license-official-text/"> SIL Open Font License, Version 1.1</a>.</p>
-                        <h4>Licence k NodeJS knihovnám:</h4>
-                        <ul>
-                            <li><a href="https://github.com/mbostock/ndjson-cli/blob/master/LICENSE.txt">ndjson-cli</a></li>
-                            <li><a href="https://github.com/topojson/topojson-server/blob/master/LICENSE">topojson-server</a></li>
-                            <li><a href="https://github.com/topojson/topojson-simplify/blob/master/LICENSE">topojson-simplify</a></li>
-                            <li><a href="https://github.com/topojson/topojson-client/blob/master/LICENSE">topojson-client</a></li>
-                            <li><a href="https://github.com/mbostock/shapefile/blob/master/LICENSE.txt">shapefile</a></li>
-                            <li><a href="https://github.com/d3/d3-dsv/blob/main/LICENSE">d3-dsv</a></li>
-                            <li><a href="https://github.com/expressjs/express/blob/master/LICENSE">Express JS</a></li>
-                            <li><a href="https://github.com/tj/commander.js/blob/master/LICENSE">Commander JS</a></li>
-                            <li><a href="https://www.apache.org/licenses/LICENSE-2.0">EJS</a></li>
-                        </ul>
-                        <p>Samotný program (tedy vše, co zbývá po odečtení výše uvedeného), je licencován pod <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3</a>.</p>
                     </section>
                     <section>
                         <h2>Zdroje</h2>
@@ -101,14 +79,54 @@
                         <h3>Kód</h3>
                         <ul>
                             <li>inpirováno návodem na <a href="https://data.gov.cz/%C4%8Dl%C3%A1nky/mapa-s-v%C3%BDsledky-voleb-po-okrsc%C3%ADch">data.gov.cz</a></li>
-                            <li>komunita na StackOverflow</li>
-                            <li>ve výjimečných případech ChatGPT</li>
-                            <li>...a moje maličkost (ne vážně, jsem fakt prcek)</li>
                         </ul>
-                        <h3>Uživatelské rozhraní</h3>
+                        <h2>Rozpočet na vývoj</h2>
                         <ul>
-                            <li>základ (včetně ikon): <a href="https://getbootstrap.com/" target="_blank">Bootstrap verze 5.3.8</a></li>
-                            <li>fonty: <a href="https://fonts.google.com" target="_blank">Google Fonts</a></li>
+                            <li>0,- (a ještě se šetřilo)</li>
+                        </ul>
+                    </section>
+                    <script>
+                        fetch('/licenses.json', { 
+                            method: 'GET'
+                        })
+                        .then(function(response) { return response.json(); })
+                        .then(function(json) {
+                            window.seznam = json
+                            let licence = json
+                            let kody = Object.keys(licence)
+                            kody.forEach(
+                                function(element) {
+                                    let kod = document.createElement("h3"); kod.innerHTML = element
+                                    let info = json[element]
+                                    let seznam = document.createElement("ul")
+                                    let autor = document.createElement("li"); if(info["publisher"] !== undefined) {autor.innerHTML = `autor: ${info["publisher"]}`} else {autor.innerHTML = "autor: neuveden"}
+                                    let druhlicence = document.createElement("li"); druhlicence.innerHTML = `druh licence: ${info["licenses"]}`
+                                    let repositar = document.createElement("li"); repositar.innerHTML = `repozitář: <a href='${info["repository"]}'>${element}</a>`
+                                    let souborlicence = document.createElement("li"); souborlicence.innerHTML = `soubor licence: <a href='${info["licenseFile"].substring(info["licenseFile"].indexOf("\\node_modules"))}'>licence</a>`
+                                    seznam.append(autor, druhlicence, repositar, souborlicence)
+
+                                    document.getElementById("prehlednpmlicenci").append(kod, seznam)
+                                }
+                            )
+                        });
+                    </script>
+                    <section id="prehlednpmlicenci">
+                        <h2>Licence</h2>
+                        <b>Program ještě není zdaleka dokončen, proto zde nejsou uvedeny všechny licence. S dynamickým vývojem programu je nemožné udržovat seznam aktuální. V budoucnu dojde k revizi.</b>
+                        <p>Volební statistiky nejsou standartní součástí programu. V archivačním souboru programu se nacházejí pouze z důvodu zvýšení uživatelského komfortu. Jejich využití podléhá <a href="https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu">licenčním podmínkám Českého statistického úřadu</a>.</p>
+                        <h3>Vrstvy</h3>
+                        <ul>
+                            <li>hranice okresů z let 1921, 1950 a 1961: „JÍCHOVÁ, J., SOUKUP, M., NEMEŠKAL, J., OUŘEDNÍČEK, M., POSPÍŠILOVÁ, L., SVOBODA, P., ŠPAČKOVÁ, P. a kol. (2014): Geodatabáze historických statistických a prostorových dat Česka ze Sčítání lidu, domů a bytů 1921−2011. Urbánní a regionální laboratoř, Přírodovědecká fakulta Univerzity Karlovy v Praze, Praha.“</li>
+                            <li>vrstva hranic Protektorátu Čechy a Morava se řídí licenčními podmínkami <a href="https://datahub.natur.cuni.cz/pages/licence">Mapového a datového centra Přírodovědecké fakulty Univerzity Karlovy</a> (<a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</p></li>
+                        </ul>
+                        <p>Vše za oponou řídí Python. Licenční podmínky <a href="https://docs.python.org/3/license.html">zde</a>.</p>
+                        <p>Práci s daty má na starosti <a href="https://pandas.pydata.org/">pandas</a>. Licenční podmínky <a href="https://github.com/pandas-dev/pandas/blob/main/LICENSE">zde</a>.</p>
+                        <p>Práci s mapovými podklady řídí <a href="https://geopandas.org/">geopandas</a>. Licenční podmínky <a href="https://github.com/geopandas/geopandas/blob/main/LICENSE.txt">zde</a>.</p>
+                        <p>Vrstvu kompatibility pro Windows tvoří <a href="https://gitforwindows.org/">Git for Windows</a>. Licenční podmínky <a href="https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses">zde</a>.</p>
+                        <p>Fonty, pokud nejsou součástí Bootstrapu, se řídí licencí <a href="https://openfontlicense.org/open-font-license-official-text/"> SIL Open Font License, Version 1.1</a>.</p>
+                        <p>Mé mizerné grafické schopnosti vynahrazuje <a href="https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template">TailAdmin</a>. Licenční podmínky <a href="https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template/blob/main/LICENSE">zde</a>.</p>
+                        <p>Samotný program (tedy vše, co zbývá po odečtení výše uvedeného), je licencován pod <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3</a>.</p>
+                        <ul>
                             <li>favicon: <a href="https://www.flaticon.com/free-icons/democracy" title="democracy icons" target="_blank">Democracy icons created by Freepik - Flaticon</a></li>
                             <li>globe: <a href="https://www.magnific.com/free-vector/globe-grid-earth_361053798.htm" target="_blank">Globe icon created by Freepik (Magnific)</a></li>
                             <li><a href="https://www.flaticon.com/free-icons/invalid-vote" title="invalid vote icons" target="_blank">Invalid vote icon created by Freepik (Magnific) - Flaticon</a></li>
@@ -116,6 +134,7 @@
                             <li><a href="https://img.icons8.com/windows/96/vote-yea.png">vote icon (Icons8.com)</a></li>
                             <li>mapa Protektorátu Čechy a Morava: <a href="https://datahub.natur.cuni.cz/datasets/cuni::protektor%C3%A1t-%C4%8Dechy-a-morava-1942-1945/explore?layer=3&amp;location=49.637403%2C15.660870%2C7" target="_blank">DataHub Mapové a datové centrum Přírodovědecké fakulty Univerzity Karlovy</a> (autor neuveden)</li>
                         </ul>
+                        <h3>nodeJS balíčky</h3>
                     </section>
                 </div>
             </div>

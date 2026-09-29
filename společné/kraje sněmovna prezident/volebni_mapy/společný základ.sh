@@ -10,7 +10,7 @@ if [ "$1" == "-n" ]; then
         echo "Zadaná cesta k okrskovým mapám neexistuje."
         exit
     fi
-    node "$adresar_okrsku/../public/ogr2ogr.js" -i "$adresar_okrsku/$zdroj/okrsky.shp" -o "$adresar_voleb/okrsky.shp"
+    python3 "$adresar_okrsku/../společné/reprojekce.py" --vstup "$adresar_okrsku/$zdroj/okrsky.shp" --vystup "$adresar_voleb/okrsky.shp" > /dev/null
     shp2json -n --encoding=utf-8 "$adresar_voleb/okrsky.shp" | ndjson-map 'd.id = d.properties.kod_mco==null?d.properties.kod_obec + "-" + d.properties.cislo:d.properties.kod_mco + "-" + d.properties.cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
     geo2topo -n tracts=volebni_okrsky.ndjson > volebni_okrsky-topo.json
     toposimplify -P 0.05 -f < volebni_okrsky-topo.json > volebni_okrsky-simple-topo.json 2> /dev/null

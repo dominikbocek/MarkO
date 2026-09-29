@@ -1,7 +1,7 @@
 <h2>Vyberte si ze seznamu voleb</h2>
 <div style="display: flex;align-items: center;justify-content: center;gap: 10px;box-sizing: border-box;">
     <form>
-        <select id="seznamvoleb" name="volby">
+        <select id="seznamvoleb" name="volby" class="form-select" style="display: inline; width: fit-content;">
         <%
         seznamvoleb = JSON.parse(locals.seznamvoleb)
         seznamvoleb.forEach(element => {

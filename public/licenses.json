@@ -1,0 +1,1686 @@
+{
+  "@asamuzakjp/css-color@5.1.11": {
+    "licenses": "MIT",
+    "repository": "https://github.com/asamuzaK/cssColor",
+    "publisher": "asamuzaK",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\css-color",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\css-color\\LICENSE"
+  },
+  "@asamuzakjp/dom-selector@7.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/asamuzaK/domSelector",
+    "publisher": "asamuzaK",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\dom-selector",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\dom-selector\\LICENSE"
+  },
+  "@asamuzakjp/generational-cache@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/asamuzaK/generationalCache",
+    "publisher": "asamuzaK",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\generational-cache",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\generational-cache\\LICENSE"
+  },
+  "@asamuzakjp/nwsapi@2.3.9": {
+    "licenses": "MIT",
+    "repository": "https://github.com/dperini/nwsapi",
+    "publisher": "Diego Perini",
+    "email": "diego.perini@gmail.com",
+    "url": "http://www.iport.it/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\nwsapi",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@asamuzakjp\\nwsapi\\LICENSE"
+  },
+  "@bramus/specificity@2.4.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/bramus/specificity",
+    "publisher": "Bramus Van Damme",
+    "email": "bramus@bram.us",
+    "url": "https://www.bram.us/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@bramus\\specificity",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@bramus\\specificity\\LICENSE"
+  },
+  "@csstools/color-helpers@6.1.1": {
+    "licenses": "MIT-0",
+    "repository": "https://github.com/csstools/postcss-plugins",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\color-helpers",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\color-helpers\\LICENSE.md"
+  },
+  "@csstools/css-calc@3.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/csstools/postcss-plugins",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-calc",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-calc\\LICENSE.md"
+  },
+  "@csstools/css-color-parser@4.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/csstools/postcss-plugins",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-color-parser",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-color-parser\\LICENSE.md"
+  },
+  "@csstools/css-parser-algorithms@4.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/csstools/postcss-plugins",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-parser-algorithms",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-parser-algorithms\\LICENSE.md"
+  },
+  "@csstools/css-syntax-patches-for-csstree@1.1.8": {
+    "licenses": "MIT-0",
+    "repository": "https://github.com/csstools/postcss-plugins",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-syntax-patches-for-csstree",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-syntax-patches-for-csstree\\LICENSE.md"
+  },
+  "@csstools/css-tokenizer@4.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/csstools/postcss-plugins",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-tokenizer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@csstools\\css-tokenizer\\LICENSE.md"
+  },
+  "@exodus/bytes@1.15.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ExodusOSS/bytes",
+    "publisher": "Exodus Movement, Inc.",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@exodus\\bytes",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@exodus\\bytes\\LICENSE"
+  },
+  "@fortawesome/fontawesome-free@7.3.1": {
+    "licenses": "(CC-BY-4.0 AND OFL-1.1 AND MIT)",
+    "repository": "https://github.com/FortAwesome/Font-Awesome",
+    "publisher": "The Font Awesome Team",
+    "url": "https://github.com/orgs/FortAwesome/people",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@fortawesome\\fontawesome-free",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@fortawesome\\fontawesome-free\\LICENSE.txt"
+  },
+  "@img/colour@1.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/lovell/colour",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@img\\colour",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@img\\colour\\LICENSE.md"
+  },
+  "@img/sharp-win32-x64@0.35.4": {
+    "licenses": "Apache-2.0 AND LGPL-3.0-or-later",
+    "repository": "https://github.com/lovell/sharp",
+    "publisher": "Lovell Fuller",
+    "email": "npm@lovell.info",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@img\\sharp-win32-x64",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@img\\sharp-win32-x64\\LICENSE"
+  },
+  "@observablehq/plot@0.6.17": {
+    "licenses": "ISC",
+    "repository": "https://github.com/observablehq/plot",
+    "publisher": "Observable, Inc.",
+    "url": "https://observablehq.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@observablehq\\plot",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@observablehq\\plot\\LICENSE"
+  },
+  "@popperjs/core@2.11.8": {
+    "licenses": "MIT",
+    "repository": "https://github.com/popperjs/popper-core",
+    "publisher": "Federico Zivolo",
+    "email": "federico.zivolo@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@popperjs\\core",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\@popperjs\\core\\LICENSE.md"
+  },
+  "abort-controller@3.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mysticatea/abort-controller",
+    "publisher": "Toru Nagashima",
+    "url": "https://github.com/mysticatea",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\abort-controller",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\abort-controller\\LICENSE"
+  },
+  "accepts@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/accepts",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\accepts",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\accepts\\LICENSE"
+  },
+  "acorn@5.7.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/acornjs/acorn",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\acorn",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\acorn\\LICENSE"
+  },
+  "archiver@8.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/archiverjs/node-archiver",
+    "publisher": "Chris Talkington",
+    "url": "http://christalkington.com/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\archiver",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\archiver\\LICENSE"
+  },
+  "array-source@0.0.4": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/array-source",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\array-source",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\array-source\\LICENSE"
+  },
+  "async@3.2.6": {
+    "licenses": "MIT",
+    "repository": "https://github.com/caolan/async",
+    "publisher": "Caolan McMahon",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\async",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\async\\LICENSE"
+  },
+  "b4a@1.8.1": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/b4a",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\b4a",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\b4a\\LICENSE"
+  },
+  "balanced-match@4.0.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/juliangruber/balanced-match",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\balanced-match",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\balanced-match\\LICENSE.md"
+  },
+  "bare-events@2.9.1": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/bare-events",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-events",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-events\\LICENSE"
+  },
+  "bare-fs@4.7.4": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/bare-fs",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-fs",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-fs\\LICENSE"
+  },
+  "bare-path@3.1.1": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/bare-path",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-path",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-path\\LICENSE",
+    "noticeFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-path\\NOTICE"
+  },
+  "bare-stream@2.13.3": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/bare-stream",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-stream\\LICENSE"
+  },
+  "bare-url@2.4.6": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/bare-url",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-url",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bare-url\\LICENSE"
+  },
+  "base64-js@1.5.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/beatgammit/base64-js",
+    "publisher": "T. Jameson Little",
+    "email": "t.jameson.little@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\base64-js",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\base64-js\\LICENSE"
+  },
+  "bidi-js@1.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/lojjic/bidi-js",
+    "publisher": "Jason Johnston",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bidi-js",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bidi-js\\LICENSE.txt"
+  },
+  "binary-search-bounds@2.0.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mikolalysenko/binary-search-bounds",
+    "publisher": "Mikola Lysenko",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\binary-search-bounds",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\binary-search-bounds\\LICENSE"
+  },
+  "body-parser@2.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expressjs/body-parser",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\body-parser",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\body-parser\\LICENSE"
+  },
+  "bootstrap-icons@1.13.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/twbs/icons",
+    "publisher": "mdo",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bootstrap-icons",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bootstrap-icons\\LICENSE"
+  },
+  "bootstrap@5.3.8": {
+    "licenses": "MIT",
+    "repository": "https://github.com/twbs/bootstrap",
+    "publisher": "The Bootstrap Authors",
+    "url": "https://github.com/twbs/bootstrap/graphs/contributors",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bootstrap",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bootstrap\\LICENSE"
+  },
+  "brace-expansion@5.0.9": {
+    "licenses": "MIT",
+    "repository": "https://github.com/juliangruber/brace-expansion",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\brace-expansion",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\brace-expansion\\LICENSE"
+  },
+  "buffer-crc32@1.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/brianloveswords/buffer-crc32",
+    "publisher": "Brian J. Brennan",
+    "email": "brianloveswords@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\buffer-crc32",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\buffer-crc32\\LICENSE"
+  },
+  "buffer@6.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/feross/buffer",
+    "publisher": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "https://feross.org",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\buffer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\buffer\\LICENSE"
+  },
+  "bytes@3.1.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/visionmedia/bytes.js",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "url": "http://tjholowaychuk.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bytes",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\bytes\\LICENSE"
+  },
+  "call-bind-apply-helpers@1.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/call-bind-apply-helpers",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\call-bind-apply-helpers",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\call-bind-apply-helpers\\LICENSE"
+  },
+  "call-bound@1.0.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/call-bound",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\call-bound",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\call-bound\\LICENSE"
+  },
+  "commander@14.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tj/commander.js",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\commander",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\commander\\LICENSE"
+  },
+  "commander@2.20.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tj/commander.js",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ndjson-cli\\node_modules\\commander",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ndjson-cli\\node_modules\\commander\\LICENSE"
+  },
+  "commander@7.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tj/commander.js",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-dsv\\node_modules\\commander",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-dsv\\node_modules\\commander\\LICENSE"
+  },
+  "compress-commons@7.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/archiverjs/node-compress-commons",
+    "publisher": "Chris Talkington",
+    "url": "http://christalkington.com/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\compress-commons",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\compress-commons\\LICENSE"
+  },
+  "content-disposition@1.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/content-disposition",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\content-disposition",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\content-disposition\\LICENSE"
+  },
+  "content-type@1.0.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/content-type",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\content-type",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\content-type\\LICENSE"
+  },
+  "content-type@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/content-type",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\body-parser\\node_modules\\content-type",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\body-parser\\node_modules\\content-type\\LICENSE"
+  },
+  "cookie-signature@1.2.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/visionmedia/node-cookie-signature",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@learnboost.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\cookie-signature",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\cookie-signature\\LICENSE"
+  },
+  "cookie@0.7.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/cookie",
+    "publisher": "Roman Shtylman",
+    "email": "shtylman@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\cookie",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\cookie\\LICENSE"
+  },
+  "core-util-is@1.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/isaacs/core-util-is",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "url": "http://blog.izs.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\core-util-is",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\core-util-is\\LICENSE"
+  },
+  "crc-32@1.2.2": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/SheetJS/js-crc32",
+    "publisher": "sheetjs",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\crc-32",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\crc-32\\LICENSE"
+  },
+  "crc32-stream@7.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/archiverjs/node-crc32-stream",
+    "publisher": "Chris Talkington",
+    "url": "http://christalkington.com/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\crc32-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\crc32-stream\\LICENSE"
+  },
+  "css-tree@3.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/csstree/csstree",
+    "publisher": "Roman Dvornov",
+    "email": "rdvornov@gmail.com",
+    "url": "https://github.com/lahmatiy",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\css-tree",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\css-tree\\LICENSE"
+  },
+  "d3-array@3.2.4": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-array",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-array",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-array\\LICENSE"
+  },
+  "d3-axis@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-axis",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-axis",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-axis\\LICENSE"
+  },
+  "d3-brush@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-brush",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-brush",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-brush\\LICENSE"
+  },
+  "d3-chord@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-chord",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-chord",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-chord\\LICENSE"
+  },
+  "d3-color@3.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-color",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-color",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-color\\LICENSE"
+  },
+  "d3-contour@4.0.2": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-contour",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-contour",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-contour\\LICENSE"
+  },
+  "d3-delaunay@6.0.4": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-delaunay",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-delaunay",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-delaunay\\LICENSE"
+  },
+  "d3-dispatch@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-dispatch",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-dispatch",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-dispatch\\LICENSE"
+  },
+  "d3-drag@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-drag",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-drag",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-drag\\LICENSE"
+  },
+  "d3-dsv@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-dsv",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-dsv",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-dsv\\LICENSE"
+  },
+  "d3-ease@3.0.1": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/d3/d3-ease",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-ease",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-ease\\LICENSE"
+  },
+  "d3-fetch@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-fetch",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-fetch",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-fetch\\LICENSE"
+  },
+  "d3-force@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-force",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-force",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-force\\LICENSE"
+  },
+  "d3-format@3.1.2": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-format",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-format",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-format\\LICENSE"
+  },
+  "d3-geo@3.1.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-geo",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-geo",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-geo\\LICENSE"
+  },
+  "d3-hierarchy@3.1.2": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-hierarchy",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-hierarchy",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-hierarchy\\LICENSE"
+  },
+  "d3-interpolate@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-interpolate",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-interpolate",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-interpolate\\LICENSE"
+  },
+  "d3-path@3.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-path",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-path",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-path\\LICENSE"
+  },
+  "d3-polygon@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-polygon",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-polygon",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-polygon\\LICENSE"
+  },
+  "d3-quadtree@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-quadtree",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-quadtree",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-quadtree\\LICENSE"
+  },
+  "d3-random@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-random",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-random",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-random\\LICENSE"
+  },
+  "d3-scale-chromatic@3.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-scale-chromatic",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-scale-chromatic",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-scale-chromatic\\LICENSE"
+  },
+  "d3-scale@4.0.2": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-scale",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-scale",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-scale\\LICENSE"
+  },
+  "d3-selection@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-selection",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-selection",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-selection\\LICENSE"
+  },
+  "d3-shape@3.2.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-shape",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-shape",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-shape\\LICENSE"
+  },
+  "d3-time-format@4.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-time-format",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-time-format",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-time-format\\LICENSE"
+  },
+  "d3-time@3.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-time",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-time",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-time\\LICENSE"
+  },
+  "d3-timer@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-timer",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-timer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-timer\\LICENSE"
+  },
+  "d3-transition@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-transition",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-transition",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-transition\\LICENSE"
+  },
+  "d3-zoom@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3-zoom",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-zoom",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3-zoom\\LICENSE"
+  },
+  "d3@7.9.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/d3/d3",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\d3\\LICENSE"
+  },
+  "data-urls@7.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/data-urls",
+    "publisher": "Domenic Denicola",
+    "email": "d@domenic.me",
+    "url": "https://domenic.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\data-urls",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\data-urls\\LICENSE.txt"
+  },
+  "debug@4.4.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/debug-js/debug",
+    "publisher": "Josh Junon",
+    "url": "https://github.com/qix-",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\debug",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\debug\\LICENSE"
+  },
+  "decimal.js@10.6.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/MikeMcl/decimal.js",
+    "publisher": "Michael Mclaughlin",
+    "email": "M8ch88l@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\decimal.js",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\decimal.js\\LICENCE.md"
+  },
+  "delaunator@5.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/mapbox/delaunator",
+    "publisher": "Vladimir Agafonkin",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\delaunator",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\delaunator\\LICENSE"
+  },
+  "depd@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/dougwilson/nodejs-depd",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\depd",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\depd\\LICENSE"
+  },
+  "detect-libc@2.1.2": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/lovell/detect-libc",
+    "publisher": "Lovell Fuller",
+    "email": "npm@lovell.info",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\detect-libc",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\detect-libc\\LICENSE"
+  },
+  "dunder-proto@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/es-shims/dunder-proto",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\dunder-proto",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\dunder-proto\\LICENSE"
+  },
+  "ee-first@1.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonathanong/ee-first",
+    "publisher": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ee-first",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ee-first\\LICENSE"
+  },
+  "ejs@6.0.1": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/mde/ejs",
+    "publisher": "Matthew Eernisse",
+    "email": "matthew.eernisse@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ejs",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ejs\\LICENSE"
+  },
+  "encodeurl@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/encodeurl",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\encodeurl",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\encodeurl\\LICENSE"
+  },
+  "entities@8.0.0": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/fb55/entities",
+    "publisher": "Felix Boehm",
+    "email": "me@feedic.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\entities",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\entities\\LICENSE"
+  },
+  "es-define-property@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/es-define-property",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\es-define-property",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\es-define-property\\LICENSE"
+  },
+  "es-errors@1.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/es-errors",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\es-errors",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\es-errors\\LICENSE"
+  },
+  "es-object-atoms@1.1.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/es-object-atoms",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\es-object-atoms",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\es-object-atoms\\LICENSE"
+  },
+  "escape-html@1.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/component/escape-html",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\escape-html",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\escape-html\\LICENSE"
+  },
+  "etag@1.8.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/etag",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\etag",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\etag\\LICENSE"
+  },
+  "event-target-shim@5.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mysticatea/event-target-shim",
+    "publisher": "Toru Nagashima",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\event-target-shim",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\event-target-shim\\LICENSE"
+  },
+  "events-universal@1.0.1": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/events-universal",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\events-universal",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\events-universal\\LICENSE"
+  },
+  "events@3.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/Gozala/events",
+    "publisher": "Irakli Gozalishvili",
+    "email": "rfobic@gmail.com",
+    "url": "http://jeditoolkit.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\events",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\events\\LICENSE"
+  },
+  "express@5.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expressjs/express",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\express",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\express\\LICENSE"
+  },
+  "fast-fifo@1.3.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mafintosh/fast-fifo",
+    "publisher": "Mathias Buus",
+    "url": "@mafintosh",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\fast-fifo",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\fast-fifo\\LICENSE"
+  },
+  "file-source@0.6.1": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/file-source",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\file-source",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\file-source\\LICENSE"
+  },
+  "finalhandler@2.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/finalhandler",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\finalhandler",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\finalhandler\\LICENSE"
+  },
+  "forwarded@0.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/forwarded",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\forwarded",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\forwarded\\LICENSE"
+  },
+  "fresh@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/fresh",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "url": "http://tjholowaychuk.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\fresh",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\fresh\\LICENSE"
+  },
+  "function-bind@1.1.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/Raynos/function-bind",
+    "publisher": "Raynos",
+    "email": "raynos2@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\function-bind",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\function-bind\\LICENSE"
+  },
+  "get-intrinsic@1.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/get-intrinsic",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\get-intrinsic",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\get-intrinsic\\LICENSE"
+  },
+  "get-proto@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/get-proto",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\get-proto",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\get-proto\\LICENSE"
+  },
+  "gopd@1.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/gopd",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\gopd",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\gopd\\LICENSE"
+  },
+  "has-symbols@1.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inspect-js/has-symbols",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "url": "http://ljharb.codes",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\has-symbols",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\has-symbols\\LICENSE"
+  },
+  "hasown@2.0.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inspect-js/hasOwn",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\hasown",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\hasown\\LICENSE"
+  },
+  "html-encoding-sniffer@6.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/html-encoding-sniffer",
+    "publisher": "Domenic Denicola",
+    "email": "d@domenic.me",
+    "url": "https://domenic.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\html-encoding-sniffer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\html-encoding-sniffer\\LICENSE.txt"
+  },
+  "http-errors@2.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/http-errors",
+    "publisher": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\http-errors",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\http-errors\\LICENSE"
+  },
+  "iconv-lite@0.6.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ashtuchkin/iconv-lite",
+    "publisher": "Alexander Shtuchkin",
+    "email": "ashtuchkin@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\iconv-lite",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\iconv-lite\\LICENSE"
+  },
+  "iconv-lite@0.7.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/iconv-lite",
+    "publisher": "Alexander Shtuchkin",
+    "email": "ashtuchkin@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\body-parser\\node_modules\\iconv-lite",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\body-parser\\node_modules\\iconv-lite\\LICENSE"
+  },
+  "ieee754@1.2.1": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/feross/ieee754",
+    "publisher": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "https://feross.org",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ieee754",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ieee754\\LICENSE"
+  },
+  "inherits@2.0.4": {
+    "licenses": "ISC",
+    "repository": "https://github.com/isaacs/inherits",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\inherits",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\inherits\\LICENSE"
+  },
+  "internmap@2.0.3": {
+    "licenses": "ISC",
+    "repository": "https://github.com/mbostock/internmap",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\internmap",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\internmap\\LICENSE"
+  },
+  "interval-tree-1d@1.0.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mikolalysenko/interval-tree-1d",
+    "publisher": "Mikola Lysenko",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\interval-tree-1d",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\interval-tree-1d\\LICENSE"
+  },
+  "ipaddr.js@1.9.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/whitequark/ipaddr.js",
+    "publisher": "whitequark",
+    "email": "whitequark@whitequark.org",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ipaddr.js",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ipaddr.js\\LICENSE"
+  },
+  "is-core-module@2.16.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inspect-js/is-core-module",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-core-module",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-core-module\\LICENSE"
+  },
+  "is-potential-custom-element-name@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mathiasbynens/is-potential-custom-element-name",
+    "publisher": "Mathias Bynens",
+    "url": "https://mathiasbynens.be/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-potential-custom-element-name",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-potential-custom-element-name\\LICENSE-MIT.txt"
+  },
+  "is-promise@4.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/then/is-promise",
+    "publisher": "ForbesLindesay",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-promise",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-promise\\LICENSE"
+  },
+  "is-stream@4.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/sindresorhus/is-stream",
+    "publisher": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "https://sindresorhus.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\is-stream\\license"
+  },
+  "isarray@1.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/juliangruber/isarray",
+    "publisher": "Julian Gruber",
+    "email": "mail@juliangruber.com",
+    "url": "http://juliangruber.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\isarray",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\isarray\\README.md"
+  },
+  "isoformat@0.2.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/mbostock/isoformat",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\isoformat",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\isoformat\\LICENSE"
+  },
+  "jsdom@29.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/jsdom",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\jsdom",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\jsdom\\LICENSE.txt"
+  },
+  "lazystream@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jpommerening/node-lazystream",
+    "publisher": "Jonas Pommerening",
+    "email": "jonas.pommerening@gmail.com",
+    "url": "https://npmjs.org/~jpommerening",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\LICENSE"
+  },
+  "lru-cache@11.5.2": {
+    "licenses": "BlueOak-1.0.0",
+    "repository": "https://github.com/isaacs/node-lru-cache",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lru-cache",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lru-cache\\LICENSE.md"
+  },
+  "marko@2.0.0": {
+    "licenses": "GPL-3.0-only",
+    "publisher": "Dominik Boček",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public"
+  },
+  "math-intrinsics@1.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/es-shims/math-intrinsics",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\math-intrinsics",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\math-intrinsics\\LICENSE"
+  },
+  "mdn-data@2.27.1": {
+    "licenses": "CC0-1.0",
+    "repository": "https://github.com/mdn/data",
+    "publisher": "Mozilla Developer Network",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\mdn-data",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\mdn-data\\LICENSE"
+  },
+  "media-typer@1.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/media-typer",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\media-typer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\media-typer\\LICENSE"
+  },
+  "merge-descriptors@2.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/sindresorhus/merge-descriptors",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\merge-descriptors",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\merge-descriptors\\license"
+  },
+  "mime-db@1.54.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/mime-db",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\mime-db",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\mime-db\\LICENSE"
+  },
+  "mime-types@3.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/mime-types",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\mime-types",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\mime-types\\LICENSE"
+  },
+  "minimatch@10.2.6": {
+    "licenses": "BlueOak-1.0.0",
+    "repository": "https://github.com/isaacs/minimatch",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "url": "http://blog.izs.me",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\minimatch",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\minimatch\\LICENSE.md"
+  },
+  "ms@2.1.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/vercel/ms",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ms",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ms\\license.md"
+  },
+  "ndjson-cli@0.3.1": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/ndjson-cli",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ndjson-cli",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ndjson-cli\\LICENSE.txt"
+  },
+  "negotiator@1.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/negotiator",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\negotiator",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\negotiator\\LICENSE"
+  },
+  "normalize-path@3.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/normalize-path",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\normalize-path",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\normalize-path\\LICENSE"
+  },
+  "object-inspect@1.13.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inspect-js/object-inspect",
+    "publisher": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\object-inspect",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\object-inspect\\LICENSE"
+  },
+  "ogr2ogr@7.0.1": {
+    "licenses": "MIT*",
+    "repository": "https://github.com/wavded/ogr2ogr",
+    "publisher": "Marc Harter",
+    "email": "wavded@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ogr2ogr",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\ogr2ogr\\license"
+  },
+  "on-finished@2.4.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/on-finished",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\on-finished",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\on-finished\\LICENSE"
+  },
+  "once@1.4.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/isaacs/once",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "url": "http://blog.izs.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\once",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\once\\LICENSE"
+  },
+  "parse5@8.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inikulin/parse5",
+    "publisher": "Ivan Nikulin",
+    "email": "ifaaan@gmail.com",
+    "url": "https://github.com/inikulin",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\parse5",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\parse5\\LICENSE"
+  },
+  "parseurl@1.3.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/parseurl",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\parseurl",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\parseurl\\LICENSE"
+  },
+  "path-parse@1.0.7": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jbgutierrez/path-parse",
+    "publisher": "Javier Blanco",
+    "email": "http://jbgutierrez.info",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\path-parse",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\path-parse\\LICENSE"
+  },
+  "path-source@0.1.3": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/path-source",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\path-source",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\path-source\\LICENSE"
+  },
+  "path-to-regexp@8.4.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/path-to-regexp",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\path-to-regexp",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\path-to-regexp\\LICENSE"
+  },
+  "process-nextick-args@2.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/calvinmetcalf/process-nextick-args",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\process-nextick-args",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\process-nextick-args\\license.md"
+  },
+  "process@0.11.10": {
+    "licenses": "MIT",
+    "repository": "https://github.com/shtylman/node-process",
+    "publisher": "Roman Shtylman",
+    "email": "shtylman@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\process",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\process\\LICENSE"
+  },
+  "proxy-addr@2.0.7": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/proxy-addr",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\proxy-addr",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\proxy-addr\\LICENSE"
+  },
+  "punycode@2.3.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mathiasbynens/punycode.js",
+    "publisher": "Mathias Bynens",
+    "url": "https://mathiasbynens.be/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\punycode",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\punycode\\LICENSE-MIT.txt"
+  },
+  "qs@6.16.0": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/ljharb/qs",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\qs",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\qs\\LICENSE.md"
+  },
+  "range-parser@1.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/range-parser",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "url": "http://tjholowaychuk.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\range-parser",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\range-parser\\LICENSE"
+  },
+  "raw-body@3.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/stream-utils/raw-body",
+    "publisher": "Jonathan Ong",
+    "email": "me@jongleberry.com",
+    "url": "http://jongleberry.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\raw-body",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\raw-body\\LICENSE"
+  },
+  "readable-stream@2.3.8": {
+    "licenses": "MIT",
+    "repository": "https://github.com/nodejs/readable-stream",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\node_modules\\readable-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\node_modules\\readable-stream\\LICENSE"
+  },
+  "readable-stream@4.7.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/nodejs/readable-stream",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\readable-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\readable-stream\\LICENSE"
+  },
+  "readdir-glob@3.0.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/Yqnn/node-readdir-glob",
+    "publisher": "Yann Armelin",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\readdir-glob",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\readdir-glob\\LICENSE"
+  },
+  "require-from-string@2.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/floatdrop/require-from-string",
+    "publisher": "Vsevolod Strukchinsky",
+    "email": "floatdrop@gmail.com",
+    "url": "github.com/floatdrop",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\require-from-string",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\require-from-string\\license"
+  },
+  "resolve@1.22.12": {
+    "licenses": "MIT",
+    "repository": "https://github.com/browserify/resolve",
+    "publisher": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\resolve",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\resolve\\LICENSE"
+  },
+  "robust-predicates@3.0.3": {
+    "licenses": "Unlicense",
+    "repository": "https://github.com/mourner/robust-predicates",
+    "publisher": "Vladimir Agafonkin",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\robust-predicates",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\robust-predicates\\LICENSE"
+  },
+  "router@2.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/router",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\router",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\router\\LICENSE"
+  },
+  "rw@1.3.3": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/rw",
+    "publisher": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\rw",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\rw\\LICENSE"
+  },
+  "safe-buffer@5.1.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/feross/safe-buffer",
+    "publisher": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "http://feross.org",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\node_modules\\safe-buffer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\node_modules\\safe-buffer\\LICENSE"
+  },
+  "safe-buffer@5.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/feross/safe-buffer",
+    "publisher": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "https://feross.org",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\safe-buffer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\safe-buffer\\LICENSE"
+  },
+  "safer-buffer@2.1.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ChALkeR/safer-buffer",
+    "publisher": "Nikita Skovoroda",
+    "email": "chalkerx@gmail.com",
+    "url": "https://github.com/ChALkeR",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\safer-buffer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\safer-buffer\\LICENSE"
+  },
+  "saxes@6.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/lddubeau/saxes",
+    "publisher": "Louis-Dominique Dubeau",
+    "email": "ldd@lddubeau.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\saxes",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\saxes\\README.md"
+  },
+  "semver@7.8.5": {
+    "licenses": "ISC",
+    "repository": "https://github.com/npm/node-semver",
+    "publisher": "GitHub Inc.",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\semver",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\semver\\LICENSE"
+  },
+  "send@1.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pillarjs/send",
+    "publisher": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\send",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\send\\LICENSE"
+  },
+  "serve-static@2.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expressjs/serve-static",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\serve-static",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\serve-static\\LICENSE"
+  },
+  "setprototypeof@1.2.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/wesleytodd/setprototypeof",
+    "publisher": "Wes Todd",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\setprototypeof",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\setprototypeof\\LICENSE"
+  },
+  "shapefile@0.6.6": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/shapefile",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\shapefile",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\shapefile\\LICENSE.txt"
+  },
+  "sharp@0.35.4": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/lovell/sharp",
+    "publisher": "Lovell Fuller",
+    "email": "npm@lovell.info",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\sharp",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\sharp\\LICENSE"
+  },
+  "side-channel-list@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/side-channel-list",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel-list",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel-list\\LICENSE"
+  },
+  "side-channel-map@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/side-channel-map",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel-map",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel-map\\LICENSE"
+  },
+  "side-channel-weakmap@1.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/side-channel-weakmap",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel-weakmap",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel-weakmap\\LICENSE"
+  },
+  "side-channel@1.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/ljharb/side-channel",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\side-channel\\LICENSE"
+  },
+  "slice-source@0.4.1": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/slice-source",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\slice-source",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\slice-source\\LICENSE"
+  },
+  "source-map-js@1.2.1": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/7rulnik/source-map-js",
+    "publisher": "Valentin 7rulnik Semirulnik",
+    "email": "v7rulnik@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\source-map-js",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\source-map-js\\LICENSE"
+  },
+  "statuses@2.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/statuses",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\statuses",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\statuses\\LICENSE"
+  },
+  "stream-source@0.3.5": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mbostock/stream-source",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\stream-source",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\stream-source\\README.md"
+  },
+  "streamx@2.28.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mafintosh/streamx",
+    "publisher": "Mathias Buus",
+    "url": "@mafintosh",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\streamx",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\streamx\\LICENSE"
+  },
+  "string_decoder@1.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/nodejs/string_decoder",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\node_modules\\string_decoder",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\lazystream\\node_modules\\string_decoder\\LICENSE"
+  },
+  "string_decoder@1.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/nodejs/string_decoder",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\string_decoder",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\string_decoder\\LICENSE"
+  },
+  "supports-preserve-symlinks-flag@1.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inspect-js/node-supports-preserve-symlinks-flag",
+    "publisher": "Jordan Harband",
+    "email": "ljharb@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\supports-preserve-symlinks-flag",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\supports-preserve-symlinks-flag\\LICENSE"
+  },
+  "symbol-tree@3.2.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/js-symbol-tree",
+    "publisher": "Joris van der Wel",
+    "email": "joris@jorisvanderwel.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\symbol-tree",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\symbol-tree\\LICENSE"
+  },
+  "tar-stream@3.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mafintosh/tar-stream",
+    "publisher": "Mathias Buus",
+    "email": "mathiasbuus@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tar-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tar-stream\\LICENSE"
+  },
+  "teex@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mafintosh/teex",
+    "publisher": "Mathias Buus",
+    "url": "@mafintosh",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\teex",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\teex\\LICENSE"
+  },
+  "text-decoder@1.2.7": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/holepunchto/text-decoder",
+    "publisher": "Holepunch",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\text-decoder",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\text-decoder\\LICENSE"
+  },
+  "text-encoding@0.6.4": {
+    "licenses": "Unlicense",
+    "repository": "https://github.com/inexorabletash/text-encoding",
+    "publisher": "Joshua Bell",
+    "email": "inexorabletash@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\text-encoding",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\text-encoding\\LICENSE.md"
+  },
+  "tldts-core@7.4.10": {
+    "licenses": "MIT",
+    "repository": "https://github.com/remusao/tldts",
+    "publisher": "Rémi Berson",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tldts-core",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tldts-core\\LICENSE"
+  },
+  "tldts@7.4.10": {
+    "licenses": "MIT",
+    "repository": "https://github.com/remusao/tldts",
+    "publisher": "Rémi Berson",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tldts",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tldts\\LICENSE"
+  },
+  "toidentifier@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/component/toidentifier",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\toidentifier",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\toidentifier\\LICENSE"
+  },
+  "topojson-client@3.1.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/topojson/topojson-client",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\topojson-client",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\topojson-client\\LICENSE"
+  },
+  "topojson-server@3.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/topojson/topojson-server",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\topojson-server",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\topojson-server\\LICENSE"
+  },
+  "topojson-simplify@3.0.3": {
+    "licenses": "ISC",
+    "repository": "https://github.com/topojson/topojson-simplify",
+    "publisher": "Mike Bostock",
+    "url": "https://bost.ocks.org/mike",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\topojson-simplify",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\topojson-simplify\\LICENSE"
+  },
+  "tough-cookie@6.0.2": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/salesforce/tough-cookie",
+    "publisher": "Jeremy Stashewsky",
+    "email": "jstash@gmail.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tough-cookie",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tough-cookie\\LICENSE"
+  },
+  "tr46@6.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/tr46",
+    "publisher": "Sebastian Mayr",
+    "email": "npm@smayr.name",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tr46",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\tr46\\LICENSE.md"
+  },
+  "type-is@2.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/type-is",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\type-is",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\type-is\\LICENSE"
+  },
+  "undici@7.29.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/nodejs/undici",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\undici",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\undici\\LICENSE"
+  },
+  "unpipe@1.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/stream-utils/unpipe",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\unpipe",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\unpipe\\LICENSE"
+  },
+  "util-deprecate@1.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/TooTallNate/util-deprecate",
+    "publisher": "Nathan Rajlich",
+    "email": "nathan@tootallnate.net",
+    "url": "http://n8.io/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\util-deprecate",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\util-deprecate\\LICENSE"
+  },
+  "vary@1.1.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jshttp/vary",
+    "publisher": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\vary",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\vary\\LICENSE"
+  },
+  "w3c-xmlserializer@5.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/w3c-xmlserializer",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\w3c-xmlserializer",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\w3c-xmlserializer\\LICENSE.md"
+  },
+  "webidl-conversions@8.0.1": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/jsdom/webidl-conversions",
+    "publisher": "Domenic Denicola",
+    "email": "d@domenic.me",
+    "url": "https://domenic.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\webidl-conversions",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\webidl-conversions\\LICENSE.md"
+  },
+  "whatwg-mimetype@5.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/whatwg-mimetype",
+    "publisher": "Domenic Denicola",
+    "email": "d@domenic.me",
+    "url": "https://domenic.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\whatwg-mimetype",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\whatwg-mimetype\\LICENSE.txt"
+  },
+  "whatwg-url@16.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jsdom/whatwg-url",
+    "publisher": "Sebastian Mayr",
+    "email": "github@smayr.name",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\whatwg-url",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\whatwg-url\\LICENSE.txt"
+  },
+  "wrappy@1.0.2": {
+    "licenses": "ISC",
+    "repository": "https://github.com/npm/wrappy",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "url": "http://blog.izs.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\wrappy",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\wrappy\\LICENSE"
+  },
+  "xml-name-validator@5.0.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/jsdom/xml-name-validator",
+    "publisher": "Domenic Denicola",
+    "email": "d@domenic.me",
+    "url": "https://domenic.me/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\xml-name-validator",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\xml-name-validator\\LICENSE.txt"
+  },
+  "xmlchars@2.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/lddubeau/xmlchars",
+    "publisher": "Louis-Dominique Dubeau",
+    "email": "ldd@lddubeau.com",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\xmlchars",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\xmlchars\\LICENSE"
+  },
+  "zip-stream@7.0.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/archiverjs/node-zip-stream",
+    "publisher": "Chris Talkington",
+    "url": "http://christalkington.com/",
+    "path": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\zip-stream",
+    "licenseFile": "C:\\Users\\bocedo00\\Downloads\\obecní zastupitelstva\\MarkO v1.0.3\\MarkO v1.0.2\\public\\node_modules\\zip-stream\\LICENSE"
+  }
+}
+
