@@ -80,7 +80,7 @@ router.post('/okrskove-mapy', (req, res, next) => {
                 return res.status(500).send("Vyskytla se chyba...")
             }
 
-            let zprava = `<span>Vytvoření mapy dokončeno. Pro zobrazení klikněte <a href="/volby/${volby}/obce/${obec}" target="_blank">sem</a>.</span>`
+            let zprava = `<span>Vytvoření mapy dokončeno. Pro zobrazení klikněte <a href="/volby/${volby}/obce/${obec}/vitez" target="_blank">sem</a>.</span>`
             res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, obec})
         })
     }
@@ -99,7 +99,7 @@ router.post('/okrskove-mapy', (req, res, next) => {
                 return res.status(500).send("Vyskytla se chyba...")
             }
 
-            let zprava = `Vytvoření mapy dokončeno. Pro zobrazení klikněte <a href="volby/${volby}/${prezident}/" target="_blank">sem</a>.`
+            let zprava = `Vytvoření mapy dokončeno. Pro zobrazení klikněte <a href="volby/${volby}/${prezident}/vitez" target="_blank">sem</a>.`
             res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo});
         });
     } else {
