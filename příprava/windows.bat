@@ -28,7 +28,7 @@ if %errorLevel% == 0 (
     cd "%~dp0\..\public"
     start cmd /c "%programfiles%\nodejs\npm" install
     cd ..
-    curl https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe --output .\gitbash.exe
+    curl --location https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe --output .\gitbash.exe
     set opravneni=administrator
 ) else (
     echo Uživatel nemá administrátorská práva.
@@ -37,9 +37,9 @@ if %errorLevel% == 0 (
     curl https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip --output .\node-v24.21.0-win-x64.zip
     powershell.exe -executionpolicy bypass -file ".\příprava\soubory instalátoru\extraktor.ps1" "node-v24.21.0-win-x64.zip" ".\nodeJS">nul
     cd "%~dp0\..\public"
-    start cmd /c "%~dp0\..\nodeJS\node-v24.21.0-win-x64\npm" install
+    start cmd /c "%~dp0\..\nodeJS\npm" install
     cd ..
-    curl https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/PortableGit-2.55.0.5-64-bit.7z.exe --output gitbash.exe
+    curl --location https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/PortableGit-2.55.0.5-64-bit.7z.exe --output gitbash.exe
     set opravneni=standard
 )
 
@@ -56,8 +56,7 @@ copy "%cd%\příprava\volby\MarkO.py" "%cd%\.MarkO.py"
 echo @echo off >> MarkO.bat
 echo cls >> MarkO.bat
 if %opravneni% == standard (
-    setx Path %Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;
-    setx Path %Path%;%cd%\..\public\node_modules\.bin
+    setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\..\public\node_modules\.bin"
 )
 echo python3 .MarkO.py >> MarkO.bat
 echo Program MarkO byl úspěšně nainstalován.
