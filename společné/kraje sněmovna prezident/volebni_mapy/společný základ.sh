@@ -10,7 +10,7 @@ if [ "$1" == "-n" ]; then
         echo "Zadaná cesta k okrskovým mapám neexistuje."
         exit
     fi
-    ogr2ogr -t_srs EPSG:4326 -lco ENCODING=UTF-8 "$adresar_voleb/okrsky.shp" "$adresar_okrsku/$zdroj/okrsky.shp" --quiet -ct_opt WARN_ABOUT_DIFFERENT_COORD_OP=NO
+    node "$adresar_okrsku/../public/ogr2ogr.js" -i "$adresar_okrsku/$zdroj/okrsky.shp" -o "$adresar_voleb/okrsky.shp"
     shp2json -n --encoding=utf-8 "$adresar_voleb/okrsky.shp" | ndjson-map 'd.id = d.properties.kod_mco==null?d.properties.kod_obec + "-" + d.properties.cislo:d.properties.kod_mco + "-" + d.properties.cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
     geo2topo -n tracts=volebni_okrsky.ndjson > volebni_okrsky-topo.json
     toposimplify -P 0.05 -f < volebni_okrsky-topo.json > volebni_okrsky-simple-topo.json 2> /dev/null

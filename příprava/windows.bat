@@ -18,7 +18,7 @@ if %errorLevel% == 0 (
         echo NPM existuje. Program může pokračovat v instalaci balíčků.
     ) else (
         echo "Instaluji npm..."
-        winget install -e --id OpenJS.NodeJS
+        winget install --source=winget -e --id OpenJS.NodeJS
         if %errorLevel% NEQ 0 (
             echo "Při instalaci nastala chyba."
             pause
@@ -26,20 +26,20 @@ if %errorLevel% == 0 (
         )
     )
     cd "%~dp0\..\public"
-    powershell -Command "& '%programfiles%\nodejs\npm' install"
+    start cmd /c "%programfiles%\nodejs\npm" install
     cd ..
-    powershell -Command "Invoke-WebRequest https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe -OutFile gitbash.exe"
+    curl https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe --output .\gitbash.exe
     set opravneni=administrator
 ) else (
     echo Uživatel nemá administrátorská práva.
     cd ..
     mkdir "nodeJS"
-    powershell -Command "Invoke-WebRequest https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip -OutFile nodeJS.zip
-    powershell -Command "Expand-Archive -Force nodeJS.zip nodeJS"
+    curl https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip --output .\node-v24.21.0-win-x64.zip
+    powershell.exe -executionpolicy bypass -file ".\příprava\soubory instalátoru\extraktor.ps1" "node-v24.21.0-win-x64.zip" ".\nodeJS">nul
     cd "%~dp0\..\public"
-    powershell -Command "& '..\nodeJS\node-v24.21.0-win-x64\npm'" install
+    start cmd /c "%~dp0\..\nodeJS\node-v24.21.0-win-x64\npm" install
     cd ..
-    powershell -Command "Invoke-WebRequest https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/PortableGit-2.55.0.5-64-bit.7z.exe -OutFile gitbash.exe"
+    curl https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/PortableGit-2.55.0.5-64-bit.7z.exe --output gitbash.exe
     set opravneni=standard
 )
 
@@ -47,15 +47,18 @@ gitbash.exe
 
 python3 --version >nul
 if %errorLevel% NEQ 0 (
-    winget install -e --id Python.Python.3.13
+    winget install 9NQ7512CXL7T --accept-package-agreements
+    rem Python Installation Manager
 )
 
-pip3 install pandas
-rem SET PATH=%PATH%;%~dp0\..\public\node_modules\.bin
-rem ani nevím, jestli je to vůbec k něčemu dobré a zda to funguje
+start cmd /c pip3 install pandas
 copy "%cd%\příprava\volby\MarkO.py" "%cd%\.MarkO.py"
 echo @echo off >> MarkO.bat
-if %opravneni% == standard (echo SET PATH=%PATH%;%cd%\nodeJS\node-v24.21.0-win-x64\ >> MarkO.bat)
+echo cls >> MarkO.bat
+if %opravneni% == standard (
+    setx Path %Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;
+    setx Path %Path%;%cd%\..\public\node_modules\.bin
+)
 echo python3 .MarkO.py >> MarkO.bat
 echo Program MarkO byl úspěšně nainstalován.
 pause
