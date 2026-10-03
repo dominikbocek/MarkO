@@ -1,5 +1,5 @@
-import { legenda_skala, color } from "../../legendy/legenda-skala.js"
-import { nactenimapy, nacteni_csv } from "/společné/mapy/vykreslení/načtení.js"
+import { legenda_skala, color } from "/společné/mapy/legendy/legenda-skala.js"
+import { nactenimapy, nactenicsv } from "/společné/mapy/vykreslení/načtení.js"
 import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
 
 export async function vykresleni(svg) {
@@ -8,7 +8,7 @@ export async function vykresleni(svg) {
   const legendaelement = d3.select("#legenda")
 
   const data = await nactenimapy(parametry.data)
-  const csv = await nacteni_csv(parametry.csv)
+  const csv = await nactenicsv(parametry.statistiky)
 
   const subunits = await vykresleni_zaklad(data, csv)
 
@@ -26,7 +26,7 @@ export async function vykresleni(svg) {
     .data(subunits.features)
     .enter().append("path")
     .attr("class", function(d) { return "subunit " + d.id; })
-    .attr("fill", function(d) { return color(procentualnirozsah)(d.properties["PROCENTA"]); })
+    .attr("fill", function(d) { return color(parametry.rozsah)(d.properties.ucast !== undefined ? Math.round((d.properties.ucast)*100)/100: d.properties.PL_HL_CELK !== undefined && d.properties.VOL_SEZNAM !== undefined ? Math.round(((d.properties.PL_HL_CELK / d.properties.VOL_SEZNAM) * 10000))/100 : null);})
     .attr("d", path)
 
   legenda_skala(legendaelement, procentualnirozsah)

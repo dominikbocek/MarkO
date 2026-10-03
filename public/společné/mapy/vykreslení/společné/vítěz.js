@@ -1,15 +1,15 @@
 import { legenda_normalni } from "../../legendy/legenda-normalni.js"
-import { nactenimapy, nactenistran, nacteni_csv } from "/společné/mapy/vykreslení/načtení.js"
+import { nactenimapy, nactenistran, nactenicsv } from "/společné/mapy/vykreslení/načtení.js"
 import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
 
-export async function vykresleni(svg, druhvoleb, geojson = null, stranyjson = null) {
+export async function vykresleni(svg, druhvoleb) {
   // vykreslení mapy
 
   let legendaelement = d3.select("#legenda")
 
   const data = await nactenimapy(parametry.data)
   const strany = await nactenistran(parametry.legendazdroj)
-  const csv = await nacteni_csv(parametry.statistiky)
+  const csv = await nactenicsv(parametry.statistiky)
 
   const subunits = await vykresleni_zaklad(data, csv)
 
@@ -51,6 +51,8 @@ export async function vykresleni(svg, druhvoleb, geojson = null, stranyjson = nu
           case "krajské":
             identifikator = "KSTRANA"
             break;
+          case "komunální":
+            identifikator = "POR_STR_HL"
           default:
             break;
         }

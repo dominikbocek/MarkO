@@ -26,7 +26,7 @@ export async function nactenistran(url) {
   }
 }
 
-export async function nacteni_csv(url) {
+export async function nactenicsv(url) {
   if(parametry.typzobrazeni == "samostatné" && (parametry.hledanastrana == "" || isNaN(parametry.hledanastrana))) {
     svg.innerHTML = hlaska(`Neplatné id`)
     throw new Error("Neplatné id");

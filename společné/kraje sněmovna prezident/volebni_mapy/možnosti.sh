@@ -47,8 +47,10 @@ case $1 in
       Info
       exit;;
     *) # neplatná možnost
-      echo "Neplatná možnost: $1"
-      echo
+      if ! [ "$1" == "" ]; then
+         echo "Neplatná možnost: $1"
+         echo
+      fi
       Help_prikazy_volebni_mapy
       exit;;
 esac

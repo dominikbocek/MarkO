@@ -33,10 +33,6 @@ source ./nápověda.sh
 #############################
 
 shopt -s extglob
-if [ "$1" == "" ]; then
-   Help_prikazy_samostatne
-   exit
-fi
    
 case $1 in
    -h) # zobrazí nápovědu
@@ -56,8 +52,10 @@ case $1 in
       python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani "okrsky"
       ;;
    *) # neplatná možnost
-      echo "Neplatná možnost: $1"
-      echo
+      if ! [ "$1" == "" ]; then
+         echo "Neplatná možnost: $1"
+         echo
+      fi
       Help_prikazy_samostatne
       exit;;
 esac

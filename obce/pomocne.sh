@@ -15,13 +15,13 @@ Overeni_zpracovani() {
    local obec="$2"
    local kod=$(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$obec" --vratit "kodstatut")
    if (( $kod == 0 )); then
-      if ! test -f "$adresar_voleb/obce/$obec/volebni_okrsky-simple-data-topo-$obec.json"; then
+      if ! test -f "$adresar_voleb/obce/$obec/volebni_okrsky-simple-data.json"; then
          echo "Chybí soubor $adresar_voleb/obce/$obec/volebni_okrsky-simple-data-topo-$obec.json"
          echo "Pro vytvoření samostatných map kandidujících subjektů je potřeba nejprve zpracovat data v normálním režimu pomocí příkazu bash ./volebni_mapy.sh -n"
          exit
       fi
    elif ! (( $kod == 0 )) && $(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$obec" --vratit "jesamospravnyobvod"); then
-      if ! test -f "$adresar_voleb/obce/$kod/$obec/volebni_okrsky-simple-data-topo-$obec.json"; then
+      if ! test -f "$adresar_voleb/obce/$kod/$obec/volebni_okrsky-simple-data.json"; then
          echo "Chybí soubor $adresar_voleb/obce/$kod/$obec/volebni_okrsky-simple-data-topo-$obec.json"
          echo "Pro vytvoření samostatných map kandidujících subjektů je potřeba nejprve zpracovat data v normálním režimu pomocí příkazu bash ./volebni_mapy.sh -n"
          exit

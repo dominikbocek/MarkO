@@ -22,6 +22,7 @@
         <input type="hidden" name="druh_map" value="<%- druh_map %>">
         <input type="hidden" name="volby" value="<%- volby %>">
         <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
+        <% if(info["druh"] == "komunální") {%><input type="hidden" name="obec" value="<%= obec %>"><%} %>
         <input type="hidden" name="cisla">
     </form>
     <%} %>

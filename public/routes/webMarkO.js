@@ -174,6 +174,7 @@ router.post('/samostatne-mapy', (req, res, next) => {
     let volby = req.body.volby;
     let cisla = req.body.cisla
     let kolo = req.body.kolo
+    let obec = req.body.obec
     let prezident = "."
 
     const info = pomocnefunkce.nacistJSON(volby)
@@ -182,12 +183,26 @@ router.post('/samostatne-mapy', (req, res, next) => {
         return res.status(500).send("Vyskytla se chyba...")
     }
 
-    let verzeprogramu = vyberverzi(info, res)
+    //let verzeprogramu = vyberverzi(info, res)
 
-    if (kolo == "1") {prezident = "první kolo"} else if (kolo == "2") {prezident = "druhé kolo"}
-    // opatření pro druhé kolo, protože verze programu je osekaná až na kost
-    if (kolo == "2") {command = `cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./samostatne.sh -n "${volby}"`}
-    else {command = `cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./samostatne.sh -k "${volby}" "${cisla}" ano`}
+    let command
+
+    switch (info["druh"]) {
+        case "prezidentské":
+            if (kolo == "1") {prezident = "první kolo"} else if (kolo == "2") {prezident = "druhé kolo"}
+            // opatření pro druhé kolo, protože verze programu je osekaná až na kost
+            if (kolo == "2") {command = `cd "${cwd()}/../prezident/${prezident}" && bash ./samostatne.sh -n "${volby}"`}
+            break;
+        case "sněmovní":
+            command = `cd "${cwd()}/../kraje a sněmovna/" && bash ./samostatne.sh -n "${volby}"`
+            break;
+        case "komunální":
+            command = `cd "${cwd()}/../obce/" && bash ./samostatne.sh -n "${volby}" "${cisla}" "${obec}"`
+            break;
+        default:
+            break;
+    }
+
     return exec(command, (error, stdout, stderr) => {
         if (error) {
             chyby.chyba(error)

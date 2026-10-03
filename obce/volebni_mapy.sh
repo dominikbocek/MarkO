@@ -51,14 +51,9 @@ source ./nápověda.sh
 # Možnosti                                                 #
 ############################################################
 
-if [ "$1" == "" ]; then
-   Help
-   exit
-fi
-
 case $1 in
    -h) # zobrazí nápovědu
-      Help_prikazy_volebni_mapy
+      Help_prikazy_volebni_mapy "$2"
       exit;;
    -S) # zpracuje celé obce bez ohledu na to, zda jsou statutární nebo ne (nutno ověřit, že uživatel nezadává kód pro samosprávný obvod)
       Overeni_souboru "$2"
@@ -106,8 +101,10 @@ case $1 in
       Info
       exit;;
    *) # neplatná možnost
-      echo "Neplatná možnost: $1"
-      echo
+      if ! [ "$1" == "" ]; then
+         echo "Neplatná možnost: $1"
+         echo
+      fi
       Help_prikazy_volebni_mapy
       exit;;
 esac
@@ -115,9 +112,6 @@ esac
 zpracovani_dat() {
    local volby="$1"
    local kodstatut="$2"
-   ndjson-join --left 'd.id' volebni_okrsky-simple.ndjson "$kodstatut.ndjson" | ndjson-map 'Object.assign(d[0], Object.assign(d[0].properties, d[1]))' > "volebni_okrsky-simple-data-$kodstatut.ndjson"
-   cat "volebni_okrsky-simple-data-$kodstatut.ndjson" | ndjson-reduce 'p.features.push(d), p' '{type: "FeatureCollection", features: []}' > "volebni_okrsky-simple-data-$kodstatut.json"
-   geo2topo tracts="volebni_okrsky-simple-data-$kodstatut.json" > "volebni_okrsky-simple-data-topo-$kodstatut.json"
    python3 "$adresar_instalace/odstranit_sloupce.py" --volby "$volby" --obec "$kodstatut"
    python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut"
    python3 "$adresar_instalace/legenda.py" --volby "$volby" --obec "$kodstatut"
@@ -128,9 +122,6 @@ zpracovani_dat() {
 zpracovani_dat_k() {
    local volby="$1"
    local kodstatut="$2"
-   ndjson-join --left 'd.id' volebni_okrsky-simple.ndjson "$kodstatut-2.ndjson" | ndjson-map 'Object.assign(d[0], Object.assign(d[0].properties, d[1]))' > "volebni_okrsky-simple-data-$kodstatut.ndjson"
-   cat "volebni_okrsky-simple-data-$kodstatut.ndjson" | ndjson-reduce 'p.features.push(d), p' '{type: "FeatureCollection", features: []}' > "volebni_okrsky-simple-data-$kodstatut.json"
-   geo2topo tracts="volebni_okrsky-simple-data-$kodstatut.json" > "volebni_okrsky-simple-data-topo-$kodstatut-2.json"
    python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut" --koalice ano
    python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut" --koalice univerzal
    python3 "$adresar_instalace/pridat_barvy.py" --volby "$volby" --obec "$kodstatut" --koalice ano
@@ -200,16 +191,13 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
          obeckod="$kodstatut"
          mkdir -p "$obec/"
       fi
-      python3 "$adresar_okrsku/../společné/reprojekce.py" --vstup "$obec/VO_P.shp" --vystup "$obec/okrsky.shp" > /dev/null
-      shp2json -n --encoding=utf-8 "$obec/okrsky.shp" > volebni_okrsky.ndjson
-      python3 "$adresar_instalace/přečíslování.py" --volby "$2" --obec "$4"
-      mv "volebni_okrsky_nove.ndjson" "volebni_okrsky.ndjson"
+      python3 "$adresar_instalace/../společné/reprojekce.py" --vstup "$obec/VO_P.shp" --vystup "$obec/okrsky.shp"
       if [ -e "$obec/MOMC_P.shp" ]; then # statutární město s městskými částmi/obvody
-         cat "volebni_okrsky.ndjson" | ndjson-map 'd.id = d.properties.MOMC_KOD + "-" + d.properties.CISLO, d' > "volebni_okrsky_nove.ndjson"
+         shp2json -n --encoding=utf-8 "$obec/okrsky.shp" | ndjson-map 'd.id = d.properties.MOMC_KOD + "-" + d.properties.CISLO, d' > "volebni_okrsky.ndjson"
       else # běžné zastupitelstvo
-         cat "volebni_okrsky.ndjson" | ndjson-map 'd.id = d.properties.OBEC_KOD + "-" + d.properties.CISLO, d' > "volebni_okrsky_nove.ndjson"
+         shp2json -n --encoding=utf-8 "$obec/okrsky.shp" | ndjson-map 'd.id = d.properties.OBEC_KOD + "-" + d.properties.CISLO, d' > "volebni_okrsky.ndjson"
       fi
-      mv "volebni_okrsky_nove.ndjson" "volebni_okrsky.ndjson"
+      python3 "$adresar_instalace/přečíslování.py" --volby "$2" --obec "$4"
    else
       if [ "$3" == "" ]; then # pro volby z roku 2022 a starší je použita sada z roku 2022, jelikož starší data již nejsou k dispozici, je rovněž nastavena jako výchozí, pokud není argument specifikován
          shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/volební/2022/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
@@ -231,15 +219,14 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
       fi
    fi
    geo2topo -n tracts=volebni_okrsky.ndjson > volebni_okrsky-topo.json
-   topo2geo < volebni_okrsky-topo.json tracts=volebni_okrsky-simple.json
-   ndjson-split 'd.features' < volebni_okrsky-simple.json > volebni_okrsky-simple.ndjson # ???
+   topo2geo < volebni_okrsky-topo.json tracts=volebni_okrsky-simple-data.json
 fi
 
 if [ "$1" == "-S" ]; then
    # zde řešíme přípravu statistických dat
    if $(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "jestatut"); then # statutární město s městskými částmi/obvody
       if [ "$3" == "RÚIAN" ]; then
-         python3 "$adresar_okrsku/../společné/reprojekce.py" --vstup "$obec/MOMC_P.shp" --vystup "$obec/obvody.shp" > /dev/null
+         python3 "$adresar_instalace/../společné/reprojekce.py" --vstup "$obec/MOMC_P.shp" --vystup "$obec/obvody.shp"
          shp2json -n --encoding=utf-8 "$obec/obvody.shp" > obvody.ndjson
       else
          python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
@@ -255,7 +242,6 @@ if [ "$1" == "-S" ]; then
       cd "$obec"
       # zpracování statutárního zastupitelstva
       # zde transform.py není potřeba, jelikož statistiky k volbám do statutárního zastupitelstva již máme
-      csv2json -n "$4.csv" > "$4.ndjson"
       if ! test -f "$4-univerzal.csv"; then
          cp "$4.csv" "$4-univerzal.csv"
       fi
@@ -272,7 +258,6 @@ fi
 
 if [ "$1" == "-n" ]; then
    obvody_n_k "$2" "$4"
-   csv2json -n "$4.csv" > "$4.ndjson"
    if ! test -f "$4-univerzal.csv"; then
       cp "$4.csv" "$4-univerzal.csv"
    fi
@@ -293,7 +278,6 @@ if [ "$1" == "-k" ]; then
       cd "$adresar_voleb/obce/$3/" || exit
    fi
    python3 "$adresar_instalace/odstranit_cleny_koalice.py" --volby "$2" --obec "$3" --koalice "$4"
-   csv2json -n "$3-2.csv" > "$3-2.ndjson"
    zpracovani_dat_k "$2" "$3"
    echo "-k" > .zpracováno
    if [ "$7" == "auto" ]; then

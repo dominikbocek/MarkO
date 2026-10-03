@@ -71,7 +71,7 @@ Help_prikazy_volebni_mapy() {
 
 Help_prikazy_samostatne() {
     local prikaz="$1"
-    if [ "$prikaz" == "$1" ]; then
+    if [ "$prikaz" == "" ]; then
         echo "Program na vytváření map s volebními výsledky - verze pro obecní volby"
         echo "Nápověda:"
         echo
@@ -80,6 +80,7 @@ Help_prikazy_samostatne() {
         echo "-n      spustí program v normálním režimu"
         echo "-S      spustí program v normálním režimu, určeno pro statutární města"
         echo "-k      zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)"
+        exit
     fi
     case $prikaz in
         -n)
