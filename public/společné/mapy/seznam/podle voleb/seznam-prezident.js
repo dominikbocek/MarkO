@@ -1,5 +1,5 @@
-//menu
-export async function menu() {
+//seznam
+export async function seznam() {
   let kandidati = []
   let data
   try {
@@ -8,7 +8,7 @@ export async function menu() {
     try {
       data = await d3.csv(parametry.seznamstran2)
     } catch (error) {
-      console.error("Seznam volebních subjektů neexistuje.") 
+      throw new Error("Seznam volebních subjektů neexistuje.");
     }
   }
       

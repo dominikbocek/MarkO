@@ -1,17 +1,4 @@
 #!/bin/bash
-#############################
-# Nápověda                  #
-#############################
-
-Help() {
-   echo "Program na vytváření map s volebními výsledky - verze pro obecní volby"
-   echo "Nápověda:"
-   echo
-   echo "možnosti"
-   echo "-h      zobrazí tuto nápovědu"
-   echo "-n      spustí program v normálním režimu"
-   echo "-k      zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)"
-}
 
 # Poznámky:
 # - běžná zastupitelstva a statutární zastupitelstva + samosprávné obvody (varianta -S); v případě statutárních měst se zpracují i samosprávné obvody (tzn. zpracuje se celá obec)
@@ -25,6 +12,10 @@ source ../společné/urlencode.sh
 # Pomocné funkce
 
 source ./pomocne.sh
+
+# Nápověda
+
+source ./nápověda.sh
 
 #############################
 # Hlavní program
@@ -53,15 +44,10 @@ obvody_n_k() {
 ############################################################
 
 shopt -s extglob
-if [ "$1" == "" ]
-   then
-   Help
-   exit
-fi
 
 case $1 in
    -h) # zobrazí nápovědu
-      Help
+      Help_prikazy_samostatne
       exit;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky; zpracuje obec/obvod podle zadaného kódu
       adresar_voleb="$(realpath "../public/volby/$2")"
@@ -83,7 +69,7 @@ case $1 in
    *) # neplatná možnost
       echo "Neplatná možnost: $1"
       echo
-      Help
+      Help_prikazy_samostatne
       exit;;
 esac
 

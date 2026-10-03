@@ -54,7 +54,7 @@ if(kezobrazeni.length > 0) {
                 %><option value="<%= element["název"] %>"><%= element["název"] %></option><%
             }) %>
         </select>
-        <div>
+        <div style="display: flex; align-items: center; margin-top: 10px; gap: 5px;">
             <input type="color" id="barva" value="white" onchange="d3.selectAll(`.${document.getElementById('vrstvy').getAttribute('data-selector')}`).attr('stroke', this.value);">
             <label for="barva">barva ohraničení vrstvy</label>
         </div>

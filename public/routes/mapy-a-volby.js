@@ -26,6 +26,8 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
         }
 
         switch (info["druh"]) {
+            case "komunální": // pouze dočasné
+                break;
             case "krajské":
             case "sněmovní":
                 if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {// byly volby zpracovány?
@@ -175,7 +177,7 @@ function vypsat_seznam(res, next, slozka) {
     if (!fs.existsSync(slozka)) {
         return next()
     }
-    var seznam = execSync(`cd "${slozka}" && python3 "${cwd()}/společné/mapy/menu/menu-samostatné.py"`)
+    var seznam = execSync(`cd "${slozka}" && python3 "${cwd()}/společné/mapy/seznam/seznam-samostatné.py"`)
     
     seznam = seznam.toString()
     return res.type("text/javascript").send(seznam)

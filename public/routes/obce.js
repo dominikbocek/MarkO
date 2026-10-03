@@ -31,7 +31,7 @@ obce.get('/obce/', (req, res, next) => {
 
 // univerzální funkce pro obce komumálních a ostatních voleb
 
-function obce_ostatni_volby(url, typzobrazeni) {
+function obce_vsechny_volby(url, typzobrazeni) {
 
     return router.get(url, (req, res, next) => {
         req.acceptsCharsets('utf-8')
@@ -129,9 +129,9 @@ function obce_ostatni_volby(url, typzobrazeni) {
     })
 }
 
-obce_ostatni_volby("/:obec/vitez", "normální")
-obce_ostatni_volby("/:obec/samostatn%C3%A9/", "samostatné")
-obce_ostatni_volby("/:obec/ucast", "účast")
+obce_vsechny_volby("/:obec/vitez", "normální")
+obce_vsechny_volby("/:obec/samostatn%C3%A9/", "samostatné")
+obce_vsechny_volby("/:obec/ucast", "účast")
 
 const legenda = express.Router({mergeParams: true})
 legenda.get("/vysledky_cr.json", (req, res, next) => {

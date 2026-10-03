@@ -4,16 +4,6 @@
 # Nápověda #
 ############
 
-Help() {
-   echo "MarkO: program na vytváření map s volebními výsledky - verze pro 1. kolo prezidentských voleb"
-   echo "Nápověda:"
-   echo
-   echo "možnosti"
-   echo "-h      zobrazí tuto nápovědu"
-   echo "-n      spustí program v normálním režimu"
-   echo "-k      zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje kandidáta/y samostatně (více informací v manuálu)"
-}
-
 # Ověření
 Overeni() {
    local volby="$1"
@@ -33,6 +23,10 @@ source ../../společné/urlencode.sh
 # Informace
 
 source ../../společné/info.sh
+
+# Nápověda
+
+source ./nápověda.sh
 
 ############################################################
 # Hlavní program                                           #

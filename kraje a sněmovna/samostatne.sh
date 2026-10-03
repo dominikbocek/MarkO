@@ -1,19 +1,5 @@
 #!/bin/bash
 
-############
-# Nápověda #
-############
-
-Help() {
-   echo "MarkO: program na vytváření map s volebními výsledky - verze pro sněmovní a krajské volby"
-   echo "Nápověda:"
-   echo
-   echo "možnosti"
-   echo "-h      zobrazí tuto nápovědu"
-   echo "-n      spustí program v normálním režimu"
-   echo "-k      zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)"
-}
-
 # Ověření
 Overeni() {
    local volby="$1"
@@ -37,6 +23,10 @@ source ../společné/info.sh
 # Pomocné funkce
 
 source ./pomocne.sh
+
+# Nápověda
+
+source ./nápověda.sh
 
 ############################################################
 # Hlavní program                                           #

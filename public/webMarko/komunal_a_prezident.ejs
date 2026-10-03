@@ -37,7 +37,11 @@
     const data = await d3.dsv(";", "/kvcoco.csv")
 
     function vyhledat(text) {
-        const vysledky = data.filter(function(element) {return element["NAZEVZAST"].startsWith(text)})
+        const vysledky = data.filter(function(element) {
+            if(element["KODZASTUP"] == element["NADRZASTUP"] || element["NADRZASTUP"] == "") {
+                return element["NAZEVZAST"].startsWith(text)
+            }
+        })
         let seznam_element = document.getElementById("seznamobci")
         seznam_element.innerHTML = ""
         if(text == "") {return 0}
@@ -53,6 +57,7 @@
             obec.classList.add("obec")
             obec.name = "obec"
             obec.value = vysledky[i]["KODZASTUP"]
+            obec.setAttribute("data-statutarni", vysledky[i]["NADRZASTUP"]==""?true:false)
             seznam_element.append(obec)
             seznam_element.append(polozka)
         };
@@ -60,8 +65,12 @@
 
     document.getElementById("hledatobec").oninput = function() {vyhledat(this.value)}
 </script>
+<% if(locals.obec == "statutární") {%>
 <!-- samosprávné městské části -->
 <h3>Vyberte, zda chcete zpracovat celou obec, nebo její část</h3>
+<ul>
+
+</ul>
 <script>
     const vybranaobec = <%= obec %>
 </script>
@@ -75,4 +84,4 @@
 <select name="casti" id="casti">
     <!-- sem přijde seznam samosprávných městských částí -->
 </select>
-<%} %>
+<%}} %>

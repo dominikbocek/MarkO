@@ -1,4 +1,4 @@
-import { legenda_skala, color } from "../../legendy/legenda-skala.js"
+import { legenda_skala, color } from "/společné/mapy/legendy/legenda-skala.js"
 import { nactenimapy, nacteni_csv } from "/společné/mapy/vykreslení/načtení.js"
 import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
 

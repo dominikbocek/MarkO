@@ -2,22 +2,7 @@
 
 DRUH_VOLEB="PREZIDENT"
 
-############
-# Nápověda #
-############
-
-Help() {
-  echo "MarkO: program na vytváření map s volebními výsledky - verze pro 2. kolo prezidentských voleb"
-  echo
-  echo "Nápověda:"
-  echo "možnosti"
-  echo "-h                       zobrazí tuto nápovědu"
-  echo "-i                       zobrazí informace o programu"
-  echo "-n                       spustí program v normálním režimu"
-  exit
-}
-
-source ../nápověda.sh
+# MarkO: program na vytváření volebních map - verze pro 2. kolo prezidentských voleb
 
 #############################
 # Ověření existence souborů #
@@ -50,6 +35,10 @@ source ../../společné/urlencode.sh
 
 source ../../společné/info.sh
 
+# Nápověda
+
+source ./nápověda.sh
+
 ############################################################
 # Hlavní program                                           #
 ############################################################
@@ -57,18 +46,10 @@ source ../../společné/info.sh
 #############################
 # Možnosti                  #
 #############################
-
-if [ "$1" == "" ]; then
-  Help
-fi
    
 case $1 in
   -h) # zobrazí nápovědu
-    if [ "$2" == "" ]; then
-      Help
-    else
-      Help_prikazy "$2"
-    fi
+    Help_prikazy_volebni_mapy "$2"
     ;;
   -n) # poběží v normálním režimu
     Overeni "$2"
@@ -80,7 +61,7 @@ case $1 in
   *) # neplatná možnost
     echo "Neplatná možnost: $1"
     echo
-    Help
+    Help_prikazy_volebni_mapy
     exit;;
 esac
 

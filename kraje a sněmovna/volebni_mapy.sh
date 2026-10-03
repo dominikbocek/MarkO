@@ -2,22 +2,7 @@
 
 DRUH_VOLEB="KRAJE"
 
-############
-# Nápověda #
-############
-
-Help() {
-   echo "MarkO: program na vytváření map s volebními výsledky - verze pro sněmovní volby"
-   echo
-   echo "Nápověda:"
-   echo "možnosti"
-   echo "-h                       zobrazí tuto nápovědu"
-   echo "-i                       zobrazí informace o programu"
-   echo "-n                       spustí program v normálním režimu"
-   echo "-s                       vypíše seznam kandidujících subjektů"
-   echo "-k                       vytvoří koalice podle zadaných subjektů a propíše je do mapy okrskových vítězů"
-   echo "-koalice-samostatne      vytvoří koalice podle zadaných subjektů, ale neprojeví se to na mapě okrskových vítězů, pouze na mapě míry podpory"
-}
+# Nápověda
 
 source "./nápověda.sh"
 

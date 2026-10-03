@@ -39,22 +39,9 @@ source ./pomocne.sh
 
 # konvence názvů? (vysledky_cr_cisloobce --> vysledky_obce_cisloobce)
 
-#############################
-# Nápověda                  #
-#############################
+# Nápověda
 
-Help() {
-   echo "MarkO: program na vytváření map s volebními výsledky - verze pro obecní volby"
-   echo
-   echo "Nápověda:"
-   echo "možnosti"
-   echo "-h                                     zobrazí tuto nápovědu"
-   echo "-i                                     zobrazí informace o programu"
-   echo "-n <volby> <id>                        spustí program v normálním režimu"
-   echo "-s <volby> <id>                        vypíše seznam kandidujících subjektů"
-   echo "-k <volby> <id> <...>                  vytvoří koalice podle zadaných subjektů a propíše je do mapy okrskových vítězů"
-   echo "-koalice-samostatne <volby> <id> <...> vytvoří koalice podle zadaných subjektů, ale neprojeví se to na mapě okrskových vítězů, pouze na mapě míry podpory"
-}
+source ./nápověda.sh
 
 #############################
 # Hlavní program
@@ -71,7 +58,7 @@ fi
 
 case $1 in
    -h) # zobrazí nápovědu
-      Help
+      Help_prikazy_volebni_mapy
       exit;;
    -S) # zpracuje celé obce bez ohledu na to, zda jsou statutární nebo ne (nutno ověřit, že uživatel nezadává kód pro samosprávný obvod)
       Overeni_souboru "$2"
@@ -121,7 +108,7 @@ case $1 in
    *) # neplatná možnost
       echo "Neplatná možnost: $1"
       echo
-      Help
+      Help_prikazy_volebni_mapy
       exit;;
 esac
 
@@ -182,22 +169,7 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
       csv2json -r ";" -n "$adresar_instalace/../sada/$2/kvrzcoco.csv" > "$adresar_voleb/kvrzcoco.ndjson" # seznam všech zastupitelstev; převedeno přes d3-dsv
    fi
    # zde řešíme zdroj map pro vykreslení
-   if [ "$3" == "" ]; then # pro volby z roku 2022 a starší je použita sada z roku 2022, jelikož starší data již nejsou k dispozici, je rovněž nastavena jako výchozí, pokud není argument specifikován
-      shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/volební/2022/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
-      kodstatut=$(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "kodstatut")
-      if $(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "jesamospravny"); then # samosprávný obvod
-         # if test -d "$adresar_voleb/obce/$kodstatut/$4"; then rm -r "$adresar_voleb/obce/$kodstatut/$4"; fi pokud se spustí znovu, původní složla se smaže
-         mkdir -p "$adresar_voleb/obce/$kodstatut/$4"
-         cd "$adresar_voleb/obce/$kodstatut/$4"
-         python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
-      elif (( $kodstatut == 0 )); then
-         echo "statut nebo obyč" # u obyčejných obcí není potřeba vytvářet adresář, existuje už z dřívějška
-         # if test -d "$adresar_voleb/obce/$4"; then rm -r "$adresar_voleb/obce/$4"; fi pokud se spustí znovu, původní složla se smaže
-         mkdir -p "$adresar_voleb/obce/$4/"
-         cd "$adresar_voleb/obce/$4/"
-         python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
-      fi
-   elif [ "$3" == "RÚIAN" ]; then
+   if [ "$3" == "RÚIAN" ]; then
       kodstatut=$(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "kodstatut")
       if $(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "jesamospravny"); then # samosprávný obvod         
          # if test -d "$adresar_voleb/obce/$kodstatut/$4"; then rm -r "$adresar_voleb/obce/$kodstatut/$4"; fi pokud se spustí znovu, původní složla se smaže
@@ -238,10 +210,25 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
          cat "volebni_okrsky.ndjson" | ndjson-map 'd.id = d.properties.OBEC_KOD + "-" + d.properties.CISLO, d' > "volebni_okrsky_nove.ndjson"
       fi
       mv "volebni_okrsky_nove.ndjson" "volebni_okrsky.ndjson"
-   else # parametr slouží jako cesta k datům o okrscích (viz struktura složky okrsky), nutno použít sadu pro dané volby, podklady pro celý stát z RÚIANU pro tento mechanismus nefungují
-      mkdir -p "$adresar_voleb/obce/$4"
-      shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/$3/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
-      python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
+   else
+      if [ "$3" == "" ]; then # pro volby z roku 2022 a starší je použita sada z roku 2022, jelikož starší data již nejsou k dispozici, je rovněž nastavena jako výchozí, pokud není argument specifikován
+         shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/volební/2022/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
+      else # parametr slouží jako cesta k datům o okrscích (viz struktura složky okrsky), nutno použít sadu pro dané volby, podklady pro celý stát z RÚIANU pro tento mechanismus nefungují
+         shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/$3/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
+      fi
+      kodstatut=$(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "kodstatut")
+      if $(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "jesamospravny"); then # samosprávný obvod
+         # if test -d "$adresar_voleb/obce/$kodstatut/$4"; then rm -r "$adresar_voleb/obce/$kodstatut/$4"; fi pokud se spustí znovu, původní složla se smaže
+         mkdir -p "$adresar_voleb/obce/$kodstatut/$4"
+         cd "$adresar_voleb/obce/$kodstatut/$4"
+         python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
+      elif (( $kodstatut == 0 )); then
+         echo "statut nebo obyč" # u obyčejných obcí není potřeba vytvářet adresář, existuje už z dřívějška
+         # if test -d "$adresar_voleb/obce/$4"; then rm -r "$adresar_voleb/obce/$4"; fi pokud se spustí znovu, původní složla se smaže
+         mkdir -p "$adresar_voleb/obce/$4/"
+         cd "$adresar_voleb/obce/$4/"
+         python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
+      fi
    fi
    geo2topo -n tracts=volebni_okrsky.ndjson > volebni_okrsky-topo.json
    topo2geo < volebni_okrsky-topo.json tracts=volebni_okrsky-simple.json

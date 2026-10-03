@@ -7,6 +7,7 @@ DRUH_VOLEB="PREZIDENT"
 #############################
 # Ověření existence souborů #
 #############################
+
 Overeni() {
   local sada="$1"
   if [ "$sada" == "" ]; then
@@ -34,27 +35,9 @@ source ../../společné/urlencode.sh
 
 source ../../společné/info.sh
 
-#############################
-# Nápověda                  #
-#############################
+# Nápověda
 
-Help() {
-  echo "MarkO: program na vytváření map s volebními výsledky - verze pro 1. kolo prezidentských voleb"
-  echo
-  echo "Nápověda:"
-  echo "možnosti"
-  echo "-h                       zobrazí tuto nápovědu"
-  echo "-i                       zobrazí informace o programu"
-  echo "-n                       spustí program v normálním režimu"
-  echo "-s                       vypíše seznam kandidátů"
-  echo "-k                       vytvoří koalice podle zadaných kandidátů a propíše je do mapy okrskových vítězů"
-  echo "-koalice-samostatne      vytvoří koalice podle zadaných kandidátů, ale neprojeví se to na mapě okrskových vítězů, pouze na mapě míry podpory"
-  echo
-  echo "Podrobnější nápovědu vypíše příkaz ./volebni_mapy.sh -h <prikaz>, například pro normální režim: ./volebni_mapy.sh -h -n"
-  exit
-}
-
-source ../nápověda.sh
+source ./nápověda.sh
 
 #############################
 # Hlavní program

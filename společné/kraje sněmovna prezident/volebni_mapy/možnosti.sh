@@ -4,18 +4,9 @@
 # Možnosti                  #
 #############################
 
-if [ "$1" == "" ]; then
-   Help
-   exit
-fi
-
 case $1 in
    -h) # zobrazí nápovědu
-      if [ "$2" == "" ]; then
-         Help
-      else
-         Help_prikazy "$2"
-      fi
+      Help_prikazy_volebni_mapy "$2"
       ;;
    -n) # poběží v normálním režimu
       Overeni "$2"
@@ -58,6 +49,6 @@ case $1 in
     *) # neplatná možnost
       echo "Neplatná možnost: $1"
       echo
-      Help
+      Help_prikazy_volebni_mapy
       exit;;
 esac

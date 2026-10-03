@@ -1,18 +1,5 @@
 #!/bin/bash
 
-############
-# Nápověda #
-############
-
-Help() {
-   echo "MarkO: program na vytváření map s volebními výsledky - verze pro 2. kolo prezidentských voleb"
-   echo "Nápověda:"
-   echo
-   echo "možnosti"
-   echo "-h      zobrazí tuto nápovědu"
-   echo "-n      spustí program v normálním režimu"
-}
-
 # Ověření
 Overeni() {
    local volby="$1"
@@ -33,6 +20,10 @@ source ../../společné/urlencode.sh
 
 source ../../společné/info.sh
 
+# Nápověda
+
+source ./nápověda.sh
+
 ############################################################
 # Hlavní program                                           #
 ############################################################
@@ -43,13 +34,13 @@ source ../../společné/info.sh
 
 shopt -s extglob
 if [ "$1" == "" ]; then
-   Help
+   Help_prikazy_samostatne
    exit
 fi
    
 case $1 in
    -h) # zobrazí nápovědu
-      Help
+      Help_prikazy_samostatne "$2"
       exit;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky
       Overeni "$2"
@@ -67,7 +58,7 @@ case $1 in
    *) # neplatná možnost
       echo "Neplatná možnost: $1"
       echo
-      Help
+      Help_prikazy_samostatne
       exit;;
 esac
 

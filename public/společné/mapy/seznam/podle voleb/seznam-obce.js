@@ -1,5 +1,5 @@
-//menu
-export async function menu() {
+//seznam
+export async function seznam() {
   var strany = []
   return fetch(`../parties-${id_obce}-univerzal.json`)
     .then(res => {

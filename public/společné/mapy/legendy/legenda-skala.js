@@ -33,6 +33,11 @@ let color = function(rozsah) {
         .range([barva1, prostrednibarva, barva2]) //#20dced
         .clamp(true)
 
+    const vlastni = d3.scaleLinear()
+        .domain([location.search])
+        .range([barva1, prostrednibarva, barva2])
+        .clamp(true)
+
 
     if(rozsah !== "velmimale" && rozsah !== "male" && rozsah !== "standard" && rozsah !== "velke" && rozsah !== "plne") {
         return standard;

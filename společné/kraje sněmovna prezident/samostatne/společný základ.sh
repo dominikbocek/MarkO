@@ -6,12 +6,16 @@
 
 shopt -s extglob
 if [ "$1" == "" ]; then
-   Help
+   Help_prikazy_samostatne
 fi
 
 case $1 in
    -h) # zobrazí nápovědu
-      Help
+      if [ "$2" == "" ]; then
+         Help_prikazy_samostatne
+      else
+         Help_prikazy_samostatne "$2"
+      fi
       ;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky
       Overeni "$2"
@@ -42,7 +46,7 @@ case $1 in
    *) # neplatná možnost
       echo "Neplatná možnost: $1"
       echo
-      Help
+      Help_prikazy_samostatne
       exit;;
 esac
 

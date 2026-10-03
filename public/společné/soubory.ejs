@@ -1,4 +1,4 @@
-<% //var urllegenda, urlparametry, urlmenu, urlvykresleni
+<%
 // u samostatných map urlvykresleni viz prohlížeč.ejs
 switch (info["druh"]) {
       case "sněmovní":
@@ -12,7 +12,7 @@ switch (info["druh"]) {
                 urlvykresleni = "/společné/mapy/vykreslení/celostát a kraje/samostatné.js"
                 urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
                 urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlmenu = "/společné/mapy/menu/podle voleb/menu-kraje-sněmovna.js"
+                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-kraje-sněmovna.js"
                 break;
             case "účast":
                 urlvykresleni = "/společné/mapy/vykreslení/celostát a kraje/účast.js"
@@ -32,7 +32,7 @@ switch (info["druh"]) {
                 urlvykresleni = "/společné/mapy/vykreslení/celostát a kraje/samostatné.js"
                 urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
                 urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlmenu = "/společné/mapy/menu/podle voleb/menu-prezident.js"
+                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-prezident.js"
                 break;
             case "účast":
                 urlvykresleni = "/společné/mapy/vykreslení/celostát a kraje/účast.js"
@@ -52,7 +52,7 @@ switch (info["druh"]) {
                 urlvykresleni = "/společné/mapy/vykreslení/ostatní/samostatné.js"
                 urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
                 urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlmenu = "/společné/mapy/menu/podle voleb/menu-eu.js"
+                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-eu.js"
                 break;
             case "účast":
                 urlvykresleni = "/společné/mapy/vykreslení/ostatní/účast.js"
@@ -72,7 +72,7 @@ switch (info["druh"]) {
                 urlvykresleni = "/společné/mapy/vykreslení/celostát a kraje/samostatné.js"
                 urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
                 urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlmenu = "/společné/mapy/menu/podle voleb/menu-kraje-sněmovna.js"
+                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-kraje-sněmovna.js"
                 break;
             case "účast":
                 urlvykresleni = "/společné/mapy/vykreslení/celostát a kraje/účast.js"
@@ -92,7 +92,7 @@ switch (info["druh"]) {
                 urlvykresleni = "/společné/mapy/vykreslení/obce/samostatné.js"
                 urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
                 urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlmenu = "/společné/mapy/menu/podle voleb/menu-obce.js"
+                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-obce.js"
                 break;
             case "účast":
                 urlvykresleni = "/společné/mapy/vykreslení/obce/účast.js"

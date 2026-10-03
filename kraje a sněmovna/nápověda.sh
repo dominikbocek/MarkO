@@ -1,15 +1,28 @@
 #!/bin/bash
 
-Help_prikazy() {
+Help_prikazy_volebni_mapy() {
     local prikaz="$1"
+    if [ "$prikaz" == "" ]; then
+        echo "MarkO: program na vytváření map s volebními výsledky - verze pro sněmovní volby"
+        echo
+        echo "Nápověda:"
+        echo "možnosti"
+        echo "-h                       zobrazí tuto nápovědu"
+        echo "-i                       zobrazí informace o programu"
+        echo "-n                       spustí program v normálním režimu"
+        echo "-s                       vypíše seznam kandidujících subjektů"
+        echo "-k                       vytvoří koalice podle zadaných subjektů a propíše je do mapy okrskových vítězů"
+        echo "-koalice-samostatne      vytvoří koalice podle zadaných subjektů, ale neprojeví se to na mapě okrskových vítězů, pouze na mapě míry podpory"
+        exit
+    fi
     case $prikaz in
         -n)
             echo "Spustí program v normálním režimu, tedy vytvoří mapu s barevným vyznačením vítězů."
             echo
             echo "Formát příkazu:"
-            echo "      -n <volby> <uzemni_jednotka>"
-            echo "<volby> představují název podsložky, ve které jsou uložená data pro zadané volby"
-            echo "<uzemni_jednotka> je volitelným parametrem. Slouží ke specifikování podrobnosti mapy. Zpracovává výsledky na úrovni obcí a okrsků. Hodnotou je buď 'obce' nebo relativní cesta k podsložce s daty k okrskovým mapám. Ve výchozím stavu (pokud není zadána hodnota) zpracovává výsledky na úrovni obcí."
+            echo "      -n <volby> <mapový_podklad>"
+            echo "<volby> název voleb, pod nímž jsou uvedeny v soubrou společné/info.csv"
+            echo "<uzemni_jednotka> relativní cesta k mapovému podkladu, volitelné"
             exit;;
         -s)
             echo "Vypíše tabulku volebních subjektů. Hodí se v případě, že chcete vytvářet koalice."
@@ -42,8 +55,42 @@ Help_prikazy() {
             echo "Formát příkazu:"
             echo "  viz možnost -k"
             echo "Koalice lze vytvářet neomezeně, ale nelze je mezi sebou kombinovat."
-            ;;
+            exit;;
         *)
             python3 -m webbrowser "https://www.youtube.com/watch?v=f7JezlJx1-4"
+            exit;;
+    esac
+}
+
+Help_prikazy_samostatne() {
+    local prikaz="$1"
+    if [ "$prikaz" == "" ]; then
+        echo "MarkO: program na vytváření map s volebními výsledky - verze pro sněmovní a krajské volby"
+        echo "Nápověda:"
+        echo
+        echo "možnosti"
+        echo "-h      zobrazí tuto nápovědu"
+        echo "-n      spustí program v normálním režimu"
+        echo "-k      zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)"
+        exit
+    fi
+    case $prikaz in
+        -n)
+            echo "Spustí program v normálním režimu, tedy vytvoří mapu volební podpory pro zadaný volební subjekt."
+            echo
+            echo "Formát příkazu:"
+            echo "      -n <volby>"
+            echo "<volby> název voleb, pod nímž jsou uvedeny v soubrou společné/info.csv"
+            exit;;
+        -k)
+            echo "Zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)."
+            echo
+            echo "Formát příkazu:"
+            echo "      -k <volby>"
+            echo "<volby> název voleb, pod nímž jsou uvedeny v soubrou společné/info.csv"
+            exit;;
+        *)
+            python3 -m webbrowser "https://www.youtube.com/watch?v=aY3Mq0em8mY"
+            exit;;
     esac
 }

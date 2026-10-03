@@ -116,7 +116,7 @@
     border-radius: 12px;
 }
 
-.sidebar li a {
+.sidebar li a, .sidebar li button {
     display: flex;
     height: 100%;
     width: 100%;
@@ -127,7 +127,7 @@
     background: #11101D;
 }
 
-.sidebar li a:hover {
+.sidebar li a:hover, .sidebar li button:hover {
     background: #fff;
 }
 
@@ -146,7 +146,7 @@
     pointer-events: auto;
 }
 
-.sidebar li a:hover .links_name, .sidebar li a:hover i {
+.sidebar li a:hover .links_name, .sidebar li a:hover i, .sidebar li button:hover i {
     transition: all 0.5s ease;
     color: #11101D;
 }
