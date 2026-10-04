@@ -1,12 +1,31 @@
 <div>
                 <h3>Legenda</h3>
-                <select id="rozsah" class="form-select" onchange="location.href='?<% if(typzobrazeni != "účast") {%>strana=' + parametry.hledanastrana + '&<% } %>rozsah=' + this.value">
+                <select id="rozsah" class="form-select" onchange="if(this.value !== 'vlastni') {location.href='?<% if(typzobrazeni != "účast") {%>strana=' + parametry.hledanastrana + '&<% } %>rozsah=' + this.value} else {document.getElementById('procenta').style.display = 'block'}">
                   <option disabled selected style="display: none">Vyber procentuální rozsah</option>
                   <option value="velmimale">Velmi malý (0 - 10 %)</option>
                   <option value="male">Malý (0 - 25 %)</option>
                   <option value="standard">Standard (0 - 32 %)</option>
                   <option value="velke">Velký (0 - 50 %)</option>
                   <option value="plne">Plný (0 - 100 %)</option>
+                  <option value="vlastni">Vlastní</option>
                 </select>
+                <div style="width: 100%; display: none;" id="procenta">
+                  <div style="display: flex;">
+                    <input type="number" id="bod1" name="bod1" min="0" max="100" style="display: inline;width: 50%;" class="form-control">
+                    <input type="number" id="bod2" name="bod2" min="0" max="100" style="display: inline;width: 50%;" class="form-control">
+                  </div>
+                  <button type="button" class="btn" onclick="if(document.getElementById('bod1').value == document.getElementById('bod2').value) {alert('Hodnoty nesmí být stejné.')} else {location.href='?<% if(typzobrazeni != "účast") {%>strana=' + parametry.hledanastrana + '&<% } %>rozsah=vlastni' + this.value+'&procenta='+document.getElementById('bod1').value+','+document.getElementById('bod2').value}">OK</button>
+                </div>
               </div>
+              <script>
+                  function overeniVstupu(e) {
+                    if(isNaN(e.data)) {
+                      document.getElementById(e.target.id).value = ""
+                    }
+
+                    if(Number(document.getElementById(e.target.id).value) > Number(document.getElementById(e.target.id).max)) {this.value = 100}
+                  }
+                  document.getElementById("bod1").oninput = overeniVstupu
+                  document.getElementById("bod2").oninput = overeniVstupu
+                </script>
               <% pocetnastaveni +=1 %>

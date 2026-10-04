@@ -156,7 +156,6 @@ router.post('/kandidujici-subjekty', (req, res, next) => {
         command = `cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./volebni_mapy.sh -s "${volby}" "všechno" ano`
     }
 
-    //if (druh_voleb == "prezidentské") {prezident = "první kolo"} //???
     exec(command, (error, stdout, stderr) => {
         if (error) {
             chyby.chyba(error)
@@ -166,6 +165,9 @@ router.post('/kandidujici-subjekty', (req, res, next) => {
             console.error(`stderr: ${stderr}`);
             return res.status(500).send("Vyskytla se chyba...")
         }
+
+        console.log(stdout)
+
         res.render(`${cwd()}/webMarko/tretifaze.ejs`, {volby, subjekty: `${stdout}`, kolo, info, vytvorit, druh_map});
     });
 });

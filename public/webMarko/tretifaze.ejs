@@ -52,9 +52,7 @@
         document.getElementById("pagination").querySelector("div").innerHTML += element
     }
     pagerInit(pager);
-    $(function() {
-        bindList(druh_voleb);
-    });
+    (function() {bindList(druh_voleb)})()
     document.getElementById("pagination").querySelector(".dopredu").onclick = function() {nextPage(druh_voleb)}
     document.getElementById("pagination").querySelector(".dozadu").onclick = function() {prevPage(druh_voleb)}
 </script>

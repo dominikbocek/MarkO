@@ -174,3 +174,10 @@ label {
         background: transparent;
     }
 }
+
+.show {
+  transition: all 400ms;
+}
+.hide {
+  opacity: 0;
+}

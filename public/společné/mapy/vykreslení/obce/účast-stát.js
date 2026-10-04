@@ -1,5 +1,5 @@
 import { legenda_skala, color } from "/společné/mapy/legendy/legenda-skala.js"
-import { nactenimapy, nacteni_csv } from "/společné/mapy/vykreslení/načtení.js"
+import { nactenimapy, nactenicsv } from "/společné/mapy/vykreslení/načtení.js"
 import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
 
 export async function vykresleni(svg) {
@@ -8,7 +8,7 @@ export async function vykresleni(svg) {
   const legendaelement = d3.select("#legenda")
 
   const data = await nactenimapy("/volby/sněmovní volby 2025/volebni_okrsky-simple-data.json")
-  const csv = await nacteni_csv("/volby/komunální volby 2022/účast.csv")
+  const csv = await nactenicsv("/volby/komunální volby 2022/účast.csv")
 
   const subunits = await vykresleni_zaklad(data, csv)
 

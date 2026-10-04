@@ -10,12 +10,11 @@ html {
 
 body {
   overflow: hidden;
-  font-family: 'Source Serif 4', sans-serif;
   width: inherit;
   height: inherit;
-  background-image: url("/společné/globe.png");
+  /*background-image: url("/společné/globe.png");
   background-position: center;
-  background-size: 50%;
+  background-size: 50%;*/
 }
 
 body > section, #prohlizec {
