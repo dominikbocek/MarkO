@@ -56,27 +56,42 @@ case $1 in
       Help_prikazy_volebni_mapy "$2"
       exit;;
    -S) # zpracuje celé obce bez ohledu na to, zda jsou statutární nebo ne (nutno ověřit, že uživatel nezadává kód pro samosprávný obvod)
+      if [ $# -lt 4 ]; then
+         Help_prikazy_volebni_mapy "$1"
+      fi
       Overeni_souboru "$2"
       mkdir -p "$adresar_voleb/obce"
       cd "$adresar_voleb"
       python3 "$adresar_instalace/třídění.py" --volby "$2"
       ;;
    -o) # vypíše obce
-      Overeni_souboru "$2"
-      python3 "$adresar_instalace/vypsat_obce.py" --volby "$2" --json "$3"
+      if [ $# -lt 4 ]; then
+         Help_prikazy_volebni_mapy "$1"
+      fi
+      adresar_instalace="$(realpath .)"
+      python3 "$adresar_instalace/vypsat_obce.py" --vyhledat "$2" --hledanahodnota "$3" --json "$4"
       exit;;
    -s) # vypíše strany
+      if [ $# -lt 5 ]; then
+         Help_prikazy_volebni_mapy "$1"
+      fi
       Overeni_souboru "$2"
       Overeni_zpracovani "$2" "$3"
       python3 ./vypsat_strany.py --volby "$2" --obec "$3" --vypsat "$4" --json "$5"
       exit;;
    -n) # zpracuje obec/samosprávný obvod podle zadaného kódu (u statutárních obcí - pokud mají samosprávné obvody - zpracuje pouze statutární zastupitelstvo)
+      if [ $# -lt 4 ]; then
+         Help_prikazy_volebni_mapy "$1"
+      fi
       Overeni_souboru "$2"
       mkdir -p "$adresar_voleb/obce"
       cd "$adresar_voleb"
       python3 "$adresar_instalace/třídění.py" --volby "$2"
       ;;
    -k) # uvoří koalice, doplnit ověření, zda zadané strany vůbec existují, totéž u ostatních verzí programu; zatím to nefunguje pro místní samosprávné obvody
+      if [ $# -lt 4 ]; then
+         Help_prikazy_volebni_mapy "$1"
+      fi
       Overeni_souboru "$2"
       Overeni_zpracovani "$2" "$3"
       odpoved="$(python3 ./koalice.py --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
@@ -84,6 +99,9 @@ case $1 in
       if [ "$2" == "" ] || [ "$3" == "" ] || [ "$4" == "" ]|| [ "$6" == "" ]; then echo "Nezadali jste potřebné parametry."; exit; fi
       ;;
    -koalice-samostatne) # vytvoří libovolné koalice, aniž by se to projevilo na mapách okrskových vítězů
+      if [ $# -lt 4 ]; then
+         Help_prikazy_volebni_mapy "$1"
+      fi
       Overeni_souboru "$2"
       Overeni_zpracovani "$2" "$3"
       odpoved="$(python3 "$adresar_instalace/koalice_samostatne.py" --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
@@ -94,8 +112,8 @@ case $1 in
       exit
       ;;
    -v)
-      Overeni_souboru "$2"
-      python3 "$adresar_instalace/vypsat_obce.py" --volby "$2" --vyhledat "$3" --hledanahodnota "$4"
+      adresar_instalace="$(realpath .)"
+      python3 "$adresar_instalace/vypsat_obce.py" --vyhledat "" --hledanahodnota ""
       exit;;
    -i) # informace o programu
       Info

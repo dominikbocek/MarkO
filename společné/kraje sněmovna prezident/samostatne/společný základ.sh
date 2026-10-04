@@ -11,6 +11,9 @@ case $1 in
       Help_prikazy_samostatne "$2"
       ;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky
+      if [ $# -lt 2 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       Overeni "$2"
       if ! test -f "$adresar_voleb/statistics.csv"; then
          echo "Chybí soubor $adresar_voleb/statistics.csv"
@@ -24,6 +27,9 @@ case $1 in
       python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani "okrsky"
       ;;
    -k) # zpracuje vše, tzn. původní výsledky i koalice, pokud byly vytvořeny (statistics-univerzal.csv)
+      if [ $# -lt 2 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       Overeni "$2"
       if ! test -f "$adresar_voleb/statistics-univerzal.csv"; then
          echo "Chybí soubor $adresar_voleb/statistics-univerzal.csv"

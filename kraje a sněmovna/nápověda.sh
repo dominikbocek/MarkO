@@ -22,7 +22,7 @@ Help_prikazy_volebni_mapy() {
             echo "Formát příkazu:"
             echo "      -n <volby> <mapový_podklad>"
             echo "<volby> název voleb, pod nímž jsou uvedeny v soubrou společné/info.csv"
-            echo "<uzemni_jednotka> relativní cesta k mapovému podkladu, volitelné"
+            echo "<mapový_podklad> relativní cesta k mapovému podkladu, volitelné"
             exit;;
         -s)
             echo "Vypíše tabulku volebních subjektů. Hodí se v případě, že chcete vytvářet koalice."

@@ -52,9 +52,23 @@ case $1 in
     Help_prikazy_volebni_mapy "$2"
     ;;
   -n) # poběží v normálním režimu
+    if [ $# -lt 2 ]; then
+      Help_prikazy_volebni_mapy "$1"
+    fi
     Overeni "$2"
     mkdir -p "$adresar_voleb"
     ;;
+  -s) # vypíše volební subjekty
+    if [ $# -lt 4 ]; then
+      Help_prikazy_volebni_mapy "$1"
+    fi
+    Overeni "$2"
+    if ! test -f "$adresar_voleb/volebni_okrsky-simple-data.json"; then
+      echo "Pro zobrazení kandidujících subjektů musí nejprve proběhnout zpracování dat ve standartním režimu (možnost -n)."
+      exit
+    fi
+    python3 "$adresar_instalace/vypsat_volebni_subjekty.py" --volby "$2" --json "$4"
+    exit;;
   -i) # informace o programu
     Info
     exit;;

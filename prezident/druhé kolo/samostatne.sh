@@ -39,6 +39,9 @@ case $1 in
       Help_prikazy_samostatne "$2"
       exit;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky
+      if [ $# -lt 2 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       Overeni "$2"
       if ! test -f "$adresar_voleb/statistics.csv"; then
          echo "Chybí soubor $adresar_voleb/statistics.csv"

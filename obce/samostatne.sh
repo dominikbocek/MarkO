@@ -50,17 +50,26 @@ case $1 in
       Help_prikazy_samostatne "$2"
       exit;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky; zpracuje obec/obvod podle zadaného kódu
+      if [ $# -lt 4 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       adresar_voleb="$(realpath "../public/volby/$2")"
       adresar_instalace="$(realpath .)"
       Overeni_zpracovani "$2" "$4"
       obvody_n_k "$2" "$4"
       ;;
    -S) # zpracuje celou obec, pokud má samosprávné obvody
+      if [ $# -lt 4 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       adresar_voleb="$(realpath "../public/volby/$2")"
       adresar_instalace="$(realpath .)"
       Overeni_zpracovani "$2" "$4"
       ;;
    -k) # zpracuje vše, tzn. původní výsledky i koalice, pokud byly vytvořeny (cisloobce-univerzal.csv)
+      if [ $# -lt 4 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       adresar_voleb="$(realpath "../public/volby/$2")"
       adresar_instalace="$(realpath .)"
       Overeni_zpracovani "$2" "$4"

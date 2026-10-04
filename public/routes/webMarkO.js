@@ -191,7 +191,7 @@ router.post('/samostatne-mapy', (req, res, next) => {
         case "prezidentské":
             if (kolo == "1") {prezident = "první kolo"} else if (kolo == "2") {prezident = "druhé kolo"}
             // opatření pro druhé kolo, protože verze programu je osekaná až na kost
-            if (kolo == "2") {command = `cd "${cwd()}/../prezident/${prezident}" && bash ./samostatne.sh -n "${volby}"`}
+            command = `cd "${cwd()}/../prezident/${prezident}" && bash ./samostatne.sh -n "${volby}"`
             break;
         case "sněmovní":
             command = `cd "${cwd()}/../kraje a sněmovna/" && bash ./samostatne.sh -n "${volby}"`
