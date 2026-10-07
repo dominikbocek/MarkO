@@ -54,7 +54,7 @@ main {
 }
 
 #faze0 form {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 /* Skrytí všech sekcí kromě první */
@@ -74,10 +74,6 @@ select {
 
 *:disabled {
     cursor: not-allowed !important;
-}
-
-label {
-    margin-left: 8px;
 }
 
 #alerty {
@@ -178,6 +174,25 @@ label {
 .show {
   transition: all 400ms;
 }
+
 .hide {
   opacity: 0;
+}
+
+#seznamobci li {
+    padding: 5px 35px;
+    text-align: left;
+}
+
+#seznamobci li input {
+    display: none;
+}
+
+#seznamobci li:hover {
+    background: #d8d8d8;
+    color: black;
+}
+
+#seznamobci label:active #seznamobci {
+    display: none;
 }

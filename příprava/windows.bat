@@ -59,6 +59,8 @@ if %opravneni% == standard (
     setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\public\node_modules\.bin"
 )
 echo python3 .MarkO.py >> MarkO.bat
+attrib +h ./.MarkO.py
+attrib +h ./.verze.txt
 echo Program MarkO byl úspěšně nainstalován.
 pause
 exit
