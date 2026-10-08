@@ -131,19 +131,19 @@ zpracovani_dat() {
    local volby="$1"
    local kodstatut="$2"
    python3 "$adresar_instalace/odstranit_sloupce.py" --volby "$volby" --obec "$kodstatut"
-   python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut"
+   #python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut"
    python3 "$adresar_instalace/legenda.py" --volby "$volby" --obec "$kodstatut"
    python3 "$adresar_instalace/pridat_barvy.py" --volby "$volby" --obec "$kodstatut"
-   python3 "$adresar_instalace/kopirovat_barvy.py" --volby "$volby" --obec "$kodstatut"
+   #python3 "$adresar_instalace/kopirovat_barvy.py" --volby "$volby" --obec "$kodstatut"
 }
 
 zpracovani_dat_k() {
    local volby="$1"
    local kodstatut="$2"
-   python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut" --koalice ano
-   python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut" --koalice univerzal
+   #python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut" --koalice ano
+   #python3 "$adresar_instalace/csvtojson.py" --volby "$volby" --obec "$kodstatut" --koalice univerzal
    python3 "$adresar_instalace/pridat_barvy.py" --volby "$volby" --obec "$kodstatut" --koalice ano
-   python3 "$adresar_instalace/kopirovat_barvy.py" --volby "$volby" --obec "$kodstatut" --koalice ano
+   #python3 "$adresar_instalace/kopirovat_barvy.py" --volby "$volby" --obec "$kodstatut" --koalice ano
 }
 
 obvody_n_k() {

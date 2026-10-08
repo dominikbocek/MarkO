@@ -34,7 +34,7 @@ export function info(event, d, strany) {
       `Volební účast: ${udaje["ucast"]}<br>
       Vítěz: ${udaje["prvnimisto"]["strana"]} (${udaje["prvnimisto"]["podil"]})<br>
       Druhé místo: ${udaje["druhemisto"]["strana"]} (${udaje["druhemisto"]["podil"]})<br>
-      `+(udaje["pocet_stran"]>2?`Třetí místo: ${udaje["tretimisto"]["strana"]} (${udaje["tretimisto"]["podil"]})`:""))+`<button type="button" onclick="document.getElementById('tooltip1').style.visibility = 'hidden'" class="btn-close" aria-label="Close"></button>`
+      `+(udaje["pocet_stran"]>2?`Třetí místo: ${udaje["tretimisto"]["strana"]} (${udaje["tretimisto"]["podil"]})`:""))
     );
   }
 
