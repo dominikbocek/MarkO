@@ -14,7 +14,7 @@ json = argumenty.json or "ne"
 
 if vyhledat == "obec":
     try:
-        int(hodnota)
+        hodnota = int(hodnota)
     except:
         print("Neplatná hodnota.")
         sys.exit()

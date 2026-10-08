@@ -29,7 +29,7 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         }
 
         subunits = topojson.feature(data, mergedObject)
-    } else if(parametry.lokalita == "obec") {
+    } else if(parametry.lokalita == "obec" || parametry.lokalita == "obvod") {
         subunits = topojson.feature(data, data.objects.tracts) // obce
     }
 
