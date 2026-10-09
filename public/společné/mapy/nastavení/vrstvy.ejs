@@ -11,9 +11,6 @@ const vrstvy = JSON.parse(include('../vrstvy/vrstvy.json'))
 
 let kezobrazeni = []
 
-console.log(info)
-
-
 vrstvy.forEach(element => {
     if(element.volby.indexOf(info["druh"]) >= 0 && element.oblast.indexOf(info.lokalita.druh) >= 0) {
         kezobrazeni.push(element)

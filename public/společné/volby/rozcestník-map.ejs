@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rozcestník map</title>
-    <%- include('icons.ejs'); %>
+    <%- include('../icons.ejs'); %>
     <!-- d3.js -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -64,9 +64,10 @@
                 max-width: 300px;
             }
     </style>
+    <script src="/společné/light-dark.js" defer></script>
 </head>
 <body style="overflow: auto; position: absolute;">
-    <%- include('menu.ejs') %>
+    <%- include('../menu.ejs') %>
     <main>
         <section style="margin-top: 20px;">
             <h1 style="margin-bottom: 20px;"><%- info["název"]%>: <% console.log(obvody) %></h1>

@@ -3,6 +3,8 @@ import argparse
 import sys
 import os
 
+# nemám šajna, k čemu tenhle soubor je
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--json', action="store", dest='json', required=False, default="ne")
 parser.add_argument('--kodobec', action="store", dest="kodobec", required=False, type=int, default=0)

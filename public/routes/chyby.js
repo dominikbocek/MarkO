@@ -6,15 +6,10 @@ const express = require('express');
 const router = express.Router();
 const { chdir, cwd } = require('node:process');
 
-// 404
+// společný handler
 router.use((req, res, next) => {
     const err = new Error("Stránka nebyla nalezena");
     err.status = 404;
-    next(err);
-});
-
-// společný handler
-router.use((err, req, res, next) => {
 
     const status = err.status || 500;
 

@@ -44,6 +44,8 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
                     return next();
                 }
 
+                info.kolo = req.params.kolo
+
                 if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
                     return next();
                 }
@@ -89,32 +91,37 @@ router.use("/:volby/", pomocnefunkce.prehled)
 // běžná/statutární zastupitelstva
 // viz obce.js
 
-const mapy = router.get('/:volby/obce/:obec/mapy', (req, res, next) => {
-    req.acceptsCharsets('utf-8')
-    if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
-        let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
+//function obce_rozcestnik(url, lokalita) {
+    router.get('/:volby/obce/:obec/mapy', (req, res, next) => { // '/:volby/obce/:obec/mapy' nebo '/:volby/obce/:obec/:obvod/mapy'
+        req.acceptsCharsets('utf-8')
+        console.log("test")
+        if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
+            let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
 
-        let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obec}" --json ano`)
+            let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat "obec" --hledanahodnota "${req.params.obec}" --json ano`)
 
-        let info = pomocnefunkce.nacistJSON(req.params.volby)
+            let info = pomocnefunkce.nacistJSON(req.params.volby)
 
-        let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
+            let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
 
-        seznam_obvodu = eval(seznam_obvodu.toString())
+            seznam_obvodu = eval(seznam_obvodu.toString())
 
-        seznam_nazvu_obvodu = eval(seznam_nazvu_obvodu.toString())
+            seznam_nazvu_obvodu = eval(seznam_nazvu_obvodu.toString())
 
-        info_obec = JSON.parse(info_obec.toString())
+            info_obec = JSON.parse(info_obec.toString())
 
-        info.lokalita = info_obec
-        info.lokalita.druh = "obec"
+            info.lokalita = info_obec
+            info.lokalita.druh = "obec"
 
-        return res.render('../public/společné/volby/rozcestník-map.ejs', {obvody:seznam_obvodu, nazvy:seznam_nazvu_obvodu, info:info});
-    
-    }
-    
-    return next();
-})
+            return res.render(`${cwd()}/společné/volby/rozcestník-map.ejs`, {obvody:seznam_obvodu, nazvy:seznam_nazvu_obvodu, info:info});
+        
+        }
+        
+        return next();
+    })
+//}
+
+//obce_rozcestnik("", )
 
 // tyhle dvě věci by se daly sjednotit
 
@@ -183,16 +190,16 @@ function vypsat_seznam(res, next, slozka) {
     return res.type("text/javascript").send(seznam)
 }
 
-router.get('/:volby/:kolo/samostatn%C3%A9/seznam.js', (req, res, next) => {
+router.get('/seznam.js/:volby/:kolo/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)
 })
-router.get('/:volby/samostatn%C3%A9/seznam.js', (req, res, next) => {
+router.get('/seznam.js/:volby/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/samostatné`)
 })
-router.get('/:volby/obce/:obec/samostatn%C3%A9/seznam.js', (req, res, next) => {
+router.get('/seznam.js/:volby/obce/:obec/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)
 })
-router.get('/:volby/obce/:obec/:obvod/samostatn%C3%A9/seznam.js', (req, res, next) => {
+router.get('/seznam.js/:volby/obce/:obec/:obvod/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)
 })
 
@@ -200,7 +207,7 @@ router.get('/:volby/obce/:obec/:obvod/samostatn%C3%A9/seznam.js', (req, res, nex
 // Další věci //
 ///////////////
 
-router.get('/:volby/obce/:obec/seznam_obvodu.js', (req, res, next) => {
+router.get('/seznam_obvodu.js/:volby/:obec/', (req, res, next) => {
     let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
 
     let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)

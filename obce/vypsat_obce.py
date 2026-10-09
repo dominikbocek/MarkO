@@ -30,14 +30,14 @@ elif vyhledat == "kód":
 elif vyhledat != "":
     sys.exit(f"Neplatná možnost: {vyhledat}")
 
-df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\coco.csv", delimiter=";", encoding="cp1250")
+df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
 
-seznam_obci = df[["OBEC", "NAZEVOBCE"]]
+seznam_obci = df[["KODZASTUP", "NAZEVZAST"]]
 seznam_obci.drop_duplicates(inplace=True)
 if vyhledat == "kód":
-    vystup = seznam_obci[seznam_obci["NAZEVOBCE"] == hodnota]
+    vystup = seznam_obci[seznam_obci["NAZEVZAST"] == hodnota]
 elif vyhledat == "obec":
-    vystup = seznam_obci[seznam_obci["OBEC"] == hodnota]
+    vystup = seznam_obci[seznam_obci["KODZASTUP"] == hodnota]
 else:
     vystup = seznam_obci
 

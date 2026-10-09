@@ -18,11 +18,20 @@
     <%- include("../soubory.ejs") %>
     <% if(typzobrazeni == "samostatné") {%>
     <!-- specifické pro volby, pouze pro samostatné mapy -->
-    <% if(info["lokalita"]["druh"] == "obec" && info["druh"] !== "komunální") {%>
-    <script src="../../../samostatné/seznam.js"></script>
-    <%} else {%>
-      <script src="seznam.js"></script>
-    <%} %>
+    <%
+    switch (info["druh"]) {
+      case "komunální":
+        %><script src="/volby/seznam.js/<%= info['název'] %>/<% if(info.lokalita.druh == 'obec') {%><%= info['lokalita']['KODZASTUP'] %><%} else if(info.lokalita.druh == 'obvod') {%><%= info['lokalita']['OBEC'] %><%} %>/"></script><%
+        break;
+      case "krajské":
+      case "sněmovní":
+        %><script src="/volby/seznam.js/<%= info['název'] %>/"/></script><%
+        break;
+      case "prezidentské":
+        %><script src="/volby/seznam.js/<%= info['název'] %>/<%= info['kolo'] %>/"></script><%
+        break;
+    }
+    %>
     <%} %>
     <script>
       const parametry = {}
@@ -30,7 +39,7 @@
       parametry.typzobrazeni = "<%- typzobrazeni %>"
       parametry.druh = "<%- info["druh"] %>"
       parametry.lokalita = "<%- info["lokalita"]["druh"] %>"
-      parametry.id_obce = "<% if(info.lokalita.druh == 'obec') {%><%= info['lokalita']['KODZASTUP'] %><%} else if(info.lokalita.druh == 'obvod') {%><%= info['lokalita']['OBEC'] %><%} %>" // primárně pro komunální volby, ale mohlo by se v budoucnu hodit pro ostatní
+      parametry.id_obce = "<% if(info.lokalita.druh == 'obec') {%><%= info['lokalita']['KODZASTUP'] %><%} else if(info.lokalita.druh == 'obvod') {%><%= info['lokalita']['OBEC'] %><%} %>"
     </script>
     <script src="<%- urlparametry %>"></script>
     <!-- stahování -->
