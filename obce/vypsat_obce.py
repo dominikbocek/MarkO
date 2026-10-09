@@ -13,9 +13,20 @@ hodnota = argumenty.hodnota
 json = argumenty.json or "ne"
 
 if vyhledat == "obec":
-    hodnota = int(hodnota)
+    try:
+        hodnota = int(hodnota)
+    except:
+        print("Neplatná hodnota.")
+        sys.exit()
 elif vyhledat == "kód":
-    hodnota = str(hodnota)
+    try:
+        hodnota = int(hodnota)
+    except:
+        hodnota = hodnota
+
+    if isinstance(hodnota, (int)):
+        print("Neplatná hodnota.")
+        sys.exit()
 elif vyhledat != "":
     sys.exit(f"Neplatná možnost: {vyhledat}")
 

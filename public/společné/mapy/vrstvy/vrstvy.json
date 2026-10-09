@@ -10,7 +10,7 @@
     {
         "název": "okresy 1921",
         "volby": ["prezidentské", "krajské", "sněmovní", "komunální"],
-        "oblast": "obec",
+        "oblast": "stát",
         "selector": "okresy1921",
         "url": "/společné/mapy/vrstvy/Okresy_1921.json"
     },

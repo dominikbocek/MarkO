@@ -47,28 +47,39 @@ shopt -s extglob
 
 case $1 in
    -h) # zobrazí nápovědu
-      Help_prikazy_samostatne
+      Help_prikazy_samostatne "$2"
       exit;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky; zpracuje obec/obvod podle zadaného kódu
+      if [ $# -lt 4 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       adresar_voleb="$(realpath "../public/volby/$2")"
       adresar_instalace="$(realpath .)"
       Overeni_zpracovani "$2" "$4"
       obvody_n_k "$2" "$4"
       ;;
    -S) # zpracuje celou obec, pokud má samosprávné obvody
+      if [ $# -lt 4 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       adresar_voleb="$(realpath "../public/volby/$2")"
       adresar_instalace="$(realpath .)"
       Overeni_zpracovani "$2" "$4"
       ;;
    -k) # zpracuje vše, tzn. původní výsledky i koalice, pokud byly vytvořeny (cisloobce-univerzal.csv)
+      if [ $# -lt 4 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       adresar_voleb="$(realpath "../public/volby/$2")"
       adresar_instalace="$(realpath .)"
       Overeni_zpracovani "$2" "$4"
       obvody_n_k "$2" "$4" ano
       ;;
    *) # neplatná možnost
-      echo "Neplatná možnost: $1"
-      echo
+      if ! [ "$1" == "" ]; then
+         echo "Neplatná možnost: $1"
+         echo
+      fi
       Help_prikazy_samostatne
       exit;;
 esac
@@ -93,24 +104,6 @@ fi
 
 if [ "$1" == "-n" ] || [ "$1" == "-k" ]; then
    python3 "$adresar_instalace/statistiky_jednotlive.py" --volby "$2" --kstrana "$3" --obec "$4" # zpracuje pouze zadanou stranu/y, pokud není zadána žádná, zpracuje všechny
-   if [ "$3" == "" ]; then
-      for f in ./samostatné/*.csv; do
-         csv2json -n "$f" > "$f.ndjson"
-         ndjson-join --left 'd.id' volebni_okrsky-simple.ndjson "$f.ndjson" | ndjson-map 'Object.assign(d[0], Object.assign(d[0].properties, d[1]))' > "$f-volebni_okrsky-simple-data.ndjson"
-         cat "$f-volebni_okrsky-simple-data.ndjson" | ndjson-reduce 'p.features.push(d), p' '{type: "FeatureCollection", features: []}' > "$f-volebni_okrsky-simple-data.json"
-         geo2topo tracts="$f-volebni_okrsky-simple-data.json" > "$f-volebni_okrsky-simple-data-topo.json"
-      done
-   else
-      IFS=', ' read -r -a subjekty <<< "$3"
-      cd "samostatné"
-      for element in "${subjekty[@]}"; do
-         csv2json -n "$element.csv" > "$element.ndjson"
-         ndjson-join --left 'd.id' "../volebni_okrsky-simple.ndjson" "$element.ndjson" | ndjson-map 'Object.assign(d[0], Object.assign(d[0].properties, d[1]))' > "$element-volebni_okrsky-simple-data.ndjson"
-         cat "$element-volebni_okrsky-simple-data.ndjson" | ndjson-reduce 'p.features.push(d), p' '{type: "FeatureCollection", features: []}' > "$element-volebni_okrsky-simple-data.json"
-         geo2topo tracts="$element-volebni_okrsky-simple-data.json" > "$element.csv-volebni_okrsky-simple-data-topo.json"
-      done
-   fi
-   rm -v !(*volebni_okrsky-simple-data-topo.json)
    #if [ "$7" == "auto" ]; then
    #   otevrit_prohlizec "$2" "$4" "samostatné"
    #fi

@@ -26,8 +26,8 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
         }
 
         switch (info["druh"]) {
-            case "komunální": // pouze dočasné
-                break;
+            //case "komunální": // pouze dočasné
+                //break;
             case "krajské":
             case "sněmovní":
                 if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {// byly volby zpracovány?

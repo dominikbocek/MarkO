@@ -12,6 +12,8 @@ Help_prikazy_volebni_mapy() {
         echo "-n                        spustí program v normálním režimu"
         echo "-S                        spustí program v normálním režimu, určeno pro statutární města"
         echo "-s                        vypíše seznam kandidujících subjektů"
+        echo "-o                        vyhledá obec nebo kód obce podle zadaných kritérií"
+        echo "-v                        vypíše seznam všech obcí a jejich kódy"
         echo "-k                        vytvoří koalice podle zadaných subjektů a propíše je do mapy okrskových vítězů"
         echo "-koalice-samostatne       vytvoří koalice podle zadaných subjektů, ale neprojeví se to na mapě okrskových vítězů, pouze na mapě míry podpory"
         exit
@@ -42,6 +44,21 @@ Help_prikazy_volebni_mapy() {
             echo "<vypsat> určuje, jaký seznam se vypíše; možné hodnoty: základ, základ+koalice, všechno (viz manuál)"
             echo "<json> určuje, zda se seznam vypíše ve formátu json; možné hodnoty: ano (volitelné, ostatní hodnoty znamenají ne, výchozí stav je ne)"
             exit;;
+        -o)
+            echo "Vypíše seznam obcí."
+            echo
+            echo "Formát příkazu:"
+            echo "      -o <vyhledat> <hledaná_hodnota> <json>"
+            echo "<vyhledat> možné hodnoty: kód, obec"
+            echo "<hledaná_hodnota> pokud se hledá kód, hodnotou je název obce, pokud se hledá obec, hodnotou je kód obce"
+            echo "<json> určuje, zda se seznam vypíše ve formátu json; možné hodnoty: ano (volitelné, ostatní hodnoty znamenají ne, výchozí stav je ne)"
+            exit;;
+        -v)
+            echo "Vypíše seznam všech obcí a jejich kódy."
+            echo
+            echo "Formát příkazu:"
+            echo "      -v"
+            exit;;
         -i)
             echo "Vypíše informace o programu, ale nic užitečného tam nejspíš nenajdete."
             exit;;
@@ -71,7 +88,7 @@ Help_prikazy_volebni_mapy() {
 
 Help_prikazy_samostatne() {
     local prikaz="$1"
-    if [ "$prikaz" == "$1" ]; then
+    if [ "$prikaz" == "" ]; then
         echo "Program na vytváření map s volebními výsledky - verze pro obecní volby"
         echo "Nápověda:"
         echo
@@ -80,6 +97,7 @@ Help_prikazy_samostatne() {
         echo "-n      spustí program v normálním režimu"
         echo "-S      spustí program v normálním režimu, určeno pro statutární města"
         echo "-k      zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)"
+        exit
     fi
     case $prikaz in
         -n)
@@ -88,7 +106,7 @@ Help_prikazy_samostatne() {
             echo "Formát příkazu:"
             echo "      -n <volby> <strana> <obec>"
             echo "<volby> název voleb, pod nímž jsou uvedeny v soubrou společné/info.csv"
-            echo "<strana> číslo strany, viz možnost -s"
+            echo "<strana> číslo strany, viz ./volebni_mapy.sh -s"
             echo "<obec> kód obce nebo místního samosprávného obvodu"
             exit;;
         -S)
@@ -100,8 +118,10 @@ Help_prikazy_samostatne() {
         -k)
             echo "Zpracuje výsledky na základě dříve vytvořených koalic, pokud byly vytvořeny, případně zpracuje subjekt/y samostatně (více informací v manuálu)."
             echo
+            echo "Formát příkazu:"
+            echo "      -k <volby> <strana> <obec>"
             echo "<volby> název voleb, pod nímž jsou uvedeny v soubrou společné/info.csv"
-            echo "<strana> číslo strany, viz možnost -s"
+            echo "<strana> číslo strany, viz ./volebni_mapy.sh -s"
             echo "<obec> kód obce nebo místního samosprávného obvodu"
             exit;;
         *)

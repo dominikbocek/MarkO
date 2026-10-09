@@ -34,12 +34,12 @@ let color = function(rozsah) {
         .clamp(true)
 
     const vlastni = d3.scaleLinear()
-        .domain([location.search])
+        .domain(parametry.urlParams.get("procenta")==null?true:parametry.urlParams.get("procenta").split(",").map(Number))
         .range([barva1, prostrednibarva, barva2])
         .clamp(true)
 
 
-    if(rozsah !== "velmimale" && rozsah !== "male" && rozsah !== "standard" && rozsah !== "velke" && rozsah !== "plne") {
+    if(rozsah !== "velmimale" && rozsah !== "male" && rozsah !== "standard" && rozsah !== "velke" && rozsah !== "plne" && rozsah !== "vlastni") {
         return standard;
     } else {
         return eval(rozsah);

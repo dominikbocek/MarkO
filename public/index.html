@@ -4,7 +4,6 @@
         <title>MarkO - program na vytváření volebních map</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
         <!-- ikony -->
         <%- include('společné/icons.ejs'); %>
         <!-- <meta name="color-scheme" content="light dark"> -->
@@ -13,31 +12,33 @@
         <script src="/node_modules/d3/dist/d3.min.js"></script>
         <script src="/společné/light-dark.js" defer></script>
         <!-- Bootstrap -->
-        <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
         <!-- vlastní styly -->
         <link rel="stylesheet" href="/styl.css">
     </head>
     <body hx-ext="response-targets">
         <%- include('společné/menu.ejs') %>
         <div id="alerty">
-            <div id="uspech" class="alert alert-success" role="alert" style="display: none;">
+            <div id="uspech" class="hide alert alert-success" role="alert">
                 <!-- oznámení o úspěšném vytvoření okrskové map/y -->
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" onclick="$('#uspech').fadeOut()">&times;</span>
+                    <span aria-hidden="true" onclick="document.getElementById('uspech').classList.replace('show', 'hide');">&times;</span>
                 </button>
             </div>
-            <div id="info" class="alert alert-info" role="alert" style="display: none;">
+            <div id="info" class="hide alert alert-info" role="alert">
                 <!-- oznámení o existující mapě -->
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" onclick="$('#info').fadeOut()">&times;</span>
+                    <span aria-hidden="true" onclick="document.getElementById('info').classList.replace('show', 'hide')">&times;</span>
                 </button>
             </div>
-            <div id="selhani" class="alert alert-danger" role="alert" style="display: none;">
+            <div id="selhani" class="hide alert alert-danger" role="alert">
                 <!-- chybová hlášení -->
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" onclick="$('#selhani').fadeOut()">&times;</span>
+                    <span aria-hidden="true" onclick="document.getElementById('selhani').classList.replace('show', 'hide')">&times;</span>
                 </button>
             </div>
         </div>
@@ -51,11 +52,11 @@
         <script>
             document.body.addEventListener('htmx:afterRequest', function(request) {
                 if(request.detail.xhr.status > 399) {
-                    $("#selhani").fadeIn()
+                    document.getElementById('selhani').classList.replace('hide', 'show')
                 }
 
                 if(request.detail.xhr.status >= 200 && request.detail.xhr.status < 399) {
-                    $("#uspech").fadeIn()
+                    document.getElementById('uspech').classList.replace('hide', 'show')
                 }
             })
         </script>
@@ -65,7 +66,6 @@
             // začátek zastaralého kódu
         
             faze0 = document.getElementById("faze0")
-            faze4 = faze0
             nacitacianimace = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Čekejte...</span>'
 
             // konec zastaralého kódu
@@ -73,14 +73,30 @@
             function subjekty(polozka, volby) {
                 if(polozka.checked) {
                     pager.items.find((item) => {
-                        if(Number(polozka.value) == Number(item["KSTRANA"]) || Number(polozka.value) == Number(item["CKAND"])) {item["checked"] = true}
-                })}
+                        if(Number(polozka.value) == Number(item["KSTRANA"]) || Number(polozka.value) == Number(item["CKAND"]) || Number(polozka.value) == Number(item["POR_STR_HL"])) {item["checked"] = true}
+                    })
+                }
                 else {
                     pager.items.find((item) => {
-                        if(Number(polozka.value) == Number(item["KSTRANA"]) || Number(polozka.value) == Number(item["CKAND"])) {item["checked"] = false}
-                })}
+                        if(Number(polozka.value) == Number(item["KSTRANA"]) || Number(polozka.value) == Number(item["CKAND"]) || Number(polozka.value) == Number(item["POR_STR_HL"])) {item["checked"] = false}
+                    })
+                }
 
-                window.identifikacniCisla = [...new Set(pager.items.map((element) => {if(element["checked"]) {if(volby == "prezident") {return element["CKAND"]} else {return element["KSTRANA"]}}}))];
+                window.identifikacniCisla = [...new Set(pager.items.map((element) => {
+                    if(element["checked"]) {
+                        switch (volby) {
+                            case "komunální":
+                                return element["POR_STR_HL"]
+                                break;
+                            case "prezidentské":
+                                return element["CKAND"]
+                                break;
+                            case "krajské":
+                            case "sněmovní":
+                                return element["KSTRANA"]
+                        }
+                    }
+                }))];
                 window.identifikacniCisla = window.identifikacniCisla.filter(function(x) { return x !== undefined; })
                 window.identifikacniCisla = window.identifikacniCisla.toString();
                 if(window.identifikacniCisla == "") {document.getElementById("vytvorit").disabled = "true"} else {document.getElementById("vytvorit").disabled = ""}
@@ -89,7 +105,7 @@
             }
 
             function checkbox_vsechno() {
-                let checkboxes = faze4.querySelector(".seznam").querySelectorAll('.subjekt');
+                let checkboxes = faze0.querySelector(".seznam").querySelectorAll('.subjekt');
                 if(document.getElementById("vsechno").checked) {
                     checkboxes.forEach(
                         function(checkbox) {
@@ -110,40 +126,29 @@
                 }
             }
 
-            function skryt_zobrazit(skryt, zobrazit) {
-                $(skryt).fadeOut(250);
-                setTimeout(function() {$(zobrazit).fadeIn();}, 250)
-            }
-
-            function chyba(error, funkce) {
-                var chyba = (error == "") ? "Připojení selhalo. Zkontrolujte, zda server běží." : "Vyskytla se chyba: " + error + ". Ujistěte se, že jste postupovali podle návodu."
-                console.error("Vyskytla se chyba ve funkci " + funkce);
-                document.getElementById("selhani").querySelector("span").innerHTML = chyba; $("#selhani").alert(); $("#selhani").fadeIn("slow");
-            }
-
             function bindList(volby) {
                 pgItems = pager.pagedItems[pager.currentPage];
-                seznam = $(".seznam")
-                seznam.empty(); //vyprázdnění
+                seznam = document.querySelector(".seznam")
+                seznam.innerHTML = ""; //vyprázdnění
                 for(var i = 0; i < pgItems.length; i++){
                     checked = pgItems[i]["checked"] == true ? "checked": ""
                     switch (volby) {
                         case "prezidentské":
-                            var option = $(`<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["CKAND"]}" class="form-check-input" id="${pgItems[i]["CKAND"]}"><label for="${pgItems[i]["CKAND"]}">${pgItems[i]["JMENO"]} ${pgItems[i]["PRIJMENI"]}</label><br>`);
-                            seznam.append(option);
+                            var option = `<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["CKAND"]}" class="form-check-input" id="${pgItems[i]["CKAND"]}"><label for="${pgItems[i]["CKAND"]}">${pgItems[i]["JMENO"]} ${pgItems[i]["PRIJMENI"]}</label><br>`;
+                            seznam.innerHTML+= option;
                             break;
                         case "sněmovní":
                         case "krajské":
-                            var option = $(`<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["KSTRANA"]}" class="form-check-input" id="${pgItems[i]["KSTRANA"]}"><label for="${pgItems[i]["KSTRANA"]}">${pgItems[i]["ZKRATKAK30"]} (${pgItems[i]["ZKRATKAK8"]})</label><br>`);
-                            seznam.append(option);
+                            var option = `<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["KSTRANA"]}" class="form-check-input" id="${pgItems[i]["KSTRANA"]}"><label for="${pgItems[i]["KSTRANA"]}">${pgItems[i]["ZKRATKAK30"]} (${pgItems[i]["ZKRATKAK8"]})</label><br>`;
+                            seznam.innerHTML+= option;
                             break;
                         case "komunální":
-                            var option = $(`<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["POR_STR_HL"]}" class="form-check-input" id="${pgItems[i]["POR_STR_HL"]}"><label for="${pgItems[i]["POR_STR_HL"]}">${pgItems[i]["ZKRATKAO30"]} (${pgItems[i]["ZKRATKAO8"]})</label><br>`)
-                            seznam.append(option);
+                            var option = `<input type="checkbox" ${checked} class="subjekt form-check-input" value="${pgItems[i]["POR_STR_HL"]}" class="form-check-input" id="${pgItems[i]["POR_STR_HL"]}"><label for="${pgItems[i]["POR_STR_HL"]}">${pgItems[i]["ZKRATKAO30"]} (${pgItems[i]["ZKRATKAO8"]})</label><br>`
+                            seznam.innerHTML+= option;
                             break;
                     }
                 }
-                let checkboxes = faze4.querySelectorAll('input[type=checkbox]');
+                let checkboxes = faze0.querySelectorAll('input[type=checkbox]');
                     Array.from(checkboxes).forEach(
                     checkbox => checkbox.onclick = function() {subjekty(this, volby)}
                 );
@@ -191,7 +196,7 @@
             function odstranit_checkbox_vsechno() {
                 if(document.getElementById("vsechno") !== null) {
                     document.getElementById("vsechno").remove()
-                    faze4.querySelector("label").remove()
+                    faze0.querySelector("label").remove()
                 }
             }
         </script>

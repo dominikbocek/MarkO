@@ -2,6 +2,8 @@ export let tooltip = d3.select("#prohlizec")
     .append("dialog")
     .attr("id", "tooltip1")
     .attr("open", "true")
+    .html(`<button type="button" onclick="document.getElementById('tooltip1').style.visibility = 'hidden'" class="btn-close" aria-label="Close"></button>`)
+    .append("div")
 
 export let tooltip2 = d3.select("#prohlizec")
     .append("dialog")
@@ -15,14 +17,13 @@ export function infobox(subunits, strany, info) {
     .data(subunits.features)
     .on("mouseover", function (event, d) {
         tooltip2.style("visibility", "visible");
-        //tooltip.style("top", (event.offsetY-30)+"px").style("left",(event.offsetX)+"px")
         tooltip2.style("top", (event.offsetY-10)+"px").style("left",(event.offsetX+10)+"px")
 
         info(event, d, strany)
     })
     .on("click", function(event, d) {
-        tooltip.style("visibility", "visible");
-        tooltip.style("top", (event.offsetY-10)+"px").style("left",(event.offsetX+10)+"px")
+        d3.select("#tooltip1").style("visibility", "visible");
+        d3.select("#tooltip1").style("top", (event.offsetY-10)+"px").style("left",(event.offsetX+10)+"px")
 
         info(event, d, strany)
     })
@@ -30,7 +31,7 @@ export function infobox(subunits, strany, info) {
     .on("mouseout", function () {tooltip2.style("visibility", "hidden")});
 }
 
-export function infonazev(d) {
+function infonazev_stat(d) {
     let nazev;
 
     if(d.properties["NAZEV"] !== undefined) {
@@ -48,12 +49,20 @@ export function infonazev(d) {
     return nazev
 }
 
-export function infonazev2(d, obvody) {
+function infonazev2_obce_obvody(d, obvody) {
     let seznam_obvodu = Object.getOwnPropertyNames(obvody)
     for (let i = 0; i < seznam_obvodu.length; i++) {
-        //console.log(obvody[element])
         if(obvody[seznam_obvodu[i]][1] == d.id.split("-")[0]) {
             return obvody[seznam_obvodu[i]][0]
         }
+    }
+}
+
+export function infonazev(d, obvody) {
+    console.log(d)
+    if(parametry.lokalita == "stát" || parametry.druh !== "komunální") {
+        return infonazev_stat(d)
+    } else if(parametry.lokalita == "obec" || parametry.lokalita == "obvod") {
+        return infonazev2_obce_obvody(d, obvody)
     }
 }

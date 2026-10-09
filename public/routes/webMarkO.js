@@ -68,6 +68,11 @@ router.post('/okrskove-mapy', (req, res, next) => {
     let verzeprogramu = vyberverzi(info, res)
 
     if(info["druh"] == "komunální") {
+        if(fs.existsSync(`${cwd()}/volby/${volby}/obce/${obec}/volebni_okrsky-simple-data.json`)) {
+            let zprava = `Mapa okrskových vítězů pro tyto volby už existuje. Pro zobrazení klikněte <a href="/volby/${volby}/obce/${obec}/vitez" target="_blank">sem</a>.`
+            return res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, obec})
+        }
+
         return exec(`cd "${cwd()}/../obce/" && bash ./volebni_mapy.sh -n "${volby}" "" ${obec}`, (error, stdout, stderr) => {
             if(error) {
                 console.log(error)
@@ -85,27 +90,27 @@ router.post('/okrskove-mapy', (req, res, next) => {
         })
     }
 
-    prezident = kolo //pouze pro prezidentské volby
+    let prezident //pouze pro prezidentské volby
     if (kolo == "1") {prezident = "první kolo"} else if (kolo == "2") {prezident = "druhé kolo"} else {prezident = ""}
 
-    if(!fs.existsSync(`${cwd()}/volby/${volby}/${prezident}/volebni_okrsky-simple-data.json`)) {
-        return exec(`cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./volebni_mapy.sh -n "${volby}"`, (error, stdout, stderr) => {
-            if (error) {
-                chyby.chyba(error)
-                return res.status(500).send("Vyskytla se chyba...")
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-                return res.status(500).send("Vyskytla se chyba...")
-            }
-
-            let zprava = `Vytvoření mapy dokončeno. Pro zobrazení klikněte <a href="volby/${volby}/${prezident}/vitez" target="_blank">sem</a>.`
-            res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo});
-        });
-    } else {
+    if(fs.existsSync(`${cwd()}/volby/${volby}/${prezident}/volebni_okrsky-simple-data.json`)) {
         let zprava = `Mapa okrskových vítězů pro tyto volby už existuje. Pro zobrazení klikněte <a href="/volby/${volby}/${prezident}/" target="_blank">sem</a>.`
-        res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo})
+        return res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo})
     }
+        
+    return exec(`cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./volebni_mapy.sh -n "${volby}"`, (error, stdout, stderr) => {
+        if (error) {
+            chyby.chyba(error)
+            return res.status(500).send("Vyskytla se chyba...")
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return res.status(500).send("Vyskytla se chyba...")
+        }
+
+        let zprava = `Vytvoření mapy dokončeno. Pro zobrazení klikněte <a href="volby/${volby}/${prezident}/vitez" target="_blank">sem</a>.`
+        res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo});
+    });
 });
 
 router.post('/kandidujici-subjekty', (req, res, next) => {
@@ -156,7 +161,6 @@ router.post('/kandidujici-subjekty', (req, res, next) => {
         command = `cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./volebni_mapy.sh -s "${volby}" "všechno" ano`
     }
 
-    //if (druh_voleb == "prezidentské") {prezident = "první kolo"} //???
     exec(command, (error, stdout, stderr) => {
         if (error) {
             chyby.chyba(error)
@@ -166,6 +170,9 @@ router.post('/kandidujici-subjekty', (req, res, next) => {
             console.error(`stderr: ${stderr}`);
             return res.status(500).send("Vyskytla se chyba...")
         }
+
+        console.log(stdout)
+
         res.render(`${cwd()}/webMarko/tretifaze.ejs`, {volby, subjekty: `${stdout}`, kolo, info, vytvorit, druh_map});
     });
 });
@@ -174,6 +181,7 @@ router.post('/samostatne-mapy', (req, res, next) => {
     let volby = req.body.volby;
     let cisla = req.body.cisla
     let kolo = req.body.kolo
+    let obec = req.body.obec
     let prezident = "."
 
     const info = pomocnefunkce.nacistJSON(volby)
@@ -182,12 +190,26 @@ router.post('/samostatne-mapy', (req, res, next) => {
         return res.status(500).send("Vyskytla se chyba...")
     }
 
-    let verzeprogramu = vyberverzi(info, res)
+    //let verzeprogramu = vyberverzi(info, res)
 
-    if (kolo == "1") {prezident = "první kolo"} else if (kolo == "2") {prezident = "druhé kolo"}
-    // opatření pro druhé kolo, protože verze programu je osekaná až na kost
-    if (kolo == "2") {command = `cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./samostatne.sh -n "${volby}"`}
-    else {command = `cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./samostatne.sh -k "${volby}" "${cisla}" ano`}
+    let command
+
+    switch (info["druh"]) {
+        case "prezidentské":
+            if (kolo == "1") {prezident = "první kolo"} else if (kolo == "2") {prezident = "druhé kolo"}
+            // opatření pro druhé kolo, protože verze programu je osekaná až na kost
+            command = `cd "${cwd()}/../prezident/${prezident}" && bash ./samostatne.sh -n "${volby}"`
+            break;
+        case "sněmovní":
+            command = `cd "${cwd()}/../kraje a sněmovna/" && bash ./samostatne.sh -n "${volby}"`
+            break;
+        case "komunální":
+            command = `cd "${cwd()}/../obce/" && bash ./samostatne.sh -n "${volby}" "${cisla}" "${obec}"`
+            break;
+        default:
+            break;
+    }
+
     return exec(command, (error, stdout, stderr) => {
         if (error) {
             chyby.chyba(error)

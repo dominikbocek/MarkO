@@ -1,6 +1,10 @@
-
+<style>
+    #faze0 {
+        margin: 0 auto;
+    }
+</style>
 <i class="bi bi-arrow-left-circle-fill" style="top: 50px; font-size: 27px; display: none;"></i> <!-- nutno změnit -->
-<div style="position: relative; /*top: 50px;*/ height: calc(100vh - 101px); overflow: auto;">
+<div style="position: relative; top: 101px; height: calc(100vh - 101px); overflow: auto;">
     <h2>Vyberte ze seznamu volební subjekty</h2>
     <p class="vybrane_volby">vybrané volby: <%= volby %></p>
     <% if(vytvorit == "koalice") {%>
@@ -22,6 +26,7 @@
         <input type="hidden" name="druh_map" value="<%- druh_map %>">
         <input type="hidden" name="volby" value="<%- volby %>">
         <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
+        <% if(info["druh"] == "komunální") {%><input type="hidden" name="obec" value="<%= obec %>"><%} %>
         <input type="hidden" name="cisla">
     </form>
     <%} %>
@@ -51,9 +56,7 @@
         document.getElementById("pagination").querySelector("div").innerHTML += element
     }
     pagerInit(pager);
-    $(function() {
-        bindList(druh_voleb);
-    });
+    (function() {bindList(druh_voleb)})()
     document.getElementById("pagination").querySelector(".dopredu").onclick = function() {nextPage(druh_voleb)}
     document.getElementById("pagination").querySelector(".dozadu").onclick = function() {prevPage(druh_voleb)}
 </script>

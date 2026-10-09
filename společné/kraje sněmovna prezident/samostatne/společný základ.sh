@@ -5,19 +5,15 @@
 #############################
 
 shopt -s extglob
-if [ "$1" == "" ]; then
-   Help_prikazy_samostatne
-fi
 
 case $1 in
    -h) # zobrazí nápovědu
-      if [ "$2" == "" ]; then
-         Help_prikazy_samostatne
-      else
-         Help_prikazy_samostatne "$2"
-      fi
+      Help_prikazy_samostatne "$2"
       ;;
    -n) # poběží v normálním režimu, tzn. zpracuje původní výsledky
+      if [ $# -lt 2 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       Overeni "$2"
       if ! test -f "$adresar_voleb/statistics.csv"; then
          echo "Chybí soubor $adresar_voleb/statistics.csv"
@@ -31,6 +27,9 @@ case $1 in
       python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani "okrsky"
       ;;
    -k) # zpracuje vše, tzn. původní výsledky i koalice, pokud byly vytvořeny (statistics-univerzal.csv)
+      if [ $# -lt 2 ]; then
+         Help_prikazy_samostatne "$1"
+      fi
       Overeni "$2"
       if ! test -f "$adresar_voleb/statistics-univerzal.csv"; then
          echo "Chybí soubor $adresar_voleb/statistics-univerzal.csv"
@@ -44,8 +43,10 @@ case $1 in
       python3 "$adresar_instalace/popisky.py" --volby "$2" --zpracovani "okrsky"
       ;;
    *) # neplatná možnost
-      echo "Neplatná možnost: $1"
-      echo
+      if ! [ "$1" == "" ]; then
+         echo "Neplatná možnost: $1"
+         echo
+      fi
       Help_prikazy_samostatne
       exit;;
 esac

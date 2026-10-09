@@ -51,8 +51,7 @@ if %errorLevel% NEQ 0 (
     rem Python Installation Manager
 )
 
-start cmd /c pip3 install pandas
-start cmd /c pip3 install geopandas
+start cmd /c pip install -r public\requirements.txt
 copy "%cd%\příprava\volby\MarkO.py" "%cd%\.MarkO.py"
 echo @echo off >> MarkO.bat
 echo cls >> MarkO.bat
@@ -60,6 +59,8 @@ if %opravneni% == standard (
     setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\public\node_modules\.bin"
 )
 echo python3 .MarkO.py >> MarkO.bat
+attrib +h ./.MarkO.py
+attrib +h ./.verze.txt
 echo Program MarkO byl úspěšně nainstalován.
 pause
 exit

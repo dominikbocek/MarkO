@@ -22,4 +22,8 @@ if(parametry.druh !== "komunální") {
     } else if(parametry.lokalita == "obec") {
         parametry.csv = `${predpona}samostatné/${parametry.hledanastrana}.csv`
     }
+} else {
+    parametry.data = "../volebni_okrsky-simple-data.json"
+    parametry.seznamstran = `../parties-${parametry.id_obce}.csv`
+    parametry.csv = `${parametry.hledanastrana}.csv`
 }
