@@ -59,7 +59,8 @@ function infonazev2_obce_obvody(d, obvody) {
 }
 
 export function infonazev(d, obvody) {
-    if(parametry.lokalita == "stát") {
+    console.log(d)
+    if(parametry.lokalita == "stát" || parametry.druh !== "komunální") {
         return infonazev_stat(d)
     } else if(parametry.lokalita == "obec" || parametry.lokalita == "obvod") {
         return infonazev2_obce_obvody(d, obvody)

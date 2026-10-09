@@ -11,13 +11,13 @@ export function info(event, d, strany) {
     return parseInt(d.properties[b.toString()]) - parseInt(d.properties[a.toString()])
   })
 
-  //console.log(strany)
+  let strana = function (poradi) {return strany.filter(function(element) {if(element["POR_STR_HL"] == hlasy[poradi]) {return element["POR_STR_HL"]}})[0]}
       
   let ucast = d.properties.ucast !== undefined ? `${Math.round((d.properties.ucast)*100)/100} %`: "data nejsou dostupná"
   let pocet_stran = d.properties.POCET_VS !== undefined ? d.properties.POCET_VS: null
-  let prvnimisto = {"strana": strany[hlasy[0]] !== undefined ? strany[hlasy[0]]["ZKRATKAO30"]: "data nejsou dostupná", "podil": strany[hlasy[0]] !== undefined ? `${Math.round((d.properties[hlasy[0].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
-  let druhemisto = {"strana": strany[hlasy[1]] !== undefined ? strany[hlasy[1]]["ZKRATKAO30"]: "data nejsou dostupná", "podil": strany[hlasy[1]] !== undefined ? `${Math.round((d.properties[hlasy[1].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
-  let tretimisto = {"strana": strany[hlasy[2]] !== undefined ? strany[hlasy[2]]["ZKRATKAO30"]: "data nejsou dostupná", "podil": strany[hlasy[2]] !== undefined ? `${Math.round((d.properties[hlasy[2].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
+  let prvnimisto = {"strana": strana(0) !== undefined ? strana(0)["strana"]: "data nejsou dostupná", "podil": strana(0) !== undefined ? `${Math.round((d.properties[hlasy[0].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
+  let druhemisto = {"strana": strana(1) !== undefined ? strana(1)["strana"]: "data nejsou dostupná", "podil": strana(1) !== undefined ? `${Math.round((d.properties[hlasy[1].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
+  let tretimisto = {"strana": strana(2) !== undefined ? strana(2)["strana"]: "data nejsou dostupná", "podil": strana(2) !== undefined ? `${Math.round((d.properties[hlasy[2].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
   const udaje = {
     "nazev": infonazev(d, window.obvody),
     "pocet_stran": pocet_stran,

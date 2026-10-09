@@ -107,7 +107,7 @@
       import { info } from '<%- urlinfo%>'
       import { vykreslit_vrstvu } from "/společné/mapy/vrstvy/vrstvy.js"
       import * as Zoom from "/společné/mapy/js/zoom.js"
-      <% if (info["druh"] == "komunální") {%>import { obvody } from "<% if(typzobrazeni == 'samostatné') {%>.<%}%>../seznam_obvodu.js"
+      <% if (info["druh"] == "komunální" && info.lokalita.druh == "obec") {%>import { obvody } from "<% if(typzobrazeni == 'samostatné') {%>.<%}%>./seznam_obvodu.js"
       
       window.obvody = obvody
       <%} %>

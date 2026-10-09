@@ -107,7 +107,7 @@ case $1 in
       odpoved="$(python3 "$adresar_instalace/koalice_samostatne.py" --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
       if [ "$odpoved" == "" ]; then exit; fi
       if [ "$2" == "" ] || [ "$3" == "" ] || [ "$4" == "" ] || [ "$5" == "" ] || [ "$6" == "" ]; then echo "Nezadali jste potřebné parametry."; exit; fi
-      python3 "$adresar_instalace/csvtojson.py" --volby "$2" --obec "$3" --koalice univerzal
+      #python3 "$adresar_instalace/csvtojson.py" --volby "$2" --obec "$3" --koalice univerzal
       ( bash "$adresar_instalace/samostatne.sh" -k "$2" "$odpoved" "$3" )
       exit
       ;;
