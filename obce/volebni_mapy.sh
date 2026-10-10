@@ -150,7 +150,7 @@ obvody_n_k() {
    local volby="$1"
    local kodstatut="$2"
    if $(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$kodstatut" --vratit "jestatut"); then
-      seznam_obvodu=($(python3 "$adresar_instalace/seznam_obvodů.py" --volby "$volby" --obec "$kodstatut" | tr -d '[],')) # nutno rozlišit typ zastupitelstva (1 - zastupitelstvo obce, 2 - zastupitelstvo městské části/obvodu, viz. https://www.volby.cz/opendata/kv2022/KV2022ciselnikyPopis.pdf)
+      seznam_obvodu=($(python3 "$adresar_instalace/seznam_obvodů.py" --obec "$kodstatut" | tr -d '[],')) # nutno rozlišit typ zastupitelstva (1 - zastupitelstvo obce, 2 - zastupitelstvo městské části/obvodu, viz. https://www.volby.cz/opendata/kv2022/KV2022ciselnikyPopis.pdf)
       echo "${seznam_obvodu[@]}"
       for i in "${seznam_obvodu[@]}"; do # zpracování jednotlivých samosprávných obvodů
          mkdir -p "$adresar_voleb/obce/$kodstatut/$i"
@@ -249,7 +249,7 @@ if [ "$1" == "-S" ]; then
       else
          python3 "$adresar_instalace/filtr.py" --volby "$2" --obec "$4"
       fi
-      seznam_obvodu=($(python3 "$adresar_instalace/seznam_obvodů.py" --volby "$2" --obec "$4" | tr -d '[],')) # nutno rozlišit typ zastupitelstva (1 - zastupitelstvo obce, 2 - zastupitelstbo městské části/obvodu, viz. https://www.volby.cz/opendata/kv2022/KV2022ciselnikyPopis.pdf)
+      seznam_obvodu=($(python3 "$adresar_instalace/seznam_obvodů.py" --obec "$4" | tr -d '[],')) # nutno rozlišit typ zastupitelstva (1 - zastupitelstvo obce, 2 - zastupitelstbo městské části/obvodu, viz. https://www.volby.cz/opendata/kv2022/KV2022ciselnikyPopis.pdf)
       for i in "${seznam_obvodu[@]}"; do
          cd "$adresar_instalace" # kvůli ověřování souborů
          ( bash "$adresar_instalace/volebni_mapy.sh" -n "$2" "$3" "$i" )

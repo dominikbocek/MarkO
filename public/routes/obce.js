@@ -191,5 +191,3 @@ router.use("/:obec/:obvod/", legenda)
 obce.use("/obce/", router)
 
 module.exports = obce;
-
-//obvody??? u nekomunálních voleb

@@ -88,64 +88,7 @@ router.use("/:volby/", pomocnefunkce.prehled)
 // komunální volby //
 ////////////////////
 
-// běžná/statutární zastupitelstva
 // viz obce.js
-
-//function obce_rozcestnik(url, lokalita) {
-    router.get('/:volby/obce/:obec/mapy', (req, res, next) => { // '/:volby/obce/:obec/mapy' nebo '/:volby/obce/:obec/:obvod/mapy'
-        req.acceptsCharsets('utf-8')
-        console.log("test")
-        if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
-            let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
-
-            let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat "obec" --hledanahodnota "${req.params.obec}" --json ano`)
-
-            let info = pomocnefunkce.nacistJSON(req.params.volby)
-
-            let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
-
-            seznam_obvodu = eval(seznam_obvodu.toString())
-
-            seznam_nazvu_obvodu = eval(seznam_nazvu_obvodu.toString())
-
-            info_obec = JSON.parse(info_obec.toString())
-
-            info.lokalita = info_obec
-            info.lokalita.druh = "obec"
-
-            return res.render(`${cwd()}/společné/volby/rozcestník-map.ejs`, {obvody:seznam_obvodu, nazvy:seznam_nazvu_obvodu, info:info});
-        
-        }
-        
-        return next();
-    })
-//}
-
-// tyhle dvě věci by se daly sjednotit
-
-//komunální zastupitelstva - samosprávné obvody/městské části
-
-const mapy_obvody = router.get('/:volby/obce/:obec/:obvod/mapy', (req, res, next) => {
-    req.acceptsCharsets('utf-8')
-    if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
-        let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obvod}"`)
-
-        let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --volby "${req.params.volby}" --vyhledat "obec" --hledanahodnota "${req.params.obvod}" --json ano`)
-
-        let info = pomocnefunkce.nacistJSON(req.params.volby)
-
-        info_obec = JSON.parse(info_obec.toString())
-
-        info.lokalita = info_obec
-        info.lokalita.druh = "obvod"
-    
-        seznam_obvodu = eval(seznam_obvodu.toString())
-
-        return res.render('../public/společné/volby/rozcestník-map.ejs', {obvody:seznam_obvodu, info:info});
-    }
-    
-    return next();
-})
 
 
 /////////////////////////////////

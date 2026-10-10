@@ -91,12 +91,19 @@ prehled.get("/prehled", (req, res, next) => {
         info.lokalita.druh = "obvod"
     }
 
-    return res.render(`${cwd()}/společné/volby/volby.ejs`, { info })
+
+    let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --obec "${req.params.obec}"`)
+
+    let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --obec "${req.params.obec}" --vypsat "název"`)
+
+    seznam_obvodu = eval(seznam_obvodu.toString())
+
+    seznam_nazvu_obvodu = eval(seznam_nazvu_obvodu.toString())
+
+    return res.render(`${cwd()}/společné/volby/volby.ejs`, { info , obvody:seznam_obvodu, nazvy:seznam_nazvu_obvodu})
 })
 
 prehled.get("/", (req, res, next) => {
-    console.log(req.originalUrl)
-    console.log(req.baseUrl)
     if(req.originalUrl.endsWith("/")) {
         return res.redirect(301, req.baseUrl + req.path + "prehled");
     } else {

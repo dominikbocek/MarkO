@@ -12,6 +12,8 @@
     </title>
     <script src="/node_modules/d3/dist/d3.min.js"></script>
     <script src="/node_modules/@observablehq/plot/dist/plot.umd.min.js"></script>
+    <script src="/node_modules/topojson-client/dist/topojson-client.min.js"></script>
+    <script src="/node_modules/topojson-server/dist/topojson-server.min.js"></script>
     <link rel="icon" href="favicon.ico"><link href="/společné/volby/tailadmin/style.css" rel="stylesheet">
     <script defer src="/společné/volby/tailadmin/bundle.js"></script>
   </head>
@@ -76,6 +78,7 @@
                 <%- include('./partials/chart/chart-02.html') %>
                 <!-- ====== Chart Two End -->
               </div>
+              <%- include("../rozcestník-map.ejs") %>
             </div>
           </div>
         </main>
