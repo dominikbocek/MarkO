@@ -55,15 +55,33 @@
   </div>
 </div>
 <script type="module">
-window.vol_seznam = d3.sum(await d3.csv("./statistics.csv", function(d) {
-  return d.VOL_SEZNAM
-}))
 
-window.pl_hl_celk = d3.sum(await d3.csv("./statistics.csv", function(d) {
-  return d.PL_HL_CELK
-}))
+  <% if(info.lokalita.druh !== "stát") {
+    %>const id_obce = <%= info['lokalita']['KODZASTUP'] %>
+  <% } %>
 
-window.ucast = Math.round((pl_hl_celk / vol_seznam)*10000)/100
+  <%
+  if(info["druh"] !== "komunální") {
+    %>let zdroj = '/volby/<%= info["název"] %>/<% if(info.kolo !== undefined) {%><%= info.kolo%>/<%}  %>statistics-obce.csv'<%
+  } else {%>let zdroj = `./${id_obce}.csv`<%}
+  %>
+
+  window.vysledky = await d3.csv(zdroj)
+  <% if(info.lokalita.druh !== "stát" && info.druh !== "komunální") {// pro zpracování obcí ve volbách mimo komunální
+    %>
+    vysledky = vysledky.filter(function(element) {return element["id"] == id_obce})[0]
+    window.pl_hl_celk = vysledky.PL_HL_CELK
+    window.vol_seznam = vysledky.VOL_SEZNAM
+    <%
+  } else if(info.druh == "komunální") {%>// pro zpracování obcí pro komunální volby, pro přehled pro celostát u komunálních voleb se zatím nepočítá
+    window.pl_hl_celk = d3.sum(vysledky, d => d.ODEVZ_OBAL)
+    window.vol_seznam = d3.sum(vysledky, d => d.VOL_SEZNAM)
+  <%} else {%>
+    window.pl_hl_celk = d3.sum(vysledky, d => d.PL_HL_CELK)
+    window.vol_seznam = d3.sum(vysledky, d => d.VOL_SEZNAM)
+  <%} %>
+
+let ucast = Math.round((pl_hl_celk / vol_seznam)*10000)/100
 
 function chart02(selector, value, options = {}) {
 
@@ -127,5 +145,4 @@ function chart02(selector, value, options = {}) {
 }
 
 chart02("#chartTwo", ucast)
-console.log("test")
 </script>

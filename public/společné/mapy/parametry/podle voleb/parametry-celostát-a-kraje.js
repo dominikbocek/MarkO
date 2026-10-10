@@ -1,6 +1,16 @@
 //základní parametry
 // proměnná parametry definována v souboru hlava.ejs
-if (parametry.id_obce !== "") {predpona = "../../"} else {predpona = ""}
+switch (parametry.lokalita) {
+    case "stát":
+        predpona = ""
+        break;
+    case "obec":
+        predpona = "../../"
+        break;
+    case "obvod":
+        predpona = "../../../"
+        break;
+}
 
 if(parametry.typzobrazeni == "normální") {
     parametry.urlParams = new URLSearchParams(window.location.search);
@@ -11,18 +21,26 @@ if(parametry.typzobrazeni == "normální") {
         parametry.koalice = false
     }
     parametry.data = predpona + "volebni_okrsky-simple-data.json"
-    if(parametry.lokalita == "obec") {
-        parametry.statistiky = parametry.koalice ? predpona + "statistics2.csv" : predpona + "statistics.csv"
-    } else if(parametry.lokalita = "stát") {
-        parametry.statistiky = parametry.koalice ? predpona + "statistics-obce2.csv" : predpona + "statistics-obce.csv"
+    switch (parametry.lokalita) {
+        case "stát":
+            parametry.statistiky = parametry.koalice ? predpona + "statistics-obce2.csv" : predpona + "statistics-obce.csv"
+            break;
+        case "obec":
+        case "obvod":
+            parametry.statistiky = parametry.koalice ? predpona + "statistics2.csv" : predpona + "statistics.csv"
+            break;
     }
     parametry.legendazdroj = parametry.koalice ? "vysledky_cr2.json" : "vysledky_cr.json"
 } else if(parametry.typzobrazeni == "účast") {
     parametry.data = predpona + "volebni_okrsky-simple-data.json"
-    if(parametry.lokalita == "obec") {
-        parametry.statistiky = predpona + "statistics.csv"
-    } else if(parametry.lokalita = "stát") {
-        parametry.statistiky = "statistics-obce.csv"
+    switch (parametry.lokalita) {
+        case "stát":
+            parametry.statistiky = "statistics-obce.csv"
+            break;
+        case "obec":
+        case "obvod":
+            parametry.statistiky = predpona + "statistics.csv"
+            break;
     }
     parametry.urlParams = new URLSearchParams(window.location.search);
     parametry.rozsah = (parametry.urlParams.get('rozsah') === null) ? "standard" : parametry.urlParams.get('rozsah');

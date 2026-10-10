@@ -17,7 +17,6 @@ export async function vykresleni_zaklad(geodata, statistiky) {
 
         geometrie.id = idObce
         geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
-        //console.log(geometrie)
 
         return geometrie
         })
@@ -33,8 +32,12 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         subunits = topojson.feature(data, data.objects.tracts) // obce
     }
 
-    if(parametry.lokalita == "obec" && parametry.druh !== "komunální") {
-        subunits.features = subunits.features.filter(function(element) {return element["properties"]["kod_obec"].startsWith(parametry.id_obce)})
+    if(parametry.druh !== "komunální") {
+        if(parametry.lokalita == "obec") {
+            subunits.features = subunits.features.filter(function(element) {return element["properties"]["kod_obec"].startsWith(parametry.id_obce)})
+        } else if(parametry.lokalita == "obvod") {
+            subunits.features = subunits.features.filter(function(element) {if(element["properties"]["kod_mco"] !== null) {return element["properties"]["kod_mco"].startsWith(parametry.id_obce)}})
+        }
     }
 
     subunits.features.forEach(element => {

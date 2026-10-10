@@ -40,15 +40,41 @@ prehled.get("/prehled", (req, res, next) => {
         return next()
     }
 
-    if((info["druh"] == "prezidentské" && (req.params.kolo == undefined || (req.params.kolo !== "první kolo" && req.params.kolo !== "druhé kolo"))) || (info["druh"] !== "prezidentské" && req.params.kolo !== undefined) || (info["druh"] == "komunální") && req.params.obec == undefined) {
-        return next()
+    switch (info["druh"]) {// byly volby zpracovány?
+        case "krajské":
+        case "sněmovní":
+            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {
+                return next();
+            }
+            break;
+        case "prezidentské":
+            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {
+                return next();
+            }
+            break;
+        case "komunální":
+            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
+                return next();
+            }
+            break;
+    }
+
+    if(info["druh"] == "prezidentské") {
+        info.kolo = req.params.kolo
     }
 
     if(req.params.obec == undefined) {
+        info.lokalita = {druh: "stát"}
         return res.render(`${cwd()}/společné/volby/volby.ejs`, { info })
     }
 
-    let info_obec = execSync(`python3 "${cwd()}/../společné/vypsat_obce.py" --kodobec ${req.params.obec} --json ano`)
+    let info_obec
+
+    if(req.params.obvod == undefined) {
+        info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obec} --json ano`)
+    } else {
+        info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obvod} --json ano`)
+    }
 
     try {
         info_obec = JSON.parse(info_obec.toString()) // pokud obec neexistuje v seznamu, prehled se nezobrazí
@@ -57,15 +83,25 @@ prehled.get("/prehled", (req, res, next) => {
         return next()
     }
 
-    return res
-        .render(`${cwd()}/společné/volby/volby.ejs`, { info })
+    info.lokalita = info_obec
+
+    if(req.params.obvod == undefined) {
+        info.lokalita.druh = "obec"
+    } else {
+        info.lokalita.druh = "obvod"
+    }
+
+    return res.render(`${cwd()}/společné/volby/volby.ejs`, { info })
 })
 
-/*prehled.get("./", (req, res, next) => {
-    if(req.url.endsWith("/")) {
-
+prehled.get("/", (req, res, next) => {
+    console.log(req.originalUrl)
+    console.log(req.baseUrl)
+    if(req.originalUrl.endsWith("/")) {
         return res.redirect(301, req.baseUrl + req.path + "prehled");
+    } else {
+        return next()
     }
-})*/
+})
 
 module.exports = {nacistJSON, urllomitka, prehled}

@@ -55,7 +55,7 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
                 //break;
         }
 
-        info.lokalita = {druh: "stát"}
+        info.lokalita = {druh: "stát"} // pokud není stanoveno jinak, pro sněmovní, krajské a prezidentské volby platí lokalita stát; NUTNO přepsat v případě kteréhokoliv jiného území VÝHRADNĚ v sekci daného území; tento řádek NEPŘEPISOVAT
 
         const souborynastaveni = fs.readdirSync(`${cwd()}/společné/mapy/nastavení`)
         return res.render(`${cwd()}/společné/mapa.html`, {volby:req.params.volby, info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni});       
@@ -121,8 +121,6 @@ router.use("/:volby/", pomocnefunkce.prehled)
     })
 //}
 
-//obce_rozcestnik("", )
-
 // tyhle dvě věci by se daly sjednotit
 
 //komunální zastupitelstva - samosprávné obvody/městské části
@@ -149,32 +147,6 @@ const mapy_obvody = router.get('/:volby/obce/:obec/:obvod/mapy', (req, res, next
     return next();
 })
 
-function obvod(url, typzobrazeni) {
-    return router.get(url, (req, res, next) => {
-        req.acceptsCharsets('utf-8')
-        if(fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
-            let info = pomocnefunkce.nacistJSON(req.params.volby)
-
-            //title a popisek mapy; generické volby, nejsou potřeba, ale chceme přístup k seznamu voleb, který je pořád stejný, nutno dořešit
-            let info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat "obec" --hledanahodnota "${req.params.obvod}" --json ano`)
-
-            info_obec = JSON.parse(info_obec.toString())
-
-            info.lokalita = info_obec
-            info.lokalita.druh = "obvod"
-
-            const souborynastaveni = fs.readdirSync(`${cwd()}/společné/mapy/nastavení`)
-            return res.render(`${cwd()}/společné/mapa.html`, {volby:req.params.volby, info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni});
-        }
-        
-        return next();
-    })
-}
-
-obvod('/:volby/obce/:obec/:obvod/vitez', "normální")
-obvod('/:volby/obce/:obec/:obvod/ucast', "účast")
-obvod('/:volby/obce/:obec/:obvod/samostatn%C3%A9/', "samostatné")
-
 
 /////////////////////////////////
 // seznam pro samostatné mapy //
@@ -197,26 +169,11 @@ router.get('/seznam.js/:volby/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/samostatné`)
 })
 router.get('/seznam.js/:volby/obce/:obec/', (req, res, next) => {
+    console.log("test Svitavy")
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)
 })
 router.get('/seznam.js/:volby/obce/:obec/:obvod/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)
-})
-
-/////////////////
-// Další věci //
-///////////////
-
-router.get('/seznam_obvodu.js/:volby/:obec/', (req, res, next) => {
-    let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
-
-    let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
-
-    seznam_obvodu = eval(seznam_obvodu.toString())
-
-    seznam_nazvu_obvodu = eval(seznam_nazvu_obvodu.toString())
-
-    return res.type("text/javascript").render(`${cwd()}/společné/mapy/vykreslení/obvody.ejs`, {seznam_obvodu, seznam_nazvu_obvodu})
 })
 
 router.use(chyby.router)
