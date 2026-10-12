@@ -80,7 +80,7 @@ async function nactenivysledku(url) {
   marks: [
     Plot.barY(
       filtrovanadata, {
-        x: "<% if(info['druh'] == 'prezidentské') {%>kandidat<%} else {%>zkratka<%} %>", //u prezidentských voleb kandidat
+        x: "<% if(info['druh'] == 'prezidentské') {%>kandidat<%} else if(info['druh'] == 'komunální') {%>strana<%} else {%>zkratka<%} %>", //u prezidentských voleb kandidat
         y: "proc_hlasu",
         fill: "color",
         text: "test",

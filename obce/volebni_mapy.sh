@@ -237,7 +237,6 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
       fi
    fi
    geo2topo -n tracts=volebni_okrsky.ndjson > volebni_okrsky-topo.json
-   topo2geo < volebni_okrsky-topo.json tracts=volebni_okrsky-simple-data.json
 fi
 
 if [ "$1" == "-S" ]; then

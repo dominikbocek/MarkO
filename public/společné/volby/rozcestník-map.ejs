@@ -9,7 +9,7 @@
                 color: #d80036;
             }
     </style>
-        <% if(obvody.length > 1)  {%>
+        <% if(obvody.length > 1 && info['lokalita']['druh'] == "obec")  {%>
             <section class="col-span-12">
             <header><h2>Samosprávné městské části/obvody</h2></header>
             <div style="display: flex;">
@@ -17,7 +17,7 @@
                     <ul id="obvody">
                         <%
                             for (var i = 0; i < obvody.length ; i++) {%>
-                                <li><a href="<%= obvody[i] %>/mapy" target="_blank" class="momc-<%= obvody[i] %>"><%= nazvy[i] %></a>
+                                <li><a href="<%= obvody[i] %>/" target="_blank" class="momc-<%= obvody[i] %>"><%= nazvy[i] %></a>
                                 </li>
                             <% } %>
                     </ul>
@@ -31,9 +31,15 @@
         </section>
         <script type="module">
             const svg = d3.select("#mapa") // u někomunálních voleb nutnost filtrace
-            const data = await d3.json(<% if(info['druh'] !== 'komunální') {%>"../../volebni_okrsky-topo.json"<%} {%>"volebni_okrsky-topo.json"<%} %>)
+            const data = await d3.json(<% if(info['druh'] !== 'komunální') {%>"../../volebni_okrsky-simple-topo.json"<%} else {%>"volebni_okrsky-topo.json"<%} %>)
+
+            <% if(info.lokalita.druh !== "stát") {
+                %>const id_obce = <%= info['lokalita']['KODZASTUP'] %>
+            <% } %>
 
             const subunits = topojson.feature(data, data.objects.tracts) // obce
+
+            <% if(info['druh'] !== 'komunální' && info['lokalita']['druh'] !== 'stát') {%>subunits.features = subunits.features.filter(function(element) {return element["properties"]["kod_obec"].startsWith(id_obce)})<% } %>
 
             var projection = d3.geoMercator()
             .center(d3.geoCentroid(subunits)) //střed obce

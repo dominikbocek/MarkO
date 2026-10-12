@@ -12,6 +12,8 @@ switch (parametry.lokalita) {
         break;
 }
 
+parametry.data = predpona + "volebni_okrsky-simple-topo.json"
+
 if(parametry.typzobrazeni == "normální") {
     parametry.urlParams = new URLSearchParams(window.location.search);
     parametry.koalice = parametry.urlParams.get('koalice');
@@ -20,7 +22,7 @@ if(parametry.typzobrazeni == "normální") {
     } else {
         parametry.koalice = false
     }
-    parametry.data = predpona + "volebni_okrsky-simple-data.json"
+    
     switch (parametry.lokalita) {
         case "stát":
             parametry.statistiky = parametry.koalice ? predpona + "statistics-obce2.csv" : predpona + "statistics-obce.csv"
@@ -32,7 +34,7 @@ if(parametry.typzobrazeni == "normální") {
     }
     parametry.legendazdroj = parametry.koalice ? "vysledky_cr2.json" : "vysledky_cr.json"
 } else if(parametry.typzobrazeni == "účast") {
-    parametry.data = predpona + "volebni_okrsky-simple-data.json"
+
     switch (parametry.lokalita) {
         case "stát":
             parametry.statistiky = "statistics-obce.csv"

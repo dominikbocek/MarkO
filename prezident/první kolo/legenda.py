@@ -22,18 +22,34 @@ kodobec = argumenty.kodobec
 dosouboru = argumenty.dosouboru
 koalice = argumenty.koalice
 
+
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
 
 soubor = "candidates.csv"
 souborjson = "vysledky_cr.json"
 
-match koalice:
-    case "ano":
-        statistiky = "statistics-obce2.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
-    case "ne":
-        statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
-    case _:
-        sys.exit("Neplatná možnost!")
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
+
+if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["NADRZASTUP"])) | ((obce["KODZASTUP"] == int(kodobec)) & (obce["NADRZASTUP"].isna()))]) > 0:
+    print("test1")
+    match koalice:
+        case "ano":
+            statistiky = "statistics-obce2.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+        case "ne":
+            statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+        case _:
+            sys.exit("Neplatná možnost!")
+elif len(obce[(obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] != obce["NADRZASTUP"])]) > 0:
+    print("test2")
+    match koalice:
+        case "ano":
+            statistiky = "statistics2.csv"
+        case "ne":
+            statistiky = "statistics.csv"
+        case _:
+            sys.exit("Neplatná možnost!")
+else:
+    sys.exit("Obec se zadaným kódem neexistuje.")
 
 data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8')
 if kodobec > 0:

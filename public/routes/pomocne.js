@@ -33,7 +33,7 @@ function urllomitka(url, req, res) {
 
 const prehled = express.Router({ mergeParams: true })
 
-prehled.get("/prehled", (req, res, next) => {
+prehled.get(["/prehled", "/"], (req, res, next) => {
     let info = nacistJSON(req.params.volby)
 
     if (info == null) {
@@ -71,8 +71,14 @@ prehled.get("/prehled", (req, res, next) => {
     let info_obec
 
     if(req.params.obvod == undefined) {
+        if(isNaN(req.params.obec)) {
+            return next()
+        }
         info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obec} --json ano`)
     } else {
+        if(isNaN(req.params.obvod)) {
+            return next()
+        }
         info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obvod} --json ano`)
     }
 
@@ -81,6 +87,10 @@ prehled.get("/prehled", (req, res, next) => {
     } catch (error) {
         chyby.chyba(error)
         return next()
+    }
+
+    if(req.originalUrl.endsWith("/") || !req.originalUrl.endsWith("/prehled")) {
+        return res.redirect(301, req.baseUrl + req.path + "prehled");
     }
 
     info.lokalita = info_obec
@@ -101,14 +111,6 @@ prehled.get("/prehled", (req, res, next) => {
     seznam_nazvu_obvodu = eval(seznam_nazvu_obvodu.toString())
 
     return res.render(`${cwd()}/společné/volby/volby.ejs`, { info , obvody:seznam_obvodu, nazvy:seznam_nazvu_obvodu})
-})
-
-prehled.get("/", (req, res, next) => {
-    if(req.originalUrl.endsWith("/")) {
-        return res.redirect(301, req.baseUrl + req.path + "prehled");
-    } else {
-        return next()
-    }
 })
 
 module.exports = {nacistJSON, urllomitka, prehled}

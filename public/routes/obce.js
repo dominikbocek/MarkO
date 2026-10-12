@@ -167,7 +167,14 @@ legenda.get("/vysledky_cr.json", (req, res, next) => {
             return next()
     }
 
-    var filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obec}`)
+    var filtrovanalegenda
+
+    if(req.params.obvod == undefined) {
+        filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obec}`)
+    } else {
+        filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obvod}`)
+    }
+
     return res.send(filtrovanalegenda)
 })
 

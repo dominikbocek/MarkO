@@ -1,11 +1,9 @@
 export async function vykresleni_zaklad(geodata, statistiky) {
-    
-    let data = topojson.topology({tracts: geodata})
 
     let subunits
 
     if(parametry.lokalita == "stát") { 
-        const puvodnigeometrie = data.objects.tracts.geometries
+        const puvodnigeometrie = geodata.objects.tracts.geometries
 
         // seskupení podle id (pouze pro zobrazení celostátních výsledků)
         const obce = d3.group(puvodnigeometrie, d => String(d.properties.kod_obec))
@@ -13,7 +11,7 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         // Sloučení okrsků každé obce
         const slouceno = Array.from(obce, ([idObce, okrsky]) => {
 
-        const geometrie = topojson.mergeArcs(data, okrsky)
+        const geometrie = topojson.mergeArcs(geodata, okrsky)
 
         geometrie.id = idObce
         geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
@@ -27,9 +25,9 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         geometries: slouceno
         }
 
-        subunits = topojson.feature(data, mergedObject)
+        subunits = topojson.feature(geodata, mergedObject)
     } else if(parametry.lokalita == "obec" || parametry.lokalita == "obvod") {
-        subunits = topojson.feature(data, data.objects.tracts) // obce
+        subunits = topojson.feature(geodata, geodata.objects.tracts) // obce
     }
 
     if(parametry.druh !== "komunální") {

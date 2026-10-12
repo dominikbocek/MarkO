@@ -78,7 +78,9 @@
                 <%- include('./partials/chart/chart-02.html') %>
                 <!-- ====== Chart Two End -->
               </div>
-              <%- include("../rozcestník-map.ejs") %>
+              <% if(locals.obvody !== undefined) {%>
+                <%- include("../rozcestník-map.ejs") %>
+              <%} %>
             </div>
           </div>
         </main>

@@ -5,7 +5,7 @@ parametry.rozsah = (parametry.urlParams.get('rozsah') === null) ? "standard" : p
 parametry.hledanastrana = parametry.urlParams.get('strana');
 if(parametry.druh !== "komunální") {
     if (parametry.id_obce !== "") {predpona = "../../../"} else {predpona = "../"}
-    parametry.data = predpona + "volebni_okrsky-simple-data.json"
+    parametry.data = predpona + "volebni_okrsky-simple-topo.json"
     switch (parametry.druh) {
         case "prezidentské":
             parametry.seznamstran = `${predpona}samostatné/../candidates-univerzal.csv`
@@ -23,7 +23,7 @@ if(parametry.druh !== "komunální") {
         parametry.csv = `${predpona}samostatné/${parametry.hledanastrana}.csv`
     }
 } else {
-    parametry.data = "../volebni_okrsky-simple-data.json"
+    parametry.data = "../volebni_okrsky-topo.json"
     parametry.seznamstran = `../parties-${parametry.id_obce}.csv`
     parametry.csv = `${parametry.hledanastrana}.csv`
 }
