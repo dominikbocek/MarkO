@@ -9,7 +9,7 @@
                 color: #d80036;
             }
     </style>
-        <% if(obvody.length > 1 && info['lokalita']['druh'] == "obec")  {%>
+        <% if(obvody.length > 0 && info['lokalita']['druh'] == "obec")  {%>
             <section class="col-span-12">
             <header><h2>Samosprávné městské části/obvody</h2></header>
             <div style="display: flex;">
@@ -66,13 +66,21 @@
                 .attr("d", path)
                 .on("mouseover", function () {
                     this.setAttribute("fill", "#d80036")
-                    svg.selectAll(`.${this.classList[2]}`).attr("fill", "#d80036")
-                    document.getElementById("obvody").querySelector(`.${this.classList[2]}`).style.color = "#d80036"
+                    if(document.getElementById("obvody").querySelector(`.${this.classList[2]}`) !== null) {
+                        svg.selectAll(`.${this.classList[2]}`).attr("fill", "#d80036")
+                        document.getElementById("obvody").querySelector(`.${this.classList[2]}`).style.color = "#d80036"
+                    } else {
+                        svg.selectAll(`.${this.classList[2]}`).attr("fill", "#aaa")
+                    }
                     })
                 .on("mouseout", function () {
                     this.setAttribute("fill", "#aaa")
-                    svg.selectAll(`.${this.classList[2]}`).attr("fill", "#aaa")
-                    document.getElementById("obvody").querySelector(`.${this.classList[2]}`).style.color = ""
+                    if(document.getElementById("obvody").querySelector(`.${this.classList[2]}`) !== null) {
+                        svg.selectAll(`.${this.classList[2]}`).attr("fill", "#aaa")
+                        document.getElementById("obvody").querySelector(`.${this.classList[2]}`).style.color = ""
+                    } else {
+                        svg.selectAll(`.${this.classList[2]}`).attr("fill", "#aaa")
+                    }
                 });
                 
                 <%

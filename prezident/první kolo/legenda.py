@@ -25,13 +25,9 @@ koalice = argumenty.koalice
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
 
-soubor = "candidates.csv"
-souborjson = "vysledky_cr.json"
-
 obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
 
-if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["NADRZASTUP"])) | ((obce["KODZASTUP"] == int(kodobec)) & (obce["NADRZASTUP"].isna()))]) > 0:
-    print("test1")
+if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["NADRZASTUP"])) | ((obce["KODZASTUP"] == int(kodobec)) & (obce["NADRZASTUP"].isna()))]) > 0 or kodobec == 0:
     match koalice:
         case "ano":
             statistiky = "statistics-obce2.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
@@ -40,7 +36,6 @@ if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["N
         case _:
             sys.exit("Neplatná možnost!")
 elif len(obce[(obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] != obce["NADRZASTUP"])]) > 0:
-    print("test2")
     match koalice:
         case "ano":
             statistiky = "statistics2.csv"
@@ -48,12 +43,22 @@ elif len(obce[(obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] != obce["
             statistiky = "statistics.csv"
         case _:
             sys.exit("Neplatná možnost!")
-else:
+elif kodobec > 0:
     sys.exit("Obec se zadaným kódem neexistuje.")
 
-data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8')
+match koalice:
+    case "ano":
+        soubor = "candidates2.csv"
+        souborjson = "vysledky_cr2.json"
+    case "ne":
+        soubor = "candidates.csv"
+        souborjson = "vysledky_cr.json"
+    case _:
+        sys.exit("Neplatná možnost!")
+
+data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8', dtype={'id': str})
 if kodobec > 0:
-    data = data[data["id"] == kodobec]
+    data = data[data["id"].str.startswith(str(kodobec))] # jsem líný přidávat důkladnější ověřování, tohle by mělo stačit
 platne_hlasy_celkem = int(data["PL_HL_CELK"].sum(axis=0))
 
 # Otevření souboru v režimu pro čtení

@@ -4,8 +4,15 @@ parametry.urlParams = new URLSearchParams(window.location.search);
 parametry.rozsah = (parametry.urlParams.get('rozsah') === null) ? "standard" : parametry.urlParams.get('rozsah');
 parametry.hledanastrana = parametry.urlParams.get('strana');
 if(parametry.druh !== "komunální") {
-    if (parametry.id_obce !== "") {predpona = "../../../"} else {predpona = "../"}
+    if (parametry.id_obce !== "") {
+        if(parametry.lokalita == "obec") {
+            predpona = "../../../"
+        } else {
+            predpona = "../../../../"
+        }
+    } else {predpona = "../"}
     parametry.data = predpona + "volebni_okrsky-simple-topo.json"
+    parametry.csv = `${predpona}samostatné/${parametry.hledanastrana}.csv`
     switch (parametry.druh) {
         case "prezidentské":
             parametry.seznamstran = `${predpona}samostatné/../candidates-univerzal.csv`

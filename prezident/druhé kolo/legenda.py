@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--volby', action="store", dest="volby", required=True)
 parser.add_argument('--kodobec', action="store", dest="kodobec", type=int, default=0)
 parser.add_argument('--dosouboru', action="store", dest="dosouboru", default=False)
+
 argumenty = parser.parse_args()
 volby = argumenty.volby
 kodobec = argumenty.kodobec
@@ -21,12 +22,20 @@ dosouboru = argumenty.dosouboru
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\druhé kolo")
 
 soubor = "candidates.csv"
-statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
 souborjson = "vysledky_cr.json"
 
-data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8')
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
+
+if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["NADRZASTUP"])) | ((obce["KODZASTUP"] == int(kodobec)) & (obce["NADRZASTUP"].isna()))]) > 0 or kodobec == 0:
+    statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
+elif len(obce[(obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] != obce["NADRZASTUP"])]) > 0:
+    statistiky = "statistics.csv"
+elif kodobec > 0:
+    sys.exit("Obec se zadaným kódem neexistuje.")
+
+data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8', dtype={'id': str})
 if kodobec > 0:
-    data = data[data["id"] == kodobec]
+    data = data[data["id"].str.startswith(str(kodobec))] # jsem líný přidávat důkladnější ověřování, tohle by mělo stačit
 platne_hlasy_celkem = int(data["PL_HL_CELK"].sum(axis=0))
 
 # Otevření souboru v režimu pro čtení

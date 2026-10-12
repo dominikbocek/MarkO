@@ -20,7 +20,7 @@ case $1 in
          Help_prikazy_volebni_mapy "$1"
       fi
       Overeni "$2"
-      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data.json"; then
+      if ! test -f "$adresar_voleb/volebni_okrsky-simple-topo.json"; then
          echo "Pro zobrazení kandidujících subjektů musí nejprve proběhnout zpracování dat ve standartním režimu (možnost -n)."
          exit
       fi
@@ -31,7 +31,7 @@ case $1 in
          Help_prikazy_volebni_mapy "$1"
       fi
       Overeni "$2"
-      if ! test -f "$adresar_voleb/volebni_okrsky-simple-data.json"; then
+      if ! test -f "$adresar_voleb/volebni_okrsky-simple-topo.json"; then
          echo "Pro vznik koalic musí nejprve proběhnout zpracování dat ve standartním režimu (možnost -n)."
          exit
       fi

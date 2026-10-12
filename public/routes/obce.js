@@ -75,6 +75,8 @@ function obce_obvody_vsechny_volby(url, typzobrazeni) {
                 if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
                     return next()
                 }
+
+                info.kolo = req.params.kolo
                 
                 break;
             case "sněmovní":
