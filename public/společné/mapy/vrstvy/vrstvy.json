@@ -1,7 +1,7 @@
 [
     {
         "název": "Sudety",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "volby": ["prezidentské", "krajské", "sněmovní", "komunální"],
         "oblast": "stát",
         "selector": "protektorat",
         "url": "/společné/mapy/vrstvy/protektorát.json"
@@ -9,7 +9,7 @@
 
     {
         "název": "okresy 1921",
-        "volby": ["prezidentské", "krajské", "sněmovní", "komunální"],
+        "volby": ["prezidentské", "krajské", "sněmovní"],
         "oblast": "stát",
         "selector": "okresy1921",
         "url": "/společné/mapy/vrstvy/Okresy_1921.json"

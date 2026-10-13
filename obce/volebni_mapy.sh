@@ -219,8 +219,10 @@ if [ "$1" == "-n" ] || [ "$1" == "-S" ]; then # data z RÚIANu + data pro sněmo
    else
       if [ "$3" == "" ]; then # pro volby z roku 2022 a starší je použita sada z roku 2022, jelikož starší data již nejsou k dispozici, je rovněž nastavena jako výchozí, pokud není argument specifikován
          shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/volební/2022/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
+         geo2topo -n tracts="$adresar_voleb/volebni_okrsky.ndjson" > "$adresar_voleb/volebni_okrsky-topo.json"
       else # parametr slouží jako cesta k datům o okrscích (viz struktura složky okrsky), nutno použít sadu pro dané volby, podklady pro celý stát z RÚIANU pro tento mechanismus nefungují
          shp2json -n --encoding=utf-8 "$adresar_instalace/../okrsky/$3/okrsky.shp" | ndjson-map 'd.id = d.properties.Momc==0?d.properties.Obec + "-" + d.properties.Cislo:d.properties.Momc + "-" + d.properties.Cislo, d' > "$adresar_voleb/volebni_okrsky.ndjson"
+         geo2topo -n tracts="$adresar_voleb/volebni_okrsky.ndjson" > "$adresar_voleb/volebni_okrsky-topo.json"
       fi
       kodstatut=$(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "kodstatut")
       if $(python3 "$adresar_instalace/jestatut.py" --volby "$2" --obec "$4" --vratit "jesamospravny"); then # samosprávný obvod

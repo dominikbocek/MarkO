@@ -181,9 +181,9 @@ legenda.get("/vysledky_cr.json", (req, res, next) => {
 })
 
 router.get("/:obec/seznam_obvodu.js", (req, res, next) => {
-    let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}"`)
+    let seznam_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --obec "${req.params.obec}"`)
 
-    let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --volby "${req.params.volby}" --obec "${req.params.obec}" --vypsat "název"`)
+    let seznam_nazvu_obvodu = execSync(`python3 "${cwd()}/../obce/seznam_obvodů.py" --obec "${req.params.obec}" --vypsat "název"`)
 
     seznam_obvodu = eval(seznam_obvodu.toString())
 

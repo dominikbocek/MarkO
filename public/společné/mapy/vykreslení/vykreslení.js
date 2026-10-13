@@ -12,6 +12,7 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         const slouceno = Array.from(obce, ([idObce, okrsky]) => {
 
         const geometrie = topojson.mergeArcs(geodata, okrsky)
+        window.geometrie = geometrie
 
         geometrie.id = idObce
         geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
@@ -25,7 +26,7 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         geometries: slouceno
         }
 
-        subunits = topojson.feature(geodata, mergedObject)
+        subunits = topojson.feature(geodata, mergedObject) // pro zobrazení po obcích použít topojson.feature(geodata, mergedObject), pro okrsky topojson.feature(geodata, geodata.objects.tracts)
     } else if(parametry.lokalita == "obec" || parametry.lokalita == "obvod") {
         subunits = topojson.feature(geodata, geodata.objects.tracts) // obce
     }

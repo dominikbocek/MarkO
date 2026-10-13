@@ -2,7 +2,9 @@ import { legenda_skala, color } from "/společné/mapy/legendy/legenda-skala.js"
 import { nactenimapy, nactenicsv } from "/společné/mapy/vykreslení/načtení.js"
 import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
 
-export async function vykresleni(svg) {
+import { vykresleni_komunalni_volby_celostat } from "/společné/mapy/vykreslení/obce/účast-stát.js" // jsem líný kvůli takové hovadině zavádět dynamický import
+
+async function vykresleni_univerzalni(svg) {
   // vykreslení mapy
 
   const legendaelement = d3.select("#legenda")
@@ -35,3 +37,13 @@ export async function vykresleni(svg) {
     subunits: subunits
   }
 }
+
+let vykresleni
+
+if(parametry.lokalita == "stát" && parametry.druh == "komunální") {
+  vykresleni = vykresleni_komunalni_volby_celostat
+} else {
+  vykresleni = vykresleni_univerzalni
+}
+
+export {vykresleni}

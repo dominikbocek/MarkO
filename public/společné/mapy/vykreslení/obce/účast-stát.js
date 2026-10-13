@@ -2,13 +2,13 @@ import { legenda_skala, color } from "/společné/mapy/legendy/legenda-skala.js"
 import { nactenimapy, nactenicsv } from "/společné/mapy/vykreslení/načtení.js"
 import { vykresleni_zaklad } from "/společné/mapy/vykreslení/vykreslení.js"
 
-export async function vykresleni(svg) {
+export async function vykresleni_komunalni_volby_celostat(svg) {
   // vykreslení mapy
 
   const legendaelement = d3.select("#legenda")
 
-  const data = await nactenimapy("/volby/sněmovní volby 2025/volebni_okrsky-simple-data.json")
-  const csv = await nactenicsv("/volby/komunální volby 2022/účast.csv")
+  const data = await nactenimapy(`/volby/${parametry.volby}/volebni_okrsky-topo.json`)
+  const csv = await nactenicsv(`/volby/${parametry.volby}/účast.csv`)
 
   const subunits = await vykresleni_zaklad(data, csv)
 
@@ -26,7 +26,7 @@ export async function vykresleni(svg) {
     .data(subunits.features)
     .enter().append("path")
     .attr("class", function(d) { return "subunit " + d.id; })
-    .attr("fill", function(d) { return color(parametry.rozsah)(d.properties.ucast !== undefined ? Math.round((d.properties.ucast)*100)/100: d.properties.PL_HL_CELK !== undefined && d.properties.VOL_SEZNAM !== undefined ? Math.round(((d.properties.PL_HL_CELK / d.properties.VOL_SEZNAM) * 10000))/100 : null);})
+    .attr("fill", function(d) { let ucast = (d3.sum(csv.filter(function(element) {return element["KODZASTUP"].startsWith(d.id)}), d => d.ODEVZ_OBAL) / d3.sum(csv.filter(function(element) {return element["KODZASTUP"].startsWith(d.id)}), d => d.VOL_SEZNAM))*100; return color(parametry.rozsah)(ucast);})
     .attr("d", path)
 
   legenda_skala(legendaelement, procentualnirozsah)
