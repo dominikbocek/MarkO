@@ -32,6 +32,7 @@ results = results.drop(results[results["OBEC"] != obec].index)
 results['id'] = results['OBEC'].astype(str) + '-' + results['OKRSEK'].astype(str)
 results = results[["id", "POR_STR_HL", "POC_HLASU", "TYPZASTUP", "DATUMVOLEB"]]
 
+
 if statut != 0 and jesamospravnyobvod:
     vysledky_obce = results[(results["TYPZASTUP"] == 1) & (results["DATUMVOLEB"] == datumvoleb)]
     vysledky_obvodu = results[(results["TYPZASTUP"] == 2) & (results["DATUMVOLEB"] == datumvoleb)]
@@ -42,6 +43,7 @@ if statut != 0 and jesamospravnyobvod:
         columns="POR_STR_HL",
         values="POC_HLASU"
     ).reset_index()
+
 
     vysledky_obvodu_reorganizovano = pd.merge(vysledky_obvodu_reorganizovano, ucast_vybrana_obec, on="id")
     vysledky_obvodu_reorganizovano.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}\\{obec}.csv", index=False)
@@ -71,7 +73,6 @@ else:
     doprovodne_statistiky_statutarni_mesto = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", encoding="cp1250")
     ucast_statutarni_mesto = doprovodne_statistiky_statutarni_mesto[doprovodne_statistiky_statutarni_mesto["KODZASTUP"] == statut]
     vysledek_reorganizovano = pd.merge(vysledek_reorganizovano, ucast_statutarni_mesto, on="id")
-    #print(vysledek_reorganizovano)
     if os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{statut}.csv"):
         hlava = False
     else:

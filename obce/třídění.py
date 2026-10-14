@@ -1,5 +1,6 @@
 import os
 import csv
+import sys
 import argparse
 import numpy as np
 import pandas as pd
@@ -40,18 +41,13 @@ if not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\publi
     with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvcoco.csv", 'r') as csvfile:
         csvreader = csv.DictReader(csvfile, delimiter=";")
         for row in csvreader:
-            if row["STAV_OBCE"] == "0" and str(row["DATUMVOLEB"]) == str(datumvoleb): # pokud nemá hodnotu NADRZASTUP, jde o statutární město; přepsat na pandas?
+            if row["STAV_OBCE"] == "0" and str(row["DATUMVOLEB"]) == str(datumvoleb): # pokud nemá hodnotu NADRZASTUP, jde o statutární město
                 statutarni_mesta.append(row["KODZASTUP"])
-
-    statutarni_mesta_csv = open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", mode="w+", newline="")
-    writer = csv.writer(statutarni_mesta_csv)
-    writer.writerow(["DATUMVOLEB","ID_OKRSKY","KRAJ","OKRES","OBEC","OKRSEK","TYPZASTUP","COBVODU","VOL_SEZNAM","VYD_OBALKY","ODEVZ_OBAL","PL_HL_CELK","POCET_VS","POC_VS_HL","KODZASTUP","id"])
-    statutarni_mesta_csv.close()
 
     for mesto in statutarni_mesta:
         ucast_obce = obce[obce["KODZASTUP"] != int(mesto)] # běžné obce bez statutárních zastupitelstev + statutární města bez samosprávných místních obvodů (Olomouc)
         statutarni_mesta_df = obce[obce["KODZASTUP"] == int(mesto)]
-        statutarni_mesta_df.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", mode="a", index=False, header=False)
+        statutarni_mesta_df.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", mode="a", index=False, header=not os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv"))
 
     ucast_obce["ucast"] = (ucast_obce["ODEVZ_OBAL"].astype(int) / ucast_obce["VOL_SEZNAM"].astype(int)) * 100
     ucast_obce = ucast_obce[["id", "KODZASTUP", "POCET_VS", "ODEVZ_OBAL", "VOL_SEZNAM", "PL_HL_CELK", "ucast"]]
