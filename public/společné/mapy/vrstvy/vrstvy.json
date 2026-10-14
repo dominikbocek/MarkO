@@ -9,7 +9,7 @@
 
     {
         "název": "okresy 1921",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "volby": ["prezidentské", "krajské", "sněmovní", "komunální"],
         "oblast": "stát",
         "selector": "okresy1921",
         "url": "/společné/mapy/vrstvy/Okresy_1921.json"
@@ -17,7 +17,7 @@
 
     {
         "název": "okresy 1950",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "volby": ["prezidentské", "krajské", "sněmovní", "komunální"],
         "oblast": "stát",
         "selector": "okresy1950",
         "url": "/společné/mapy/vrstvy/Okresy_1950.json"
@@ -25,7 +25,7 @@
 
     {
         "název": "okresy 1960",
-        "volby": ["prezidentské", "krajské", "sněmovní"],
+        "volby": ["prezidentské", "krajské", "sněmovní", "komunální"],
         "oblast": "stát",
         "selector": "okresy1960",
         "url": "/společné/mapy/vrstvy/Okresy_1961.json"
