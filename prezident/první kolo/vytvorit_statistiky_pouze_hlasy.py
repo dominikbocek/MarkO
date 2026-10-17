@@ -43,5 +43,5 @@ match zpracovani:
 data = pd.read_csv(soubor)
 
 # odstranění řádků a sloupců ze souboru
-novy = data.drop(columns=["id", "VOL_SEZNAM", "PL_HL_CELK", "POCET_VS"])
+novy = data.drop(columns=["id", "VOL_SEZNAM", "PL_HL_CELK", "ODEVZ_OBAL", "POCET_VS"])
 novy.to_csv(novysoubor, index=False)

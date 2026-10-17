@@ -44,7 +44,7 @@ bezregistrace = subprocess.run(["python3", f"{os.path.dirname(os.path.realpath(_
 bezregistrace = eval(bezregistrace)
 parties = parties[["KSTRANA", "VSTRANA"]]
 
-s = statistics[['id', 'VOL_SEZNAM', 'PL_HL_CELK']]
+s = statistics[['id', 'VOL_SEZNAM', 'ODEVZ_OBAL', 'PL_HL_CELK']]
 
 r = pd.pivot_table(results, values='POC_HLASU', index=['id'], columns=['KSTRANA'], aggfunc=np.sum, fill_value=0)
 
@@ -64,6 +64,8 @@ vol_seznam = statistika.pop("VOL_SEZNAM")
 
 pl_hl_celk = statistika.pop("PL_HL_CELK")
 
+odevz_obalky = statistika.pop("ODEVZ_OBAL")
+
 pocet_vs = statistika.pop("POCET_VS")
 
 statistika.drop(columns=bezregistrace, inplace=True)
@@ -72,6 +74,7 @@ statistika.rename(columns={x:y for x,y in zip(statistika.columns, range(1, len(s
 
 statistika.insert(0, id.name, id)
 statistika.insert(len(statistika.columns), vol_seznam.name, vol_seznam)
+statistika.insert(len(statistika.columns), odevz_obalky.name, odevz_obalky)
 statistika.insert(len(statistika.columns), pl_hl_celk.name, pl_hl_celk)
 statistika.insert(len(statistika.columns), pocet_vs.name, pocet_vs)
 statistika.to_csv(soubor, index=False)
@@ -81,15 +84,16 @@ statistika.to_csv(soubor, index=False)
 druhafaze = pd.read_csv(soubor)
 prvnisoucet = (
     druhafaze
-    .groupby('id', as_index=False)[['VOL_SEZNAM', 'PL_HL_CELK']]
+    .groupby('id', as_index=False)[['VOL_SEZNAM', 'ODEVZ_OBAL', 'PL_HL_CELK']]
     .sum()
 )
 
 print(prvnisoucet['VOL_SEZNAM'])
 
-druhafaze.drop(columns=['VOL_SEZNAM', 'PL_HL_CELK'], inplace=True)
+druhafaze.drop(columns=['VOL_SEZNAM', 'ODEVZ_OBAL', 'PL_HL_CELK'], inplace=True)
 druhafaze.drop_duplicates(inplace=True)
 druhafaze.insert(len(druhafaze.columns), 'VOL_SEZNAM', prvnisoucet["VOL_SEZNAM"].values)
+druhafaze.insert(len(druhafaze.columns), 'ODEVZ_OBAL', prvnisoucet["ODEVZ_OBAL"].values)
 druhafaze.insert(len(druhafaze.columns), 'PL_HL_CELK', prvnisoucet["PL_HL_CELK"].values)
 
 druhafaze["POCET_VS"] = POCET_VS

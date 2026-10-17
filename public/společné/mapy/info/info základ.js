@@ -49,19 +49,16 @@ function infonazev_stat(d) {
     return nazev
 }
 
-function infonazev2_obce_obvody(d, obvody) {
-    let seznam_obvodu = Object.getOwnPropertyNames(obvody)
-    for (let i = 0; i < seznam_obvodu.length; i++) {
-        if(obvody[seznam_obvodu[i]][1] == d.id.split("-")[0]) {
-            return obvody[seznam_obvodu[i]][0]
-        }
-    }
+function infonazev2_obce_obvody(d) {
+    let obvody
+    return "Dočasně nedostupné..."
 }
 
 export function infonazev(d, obvody) {
     if(parametry.lokalita == "stát" || parametry.druh !== "komunální") {
         return infonazev_stat(d)
     } else if(parametry.lokalita == "obec" || parametry.lokalita == "obvod") {
+        console.log("test")
         return infonazev2_obce_obvody(d, obvody)
     }
 }

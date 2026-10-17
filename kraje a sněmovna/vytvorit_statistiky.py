@@ -42,7 +42,7 @@ bezregistrace = subprocess.run(["python3", f"{os.path.dirname(os.path.realpath(_
 bezregistrace = eval(bezregistrace)
 parties = parties[["KSTRANA", "VSTRANA"]]
 
-s = statistics[['id', 'VOL_SEZNAM', 'PL_HL_CELK']]
+s = statistics[['id', 'VOL_SEZNAM', 'PL_HL_CELK', 'ODEVZ_OBAL']]
 
 r = pd.pivot_table(results, values='POC_HLASU', index=['id'], columns=['KSTRANA'], aggfunc=np.sum, fill_value=0)
 
@@ -62,6 +62,8 @@ vol_seznam = statistika.pop("VOL_SEZNAM")
 
 pl_hl_celk = statistika.pop("PL_HL_CELK")
 
+odevz_obalky = statistika.pop("ODEVZ_OBAL")
+
 pocet_vs = statistika.pop("POCET_VS")
 
 statistika.drop(columns=bezregistrace, inplace=True)
@@ -70,6 +72,7 @@ statistika.rename(columns={x:y for x,y in zip(statistika.columns, range(1, len(s
 
 statistika.insert(0, id.name, id)
 statistika.insert(len(statistika.columns), vol_seznam.name, vol_seznam)
+statistika.insert(len(statistika.columns), odevz_obalky.name, odevz_obalky)
 statistika.insert(len(statistika.columns), pl_hl_celk.name, pl_hl_celk)
 statistika.insert(len(statistika.columns), pocet_vs.name, pocet_vs)
 statistika.to_csv(soubor, index=False)

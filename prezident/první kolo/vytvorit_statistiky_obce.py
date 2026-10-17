@@ -29,7 +29,7 @@ parties = pd.read_csv("perk.csv", delimiter=";", encoding="cp1250")
 
 results = results[results["KOLO"] == 1]
 
-results = results.drop(columns=["OKRES", "OBEC", "OKRSEK", "VYD_OBALKY", "ODEVZ_OBAL", "TYP_FORM", "OPRAVA", "KOLO", "CHYBA", "KC_1", "KC_2", "KC_3", "KC_4", "KC_SUM", "POSL_KAND"])
+results = results.drop(columns=["OKRES", "OBEC", "OKRSEK", "VYD_OBALKY", "TYP_FORM", "OPRAVA", "KOLO", "CHYBA", "KC_1", "KC_2", "KC_3", "KC_4", "KC_SUM", "POSL_KAND"])
 
 neplatni_kandidati = parties.index[(parties['PLATNOST'] == "N")].tolist()
 
@@ -47,10 +47,13 @@ vol_seznam = results.pop("VOL_SEZNAM")
 
 pl_hl_celk = results.pop("PL_HL_CELK")
 
+odevz_obalky = results.pop("ODEVZ_OBAL")
+
 results.rename(columns={x:y for x,y in zip(results.columns, range(1, len(results.columns) + 1))}, inplace=True) # přečíslování
 
 results.insert(0, id.name, id)
 results.insert(len(results.columns), vol_seznam.name, vol_seznam)
+results.insert(len(results.columns), odevz_obalky.name, odevz_obalky)
 results.insert(len(results.columns), pl_hl_celk.name, pl_hl_celk)
 results["POCET_VS"] = len(parties) - len(neplatni_kandidati)
 

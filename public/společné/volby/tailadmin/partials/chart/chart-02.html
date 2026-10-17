@@ -74,22 +74,22 @@
   <% if(info.lokalita.druh !== "stát" && info.druh !== "komunální") {// pro zpracování obcí ve volbách mimo komunální
     %><% if(info.lokalita.druh == "obec") {%>
     window.vysledky = vysledky.filter(function(element) {return element["id"] == id_obce})[0]
-    window.pl_hl_celk = vysledky.PL_HL_CELK
+    window.odevz_obalky = vysledky.ODEVZ_OBAL
     window.vol_seznam = vysledky.VOL_SEZNAM
     <%} else {%>
       window.vysledky = vysledky.filter(function(element) {return element["id"].startsWith(id_obce)})
-      window.pl_hl_celk = d3.sum(vysledky, d => d.PL_HL_CELK)
+      window.pl_hl_celk = d3.sum(vysledky, d => d.ODEVZ_OBAL)
       window.vol_seznam = d3.sum(vysledky, d => d.VOL_SEZNAM)
     <%}
   } else if(info.druh == "komunální") {%>// pro zpracování obcí pro komunální volby, pro přehled pro celostát u komunálních voleb se zatím nepočítá
-    window.pl_hl_celk = d3.sum(vysledky, d => d.ODEVZ_OBAL)
+    window.odevz_obalky = d3.sum(vysledky, d => d.ODEVZ_OBAL)
     window.vol_seznam = d3.sum(vysledky, d => d.VOL_SEZNAM)
   <%} else {%>
-    window.pl_hl_celk = d3.sum(vysledky, d => d.PL_HL_CELK)
+    window.odevz_obalky = d3.sum(vysledky, d => d.ODEVZ_OBAL)
     window.vol_seznam = d3.sum(vysledky, d => d.VOL_SEZNAM)
   <%} %>
 
-let ucast = Math.round((pl_hl_celk / vol_seznam)*10000)/100
+let ucast = Math.round((odevz_obalky / vol_seznam)*10000)/100
 
 function chart02(selector, value, options = {}) {
 

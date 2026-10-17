@@ -29,7 +29,7 @@ parties = pd.read_csv("perk.csv", delimiter=";", encoding="cp1250")
 
 results = results[results["KOLO"] == 2]
 
-results = results.drop(columns=["OKRES", "OBEC", "OKRSEK", "VYD_OBALKY", "ODEVZ_OBAL", "TYP_FORM", "OPRAVA", "KOLO", "CHYBA", "KC_1", "KC_2", "KC_3", "KC_4", "KC_SUM", "POSL_KAND"])
+results = results.drop(columns=["OKRES", "OBEC", "OKRSEK", "VYD_OBALKY", "TYP_FORM", "OPRAVA", "KOLO", "CHYBA", "KC_1", "KC_2", "KC_3", "KC_4", "KC_SUM", "POSL_KAND"])
 
 neplatni_kandidati = parties.index[(parties['PLATNOST'] == "N")].tolist()
 
@@ -50,6 +50,9 @@ col = results.pop("VOL_SEZNAM")
 results.insert(len(results.columns), col.name, col)
 
 col = results.pop("PL_HL_CELK")
+results.insert(len(results.columns), col.name, col)
+
+col = results.pop("ODEVZ_OBAL")
 results.insert(len(results.columns), col.name, col)
 
 results.rename(columns={results.columns[1]: "1", results.columns[2]: "2"}, inplace=True) # přečíslování

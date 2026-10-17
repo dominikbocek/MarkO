@@ -6,7 +6,8 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         const puvodnigeometrie = geodata.objects.tracts.geometries
 
         // seskupení podle id (pouze pro zobrazení celostátních výsledků)
-        const obce = d3.group(puvodnigeometrie, d => String(d.properties.kod_obec))
+        //const obce = d3.group(puvodnigeometrie, d => String(d.properties.kod_obec))
+        const obce = d3.group(puvodnigeometrie, function(d) {if(d.properties.kod_obec == undefined) {return String(d.properties.Obec)} else {return String(d.properties.kod_obec)}})
 
         // Sloučení okrsků každé obce
         const slouceno = Array.from(obce, ([idObce, okrsky]) => {
@@ -15,7 +16,7 @@ export async function vykresleni_zaklad(geodata, statistiky) {
         window.geometrie = geometrie
 
         geometrie.id = idObce
-        geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
+        //geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
 
         return geometrie
         })

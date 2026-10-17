@@ -26,7 +26,7 @@ export async function vykresleni_komunalni_volby_celostat(svg) {
     .data(subunits.features)
     .enter().append("path")
     .attr("class", function(d) { return "subunit " + d.id; })
-    .attr("fill", function(d) { let ucast = (d3.sum(csv.filter(function(element) {return element["KODZASTUP"].startsWith(d.id)}), d => d.ODEVZ_OBAL) / d3.sum(csv.filter(function(element) {return element["KODZASTUP"].startsWith(d.id)}), d => d.VOL_SEZNAM))*100; return color(parametry.rozsah)(ucast);})
+    .attr("fill", function(d) { let ucast = (d3.sum(csv.filter(function(element) {return element["KODZASTUP"].startsWith(d.id)}), d => d.ODEVZ_OBAL) / d3.sum(csv.filter(function(element) {return element["KODZASTUP"].startsWith(d.id)}), d => d.VOL_SEZNAM))*100; d.properties.ucast = ucast; return color(parametry.rozsah)(ucast);})
     .attr("d", path)
 
   legenda_skala(legendaelement, procentualnirozsah)

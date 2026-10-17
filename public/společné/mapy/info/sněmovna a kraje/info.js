@@ -13,7 +13,7 @@ export function info(event, d, strany) {
 
   let strana = function (poradi) {return strany.filter(function(element) {if(element["KSTRANA"] == hlasy[poradi]) {return element["KSTRANA"]}})[0]}
 
-  let ucast = Math.round((Number(d.properties.PL_HL_CELK) / Number(d.properties.VOL_SEZNAM))*10000)/100 + "%"
+  let ucast = Math.round((Number(d.properties.ODEVZ_OBAL) / Number(d.properties.VOL_SEZNAM))*10000)/100 + "%"
   let pocet_stran = d.properties.POCET_VS !== undefined ? d.properties.POCET_VS: null
   let prvnimisto = {"strana": strana(0) !== undefined ? strana(0)["zkratka"]: "data nejsou dostupná", "podil": strana(0) !== undefined ? `${Math.round((d.properties[hlasy[0].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}
   let druhemisto = {"strana": strana(1) !== undefined ? strana(1)["zkratka"]: "data nejsou dostupná", "podil": strana(1) !== undefined ? `${Math.round((d.properties[hlasy[1].toString()]/d.properties.PL_HL_CELK)*10000)/100} %`: "data nejsou dostupná"}

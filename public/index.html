@@ -55,9 +55,14 @@
                     document.getElementById('selhani').classList.replace('hide', 'show')
                 }
 
-                if(request.detail.xhr.status >= 200 && request.detail.xhr.status < 399) {
+                if(request.detail.xhr.status >= 200 && request.detail.xhr.status < 399 && request.detail.pathInfo.requestPath !== "/vypsat-volby") {
                     document.getElementById('uspech').classList.replace('hide', 'show')
                 }
+            })
+
+            document.body.addEventListener('htmx:beforeRequest', function(request) {
+                document.querySelector("#faze0").querySelector("button").innerHTML = nacitacianimace
+                document.querySelector("#faze0").querySelector("button").disabled = true
             })
         </script>
         <script>
