@@ -96,10 +96,9 @@ Ostatní možnosti použití naleznete v manuálu.
 
 ## Známé problémy
 
-### Volby před rokem 2006 nejsou kompatibilní
-Data k těmto volbám používají jinou strukturu, kterou současná verze programu nedokáže zpracovat
-
 ### Chybějící data
 Nejsou zveřejněná data k volbám před rokem 2000 do obecních zastupitelstev, Poslanecké sněmovny, České národní rady a Federálního shromáždění. Chybí data k výsledkům refereda o vstupu do Evropské unie. Do roku 2022 ČSÚ nezveřejňoval k výsledkům voleb hranice volebních okrsků, z toho důvodu jsou některé mapy voleb staršího data (zejména před rokem 2017) zkreslené nebo neúplné. Zejména u statutárních měst se samosprávnými městskými částmi může být zobrazení map částečně nebo zcela nefunkční (týká se měst, která svůj statut získala po květnu 2006.)
 
 Pro komunální volby se používají data z roku 2022, pro všechny ostatní z roku 2025. Program počítá do budoucna s rozšířením sady hranic okrsků, pokud se podaří získat příslušná data.
+
+Volby před rokem 2006 nejsou kompatibilní s verzí programu 1.0.0 až 1.0.3.
