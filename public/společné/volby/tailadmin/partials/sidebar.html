@@ -66,7 +66,7 @@
                 class="menu-item-text"
                 
               >
-                Dashboard
+                Výsledky voleb
               </span>
 
               <svg
@@ -99,7 +99,7 @@
               >
                 <li>
                   <a
-                    href="prehled"
+                    href="<% if(locals.zobrazeni !== undefined) {%>../<%} else if(locals.info.lokalita == 'obec') {%>../../<%} else if(locals.info.lokalita == 'obvod') {%>../../../<%} %>prehled"
                     class="menu-dropdown-item group"
                     :class="page === 'ecommerce' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
                   >
@@ -108,7 +108,7 @@
                 </li>
                 <li>
                   <a
-                    href="./obce"
+                    href="<% if(locals.zobrazeni !== undefined) {%>../<%} else if(locals.info.lokalita !== 'obec') {%>../../<%} else if(locals.info.lokalita == 'obvod') {%>../../../<%} %>obce"
                     class="menu-dropdown-item group"
                     :class="page === 'obce' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
                   >
@@ -221,7 +221,16 @@
                     class="menu-dropdown-item group"
                     :class="page === 'blank' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
                   >
-                    Mapa vítězů po obcích
+                    Mapa vítězů
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="vitez?koalice"
+                    class="menu-dropdown-item group"
+                    :class="page === 'blank' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
+                  >
+                    Mapa vítězů s koalicemi
                   </a>
                 </li>
                 <li>

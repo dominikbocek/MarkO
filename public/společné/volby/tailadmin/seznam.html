@@ -46,7 +46,7 @@
         <main>
           <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
             <!-- Breadcrumb Start -->
-            <div x-data="{ pageName: `Blank Page`}">
+            <div x-data="{ pageName: `Volby`}">
               <%- include("./partials/breadcrumb.html") %>
             </div>
             <!-- Breadcrumb End -->
@@ -58,14 +58,14 @@
                 <h3
                   class="mb-4 text-theme-xl font-semibold text-gray-800 dark:text-white/90 sm:text-2xl"
                 >
-                  Seznam voleb
+                  Přehled zpracovaných voleb
                 </h3>
-
-                <p
-                  class="text-sm text-gray-500 dark:text-gray-400 sm:text-base text-left"
-                >
-                </p>
-                <ul>
+                <style>
+                  #seznam-voleb a:hover {
+                    color: #95cdff;
+                  }
+                </style>
+                <ul class="dark:text-white/90" style="list-style: circle; text-align: left; margin: 0 20%;" id="seznam-voleb">
                 <%
                     for (var i = 0; i < seznam.length ; i++) {%>
                         <li><a href="/volby/<%= cesty[i] %>/" target="_blank"><%= seznam[i] %></a>
