@@ -21,6 +21,8 @@ if cesta == "ne":
             seznam.append(f"{d} (druhé kolo)")
         if(os.path.isfile(f"{path}/{d}/statistics.csv")):
             seznam.append(d)
+        if(os.path.isfile(f"{path}/{d}/kvrzcoco.ndjson")):
+            seznam.append(d)
 else:
     filtr_slozek = [f for f in os.listdir(path) if os.path.isdir(os.path.join(path, f))]
     for d in filtr_slozek:
@@ -29,5 +31,7 @@ else:
         if(os.path.isfile(f"{path}/{d}/druhé kolo/statistics.csv")):
             seznam.append(f"{d}/druhé kolo")
         if(os.path.isfile(f"{path}/{d}/statistics.csv")):
+            seznam.append(d)
+        if(os.path.isfile(f"{path}/{d}/kvrzcoco.ndjson")):
             seznam.append(d)
 print(sorted(seznam))
