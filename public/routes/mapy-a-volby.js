@@ -25,34 +25,10 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
             return next()
         }
 
-        switch (info["druh"]) {
-            case "komunální": // pouze dočasné
-                break;
-            case "krajské":
-            case "sněmovní":
-                if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {// byly volby zpracovány?
-                    return next();
-                }
-
-                if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/samostatné`)) {
-                    return next();
-                }
-
-                break;
-            case "prezidentské":
-                if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {// byly volby zpracovány?
-                    return next();
-                }
-
-                info.kolo = req.params.kolo
-
-                if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
-                    return next();
-                }
-                break;
-            default:
-                return next()
-                //break;
+        let volby = pomocnefunkce.overeni(req, info, typzobrazeni)
+        
+        if(volby == 0) {
+            return next()
         }
 
         info.lokalita = {druh: "stát"} // pokud není stanoveno jinak, pro sněmovní, krajské a prezidentské volby platí lokalita stát; NUTNO přepsat v případě kteréhokoliv jiného území VÝHRADNĚ v sekci daného území; tento řádek NEPŘEPISOVAT

@@ -4,13 +4,13 @@ const { chdir, cwd } = require('node:process');
 const fs = require('fs');
 const { exec, execSync } = require('child_process');
 const pomocnefunkce = require("./pomocne.js")
-const chyby = require("./chyby.js")
 
 // Rozcestník obcí pro zobrazení výsledků za jednotlivé obce
 
 const obce = express.Router({mergeParams: true})
 
 obce.get('/obce/', (req, res, next) => {
+    console.log("test3")
 
     if(pomocnefunkce.urllomitka('/obce/', req, res) !== 0) {
         return
@@ -22,11 +22,21 @@ obce.get('/obce/', (req, res, next) => {
         return next()
     }
 
+    let volby = pomocnefunkce.overeni(req, info)
+            
+    if(volby == 0) {
+        return next()
+    }
+
+    console.log("test1")
+
     if((info["druh"] == "prezidentské" && (req.params.kolo == undefined || (req.params.kolo !== "první kolo" && req.params.kolo !== "druhé kolo"))) || (info["druh"] !== "prezidentské" && req.params.kolo !== undefined)) {
         return next()
     }
 
-    return res.render(`${cwd()}/společné/volby/obce.ejs`, {info})
+    console.log("test2")
+
+    return res.render(`${cwd()}/společné/volby/obce.ejs`, {info, zobrazeni:"prehledobci"})
 })
 
 // univerzální funkce pro obce a obvody komumálních a ostatních voleb
@@ -47,48 +57,10 @@ function obce_obvody_vsechny_volby(url, typzobrazeni) {
             return next()
         }
 
-        switch (info["druh"]) { // byly volby zpracovány?
-            case "komunální":
-                if(req.params.obvod == undefined){
-                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
-                        return next()
-                    }
-
-                    if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)) {
-                        return next()
-                    }
-                } else {
-                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
-                        return next()
-                    }
-
-                    if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/samostatné`)) {
-                        return next()
-                    }
-                }
-                break;
-            case "prezidentské":
-                if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {
-                    return next()
-                }
-
-                if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
-                    return next()
-                }
-
-                info.kolo = req.params.kolo
-                
-                break;
-            case "sněmovní":
-            case "krajské":
-                if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`)) {
-                    return next()
-                }
-
-                if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/samostatné`)) {
-                    return next()
-                }
-            break;
+        let volby = pomocnefunkce.overeni(req, info, typzobrazeni)
+        
+        if(volby == 0) {
+            return next()
         }
 
         if(req.params.obec == undefined) {

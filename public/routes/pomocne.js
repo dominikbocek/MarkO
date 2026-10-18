@@ -13,6 +13,60 @@ function nacistJSON(volby) {
     }
 }
 
+function overeni(req, info, typzobrazeni = "") {
+
+    switch (info["druh"]) {
+        case "komunální":
+            if(typzobrazeni !== "") {
+                if(req.params.obvod == undefined){
+                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
+                        return 0
+                    }
+
+                    if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)) {
+                        return 0
+                    }
+                } else {
+                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
+                        return 0
+                    }
+
+                    if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/samostatné`)) {
+                        return 0
+                    }
+                }
+            } else if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/volebni_okrsky-topo.json`) || req.params.kolo !== undefined) {
+                return 0
+            }
+            break;
+        case "krajské":
+        case "sněmovní":
+            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {// byly volby zpracovány?
+                return 0
+            }
+    
+            if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/samostatné`)) {
+                return 0
+            }
+    
+            break;
+        case "prezidentské":
+            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {// byly volby zpracovány?
+                return 0
+            }
+    
+            info.kolo = req.params.kolo
+    
+            if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
+                return 0
+            }
+            break;
+        default:
+            return 0
+            //break;
+        }
+}
+
 function urllomitka(url, req, res) {
     if(url.endsWith("/") && !req.path.endsWith("/")) {
         const queryIndex = req.originalUrl.indexOf("?"); //zjistí, zda původní url obsahovala nějaké query
@@ -34,36 +88,23 @@ function urllomitka(url, req, res) {
 const prehled = express.Router({ mergeParams: true })
 
 prehled.get(["/prehled", "/"], (req, res, next) => {
+
     let info = nacistJSON(req.params.volby)
 
     if (info == null) {
         return next()
     }
 
-    switch (info["druh"]) {// byly volby zpracovány?
-        case "krajské":
-        case "sněmovní":
-            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {
-                return next();
-            }
-            break;
-        case "prezidentské":
-            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {
-                return next();
-            }
-            break;
-        case "komunální":
-            if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
-                return next();
-            }
-            break;
-    }
-
-    if(info["druh"] == "prezidentské") {
-        info.kolo = req.params.kolo
+    let volby = overeni(req, info)
+        
+    if(volby == 0) {
+        return next()
     }
 
     if(req.params.obec == undefined) {
+        if(req.originalUrl.endsWith("/") || !req.originalUrl.endsWith("/prehled")) {
+            return res.redirect(301, req.baseUrl + req.path + "prehled");
+        }
         info.lokalita = {druh: "stát"}
         return res.render(`${cwd()}/společné/volby/volby.ejs`, { info })
     }
@@ -113,4 +154,4 @@ prehled.get(["/prehled", "/"], (req, res, next) => {
     return res.render(`${cwd()}/společné/volby/volby.ejs`, { info , obvody:seznam_obvodu, nazvy:seznam_nazvu_obvodu})
 })
 
-module.exports = {nacistJSON, urllomitka, prehled}
+module.exports = {nacistJSON, urllomitka, overeni, prehled}
