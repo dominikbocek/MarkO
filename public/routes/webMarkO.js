@@ -278,27 +278,11 @@ router.get("/volby", (req, res, next) => {
             console.error(`stderr: ${stderr}`);
         }
     })
-    var mapy_koalic = []
-    var samostatne_mapy = []
 
     seznam = eval(seznam.toString())
     cesty = eval(cesty.toString())
 
-    cesty.forEach(element => {
-        if(fs.existsSync(`${cwd()}/volby/${element}/samostatné/`)) {
-            samostatne_mapy.push("mapy voličské podpory")
-        } else {
-            samostatne_mapy.push("")
-        }
-
-        if(fs.existsSync(`${cwd()}/volby/${element}/volebni_okrsky-simple-data-topo2.json`)) {
-            mapy_koalic.push("koalice")
-        } else {
-            mapy_koalic.push("")
-        }
-    });
-
-    res.render(`${cwd()}/společné/volby/seznam.html`, {seznam:seznam, cesty:cesty, mapy_koalic:mapy_koalic, samostatne_mapy:samostatne_mapy});
+    res.render(`${cwd()}/společné/volby/tailadmin/seznam.html`, {seznam:seznam, cesty:cesty});
 })
 
 router.use("/volby", volby)
