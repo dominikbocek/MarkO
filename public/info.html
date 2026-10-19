@@ -85,32 +85,7 @@
                             <li>0,- (a ještě se šetřilo)</li>
                         </ul>
                     </section>
-                    <script>
-                        fetch('/licenses.json', { 
-                            method: 'GET'
-                        })
-                        .then(function(response) { return response.json(); })
-                        .then(function(json) {
-                            window.seznam = json
-                            let licence = json
-                            let kody = Object.keys(licence)
-                            kody.forEach(
-                                function(element) {
-                                    let kod = document.createElement("h3"); kod.innerHTML = element
-                                    let info = json[element]
-                                    let seznam = document.createElement("ul")
-                                    let autor = document.createElement("li"); if(info["publisher"] !== undefined) {autor.innerHTML = `autor: ${info["publisher"]}`} else {autor.innerHTML = "autor: neuveden"}
-                                    let druhlicence = document.createElement("li"); druhlicence.innerHTML = `druh licence: ${info["licenses"]}`
-                                    let repositar = document.createElement("li"); repositar.innerHTML = `repozitář: <a href='${info["repository"]}'>${element}</a>`
-                                    let souborlicence = document.createElement("li"); souborlicence.innerHTML = `soubor licence: <a href='${info["licenseFile"].substring(info["licenseFile"].indexOf("\\node_modules"))}'>licence</a>`
-                                    seznam.append(autor, druhlicence, repositar, souborlicence)
-
-                                    document.getElementById("prehlednpmlicenci").append(kod, seznam)
-                                }
-                            )
-                        });
-                    </script>
-                    <section id="prehlednpmlicenci">
+                    <section id="prehledlicenci">
                         <h2>Licence</h2>
                         <b>Program ještě není zdaleka dokončen, proto zde nejsou uvedeny všechny licence. S dynamickým vývojem programu je nemožné udržovat seznam aktuální. V budoucnu dojde k revizi.</b>
                         <p>Volební statistiky nejsou standartní součástí programu. V archivačním souboru programu se nacházejí pouze z důvodu zvýšení uživatelského komfortu. Jejich využití podléhá <a href="https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu">licenčním podmínkám Českého statistického úřadu</a>.</p>
@@ -136,6 +111,31 @@
                         </ul>
                         <h3>nodeJS balíčky</h3>
                     </section>
+                    <script>
+                        fetch('/licenses.json', { 
+                            method: 'GET'
+                        })
+                        .then(function(response) { return response.json(); })
+                        .then(function(json) {
+                            window.seznam = json
+                            let licence = json
+                            let kody = Object.keys(licence)
+                            kody.forEach(
+                                function(element) {
+                                    let kod = document.createElement("h3"); kod.innerHTML = element
+                                    let info = json[element]
+                                    let seznam = document.createElement("ul")
+                                    let autor = document.createElement("li"); if(info["publisher"] !== undefined) {autor.innerHTML = `autor: ${info["publisher"]}`} else {autor.innerHTML = "autor: neuveden"}
+                                    let druhlicence = document.createElement("li"); druhlicence.innerHTML = `druh licence: ${info["licenses"]}`
+                                    let repositar = document.createElement("li"); repositar.innerHTML = `repozitář: <a href='${info["repository"]}'>${element}</a>`
+                                    let souborlicence = document.createElement("li"); souborlicence.innerHTML = `soubor licence: <a href='${info["licenseFile"].substring(info["licenseFile"].indexOf("\\node_modules"))}'>licence</a>`
+                                    seznam.append(autor, druhlicence, repositar, souborlicence)
+
+                                    document.getElementById("prehledlicenci").append(kod, seznam)
+                                }
+                            )
+                        });
+                    </script>
                 </div>
             </div>
         </main>
