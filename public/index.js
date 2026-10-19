@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const { exec, execSync } = require('child_process');
+const { chdir, cwd } = require('node:process');
 const { Command } = require('commander');
 const program = new Command();
 const app = express();
@@ -97,7 +98,26 @@ app.use(webMarko)
 //  Zachytávání chyb  //
 ///////////////////////
 
-app.use(chyby.router)
+// společný handler
+app.use((req, res, next) => {
+    return res.status(404).render(`${cwd()}/společné/chyby/chyba.ejs`, {status: 404});
+});
+
+app.use((err, req, res, next) => {
+    console.log(`chyba: ${err}`)
+    if (err.statusCode === 500 || err.status === 500) {
+        chyby.chyba(err.stack)
+        if(err.message == "Neznámý druh voleb.") {
+            return res.status(err.statusCode).send(`<pre>${err.stack}</pre>`)
+        }
+        return res.status(err.statusCode).render(`${cwd()}/společné/chyby/chyba.ejs`, {status: err.statusCode});
+    } else if (err.statusCode === 404 || err.status === 404) {
+        chyby.chyba(err)
+        return res.status(err.statusCode).render(`${cwd()}/společné/chyby/chyba.ejs`, {status: err.statusCode});
+    } else {
+        console.log(err)
+    }
+});
 
 // Spuštění serveru
 app.listen(port, () => {

@@ -10,7 +10,6 @@ const pomocnefunkce = require("./pomocne.js")
 const obce = express.Router({mergeParams: true})
 
 obce.get('/obce/', (req, res, next) => {
-    console.log("test3")
 
     if(pomocnefunkce.urllomitka('/obce/', req, res) !== 0) {
         return
@@ -18,23 +17,7 @@ obce.get('/obce/', (req, res, next) => {
 
     let info = pomocnefunkce.nacistJSON(req.params.volby, next)
 
-    if(info == null) {
-        return next()
-    }
-
-    let volby = pomocnefunkce.overeni(req, info)
-            
-    if(volby == 0) {
-        return next()
-    }
-
-    console.log("test1")
-
-    if((info["druh"] == "prezidentské" && (req.params.kolo == undefined || (req.params.kolo !== "první kolo" && req.params.kolo !== "druhé kolo"))) || (info["druh"] !== "prezidentské" && req.params.kolo !== undefined)) {
-        return next()
-    }
-
-    console.log("test2")
+    pomocnefunkce.overeni(req, res, next, info)
 
     return res.render(`${cwd()}/společné/volby/obce.ejs`, {info, zobrazeni:"prehledobci"})
 })
@@ -53,33 +36,27 @@ function obce_obvody_vsechny_volby(url, typzobrazeni) {
 
         let info = pomocnefunkce.nacistJSON(req.params.volby) // existují volby v seznamu?
 
-        if(info == null) {
-            return next()
-        }
-
-        let volby = pomocnefunkce.overeni(req, info, typzobrazeni)
-        
-        if(volby == 0) {
-            return next()
-        }
-
-        if(req.params.obec == undefined) {
-            info.lokalita = {druh: "stát"}
-            return res.render(`${cwd()}/společné/volby/volby.ejs`, {volby:req.params.volby, info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni})
-        }
+        pomocnefunkce.overeni(req, res, next, info, typzobrazeni)
 
         let info_obec
 
         if(req.params.obvod == undefined) {
+            if(isNaN(req.params.obec)) {
+                throw new chyby.AppError("Neplatný identifikátor obce.", 404)
+            }
             info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obec} --json ano`)
         } else {
+            if(isNaN(req.params.obvod)) {
+                throw new chyby.AppError("Neplatný identifikátor obvodu.", 404)
+            }
             info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obvod} --json ano`)
         }
-
-        try {// v případě, že obec nebude nalezena, vrací python prázdný výstup, NIKOLIV PRÁZDNÝ JSON 
-            info_obec = JSON.parse(info_obec.toString())
+        
+        try {
+            info_obec = JSON.parse(info_obec.toString()) // pokud obec neexistuje v seznamu, prehled se nezobrazí
         } catch (error) {
-            return next()
+            chyby.chyba(error)
+            throw new chyby.AppError("Obec neexistuje.", 404)
         }
 
         info.lokalita = info_obec
@@ -93,7 +70,7 @@ function obce_obvody_vsechny_volby(url, typzobrazeni) {
         const souborynastaveni = fs.readdirSync(`${cwd()}/společné/mapy/nastavení`)
 
         if(info["druh"] == "krajské" && req.params.obec == 554782) { // vyloučení Prahy u krajských voleb
-            return next()
+            throw new chyby.AppError("Praha má v krajských volbách útrum.", 404)
         }
 
         return res.render(`${cwd()}/společné/mapa.html`, {volby:req.params.volby, info:info, typzobrazeni:typzobrazeni, souborynastaveni: souborynastaveni})
@@ -112,16 +89,16 @@ const legenda = express.Router({mergeParams: true})
 legenda.get("/vysledky_cr.json", (req, res, next) => {
     let info = pomocnefunkce.nacistJSON(req.params.volby) // existují volby v seznamu?
 
-    if(info == null) {
-        return next()
-    }
+    pomocnefunkce.overeni(req, res, next, info)
 
     if(info["druh"] == "komunální") {
         if(req.params.obvod !== undefined) {
+            console.log(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/vysledky_cr_${req.params.obvod}.json`)
             return res.sendFile(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/vysledky_cr_${req.params.obvod}.json`)    
         }
 
-        return res.sendFile(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/vysledky_cr_${req.params.obec}.json`)
+        //return res.sendFile(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/vysledky_cr_${req.params.obec}.json`)
+        return res.send(fs.readFileSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/vysledky_cr_${req.params.obec}.json`))
     }
 
     let verze
@@ -138,7 +115,7 @@ legenda.get("/vysledky_cr.json", (req, res, next) => {
             }
             break;
         default:
-            return next()
+            throw new chyby.AppError("Neznámý druh voleb.", 500)
     }
 
     var filtrovanalegenda
@@ -165,8 +142,8 @@ router.get("/:obec/seznam_obvodu.js", (req, res, next) => {
 })
 
 router.use("/:obec/", pomocnefunkce.prehled)
-router.use("/:obec/:obvod/", pomocnefunkce.prehled)
 router.use("/:obec/", legenda)
+router.use("/:obec/:obvod/", pomocnefunkce.prehled)
 router.use("/:obec/:obvod/", legenda)
 
 obce.use("/obce/", router)

@@ -21,15 +21,7 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
 
         let info = pomocnefunkce.nacistJSON(req.params.volby) // existují volby v seznamu?
 
-        if(info == null) {
-            return next()
-        }
-
-        let volby = pomocnefunkce.overeni(req, info, typzobrazeni)
-        
-        if(volby == 0) {
-            return next()
-        }
+        pomocnefunkce.overeni(req, res, next, info, typzobrazeni)
 
         info.lokalita = {druh: "stát"} // pokud není stanoveno jinak, pro sněmovní, krajské a prezidentské volby platí lokalita stát; NUTNO přepsat v případě kteréhokoliv jiného území VÝHRADNĚ v sekci daného území; tento řádek NEPŘEPISOVAT
 
@@ -38,16 +30,7 @@ function snemovna_kraje_prezident(url, typzobrazeni) {
     });
 }
 
-/////////////////////////
-// prezidentské volby //
-///////////////////////
-
-snemovna_kraje_prezident('/:volby/:kolo/vitez', "normální")
-snemovna_kraje_prezident('/:volby/:kolo/samostatn%C3%A9/', "samostatné")
-snemovna_kraje_prezident('/:volby/:kolo/ucast', "účast")
-
-router.use("/:volby/:kolo/", vysledky_obce_ostatni_volby)
-router.use("/:volby/:kolo/", pomocnefunkce.prehled)
+// !!! NEMĚNIT POŘADÍ !!!
 
 ///////////////////////////////
 // krajské a sněmovní volby //
@@ -59,6 +42,17 @@ snemovna_kraje_prezident('/:volby/ucast', "účast")
 
 router.use("/:volby/", vysledky_obce_ostatni_volby) // i pro komunální volby
 router.use("/:volby/", pomocnefunkce.prehled)
+
+/////////////////////////
+// prezidentské volby //
+///////////////////////
+
+snemovna_kraje_prezident('/:volby/:kolo/vitez', "normální")
+snemovna_kraje_prezident('/:volby/:kolo/samostatn%C3%A9/', "samostatné")
+snemovna_kraje_prezident('/:volby/:kolo/ucast', "účast")
+
+router.use("/:volby/:kolo/", vysledky_obce_ostatni_volby)
+router.use("/:volby/:kolo/", pomocnefunkce.prehled)
 
 //////////////////////
 // komunální volby //
@@ -73,7 +67,7 @@ router.use("/:volby/", pomocnefunkce.prehled)
 
 function vypsat_seznam(res, next, slozka) {
     if (!fs.existsSync(slozka)) {
-        return next()
+        throw new chyby.AppError("Volební subjekty nebyly zpracovány.", 404)
     }
     var seznam = execSync(`cd "${slozka}" && python3 "${cwd()}/společné/mapy/seznam/seznam-samostatné.py"`)
     
@@ -81,20 +75,17 @@ function vypsat_seznam(res, next, slozka) {
     return res.type("text/javascript").send(seznam)
 }
 
-router.get('/seznam.js/:volby/:kolo/', (req, res, next) => {
+router.get('/js/seznam.js/:volby/:kolo/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)
 })
-router.get('/seznam.js/:volby/', (req, res, next) => {
+router.get('/js/seznam.js/:volby/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/samostatné`)
 })
-router.get('/seznam.js/:volby/obce/:obec/', (req, res, next) => {
-    console.log("test Svitavy")
+router.get('/js/seznam.js/:volby/obce/:obec/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)
 })
-router.get('/seznam.js/:volby/obce/:obec/:obvod/', (req, res, next) => {
+router.get('/js/seznam.js/:volby/obce/:obec/:obvod/', (req, res, next) => {
     vypsat_seznam(res, next, `${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)
 })
-
-router.use(chyby.router)
 
 module.exports = router;

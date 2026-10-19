@@ -7,62 +7,67 @@ const chyby = require('./chyby.js')
 function nacistJSON(volby) {
     let soubor = `${cwd()}/../sada/${volby}/info.json`
     if (fs.existsSync(soubor)) {
-        return (JSON.parse(fs.readFileSync(`${cwd()}/../sada/${volby}/info.json`).toString()))
+        try {
+            return (JSON.parse(fs.readFileSync(`${cwd()}/../sada/${volby}/info.json`).toString()))
+        } catch (error) {
+            throw new chyby.AppError("Neplatný JSON soubor.", 404)
+        }
     } else {
-        return null
+        throw new chyby.AppError("Zadaný soubor neexistuje", 404)
     }
 }
 
-function overeni(req, info, typzobrazeni = "") {
+function overeni(req, res, next, info, typzobrazeni = "") {
 
     switch (info["druh"]) {
         case "komunální":
-            if(typzobrazeni !== "") {
-                if(req.params.obvod == undefined){
-                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obec}.csv`)) {
-                        return 0
+            if(req.params.obec !== undefined) {
+                if(req.params.obvod == undefined) {
+                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/vysledky_cr_${req.params.obec}.json`)) {
+                        throw new chyby.AppError("Obec neexistuje.", 404)
                     }
 
                     if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/samostatné`)) {
-                        return 0
+                        throw new chyby.AppError("Volební subjekty nebyly zpracovány.", 404)
                     }
                 } else {
-                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/${req.params.obvod}.csv`)) {
-                        return 0
+                    if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/vysledky_cr_${req.params.obvod}.json`)) {
+                        console.log(req.params.obvod)
+                        throw new chyby.AppError("Obvod neexistuje.", 404)
                     }
 
                     if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/samostatné`)) {
-                        return 0
+                        throw new chyby.AppError("Volební subjekty nebyly zpracovány.", 404)
                     }
                 }
-            } else if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/volebni_okrsky-topo.json`) || req.params.kolo !== undefined) {
-                return 0
+            } else if(!fs.existsSync(`${cwd()}/volby/${req.params.volby}/volebni_okrsky-topo.json`) || req.params.kolo !== undefined || typzobrazeni == "normální" || typzobrazeni == "samostatné") {
+                throw new chyby.AppError("Volby nebyly zpracovány.", 404)
             }
             break;
         case "krajské":
         case "sněmovní":
             if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/statistics.csv`) || req.params.kolo !== undefined) {// byly volby zpracovány?
-                return 0
+                throw new chyby.AppError("Volby nebyly zpracovány.", 404)
             }
     
             if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/samostatné`)) {
-                return 0
+                throw new chyby.AppError("Volební subjekty nebyly zpracovány.", 404)
             }
     
             break;
         case "prezidentské":
             if (!fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/statistics.csv`)) {// byly volby zpracovány?
-                return 0
+                throw new chyby.AppError("Volby nebyly zpracovány.", 404)
             }
     
             info.kolo = req.params.kolo
     
             if(typzobrazeni == "samostatné" && !fs.existsSync(`${cwd()}/volby/${req.params.volby}/${req.params.kolo}/samostatné`)) {
-                return 0
+                throw new chyby.AppError("Volební subjekty nebyly zpracovány.", 404)
             }
             break;
         default:
-            return 0
+            throw new chyby.AppError("Neznámý druh voleb.", 500)
             //break;
         }
 }
@@ -91,15 +96,7 @@ prehled.get(["/prehled", "/"], (req, res, next) => {
 
     let info = nacistJSON(req.params.volby)
 
-    if (info == null) {
-        return next()
-    }
-
-    let volby = overeni(req, info)
-        
-    if(volby == 0) {
-        return next()
-    }
+    overeni(req, res, next, info)
 
     if(req.params.obec == undefined) {
         if(req.originalUrl.endsWith("/") || !req.originalUrl.endsWith("/prehled")) {
@@ -113,12 +110,12 @@ prehled.get(["/prehled", "/"], (req, res, next) => {
 
     if(req.params.obvod == undefined) {
         if(isNaN(req.params.obec)) {
-            return next()
+            throw new chyby.AppError("Neplatný identifikátor obce.", 404)
         }
         info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obec} --json ano`)
     } else {
         if(isNaN(req.params.obvod)) {
-            return next()
+            throw new chyby.AppError("Neplatný identifikátor obvodu.", 404)
         }
         info_obec = execSync(`python3 "${cwd()}/../obce/vypsat_obce.py" --vyhledat obec --hledanahodnota ${req.params.obvod} --json ano`)
     }
@@ -127,7 +124,7 @@ prehled.get(["/prehled", "/"], (req, res, next) => {
         info_obec = JSON.parse(info_obec.toString()) // pokud obec neexistuje v seznamu, prehled se nezobrazí
     } catch (error) {
         chyby.chyba(error)
-        return next()
+        throw new chyby.AppError("Obec neexistuje.", 404)
     }
 
     if(req.originalUrl.endsWith("/") || !req.originalUrl.endsWith("/prehled")) {

@@ -21,14 +21,14 @@
     <%
     switch (info["druh"]) {
       case "komunální":
-        %><script src="/volby/seznam.js/<%= info['název'] %>/obce/<%= info['lokalita']['KODZASTUP'] %>/"></script><%
+        %><script src="/volby/js/seznam.js/<%= info['název'] %>/obce/<%= info['lokalita']['KODZASTUP'] %>/"></script><%
         break;
       case "krajské":
       case "sněmovní":
-        %><script src="/volby/seznam.js/<%= info['název'] %>/"/></script><%
+        %><script src="/volby/js/seznam.js/<%= info['název'] %>/"/></script><%
         break;
       case "prezidentské":
-        console.log(info); %><script src="/volby/seznam.js/<%= info['název'] %>/<%= info['kolo'] %>/"></script><%
+        console.log(info); %><script src="/volby/js/seznam.js/<%= info['název'] %>/<%= info['kolo'] %>/"></script><%
         break;
     }
     %>

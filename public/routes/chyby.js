@@ -2,34 +2,17 @@
 //  Zachytávání chyb  //
 ///////////////////////
 
-const express = require('express');
-const router = express.Router();
-const { chdir, cwd } = require('node:process');
-
-// společný handler
-router.use((req, res, next) => {
-    const err = new Error("Stránka nebyla nalezena");
-    err.status = 404;
-
-    const status = err.status || 500;
-
-    res.status(status);
-
-    
-    if (status === 500) {
-        chyba(err)
-        return res.render(`${cwd()}/společné/chyby/chyba.ejs`, {status});
-    }
-
-    if (status === 404) {
-        return res.render(`${cwd()}/společné/chyby/chyba.ejs`, {status});
-    }
-});
+class AppError extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
 
 function chyba(error) {
     if(global.options.debug) {
-        console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error.message}`);
+        console.error(`MarkO: program na vytváření volebních map\nVýpis posledního chybového hlášení (${Date()}):\n${error}`);
     }
 }
 
-module.exports = {router, chyba}
+module.exports = {AppError, chyba}
