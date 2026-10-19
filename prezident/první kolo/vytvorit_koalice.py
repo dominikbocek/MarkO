@@ -108,6 +108,7 @@ def statistiky(zpracovani):
     id = statistika.pop('id')
     vol_seznam = statistika.pop("VOL_SEZNAM")
     pl_hl_celk = statistika.pop("PL_HL_CELK")
+    odevz_obalky = statistika.pop("ODEVZ_OBAL")
     pocet_vs = statistika.pop("POCET_VS")
 
     statistika.rename(columns={x:y for x,y in zip(statistika.columns, range(1, len(statistika.columns) + 1))}, inplace=True) # přečíslování
@@ -115,6 +116,7 @@ def statistiky(zpracovani):
     statistika.insert(0, id.name, id)
     statistika.insert(len(statistika.columns), vol_seznam.name, vol_seznam)
     statistika.insert(len(statistika.columns), pl_hl_celk.name, pl_hl_celk)
+    statistika.insert(len(statistika.columns), odevz_obalky.name, odevz_obalky)
     statistika.insert(len(statistika.columns), pocet_vs.name, pocet_vs)
     statistika.to_csv(statistiky_koalice, index=False)
 
