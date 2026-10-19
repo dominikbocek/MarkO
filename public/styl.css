@@ -171,14 +171,6 @@ select {
     }
 }
 
-.show {
-  transition: all 400ms;
-}
-
-.hide {
-  opacity: 0;
-}
-
 #seznamobci li {
     padding: 5px 35px;
     text-align: left;
