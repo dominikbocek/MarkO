@@ -19,26 +19,27 @@
         <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
         <!-- vlastní styly -->
         <link rel="stylesheet" href="/styl.css">
+        <script src="/fadeInOut.js"></script>
     </head>
     <body hx-ext="response-targets">
         <%- include('společné/menu.ejs') %>
         <div id="alerty">
-            <div id="uspech" class="hide alert alert-success" role="alert">
+            <div id="uspech" class="hide alert alert-success" role="alert" style="display: none">
                 <!-- oznámení o úspěšném vytvoření okrskové map/y -->
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" onclick="document.getElementById('uspech').classList.replace('show', 'hide');">&times;</span>
+                    <span aria-hidden="true" onclick="loa.fadeOut(document.getElementById('uspech'), 250)">&times;</span>
                 </button>
             </div>
-            <div id="info" class="hide alert alert-info" role="alert">
+            <div id="info" class="hide alert alert-info" role="alert" style="display: none">
                 <!-- oznámení o existující mapě -->
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" onclick="document.getElementById('info').classList.replace('show', 'hide')">&times;</span>
+                    <span aria-hidden="true" onclick="loa.fadeOut(document.getElementById('info'), 250)">&times;</span>
                 </button>
             </div>
-            <div id="selhani" class="hide alert alert-danger" role="alert">
+            <div id="selhani" class="hide alert alert-danger" role="alert" style="display: none">
                 <!-- chybová hlášení -->
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true" onclick="document.getElementById('selhani').classList.replace('show', 'hide')">&times;</span>
+                    <span aria-hidden="true" onclick="loa.fadeOut(document.getElementById('selhani'), 250)">&times;</span>
                 </button>
             </div>
         </div>
@@ -52,11 +53,11 @@
         <script>
             document.body.addEventListener('htmx:afterRequest', function(request) {
                 if(request.detail.xhr.status > 399) {
-                    document.getElementById('selhani').classList.replace('hide', 'show')
+                    loa.fadeIn(document.getElementById("selhani"), 250)
                 }
 
                 if(request.detail.xhr.status >= 200 && request.detail.xhr.status < 399 && request.detail.pathInfo.requestPath !== "/vypsat-volby") {
-                    document.getElementById('uspech').classList.replace('hide', 'show')
+                    loa.fadeIn(document.getElementById("uspech"), 250)
                 }
             })
 
