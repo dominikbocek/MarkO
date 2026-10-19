@@ -18,7 +18,7 @@
     <script defer src="/společné/volby/tailadmin/bundle.js"></script>
   </head>
   <body
-    x-data="{ page: 'volby', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': true, 'scrollTop': false }"
+    x-data="{ page: 'volby', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': true, 'scrollTop': false, 'pageName': '<%= info["název"] %>' }"
     x-init="
          darkMode = JSON.parse(localStorage.getItem('darkMode'));
          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
@@ -54,7 +54,7 @@
         <main>
           <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-8">
             <!-- Breadcrumb Start -->
-            <div x-data="{ pageName: `<%- info["název"] %>`}">
+            <div>
               <!-- <include src="./partials/breadcrumb.html" /> -->
               <%- include("./partials/breadcrumb.html") %>
             </div>
