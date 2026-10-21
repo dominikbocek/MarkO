@@ -19,7 +19,7 @@ obce.get('/obce/', (req, res, next) => {
 
     pomocnefunkce.overeni(req, res, next, info)
 
-    return res.render(`${cwd()}/společné/volby/obce.ejs`, {info, zobrazeni:"prehledobci"})
+    return res.render(`${cwd()}/společné/volby/tailadmin/obce.html`, {info, zobrazeni:"prehledobci"})
 })
 
 // univerzální funkce pro obce a obvody komumálních a ostatních voleb
@@ -86,20 +86,10 @@ obce_obvody_vsechny_volby('/:obec/:obvod/ucast', "účast")
 obce_obvody_vsechny_volby('/:obec/:obvod/samostatn%C3%A9/', "samostatné")
 
 const legenda = express.Router({mergeParams: true})
-legenda.get("/vysledky_cr.json", (req, res, next) => {
+legenda.get(["/vysledky_cr.json", "/vysledky_cr2.json"], (req, res, next) => {
     let info = pomocnefunkce.nacistJSON(req.params.volby) // existují volby v seznamu?
 
     pomocnefunkce.overeni(req, res, next, info)
-
-    if(info["druh"] == "komunální") {
-        if(req.params.obvod !== undefined) {
-            console.log(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/vysledky_cr_${req.params.obvod}.json`)
-            return res.sendFile(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/${req.params.obvod}/vysledky_cr_${req.params.obvod}.json`)    
-        }
-
-        //return res.sendFile(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/vysledky_cr_${req.params.obec}.json`)
-        return res.send(fs.readFileSync(`${cwd()}/volby/${req.params.volby}/obce/${req.params.obec}/vysledky_cr_${req.params.obec}.json`))
-    }
 
     let verze
     switch (info["druh"]) {
@@ -121,9 +111,17 @@ legenda.get("/vysledky_cr.json", (req, res, next) => {
     var filtrovanalegenda
 
     if(req.params.obvod == undefined) {
-        filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obec}`)
+        if(req.originalUrl.endsWith("vysledky_cr.json")){
+            filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obec}`)
+        } else {
+            filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --koalice "ano" --kodobec ${req.params.obec}`)
+        }
     } else {
-        filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obvod}`)
+        if(req.originalUrl.endsWith("vysledky_cr2.json")) {
+            filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --kodobec ${req.params.obvod}`)
+        } else {
+            filtrovanalegenda = execSync(`python3 "${cwd()}/../${verze}/legenda.py" --volby "${req.params.volby}" --koalice "ano" --kodobec ${req.params.obvod}`)
+        }
     }
 
     return res.send(filtrovanalegenda)

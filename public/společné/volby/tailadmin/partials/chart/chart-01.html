@@ -26,7 +26,13 @@ async function nactenivysledku(url) {
   }
 }
 
-  const data = await nactenivysledku("./vysledky_cr.json")
+  <% if(info.lokalita.druh !== "stát") {
+    %>const id_obce = <%= info['lokalita']['KODZASTUP'] %>
+  <% } %>
+
+  const vysledky = `<% if(info['druh'] == 'komunální') {%>vysledky_cr_${id_obce}.json<%} else {%>vysledky_cr.json<%}%>`
+
+  const data = await nactenivysledku(vysledky)
   window.filtrovanadata = data.filter(function(el) {if(el["proc_hlasu"] > 1) {return el}})
   filtrovanadata = filtrovanadata.slice(0,10) // prvních deset položek má přiřazené barvy
 
