@@ -42,9 +42,10 @@ else:
 # procházení sloupců ze souhrnného souboru statistik
 for col in strany:
     # vytvoření datové struktury zahrnující id, okrskové výsledky, celkový počet platných hlasů a procentuální výsledek, uzpůsobit počtu stran
+    #print(strany_df[col].sum())
     output_df = pd.DataFrame({
         'id': popisky_df['id'],
-        'PROCENTA': (strany_df[col].astype(int) / popisky_df['PL_HL_CELK'].astype(int))*100,
+        'PROCENTA': (strany_df[col] / popisky_df['PL_HL_CELK'])*100,
         'ucast': strany_df['ucast']
     })
     
