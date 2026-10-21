@@ -1,103 +1,65 @@
 <%
 // u samostatných map urlvykresleni viz prohlížeč.ejs
 switch (info["druh"]) {
-      case "sněmovní":
-        switch(typzobrazeni) {
-            case "normální":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
-                urlinfo = "/společné/mapy/info/sněmovna a kraje/info.js"
-                break;
-            case "samostatné":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
-                urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-kraje-sněmovna.js"
-                break;
-            case "účast":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
-                break;
-        }
+        case "sněmovní":
+        case "krajské":
+            switch(typzobrazeni) {
+                case "normální":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
+                    urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
+                    urlinfo = "/společné/mapy/info/sněmovna a kraje/info.js"
+                    break;
+                case "samostatné":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
+                    urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
+                    urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
+                    urlseznam = "/společné/mapy/seznam/podle voleb/seznam-kraje-sněmovna.js"
+                    break;
+                case "účast":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
+                    urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
+                    urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
+                    break;
+            }
         break;
-      case "prezidentské":
-        switch(typzobrazeni) {
-            case "normální":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
-                urlinfo = "/společné/mapy/info/prezident/info.js"
-                break;
-            case "samostatné":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
-                urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-prezident.js"
-                break;
-            case "účast":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
-                break;
-        }
+        case "prezidentské":
+            switch(typzobrazeni) {
+                case "normální":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
+                    urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
+                    urlinfo = "/společné/mapy/info/prezident/info.js"
+                    break;
+                case "samostatné":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
+                    urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
+                    urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
+                    urlseznam = "/společné/mapy/seznam/podle voleb/seznam-prezident.js"
+                    break;
+                case "účast":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
+                    urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
+                    urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
+                    break;
+            }
         break;
-      case "evropské": // možná jednou budou
-        switch(typzobrazeni) {
-            case "normální":
-                urlvykresleni = "/společné/mapy/vykreslení/podle voleb/eu/vítěz.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-eu.js"
-                urlinfo = "/společné/mapy/info/eu/info.js"
-                break;
-            case "samostatné":
-                urlvykresleni = "/společné/mapy/vykreslení/ostatní/samostatné.js"
-                urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-eu.js"
-                break;
-            case "účast":
-                urlvykresleni = "/společné/mapy/vykreslení/ostatní/účast.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-eu.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
-                break;
-        }
+        case "komunální":
+            switch(typzobrazeni) {
+                case "normální":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
+                    urlparametry = "/společné/mapy/parametry/podle voleb/parametry-obce.js"
+                    urlinfo = "/společné/mapy/info/obce/info.js"
+                    break;
+                case "samostatné":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
+                    urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
+                    urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
+                    urlseznam = "/společné/mapy/seznam/podle voleb/seznam-obce.js"
+                    break;
+                case "účast":
+                    urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
+                    urlparametry = "/společné/mapy/parametry/podle voleb/parametry-obce.js"
+                    urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
+                    break;
+            }
         break;
-      case "krajské":
-        switch(typzobrazeni) {
-            case "normální":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
-                urlinfo = "/společné/mapy/info/sněmovna a kraje/info.js"
-                break;
-            case "samostatné":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
-                urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-kraje-sněmovna.js"
-                break;
-            case "účast":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-celostát-a-kraje.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
-                break;
-        }
-        break;
-      case "komunální": // ještě se uvidí...
-        switch(typzobrazeni) {
-            case "normální":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/vítěz.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-obce.js"
-                urlinfo = "/společné/mapy/info/obce/info.js"
-                break;
-            case "samostatné":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/samostatné.js"
-                urlparametry = "/společné/mapy/parametry/ostatní/parametry-samostatné.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-samostatné.js"
-                urlseznam = "/společné/mapy/seznam/podle voleb/seznam-obce.js"
-                break;
-            case "účast":
-                urlvykresleni = "/společné/mapy/vykreslení/společné/účast.js"
-                urlparametry = "/společné/mapy/parametry/podle voleb/parametry-obce.js"
-                urlinfo = "/společné/mapy/info/ostatní/info-účast.js"
-                break;
-        }
-        break;} %>
+    } %>
