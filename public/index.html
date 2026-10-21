@@ -55,10 +55,6 @@
                 if(request.detail.xhr.status > 399) {
                     loa.fadeIn(document.getElementById("selhani"), 250)
                 }
-
-                if(request.detail.xhr.status >= 200 && request.detail.xhr.status < 399 && request.detail.pathInfo.requestPath !== "/vypsat-volby") {
-                    loa.fadeIn(document.getElementById("uspech"), 250)
-                }
             })
 
             document.body.addEventListener('htmx:beforeRequest', function(request) {
