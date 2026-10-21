@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DRUH_VOLEB="KRAJE"
-
 # Nápověda
 
 source "./nápověda.sh"
