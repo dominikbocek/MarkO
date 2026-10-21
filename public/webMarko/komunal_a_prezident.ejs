@@ -16,6 +16,7 @@
 <!-- pouze pro komunální volby, pozn. bez samosprávných částí -->
 <h3>Vyberte obec</h3>
 <p class="vybrane_volby">vybrané volby: <%- volby %></p>
+<p class="vybrana_obec"></p>
 <div class="container">
     <div>
         <div>
@@ -34,11 +35,19 @@
         </div>
     </div>
 </div>
-<form id="vytvorit_mapu_obce">
+<form id="vytvorit_mapu_obce" hx-post="/okrskove-mapy" hx-target="#faze0" hx-target-error="#selhani">
     <input type="hidden" name="volby" value="<%- volby %>">
     <input type="hidden" name="obec" class="obec">
-    <button type="submit" class="btn" hx-post="/okrskove-mapy" hx-target="#faze0" hx-target-error="#selhani">potvrdit</button>
+    <button type="post" class="btn" disabled>potvrdit</button>
 </form>
+<script>
+    document.getElementById("vytvorit_mapu_obce").addEventListener("click", function(event) {
+        if(document.getElementById("vytvorit_mapu_obce").getElementsByTagName("input")[1].value == "") {
+            alert("chyba")
+            return 0
+        }
+    })
+</script>
 <script type="module">
     import { vyhledat } from "/společné/obce.js"
     document.getElementById("hledatobec").oninput = function() {vyhledat(this.value)}
