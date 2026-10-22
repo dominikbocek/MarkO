@@ -17,12 +17,10 @@ Tento program si klade za cíl zpřístupnit možnosti zpracování otevřených
 
 #### Jak to vlastně funguje?
 
-Práci se statistikami má na starosti python knihovna pandas. NodeJS se pak stará o propojení statistických dat a informacích o okrscích a lokální serverové pozadí. A všechno je to dohromady slepeno pomocí Bashe.
+Z otevřených dat výsledků voleb se vytvoří soubor souhrnných statistik o hlasech pro kandidující subjekty. Každý subjekt má vlastní identifikátor uvedený v seznamu kandidujících subjektů. Souhrnné statistiky obsahují výsledky jednak na úrovni volebních okrsků a jednak na úrovni obcí. Statistiky jsou pak přiřazeny k souřadnicím polohy daných okrsků/obcí. V případě map vítězů každý volební subjekt získá vlastní barvu na základě svého umístění podle počtu hlasů v dané obci/okrsku. Okrsek/obec se zbarví podle subjektu, který na daném území získal nejvíce hlasů.
 ## Varování
 
 Tak jako u jiných aplikací je i tento výplod dodáván tak, jak leží a běží bez záruky na cokoliv. I přesto, že byl testován nespočetněkrát, není vyloučeno, že obsahuje chyby.
-
-Autor tohoto projektu neví o programování o nic víc než běžný smrtelník (proto ten zdrojový kód vypadá, jak vypadá), takže zřeknutí se odpovědnosti berte dvojnásob vážně.
 
 ## Instalace
 
