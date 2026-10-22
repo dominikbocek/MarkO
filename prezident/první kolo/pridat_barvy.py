@@ -13,7 +13,7 @@ volby = argumenty.volby
 koalice = argumenty.koalice
 soubor = ""
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 match koalice:
     case "ne":
@@ -25,7 +25,7 @@ match koalice:
 
 # načtení barev z csv souboru
 barvy = []
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\barvy.csv", 'r') as f:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/barvy.csv", 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         barvy = [barva.strip() for barva in row]

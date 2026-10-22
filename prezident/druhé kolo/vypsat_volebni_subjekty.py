@@ -11,7 +11,7 @@ argumenty = parser.parse_args()
 volby = argumenty.volby
 json = argumenty.json or "ne"
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\druhé kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/druhé kolo")
 
 df = pd.read_csv('candidates.csv')
 

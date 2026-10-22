@@ -16,30 +16,30 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\obvody.py") as obvody:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
     code = obvody.read()
 exec(code)
 
 if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
 else:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
 soubor = ""
 souborjson = ""
 match koalice:
     case "ne":
-        soubor = f"{cesta}\\parties-{obec}.csv"
-        souborjson = f"{cesta}\\parties-{obec}.json"
-        statistiky = f"{cesta}\\{obec}.csv"
+        soubor = f"{cesta}/parties-{obec}.csv"
+        souborjson = f"{cesta}/parties-{obec}.json"
+        statistiky = f"{cesta}/{obec}.csv"
     case "ano":
-        soubor = f"{cesta}\\parties-{obec}-2.csv"
-        souborjson = f"{cesta}\\parties-{obec}-2.json"
-        statistiky = f"{cesta}\\{obec}-2.csv"
+        soubor = f"{cesta}/parties-{obec}-2.csv"
+        souborjson = f"{cesta}/parties-{obec}-2.json"
+        statistiky = f"{cesta}/{obec}-2.csv"
     case "univerzal":
-        soubor = f"{cesta}\\parties-{obec}-univerzal.csv"
-        souborjson = f"{cesta}\\parties-{obec}-univerzal.json"
-        statistiky = f"{cesta}\\{obec}-univerzal.csv"
+        soubor = f"{cesta}/parties-{obec}-univerzal.csv"
+        souborjson = f"{cesta}/parties-{obec}-univerzal.json"
+        statistiky = f"{cesta}/{obec}-univerzal.csv"
     case _:
         sys.exit("Neplatná možnost!")
 

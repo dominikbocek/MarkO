@@ -15,7 +15,7 @@ volby = argumenty.volby
 
 soubor = "statistics-obce.csv"
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}")
 
 with open("info.json", encoding="utf-8") as jsonsoubor:
     info = json.load(jsonsoubor)
@@ -36,11 +36,11 @@ statistics['id'] = statistics['OBEC'].astype(str)
 results = pd.read_csv(seznam_vysledku, delimiter=";", encoding="cp1250")
 results['id'] = results['OBEC'].astype(str)
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}")
 
 # strany
 parties = pd.read_csv("parties.csv", dtype={"STAVREG": str, "KSTRANA": str})
-bezregistrace = subprocess.run(["python3", f"{os.path.dirname(os.path.realpath(__file__))}\\vytvorit_seznam_subjektu.py", "--volby", f"{volby}", "--dosouboru", "False"], capture_output=True, text=True).stdout
+bezregistrace = subprocess.run(["python3", f"{os.path.dirname(os.path.realpath(__file__))}/vytvorit_seznam_subjektu.py", "--volby", f"{volby}", "--dosouboru", "False"], capture_output=True, text=True).stdout
 bezregistrace = eval(bezregistrace)
 parties = parties[["KSTRANA", "VSTRANA"]]
 
@@ -105,7 +105,7 @@ druhafaze.to_csv(soubor, index=False)
 tretifaze = pd.read_csv(soubor)
 
 # obce
-obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\coco.csv", delimiter=";", encoding="cp1250")
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../společné/coco.csv", delimiter=";", encoding="cp1250")
 
 for i, row in tretifaze.iterrows():
     #print(tretifaze.index(i))

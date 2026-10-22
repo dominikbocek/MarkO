@@ -12,7 +12,7 @@ volby = argumenty.volby
 
 soubor = "statistics-obce.csv"
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\sada\\{volby}\\")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../sada/{volby}/")
 
 # 1. fáze: vytvožení statistik (stejné jako v souboru transform.py, jen bez čísel okrsků)
 
@@ -57,7 +57,7 @@ results.insert(len(results.columns), odevz_obalky.name, odevz_obalky)
 results.insert(len(results.columns), pl_hl_celk.name, pl_hl_celk)
 results["POCET_VS"] = len(parties) - len(neplatni_kandidati)
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 results.to_csv(soubor, index=False)
 
 # 2. fáze: první součet
@@ -79,7 +79,7 @@ prvnisoucet.to_csv(soubor, index=False)
 tretifaze = pd.read_csv(soubor)
 
 # obce
-obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\coco.csv", delimiter=";", encoding="cp1250")
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/coco.csv", delimiter=";", encoding="cp1250")
 
 for i, row in tretifaze.iterrows():
     #print(tretifaze.index(i))

@@ -20,7 +20,7 @@ koalice = argumenty.koalice
 nazevkoalice = argumenty.nazevkoalice
 zkratka = argumenty.zkratka
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}")
 
 seznam_stran = "parties-univerzal.csv"
     

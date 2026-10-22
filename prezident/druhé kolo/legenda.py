@@ -19,12 +19,12 @@ volby = argumenty.volby
 kodobec = argumenty.kodobec
 dosouboru = argumenty.dosouboru
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\druhé kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/druhé kolo")
 
 soubor = "candidates.csv"
 souborjson = "vysledky_cr.json"
 
-obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/kvcoco.csv", delimiter=";", encoding="cp1250")
 
 if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["NADRZASTUP"])) | ((obce["KODZASTUP"] == int(kodobec)) & (obce["NADRZASTUP"].isna()))]) > 0 or kodobec == 0:
     statistiky = "statistics-obce.csv" # kvůli dynamickému generování legendy (celkové výsledky pro obec)
@@ -68,7 +68,7 @@ vysledky_sorted = sorted(
 
 # Načtení barev ze souboru csv
 barvy = []
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\barvy.csv", 'r') as f:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/barvy.csv", 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         barvy = [barva.strip() for barva in row]

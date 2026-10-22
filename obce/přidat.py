@@ -13,14 +13,14 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\obvody.py") as obvody:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
     code = obvody.read()
 exec(code)
 
 if statut != 0 and jesamospravnyobvod:
-    kousek = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}\\{statut}-statutární_zastupitelstvo.csv")
-    if os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{statut}.csv"):
+    kousek = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}/{statut}-statutární_zastupitelstvo.csv")
+    if os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{statut}.csv"):
         hlava = False
     else:
         hlava = True
-    kousek.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{statut}.csv", mode='a', index=False, header=hlava)
+    kousek.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{statut}.csv", mode='a', index=False, header=hlava)

@@ -9,11 +9,11 @@ parser.add_argument('--volby', action="store", dest='volby', required=True)
 argumenty = parser.parse_args()
 volby = argumenty.volby
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\druhé kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/druhé kolo")
 
 # načtení barev z csv souboru
 barvy = []
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\barvy.csv", 'r') as f:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/barvy.csv", 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         barvy = [barva.strip() for barva in row]

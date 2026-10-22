@@ -13,18 +13,18 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\obvody.py") as obvody:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
     code = obvody.read()
 exec(code)
 
 if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
 else:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
-mapa = open(f"{cesta}\\volebni_okrsky.ndjson", "w+", newline="")
+mapa = open(f"{cesta}/volebni_okrsky.ndjson", "w+", newline="")
 
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\volebni_okrsky.ndjson") as f:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/volebni_okrsky.ndjson") as f:
     for line in f:
         obvod = json.loads(line)
         if "KOD" in obvod["properties"]:

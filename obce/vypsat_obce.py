@@ -30,7 +30,7 @@ elif vyhledat == "kód":
 elif vyhledat != "":
     sys.exit(f"Neplatná možnost: {vyhledat}")
 
-df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
+df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../společné/kvcoco.csv", delimiter=";", encoding="cp1250")
 
 seznam_obci = df[["KODZASTUP", "NAZEVZAST"]]
 seznam_obci.drop_duplicates(inplace=True)

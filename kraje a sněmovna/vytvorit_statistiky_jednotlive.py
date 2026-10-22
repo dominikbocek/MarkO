@@ -18,7 +18,7 @@ zpracovani = argumenty.zpracovani
 kstrana = argumenty.kstrana
 kstrana = kstrana.split(",")
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}")
 
 # načtení souborů
 if zpracovani == "okrsky":

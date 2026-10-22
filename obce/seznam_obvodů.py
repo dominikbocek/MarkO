@@ -14,7 +14,7 @@ argumenty = parser.parse_args()
 obec = argumenty.obec
 vypsat = argumenty.vypsat
 
-obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../společné/kvcoco.csv", delimiter=";", encoding="cp1250")
 obvody_df = obce[(obce["NADRZASTUP"] == int(obec)) & (obce["KODZASTUP"] != obce["NADRZASTUP"])]
 
 if vypsat == "kód":

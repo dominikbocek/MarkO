@@ -27,7 +27,7 @@ seznam_kandidatu_koalice = "candidates2.csv"
 seznam_kandidatu_vsechno = "candidates-univerzal.csv"
 vysledky = "vysledky_cr2.json"
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 ### upravení seznamu subjektů (přidání koalice do seznamu a vytvoření samostatného souboru) ###
 

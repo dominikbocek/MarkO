@@ -14,7 +14,7 @@ json = argumenty.json or "ne"
 kodobec = argumenty.kodobec
 hledat = argumenty.hledat
 
-df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\kvcoco.csv", delimiter=";", encoding="cp1250")
+df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/kvcoco.csv", delimiter=";", encoding="cp1250")
 
 seznam_obci = df[pd.isna(df["NADRZASTUP"]) | (df["NADRZASTUP"] == df["KODZASTUP"])]
 seznam_obci = seznam_obci[["NAZEVZAST", "KODZASTUP", "NADRZASTUP"]]

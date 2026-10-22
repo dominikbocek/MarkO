@@ -11,7 +11,7 @@ argumenty = parser.parse_args()
 volby = argumenty.volby
 zpracovani = argumenty.zpracovani
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 match zpracovani:
     case "okrsky":

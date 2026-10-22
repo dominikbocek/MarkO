@@ -13,18 +13,18 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\obvody.py") as obvody:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
     code = obvody.read()
 exec(code)
 
 if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
 else:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
-soubor = f"{cesta}\\parties-{obec}.csv"
-statistiky = f"{cesta}\\{obec}.csv"
-souborjson = f"{cesta}\\vysledky_cr_{obec}.json"
+soubor = f"{cesta}/parties-{obec}.csv"
+statistiky = f"{cesta}/{obec}.csv"
+souborjson = f"{cesta}/vysledky_cr_{obec}.json"
 
 data = pd.read_csv(statistiky, delimiter=",", encoding='utf-8')
 platne_hlasy_celkem = int(data["PL_HL_CELK"].sum(axis=0))

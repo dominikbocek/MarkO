@@ -15,27 +15,27 @@ obec = int(argumenty.obec)
 
 # Načti barvy z CSV souboru
 barvy = []
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\společné\\barvy.csv", 'r') as f:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../společné/barvy.csv", 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         barvy = [barva.strip() for barva in row]
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\obvody.py") as obvody:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
     code = obvody.read()
 exec(code)
 
 if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
 else:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
 soubor = ""
 match koalice:
     case "ne":
-        soubor = f"{cesta}\\vysledky_cr_{obec}.json"
+        soubor = f"{cesta}/vysledky_cr_{obec}.json"
     case "ano":
-        soubor = f"{cesta}\\vysledky_cr_{obec}_2.json"
+        soubor = f"{cesta}/vysledky_cr_{obec}_2.json"
     case _:
         sys.exit("Neplatná možnost!")
 

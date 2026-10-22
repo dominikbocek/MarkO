@@ -14,24 +14,24 @@ volby = argumenty.volby
 obec = int(argumenty.obec)
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\obvody.py") as obvody:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
     code = obvody.read()
 exec(code)
 
 if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{statut}\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
 else:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\obce\\{obec}"
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
 soubor = ""
 vysledky = ""
 match koalice:
     case "ne":
-        soubor = f"{cesta}\\parties-{obec}.json"
-        vysledky = f"{cesta}\\vysledky_cr_{obec}.json"
+        soubor = f"{cesta}/parties-{obec}.json"
+        vysledky = f"{cesta}/vysledky_cr_{obec}.json"
     case "ano":
-        soubor = f"{cesta}\\parties-{obec}-2.json"
-        vysledky = f"{cesta}\\vysledky_cr_{obec}_2.json"
+        soubor = f"{cesta}/parties-{obec}-2.json"
+        vysledky = f"{cesta}/vysledky_cr_{obec}_2.json"
     case _:
         sys.exit("Neplatná možnost!")
 

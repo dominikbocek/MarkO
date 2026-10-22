@@ -10,7 +10,7 @@ parser.add_argument('--volby', action="store", dest='volby', required=True)
 argumenty = parser.parse_args()
 volby = argumenty.volby
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\sada\\{volby}\\")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../sada/{volby}/")
 
 # statistiky a přidání id
 statistics = pd.read_csv("pet1.csv", delimiter=";", encoding="cp1250")
@@ -53,5 +53,5 @@ results.insert(len(results.columns), odevz_obalky.name, odevz_obalky)
 results.insert(len(results.columns), pl_hl_celk.name, pl_hl_celk)
 results["POCET_VS"] = len(parties) - len(neplatni_kandidati)
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 results.to_csv("statistics.csv", index=False)

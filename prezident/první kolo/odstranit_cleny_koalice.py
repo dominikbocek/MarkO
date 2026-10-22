@@ -13,7 +13,7 @@ volby = argumenty.volby
 koalice = argumenty.koalice
 koalice = koalice.split(",")
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 # odstranit z legendy mapy
 soubor = open("vysledky_cr2.json", 'r', encoding='utf-8')

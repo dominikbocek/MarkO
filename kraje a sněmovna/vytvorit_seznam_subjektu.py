@@ -10,7 +10,7 @@ argumenty = parser.parse_args()
 volby = argumenty.volby
 dosouboru = argumenty.dosouboru
 
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\info.json", encoding="utf-8") as soubor:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/info.json", encoding="utf-8") as soubor:
     info = json.load(soubor)
     if info["druh"] == "sněmovní":
         from seznam_subjektu import vytvorit_seznam_subjektu_sněmovna

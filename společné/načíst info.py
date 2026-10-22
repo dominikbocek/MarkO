@@ -10,7 +10,7 @@ parser.add_argument('--volby', action="store", dest="volby", required=True)
 argumenty = parser.parse_args()
 
 volby = argumenty.volby
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/")
 info = open("info.json", encoding="utf8")
 data = json.load(info)
 
@@ -28,7 +28,7 @@ match data["druh"]:
     case _:
         sys.exit("Neplatná možnost!")
 
-statutarni_mesta = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\statutární města.csv")
+statutarni_mesta = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/statutární města.csv")
 
 match data["druh"]:
     case "krajské"|"prezidentské"|"sněmovní":
@@ -43,7 +43,7 @@ match data["druh"]:
                 statutarni_mesto = statutarni_mesta[statutarni_mesta["KODMESTA"] == mesto]["KODMESTA"].to_string()
                 novemesto = pd.DataFrame([[mesto, statutarni_mesto, ""]], columns=["OBEC","NAZEVOBCE","OBEC_PREZ"])
                 mesta = pd.concat([mesta, novemesto])
-        mesta.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\města.csv", index=False, encoding="utf8")
+        mesta.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/města.csv", index=False, encoding="utf8")
 
 
 # komunální volby - ověřovat názvy statutárních měst přímo z nově vytvořeného souboru, u ostatních voleb

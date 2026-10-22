@@ -14,7 +14,7 @@ volby = argumenty.volby
 koalice = argumenty.koalice
 zpracovani = argumenty.zpracovani
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 soubor = ""
 

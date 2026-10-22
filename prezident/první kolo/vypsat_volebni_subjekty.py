@@ -13,7 +13,7 @@ volby = argumenty.volby
 vypsat = argumenty.vypsat or "základ"
 json = argumenty.json or "ne"
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 match vypsat:
     case "základ":

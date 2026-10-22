@@ -12,7 +12,7 @@ volby = argumenty.volby
 vypsat = argumenty.vypsat or "základ"
 json = argumenty.json or "ne"
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}")
 
 match vypsat:
     case "základ":

@@ -23,9 +23,9 @@ dosouboru = argumenty.dosouboru
 koalice = argumenty.koalice
 
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
-obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\kvcoco.csv", delimiter=";", encoding="cp1250")
+obce = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/kvcoco.csv", delimiter=";", encoding="cp1250")
 
 if len(obce[((obce["KODZASTUP"] == int(kodobec)) & (obce["KODZASTUP"] == obce["NADRZASTUP"])) | ((obce["KODZASTUP"] == int(kodobec)) & (obce["NADRZASTUP"].isna()))]) > 0 or kodobec == 0:
     match koalice:
@@ -91,7 +91,7 @@ vysledky_sorted = sorted(
 
 # Načtení barev ze souboru csv
 barvy = []
-with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\společné\\barvy.csv", 'r') as f:
+with open(f"{os.path.dirname(os.path.realpath(__file__))}/../../společné/barvy.csv", 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         barvy = [barva.strip() for barva in row]

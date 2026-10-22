@@ -3,7 +3,7 @@ import shutil
 import pandas as pd
 
 def seznam(volby, dosouboru = False):
-    f=pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\sada\\{volby}\\kzrkl.csv", delimiter=";", encoding="cp1250")
+    f=pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../../sada/{volby}/kzrkl.csv", delimiter=";", encoding="cp1250")
     f = f.sort_values(['KSTRANA']) # seřazení podle hodnoty KSTRANA od nejmenšího po největší
     f["STAVREG"] = f["STAVREG"].astype(str) # převedení na řetězec, abychom mohli spojovat hodnoty
     stavregcelk = f.groupby("KSTRANA").agg({'STAVREG': ''.join}) # spojení hodnot STAVREG
@@ -20,7 +20,7 @@ def seznam(volby, dosouboru = False):
     if not dosouboru:
         return bezregistrace
 
-    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}")
+    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}")
     new_f.to_csv("parties.csv")
     if not os.path.exists("parties-univerzal.csv"):
         shutil.copyfile("parties.csv", "parties2.csv")

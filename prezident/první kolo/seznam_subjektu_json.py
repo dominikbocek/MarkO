@@ -15,7 +15,7 @@ koalice = argumenty.koalice
 soubor = ""
 souborjson = ""
 
-os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\..\\public\\volby\\{volby}\\první kolo")
+os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/první kolo")
 
 match koalice:
   case "ne":

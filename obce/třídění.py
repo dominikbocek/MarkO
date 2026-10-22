@@ -10,35 +10,35 @@ parser.add_argument('--volby', action="store", dest='volby', required=True)
 argumenty = parser.parse_args()
 volby = argumenty.volby
 
-datumvoleb = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\datum.csv")["DATUMVOLEB"].to_list()[0]
+datumvoleb = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/datum.csv")["DATUMVOLEB"].to_list()[0]
 
 # import z kvt3.csv
-statistics = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvt3.csv", delimiter=";", encoding="cp1250")
+statistics = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvt3.csv", delimiter=";", encoding="cp1250")
 if not "DATUMVOLEB" in statistics.columns:
     statistics["DATUMVOLEB"] = datumvoleb
-    statistics.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvt3.csv", encoding="cp1250", sep=";", index=False)
+    statistics.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvt3.csv", encoding="cp1250", sep=";", index=False)
 
-    kvcoco = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvcoco.csv", delimiter=";", encoding="cp1250")
+    kvcoco = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvcoco.csv", delimiter=";", encoding="cp1250")
     kvcoco["DATUMVOLEB"] = datumvoleb
-    kvcoco.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvcoco.csv", encoding="cp1250", sep=";", index=False)
+    kvcoco.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvcoco.csv", encoding="cp1250", sep=";", index=False)
 
-    kvrzcoco = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvrzcoco.csv", delimiter=";", encoding="cp1250")
+    kvrzcoco = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvrzcoco.csv", delimiter=";", encoding="cp1250")
     kvrzcoco["DATUMVOLEB"] = datumvoleb
-    kvrzcoco.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvrzcoco.csv", encoding="cp1250", sep=";", index=False)
+    kvrzcoco.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvrzcoco.csv", encoding="cp1250", sep=";", index=False)
 
-    kvhl = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvhl.csv", delimiter=";", encoding="cp1250")
+    kvhl = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvhl.csv", delimiter=";", encoding="cp1250")
     kvhl["DATUMVOLEB"] = datumvoleb
-    kvhl.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvhl.csv", encoding="cp1250", sep=";", index=False)
+    kvhl.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvhl.csv", encoding="cp1250", sep=";", index=False)
 
 statistics['id'] = statistics['OBEC'].astype(str) + '-' + statistics['OKRSEK'].astype(str)
 
 # pouze, pokud neexistují soubory účast.csv a účast-statutární-města.csv
-if not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast.csv") or not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv"):
+if not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast.csv") or not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast-statutární-města.csv"):
     obce = statistics[(statistics["OBEC"] != statistics["KODZASTUP"]) & (statistics["DATUMVOLEB"] == datumvoleb)] # běžné obce + statutární zastupitelstva
     obvody = statistics[(statistics["OBEC"] == statistics["KODZASTUP"]) & (statistics["DATUMVOLEB"] == datumvoleb)] # místní samosprávné obvody
     # odfiltrování statutárních měst
     statutarni_mesta = []
-    with open(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\sada\\{volby}\\kvcoco.csv", 'r') as csvfile:
+    with open(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvcoco.csv", 'r') as csvfile:
         csvreader = csv.DictReader(csvfile, delimiter=";")
         for row in csvreader:
             if row["STAV_OBCE"] == "0" and str(row["DATUMVOLEB"]) == str(datumvoleb): # pokud nemá hodnotu NADRZASTUP, jde o statutární město
@@ -47,7 +47,7 @@ if not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\publi
     for mesto in statutarni_mesta:
         ucast_obce = obce[obce["KODZASTUP"] != int(mesto)] # běžné obce bez statutárních zastupitelstev + statutární města bez samosprávných místních obvodů (Olomouc)
         statutarni_mesta_df = obce[obce["KODZASTUP"] == int(mesto)]
-        statutarni_mesta_df.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", mode="a", index=False, header=not os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv"))
+        statutarni_mesta_df.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast-statutární-města.csv", mode="a", index=False, header=not os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast-statutární-města.csv"))
 
     ucast_obce["ucast"] = (ucast_obce["ODEVZ_OBAL"].astype(int) / ucast_obce["VOL_SEZNAM"].astype(int)) * 100
     ucast_obce = ucast_obce[["id", "KODZASTUP", "POCET_VS", "ODEVZ_OBAL", "VOL_SEZNAM", "PL_HL_CELK", "ucast"]]
@@ -55,12 +55,12 @@ if not os.path.isfile(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\publi
     ucast_obvody = obvody[["id", "KODZASTUP", "POCET_VS", "ODEVZ_OBAL", "VOL_SEZNAM", "PL_HL_CELK"]]
     ucast_obvody["ucast"] = (obvody["ODEVZ_OBAL"].astype(int) / obvody["VOL_SEZNAM"].astype(int)) * 100
 
-    statutarni_mesta_df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", encoding="cp1250")
+    statutarni_mesta_df = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast-statutární-města.csv", encoding="cp1250")
     statutarni_mesta_df["ucast"] = (statutarni_mesta_df["ODEVZ_OBAL"].astype(int) / statutarni_mesta_df["VOL_SEZNAM"].astype(int)) * 100
     statutarni_mesta_df = statutarni_mesta_df[["id", "KODZASTUP", "POCET_VS", "ODEVZ_OBAL", "VOL_SEZNAM", "PL_HL_CELK", "ucast"]]
 
     # Uložení
-    ucast_obce.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast.csv", mode='w+', index=False)
-    ucast_obvody.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast.csv", mode='a', index=False, header=not os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast.csv")) # uložení běžných zastupitelstev + samosprávných obvodů
+    ucast_obce.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast.csv", mode='w+', index=False)
+    ucast_obvody.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast.csv", mode='a', index=False, header=not os.path.exists(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast.csv")) # uložení běžných zastupitelstev + samosprávných obvodů
 
-    statutarni_mesta_df.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}\\..\\public\\volby\\{volby}\\účast-statutární-města.csv", index=False) # uložení statutárních zastupitelstev
+    statutarni_mesta_df.to_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/účast-statutární-města.csv", index=False) # uložení statutárních zastupitelstev
