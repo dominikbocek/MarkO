@@ -62,35 +62,35 @@ Přidejte složku node_modules/.bin do systémové proměnné PATH.
 
 Program lze používat buď z příkazového řádku nebo z prohlížeče. Zobrazení map je možné pouze v prohlížeči, odkud je možné mapy stahovat.
 
-V kořenové složce poté rozklikněte soubor MarkO.py. Případně v terminálu přejděte do složky public a zadejte příkaz:
+### Grafická verze
+
+V kořenovém adresáři (ve složce, v níž se program nachází) rozklikněte soubor MarkO (v závislosti na systému bude mít různou příponu). Vyberte možnost z nabídky zmáčknutím čísla a stiskněte enter. Poté přejděte na adresu [localhost](http://localhost). Pokud jste ppostupovali správně, objeví se uvítací obrazovka. Po stisknutí tlačíka Začít si z rozbalovacího seznamu vyberete volby, jejichž mapu chcete vytvořit. Jakmile bude zpracování dokončeno, program vás odkáže na stránku s mapou.
+
+### CLI verze
 
 ```bash
-  node index.js
+  node public/index.js
 ```
 Ve výchozím nastavení je server spuštěn na portu 80. Lze změnit takto:
 ```bash
-  node index.js --port <port>
-  node index.js -p <port>
+  node public/index.js --port <port>
+  node public/index.js -p <port>
 ```
 
 Můžete případně přidat možnost ```-g``` nebo ```--gui```, čímž automaticky spustíte program v prohlížeči. GUI verze je intuitivní a sama vás navede.
 
 CLI verze:
-1.  extrahujte vybrané satistiky z archivu sada.zip nebo si stáhněte data z webu [volby.cz](https://volby.cz) (viz manuál)
-2.  do stejné složky extrahujte data o rozložení okrsků z archivu okrsky.zip
-3. do stejné složky extrahujte verzi programu pro dané volby
-4. přejděte v terminálu do dané složky a zadejte
+1. extrahujte vybrané satistiky z archivu sada.zip do složky sada v kořenovém adresáři nebo si stáhněte data z webu [volby.cz](https://volby.cz)
+2. do stejné složky extrahujte data o rozložení okrsků z archivu okrsky.zip do složky okrsky v kořenovém adresáři
+3. přejděte do složky podle toho, jaký druh voleb chcete zpracovat, a zadejte
 
 ```bash
-  ./volebni_mapy.sh -n
+  ./volebni_mapy.sh -n "název voleb"
 ```
 Nezapomeňte předtím zadat
 ```bash
   chmod +x volebni_mapy.sh
 ```
-Poté, co se volby zpracují, se automaticky otevře výsledná mapa ve vašem výchozím prohlížeči.
-
-Ostatní možnosti použití naleznete v manuálu.
 
 ## Známé problémy
 
