@@ -5,7 +5,6 @@ cd "$(dirname "$0")/../public"
 pip install -r requirements.txt
 npm install
 PATH=$PATH:"$(pwd)/node_modules/.bin"
-cp ../příprava/volby/MarkO.py ../.MarkO.py
 cd ..
-echo 'python3 .MarkO.py' > MarkO.sh
+echo 'python3 příprava/volby/MarkO.py' > MarkO.sh
 chmod +x MarkO.sh
