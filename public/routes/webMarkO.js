@@ -9,10 +9,11 @@ const fs = require('fs');
 const { exec, execSync } = require('child_process');
 const chyby = require("./chyby.js")
 const volby = require("./mapy-a-volby.js")
+const { exportdoPNG } = require("../společné/mapy/js/svg2png.js")
 const pomocnefunkce = require("./pomocne.js")
 
 router.get('/vypsat-volby', (req, res, next) => {
-    exec(`cd "${cwd()}/../příprava/volby" && python3 zobrazit_volby.py`, (error, stdout, stderr) => {
+    exec(`python3 "${cwd()}/../společné/zobrazit_volby.py`, (error, stdout, stderr) => {
         if (error) {
             chyby.chyba(error)
         }
@@ -261,6 +262,24 @@ router.get("/volby", (req, res, next) => {
     cesty = eval(cesty.toString())
 
     res.render(`${cwd()}/společné/volby/tailadmin/seznam.html`, {seznam:seznam, cesty:cesty});
+})
+
+// ostatní věci
+
+router.post("/stahnout", async (req, res, next) => {
+
+    let svg = req.body.svg
+    let legenda = req.body.legenda
+
+    const vysledek = exportdoPNG(svg, legenda)
+    vysledek.then(function(obrazek) {
+        res.set({
+            "Content-Type": "image/png",
+            "Content-Disposition": 'attachment; filename="mapa.png"',
+            "Content-Length": obrazek.length
+        });
+        res.send(obrazek)
+    })
 })
 
 router.use("/volby", volby)
