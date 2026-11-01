@@ -11,6 +11,10 @@
 # rozšíření nápovědy???
 # datum.csv není součástí sady, ale je nutný pro odstranění duplicit u případných pozdějších doplňovacích voleb apod.
 
+if [ `uname -s` == "Darwin" ]; then
+   PATH=$PATH:/Applications/MarkO/public/node_modules/.bin
+fi
+
 Overeni_souboru() {
    local sada=$1
    local seznam_souboru=("kvcoco.csv" "kvrzcoco.csv" "kvhl.csv" "kvt3.csv" "kvros.csv" "datum.csv") # vynechán soubor barvy.csv, je ve složce s verzí programu
@@ -20,7 +24,7 @@ Overeni_souboru() {
          exit
       fi
    done
-   adresar_voleb="$(realpath "../public/volby/$sada")"
+   adresar_voleb="$(realpath "../public/volby")/$sada"
    adresar_instalace="$(realpath .)"
 }
 
@@ -62,7 +66,7 @@ case $1 in
       Overeni_souboru "$2"
       mkdir -p "$adresar_voleb/obce"
       cd "$adresar_voleb"
-      python3 "$adresar_instalace/třídění.py" --volby "$2"
+      python3 "$adresar_instalace/účast.py" --volby "$2"
       ;;
    -o) # vypíše obce
       if [ $# -lt 4 ]; then
@@ -86,7 +90,7 @@ case $1 in
       Overeni_souboru "$2"
       mkdir -p "$adresar_voleb/obce"
       cd "$adresar_voleb"
-      python3 "$adresar_instalace/třídění.py" --volby "$2"
+      python3 "$adresar_instalace/účast.py" --volby "$2"
       ;;
    -k) # uvoří koalice, doplnit ověření, zda zadané strany vůbec existují, totéž u ostatních verzí programu; zatím to nefunguje pro místní samosprávné obvody
       if [ $# -lt 4 ]; then
@@ -94,7 +98,7 @@ case $1 in
       fi
       Overeni_souboru "$2"
       Overeni_zpracovani "$2" "$3"
-      odpoved="$(python3 ./koalice.py --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
+      odpoved="$(python3 ./vytvorit_koalice.py --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
       if [ "$odpoved" != "ok" ]; then exit; fi
       if [ "$2" == "" ] || [ "$3" == "" ] || [ "$4" == "" ]|| [ "$6" == "" ]; then echo "Nezadali jste potřebné parametry."; exit; fi
       ;;
@@ -104,10 +108,9 @@ case $1 in
       fi
       Overeni_souboru "$2"
       Overeni_zpracovani "$2" "$3"
-      odpoved="$(python3 "$adresar_instalace/koalice_samostatne.py" --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
+      odpoved="$(python3 "$adresar_instalace/vytvorit_koalice_samostatne.py" --volby "$2" --obec "$3" --koalice "$4" --nazevkoalice "$5" --zkratka "$6")"
       if [ "$odpoved" == "" ]; then exit; fi
       if [ "$2" == "" ] || [ "$3" == "" ] || [ "$4" == "" ] || [ "$5" == "" ] || [ "$6" == "" ]; then echo "Nezadali jste potřebné parametry."; exit; fi
-      #python3 "$adresar_instalace/csvtojson.py" --volby "$2" --obec "$3" --koalice univerzal
       ( bash "$adresar_instalace/samostatne.sh" -k "$2" "$odpoved" "$3" )
       exit
       ;;
@@ -130,7 +133,7 @@ esac
 zpracovani_dat() {
    local volby="$1"
    local kodstatut="$2"
-   python3 "$adresar_instalace/odstranit_sloupce.py" --volby "$volby" --obec "$kodstatut"
+   python3 "$adresar_instalace/vytvorit_seznam_subjektu.py" --volby "$volby" --obec "$kodstatut"
    python3 "$adresar_instalace/legenda.py" --volby "$volby" --obec "$kodstatut"
    python3 "$adresar_instalace/pridat_barvy.py" --volby "$volby" --obec "$kodstatut"
 }
@@ -149,11 +152,11 @@ obvody_n_k() {
       echo "${seznam_obvodu[@]}"
       for i in "${seznam_obvodu[@]}"; do # zpracování jednotlivých samosprávných obvodů
          mkdir -p "$adresar_voleb/obce/$kodstatut/$i"
-         python3 "$adresar_instalace/transform.py" --volby "$volby" --obec "$i"
+         python3 "$adresar_instalace/vytvorit_statistiky.py" --volby "$volby" --obec "$i"
          python3 "$adresar_instalace/přidat.py" --volby "$volby" --obec "$i"
       done
    else
-      python3 "$adresar_instalace/transform.py" --volby "$volby" --obec "$kodstatut"
+      python3 "$adresar_instalace/vytvorit_statistiky.py" --volby "$volby" --obec "$kodstatut"
    fi
    if ! $(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$kodstatut" --vratit "jesamospravny") && ! (( $(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$kodstatut" --vratit "kodstatut") == 0 )); then
       if ! [ "$$" -eq "$BASHPID" ]; then
@@ -255,7 +258,7 @@ if [ "$1" == "-S" ]; then
       done
       cd "$obec"
       # zpracování statutárního zastupitelstva
-      # zde transform.py není potřeba, jelikož statistiky k volbám do statutárního zastupitelstva již máme
+      # zde vytvorit_statistiky.py není potřeba, jelikož statistiky k volbám do statutárního zastupitelstva již máme
       if ! test -f "$4-univerzal.csv"; then
          cp "$4.csv" "$4-univerzal.csv"
       fi
@@ -291,7 +294,7 @@ if [ "$1" == "-k" ]; then
    elif (( $kodstatut == 0 )); then
       cd "$adresar_voleb/obce/$3/" || exit
    fi
-   python3 "$adresar_instalace/odstranit_cleny_koalice.py" --volby "$2" --obec "$3" --koalice "$4"
+   python3 "$adresar_instalace/vytvorit_seznam_subjektu.py" --volby "$2" --obec "$3" --koalice "$4"
    zpracovani_dat_k "$2" "$3"
    echo "-k" > .zpracováno
    if [ "$7" == "auto" ]; then

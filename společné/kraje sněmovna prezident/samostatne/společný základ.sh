@@ -4,6 +4,10 @@
 # Možnosti                  #
 #############################
 
+if [ `uname -s` == "Darwin" ]; then
+   PATH=$PATH:/Applications/MarkO/public/node_modules/.bin
+fi
+
 shopt -s extglob
 
 case $1 in

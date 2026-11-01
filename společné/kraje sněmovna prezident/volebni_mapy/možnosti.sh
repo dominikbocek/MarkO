@@ -4,6 +4,10 @@
 # Možnosti                  #
 #############################
 
+if [ `uname -s` == "Darwin" ]; then
+   PATH=$PATH:/Applications/MarkO/public/node_modules/.bin
+fi
+
 case $1 in
    -h) # zobrazí nápovědu
       Help_prikazy_volebni_mapy "$2"

@@ -7,6 +7,10 @@
 # Přidružené scripty
 # URL
 
+if [ `uname -s` == "Darwin" ]; then
+   PATH=$PATH:/Applications/MarkO/public/node_modules/.bin
+fi
+
 source ../společné/urlencode.sh
 
 # Pomocné funkce
@@ -29,12 +33,12 @@ obvody_n_k() {
    if ! (( $(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$obec" --vratit "kodstatut") == 0 )); then # samosprávný obvod
       kod=$(python3 "$adresar_instalace/jestatut.py" --volby "$volby" --obec "$obec" --vratit "kodstatut")
       mkdir -p "$adresar_voleb/obce/$kod/$obec/samostatné"
-      python3 "$adresar_instalace/pouze_hlasy.py" --volby "$volby" --obec "$obec" --koalice "$koalice"
+      python3 "$adresar_instalace/vytvorit_statistiky_pouze_hlasy.py" --volby "$volby" --obec "$obec" --koalice "$koalice"
       cd "$adresar_voleb/obce/$kod/$obec" || exit
    else
       echo "statut nebo obyč"
       mkdir -p "$adresar_voleb/obce/$obec/samostatné"
-      python3 "$adresar_instalace/pouze_hlasy.py" --volby "$volby" --obec "$obec" --koalice "$koalice"
+      python3 "$adresar_instalace/vytvorit_statistiky_pouze_hlasy.py" --volby "$volby" --obec "$obec" --koalice "$koalice"
       cd "$adresar_voleb/obce/$obec" || exit
    fi
 }
@@ -103,7 +107,7 @@ if [ "$1" == "-S" ]; then
 fi
 
 if [ "$1" == "-n" ] || [ "$1" == "-k" ]; then
-   python3 "$adresar_instalace/statistiky_jednotlive.py" --volby "$2" --kstrana "$3" --obec "$4" # zpracuje pouze zadanou stranu/y, pokud není zadána žádná, zpracuje všechny
+   python3 "$adresar_instalace/vytvorit_statistiky_jednotlive.py" --volby "$2" --kstrana "$3" --obec "$4" # zpracuje pouze zadanou stranu/y, pokud není zadána žádná, zpracuje všechny
    #if [ "$7" == "auto" ]; then
    #   otevrit_prohlizec "$2" "$4" "samostatné"
    #fi
