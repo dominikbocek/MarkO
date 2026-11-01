@@ -8,8 +8,6 @@
 #define MyAppURL "https://medium.seznam.cz/autor/dominik-bocek-7918"
 #define MyAppExeName "MarkO.bat"
 #define MyAppAssocName MyAppName + " File"
-#define MyAppAssocExt ".myp"
-#define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 #define DoubleAmp(Value) StringChange(Value, "&", "&&")
 #define EscapeConstArgument(Value) StringChange(StringChange(StringChange(Value, "%", "%25"), ",", "%2c"), "}", "%7d")
 
@@ -24,14 +22,13 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName=%userprofile%\{#MyAppName}
+DefaultDirName=C:\users\{username}\{#MyAppName}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
+DisableWelcomePage=no
 LicenseFile=C:\Users\bocedo00\Downloads\obecní zastupitelstva\MarkO v1.0.3\MarkO v1.0.2\LICENSE
-InfoBeforeFile=C:\Users\bocedo00\Downloads\obecní zastupitelstva\MarkO v1.0.3\MarkO v1.0.2\instalátor\windows\soubory instalátoru\uvítací obrazovka.rtf
-InfoAfterFile=C:\Users\bocedo00\Downloads\obecní zastupitelstva\MarkO v1.0.3\MarkO v1.0.2\instalátor\windows\soubory instalátoru\info licence.rtf
 ; Remove the following line to run in administrative install mode (install for all users).
-PrivilegesRequired=lowest
+PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\bocedo00\Downloads\obecní zastupitelstva\MarkO v1.0.3\MarkO v1.0.2\instalátor\instalátor
 OutputBaseFilename=mysetup
 SolidCompression=yes
@@ -44,20 +41,9 @@ Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\bocedo00\Downloads\obecní zastupitelstva\MarkO v1.0.3\MarkO 2.0.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\bocedo00\Downloads\obecní zastupitelstva\MarkO v1.0.3\MarkO 2.0.0\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files.
 
-[Registry]
-Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocName}"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
-Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
-
-[Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#DoubleAmp(MyAppName)}}"; Flags: shellexec postinstall skipifsilent
+Filename: "{app}\instalátor\windows.bat"
 

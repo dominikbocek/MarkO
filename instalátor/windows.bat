@@ -3,12 +3,6 @@ chcp 65001 >nul
 rem ps1 musí být v utf-8 BOM
 title MarkO - program na vytváření volebních map: instalátor
 echo MarkO - program na vytváření volebních map: instalátor
-rem curl --location https://github.com/dominikbocek/MarkO/archive/refs/tags/2.0.0-beta.5.zip --output .\MarkO.exe
-.\MarkO.exe
-powershell.exe -executionpolicy bypass -file ".\windows\instalátor.ps1"
-if %errorLevel% NEQ 0 (
-    exit 1
-)
 echo.
 echo Probíhá instalace. Nezavírejte okno, dokud se instalace nedokončí.
 echo.
@@ -28,24 +22,24 @@ if %errorLevel% == 0 (
         )
     )
     cd "%~dp0\..\public"
-    start cmd /c "%programfiles%\nodejs\npm" install
+    "%programfiles%\nodejs\npm" install
     cd ..
     curl --location https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe --output .\gitbash.exe
     set opravneni=administrator
+    gitbash.exe /silent
 ) else (
     echo Uživatel nemá administrátorská práva.
     cd ..
     mkdir "nodeJS"
     curl https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip --output .\node-v24.21.0-win-x64.zip
-    powershell.exe -executionpolicy bypass -file ".\příprava\soubory instalátoru\extraktor.ps1" "node-v24.21.0-win-x64.zip" ".\nodeJS">nul
+    powershell.exe -executionpolicy bypass -file ".\instalátor\windows\extraktor.ps1" "node-v24.21.0-win-x64.zip" ".\nodeJS">nul
     cd "%~dp0\..\public"
-    start cmd /c "%~dp0\..\nodeJS\npm" install
+    "%~dp0\..\nodeJS\npm" install
     cd ..
     curl --location https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/PortableGit-2.55.0.5-64-bit.7z.exe --output gitbash.exe
     set opravneni=standard
+    gitbash.exe -y
 )
-
-gitbash.exe
 
 python3 --version >nul
 if %errorLevel% NEQ 0 (
@@ -60,7 +54,6 @@ if %opravneni% == standard (
     setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\public\node_modules\.bin"
 )
 echo node public\index.js menu >> MarkO.bat
-attrib +h ./.verze.txt
+rem attrib +h ./verze.txt
 echo Program MarkO byl úspěšně nainstalován.
-pause
 exit
