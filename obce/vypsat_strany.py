@@ -1,5 +1,6 @@
 import pandas as pd
 import argparse
+import obvody
 import sys
 import os
 
@@ -9,18 +10,17 @@ parser.add_argument('--json', action="store", dest='json', required=False, defau
 parser.add_argument('--volby', action="store", dest='volby', required=True)
 parser.add_argument('--obec', action="store", dest='obec', required=True)
 argumenty = parser.parse_args()
+
 vypsat = argumenty.vypsat or "základ"
 json = argumenty.json or "ne"
 volby = argumenty.volby
 obec = int(argumenty.obec)
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
-if statut != 0:
-    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}")
+if infokod.statut != 0:
+    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{infokod.statut}/{obec}")
 else:
     os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}")
 

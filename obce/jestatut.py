@@ -1,4 +1,5 @@
 import argparse
+import obvody
 import os
 
 # zpracování argumentů
@@ -12,20 +13,18 @@ volby = argumenty.volby
 vratit = argumenty.vratit
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
 match vratit:
     case "jestatut":
-        if jestatut:
+        if infokod.jestatut:
             print("true")
         else:
             print("false")
     case "kodstatut":
-        print(statut)
+        print(infokod.statut)
     case "jesamospravny":
-        if jesamospravnyobvod:
+        if infokod.jesamospravnyobvod:
             print("true")
         else:
             print("false")

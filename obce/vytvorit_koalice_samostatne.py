@@ -1,11 +1,9 @@
 import argparse
-import numpy as np
 import pandas as pd
 import shutil
-import json
-import csv
-import os
+import obvody
 import sys
+import os
 
 # zpracování argumentů a ověřování vstupů
 parser = argparse.ArgumentParser()
@@ -15,28 +13,24 @@ parser.add_argument('--koalice', action="store", dest='koalice', required=True)
 parser.add_argument('--nazevkoalice', action="store", dest='nazevkoalice', required=True)
 parser.add_argument('--zkratka', action="store", dest='zkratka', required=True)
 argumenty = parser.parse_args()
+
 volby = argumenty.volby
 obec = int(argumenty.obec)
 koalice = argumenty.koalice
 nazevkoalice = argumenty.nazevkoalice
 zkratka = argumenty.zkratka
 
-if koalice == "":
-    sys.exit("Musíte zadat čísla koaličních subjektů oddělená čárkou.")
-if nazevkoalice == "":
-    sys.exit("Musíte zadat, jak se koalice bude jmenovat.")
-if zkratka == "":
-    sys.exit("Z důvodu struktury datových sad je potřeba zadat zkratku názvu koalice.")
+for argument in argumenty.__dict__:
+    if argumenty.__dict__[argument] == "":
+        sys.exit(f"Argument {argument} nesmí být prázdný!")
     
 koalice = koalice.split(",")
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
-if statut != 0:
-    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}")
+if infokod.statut != 0:
+    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{infokod.statut}/{obec}")
 else:
     os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}")
 

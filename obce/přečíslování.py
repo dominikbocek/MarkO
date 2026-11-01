@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import obvody
 import argparse
 
 # zpracování argumentů
@@ -12,13 +13,11 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
-if statut != 0 and jesamospravnyobvod:
-    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}")
-elif statut == 0:
+if infokod.statut != 0 and infokod.jesamospravnyobvod:
+    os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{infokod.statut}/{obec}")
+elif infokod.statut == 0:
     os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}")
 else:
     sys.exit()

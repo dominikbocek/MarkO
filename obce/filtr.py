@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import obvody
 import argparse
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -13,12 +14,10 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
-if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
+if infokod.statut != 0:
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{infokod.statut}/{obec}"
 else:
     cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
@@ -31,10 +30,10 @@ with open(f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby
             if obvod["properties"]["KOD"] == obec:
                 mapa.write(line)
         if "Obec" in obvod["properties"]:
-            if statut != 0:
+            if infokod.statut != 0:
                 if obvod["properties"]["Momc"] == obec:
                     mapa.write(line)
-            if statut == 0:
+            if infokod.statut == 0:
                 if obvod["properties"]["Obec"] == obec:
                     mapa.write(line)
     mapa.close()

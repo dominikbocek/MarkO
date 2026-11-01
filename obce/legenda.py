@@ -1,6 +1,7 @@
 import os
 import csv
 import json
+import obvody
 import argparse
 import pandas as pd
 
@@ -13,12 +14,10 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
-if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
+if infokod.statut != 0:
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{infokod.statut}/{obec}"
 else:
     cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 

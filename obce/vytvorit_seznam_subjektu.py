@@ -1,6 +1,7 @@
 import pandas as pd
 import argparse
 import shutil
+import obvody
 import os
 
 # zpracování argumentů
@@ -12,17 +13,15 @@ obec = int(argumenty.obec)
 volby = argumenty.volby
 
 # jde o místní obvod?
-with open(f"{os.path.dirname(os.path.realpath(__file__))}/obvody.py") as obvody:
-    code = obvody.read()
-exec(code)
+infokod = obvody.infokod(volby, obec)
 
 # parties
 parties = pd.read_csv(f"{os.path.dirname(os.path.realpath(__file__))}/../sada/{volby}/kvros.csv", delimiter=";", encoding="cp1250")
 obec_info = parties.drop(parties[parties["KODZASTUP"] != obec].index)
 obec_info = obec_info[["POR_STR_HL", "ZKRATKAO30", "ZKRATKAO8", "OSTRANA", "VSTRANA"]]
 
-if statut != 0:
-    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{statut}/{obec}"
+if infokod.statut != 0:
+    cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{infokod.statut}/{obec}"
 else:
     cesta = f"{os.path.dirname(os.path.realpath(__file__))}/../public/volby/{volby}/obce/{obec}"
 
