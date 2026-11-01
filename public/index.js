@@ -1,22 +1,25 @@
 const { Command } = require('commander');
-const readline = require('node:readline');
 const fs = require('fs');
 const program = new Command();
 const prompt = require("prompt-sync")({ sigint: true });
+const { cwd, chdir } = require('node:process');
 const { server } = require("./routes/server.js");
-const { options } = require('./routes/obce.js');
+
+let verze = fs.readFileSync(`${__dirname}/../verze.txt`).toString()
+
+chdir(__dirname)
 
 program
   .name('MarkO - program na vytváření volebních map')
   .description('Tato část slouží pouze ke spuštění lokálního serveru. Hlavní program najdete ve složkách pro jednotlivé druhy voleb.')
-  .version(fs.readFileSync("../.verze.txt").toString());
+  .version(verze);
 
 program
     .command('menu')
     .description('spustí menu textového uživatelského rozhraní')
     .action(() => {
 
-        console.log(`MarkO - program na vytváření volebních map, verze ${fs.readFileSync("../.verze.txt").toString()}`)
+        console.log(`MarkO - program na vytváření volebních map, verze ${verze}`)
 
         function menu() {
             console.log("1) spustit s grafickým uživatelským rozhraním (doporučeno)")

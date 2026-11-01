@@ -13,7 +13,7 @@ const { exportdoPNG } = require("../společné/mapy/js/svg2png.js")
 const pomocnefunkce = require("./pomocne.js")
 
 router.get('/vypsat-volby', (req, res, next) => {
-    exec(`python3 "${cwd()}/../společné/zobrazit_volby.py`, (error, stdout, stderr) => {
+    exec(`python3 "${cwd()}/../společné/zobrazit_volby.py"`, (error, stdout, stderr) => {
         if (error) {
             chyby.chyba(error)
         }
