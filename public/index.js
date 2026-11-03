@@ -5,7 +5,7 @@ const prompt = require("prompt-sync")({ sigint: true });
 const { cwd, chdir } = require('node:process');
 const { server } = require("./routes/server.js");
 
-let verze = fs.readFileSync(`${__dirname}/../verze.txt`).toString()
+let verze = "2.0.0"
 
 chdir(__dirname)
 
