@@ -22,7 +22,7 @@ if %errorLevel% == 0 (
         )
     )
     cd "%~dp0\..\public"
-    "%programfiles%\nodejs\npm" install
+    call "%programfiles%\nodejs\npm" install
     cd ..
     curl --location https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe --output .\gitbash.exe
     set opravneni=administrator
@@ -34,7 +34,7 @@ if %errorLevel% == 0 (
     curl https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip --output .\node-v24.21.0-win-x64.zip
     powershell.exe -executionpolicy bypass -file ".\instalátor\windows\extraktor.ps1" "node-v24.21.0-win-x64.zip" ".\nodeJS">nul
     cd "%~dp0\..\public"
-    "%~dp0\..\nodeJS\npm" install
+    call "%~dp0\..\nodeJS\npm" install
     cd ..
     curl --location https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/PortableGit-2.55.0.5-64-bit.7z.exe --output gitbash.exe
     set opravneni=standard
@@ -47,13 +47,12 @@ if %errorLevel% NEQ 0 (
     rem Python Installation Manager
 )
 
-start cmd /c pip install -r public\requirements.txt
+call pip install -r public\requirements.txt
 echo @echo off >> MarkO.bat
 echo cls >> MarkO.bat
 if %opravneni% == standard (
     setx Path "%Path%;%cd%\nodeJS;%cd%\PortableGit\usr\bin;%cd%\public\node_modules\.bin"
 )
 echo node public\index.js menu >> MarkO.bat
-rem attrib +h ./verze.txt
 echo Program MarkO byl úspěšně nainstalován.
 exit
