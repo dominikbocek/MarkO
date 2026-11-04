@@ -5,7 +5,7 @@ Jednoduchý program, který zpracovává výsledky voleb v ČR a vytváří z ni
 
 ## O programu
 
-Tento program si klade za cíl zpřístupnit možnosti zpracování otevřených statistických dat o volbách v ČR. Jeho hlavní funkcí je graficky znázornit výsledky voleb pomocí map. Napodobuje tak grafiku užívanou v médiích. Původním záměrem bylo znázornění fantomové hranice Protektorátu Čechy a Morava, v průběhu vývoje se však ukázalo, že možných neviditelných hranic je pravděpodobně více.
+Tento program si klade za cíl zpřístupnit možnosti zpracování otevřených statistických dat o volbách v ČR. Jeho hlavní funkcí je graficky znázornit výsledky voleb pomocí map. Napodobuje tak grafiku užívanou v médiích. Původním záměrem bylo znázornění fantomové hranice Protektorátu Čechy a Morava, v průběhu vývoje se však ukázalo, že možných neviditelných hranic je pravděpodobně více. Program není nijak spjat s Českým statistickým úřadem ani jinou státní a veřejnou institucí. Výstupy si VŽDY ověřte s výsledky na stránkách [volby.cz](https://volby.cz)
 
 ## Co program umí:
 - zpracovává výsledky komunálních, krajských, sněmovních a prezidentských voleb
@@ -18,9 +18,6 @@ Tento program si klade za cíl zpřístupnit možnosti zpracování otevřených
 #### Jak to vlastně funguje?
 
 Z otevřených dat výsledků voleb se vytvoří soubor souhrnných statistik o hlasech pro kandidující subjekty. Každý subjekt má vlastní identifikátor uvedený v seznamu kandidujících subjektů. Souhrnné statistiky obsahují výsledky jednak na úrovni volebních okrsků a jednak na úrovni obcí. Statistiky jsou pak přiřazeny k souřadnicím polohy daných okrsků/obcí. V případě map vítězů každý volební subjekt získá vlastní barvu na základě svého umístění podle počtu hlasů v dané obci/okrsku. Okrsek/obec se zbarví podle subjektu, který na daném území získal nejvíce hlasů.
-## Varování
-
-Tak jako u jiných aplikací je i tento výplod dodáván tak, jak leží a běží bez záruky na cokoliv. I přesto, že byl testován nespočetněkrát, není vyloučeno, že obsahuje chyby.
 
 ## Instalace
 
@@ -42,21 +39,19 @@ Prohlížeč
 Pro Windows:
 - emuleční vrstva [Cygwin](https://cygwin.com/setup-x86_64.exe) nebo [GitforWindows](https://gitforwindows.org/)
 
-### Automatizovaná instalace (doporučeno)
-
-Ve složce ```příprava``` najdete instalační soubory pro váš systém. Pro Windows a macOS jsou výše zmíněné požadované nástroje zahrnuté do instalačních souborů. U uživatelů linuxových distribucí se předpokládá ruční instalace.
-
-<i>Pozn. instalátor <b>nevyžaduje</b> oprávnění správce (platí pouze pro Windows). Pokud chcete instalaci s oprávněním správce, musíte je vynutit při spuštění instalátoru.</i>
+### Instalace
+Instalátory pro Windows a macOS [zde](https://github.com/dominikbocek/MarkO/releases). Linux: viz ruční instalace.
 
 ### Ruční instalace
+Pro případ, že instalátor selže.
 
 Stáhněte požadovaný software uvedený výše. Přejděte do složky public a spusťte příkazy:
 ```
 npm install
 pip install -r requirements.txt
 ```
-Pokud používáte Windows, nainstalujte emulátor Bashe, viz výše.
-Přidejte složku node_modules/.bin do systémové proměnné PATH.
+Pokud používáte Windows, nainstalujte emulátor Bashe, viz výše. Nezapomeňte v případě přenosné (portable) verze přidat cestu do systémové proměnné PATH.
+<b style="color: red">NEPOUŽÍVEJTE</b> WSL (Windows Subsystem for Linux).
 
 ## Použití
 
@@ -80,23 +75,20 @@ Ve výchozím nastavení je server spuštěn na portu 80. Lze změnit takto:
 Můžete případně přidat možnost ```-g``` nebo ```--gui```, čímž automaticky spustíte program v prohlížeči. GUI verze je intuitivní a sama vás navede.
 
 CLI verze:
-1. extrahujte vybrané satistiky z archivu sada.zip do složky sada v kořenovém adresáři nebo si stáhněte data z webu [volby.cz](https://volby.cz)
-2. do stejné složky extrahujte data o rozložení okrsků z archivu okrsky.zip do složky okrsky v kořenovém adresáři
-3. přejděte do složky podle toho, jaký druh voleb chcete zpracovat, a zadejte
+1. Extrahujte vybrané satistiky z archivu sada.zip (ke stažení [zde](https://github.com/dominikbocek/MarkO/releases/tag/2.0.0-beta.5)) do složky sada v kořenovém adresáři nebo si stáhněte data z webu [volby.cz](https://volby.cz)
+2. Do stejné složky extrahujte data o rozložení okrsků z archivu okrsky.zip (ke stažení [zde](https://github.com/dominikbocek/MarkO/releases/tag/2.0.0-beta.5)) do složky okrsky v kořenovém adresáři
+3. Každý druh voleb má dedikovanou vlastní verzi programu. Přejděte do složky podle vybraného druhu voleb a pro zobrazení nápovědy zadejte:
 
 ```bash
-  ./volebni_mapy.sh -n "název voleb"
-```
-Nezapomeňte předtím zadat
-```bash
-  chmod +x volebni_mapy.sh
+  ./volebni_mapy.sh
 ```
 
 ## Známé problémy
 
 ### Chybějící data
-Nejsou zveřejněná data k volbám před rokem 2000 do obecních zastupitelstev, Poslanecké sněmovny, České národní rady a Federálního shromáždění. Chybí data k výsledkům refereda o vstupu do Evropské unie. Do roku 2022 ČSÚ nezveřejňoval k výsledkům voleb hranice volebních okrsků, z toho důvodu jsou některé mapy voleb staršího data (zejména před rokem 2017) zkreslené nebo neúplné. Zejména u statutárních měst se samosprávnými městskými částmi může být zobrazení map částečně nebo zcela nefunkční. Pro komunální volby se používají data z roku 2022, pro všechny ostatní z roku 2025.
+Aktuálně chybí otevřená data k volbám před rokem 2000. Toto omezení se týká voleb do obecních zastupitelstev, Poslanecké sněmovny, České národní rady a Federálního shromáždění. Chybí data k výsledkům referenda o vstupu do Evropské unie. Český statistický úřad nemá v dohledné době v plánu jejich zveřejnění. Do roku 2022 ČSÚ nezveřejňoval k výsledkům voleb hranice volebních okrsků, z toho důvodu jsou některé mapy voleb staršího data (zejména před rokem 2017) zkreslené nebo neúplné. Český úřad zeměměřičský a katastrální poskytuje veřejně pouze nejnovější údaje. V případě stažení dat RÚIANu proto může být zkreslení výraznější. Zejména u statutárních měst se samosprávnými městskými částmi může být zobrazení map částečně nebo zcela nefunkční. Pro komunální volby se používají data z roku 2022, pro všechny ostatní z roku 2025.
 
+### Různé
 U komunálních voleb se ve výchozím stavu zpracovávají výsledky voleb z řádného termínu.
 
 Volby před rokem 2006 nejsou kompatibilní s verzí programu 1.0.0 až 1.0.3.
