@@ -45,7 +45,7 @@ Instalátory pro Windows a macOS [zde](https://github.com/dominikbocek/MarkO/rel
 ### Ruční instalace
 Pro případ, že instalátor selže.
 
-Stáhněte požadovaný software uvedený výše. Přejděte do složky public a spusťte příkazy:
+Stáhněte zdrojový kód a požadovaný software uvedený výše. Přejděte do složky public a spusťte příkazy:
 ```
 npm install
 pip install -r requirements.txt
