@@ -125,6 +125,7 @@
     text-decoration: none;
     transition: all 0.4s ease;
     background: #11101D;
+    border: solid #48d8ff 1px;
 }
 
 .sidebar li a:hover, .sidebar li button:hover {
@@ -146,9 +147,9 @@
     pointer-events: auto;
 }
 
-.sidebar li a:hover .links_name, .sidebar li a:hover i, .sidebar li button:hover i {
+.sidebar li a:hover .links_name, .sidebar li a:hover i, .sidebar li button:hover {
     transition: all 0.5s ease;
-    color: #11101D;
+    color: #11101D !important;
 }
 
 @media screen and (height <= calc(382px + 72px /*součet výšky menu (včetně odsazení) a výšky hlavního tlačítka (včetně odsazení)*/)) {
@@ -160,4 +161,12 @@
 
 h2 {
     font-weight: bold;
+}
+
+#rezim {
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    color: white;
 }
