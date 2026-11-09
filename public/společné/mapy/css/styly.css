@@ -27,74 +27,83 @@ figure > div > i {
   text-align: center;
 }
 
-/* tlačítko stažení */
-
-/* From Uiverse.io by portseif */ 
-/*#stahnout {
-  background-color: #ffffff;
-  border: 1px solid rgb(209, 213, 219);
-  border-radius: 0.5rem;
-  color: #111827;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.25rem;
-  padding: 0.75rem 1rem;
-  text-align: center;
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  display: flex;
-  gap: 2px;
-}
-
-#stahnout:hover {
-  background-color: #f9fafb;
-}
-
-#stahnout:focus {
-  outline: 2px solid rgba(0, 0, 0, 0.1);
-  outline-offset: 2px;
-}
-
-#stahnout:focus-visible {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-#stahnout > svg {
-  position: relative;
-  top: -1px;
-}*/
-
-/* konec stylů tlačítka stažení */
-
 #sudety-prepinac {
   margin-top: 10px;
   text-align: end;
 }
 
-#navigace {
+#kontejner-mapy {
+  width: 100%;
+  height: 100vh;
+}
+
+#mapa {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  /*background: #dfdfdf85;*/
+}
+
+/* sekce nástrojů */
+
+#nastroje {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  margin: 6px 10px;
+  width: auto;
+  right: 0;
+  background: rgba(240,240,255,0.5);
+  padding: 5px;
+  border-radius: 40px;
+  color: black;
+  border: solid 1px rgb(220,220,220);
 }
 
 @media (max-height: 500px) {
-  #nastroje,#navigace {
+  #nastroje {
     zoom: 0.7;
   }
 }
 
 @media (max-width: 800px) {
-  #nastroje,#navigace {
+  #nastroje {
     zoom: 0.7;
   }
+}
+
+#kompas {
+  position: relative;
+  right: 0;
+  width: 55px;
+  height: 55px;
+  border-radius: 45px;
+  background: rgb(255, 255, 255);
+  border: solid black 3px;
+  background: white;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+#kompas .horizontalni {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+#kompas .vertikalni {
+  display: grid;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: fit-content;
+  left: 50%;
+  height: 100%;
 }
 
 #doleva, #doprava, #nahoru, #stred, #dolu {
@@ -107,20 +116,9 @@ figure > div > i {
   gap: 10px;
 }
 
-/*#zoom button, svg button {
-  padding: 13px 25px;
-  border-radius: 8px;
-  border: solid 2px rgb(210,210,210);
-  color: black;
-  background: rgba(240,240,255,1);
-  cursor: pointer;
-  font-size: 16px;
-}*/
-
 dialog {
   background-color: #fff;
   border-radius: 5px;
-  border: none;
   box-shadow: black 17px 20px 20px 0px;
   position: absolute;
   top: 50%;
@@ -134,6 +132,13 @@ dialog {
   dialog {
     background-color: #121212;
     color: white;
+    border: solid #4f4f4f 1px;
+  }
+}
+
+:root[data-theme="light"] {
+  dialog {
+    border: solid #d6d6d6 1px;
   }
 }
 
@@ -162,6 +167,15 @@ dialog::backdrop {
 
 /* sekce pro nastavení mapy */
 
+#nastaveni {
+  width: 255px;
+}
+
+#nastaveni section {
+  display: grid;
+  gap: 20px;
+}
+
 #nastaveni form div {
   margin-top: 10px;
 }
@@ -182,7 +196,6 @@ dialog::backdrop {
   position: absolute;
   visibility: hidden;
   background: white;
-  border: solid #222 1px;
   padding: 5px;
   border-radius: 10px;
   transform: translate(0,0);
@@ -196,17 +209,90 @@ dialog::backdrop {
   #tooltip1, #tooltip2 {
     background: #121212;
   }
-}
 
-:root[data-theme="dark"] {
   svg g {
     fill: white;
+  }
+
+  #tooltip1 button, #tooltip2 button {
+    filter: invert();
   }
 }
 
 #tooltip1 button, #tooltip2 button {
-  filter: invert();
   position: absolute;
   top: 3px;
   right: 3px;
+  border: none;
+  opacity: 1;
+  line-height: 1;
+  font-size: 17px;
+}
+
+#info {
+  border-radius: 10px;
+}
+
+#info button {
+  float: right;
+  border: solid 1px;
+}
+
+:root[data-theme="light"] {
+  #info button {
+    color: black;
+  }
+}
+
+:root[data-theme="dark"] {
+  #info button {
+    color: white;
+  }
+}
+
+#popisek {
+  font-style: italic;
+  text-align: center;
+}
+
+#doleva, #doprava, #nahoru, #dolu {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+#nahoru, #dolu {
+  height: 100%;
+}
+
+#mapa-orientace {
+  display: inline-flex;
+  gap: 10px;
+}
+
+#mapa-orientace button {
+  background: transparent;
+  color: black;
+}
+
+#otevrit-legendu {
+  background: transparent;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: white;
+  line-height: 1;
+  border: none;
+}
+
+#vyber {
+  margin: auto;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+#seznam {
+  width: 160px;
 }
