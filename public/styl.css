@@ -85,6 +85,10 @@ select {
     z-index: 2;
 }
 
+#alerty button {
+    border: none !important;
+}
+
 #alerty > div > span, #alerty > div > button span {
     color: #212529;
 }
