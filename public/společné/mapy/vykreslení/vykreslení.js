@@ -17,7 +17,9 @@ export async function vykresleni_zaklad(geodata, statistiky) {
 
         geometrie.id = idObce
         // u komunálních voleb neúčinné
-        geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
+        if(parametry.druh !== "komunální") {
+            geometrie.properties = {naz_obec: puvodnigeometrie.filter(function(element) {return element.properties.kod_obec == geometrie.id})[0]["properties"]["naz_obec"]}
+        }
 
         return geometrie
         })
