@@ -67,7 +67,7 @@
             //pozn. zakomponovat onbeforeunload, nefunguje na mobilních prohlížečích, ale nepředpokládá se, že by se o to někdo někdy pokoušel
             // začátek zastaralého kódu
         
-            faze0 = document.getElementById("faze0")
+            MarkO = document.getElementById("faze0")
             nacitacianimace = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Čekejte...</span>'
 
             // konec zastaralého kódu
@@ -107,7 +107,7 @@
             }
 
             function checkbox_vsechno() {
-                let checkboxes = faze0.querySelector(".seznam").querySelectorAll('.subjekt');
+                let checkboxes = MarkO.querySelector(".seznam").querySelectorAll('.subjekt');
                 if(document.getElementById("vsechno").checked) {
                     checkboxes.forEach(
                         function(checkbox) {
@@ -150,7 +150,7 @@
                             break;
                     }
                 }
-                let checkboxes = faze0.querySelectorAll('input[type=checkbox]');
+                let checkboxes = MarkO.querySelectorAll('input[type=checkbox]');
                     Array.from(checkboxes).forEach(
                     checkbox => checkbox.onclick = function() {subjekty(this, volby)}
                 );
@@ -158,47 +158,51 @@
             }
 
             function prevPage(volby){
-            pager.prevPage();
-            bindList(volby);
+                pager.prevPage();
+                bindList(volby);
             }
 
             function nextPage(volby){
-            pager.nextPage();
-            bindList(volby);
+                pager.nextPage();
+                bindList(volby);
             }
 
             function pagerInit(p) {
-            p.pagedItems = [];
-            p.currentPage = 0;
-            if (p.itemsPerPage === undefined) {
-                p.itemsPerPage = 5;
-            }
-            p.prevPage = function () {
-            if (p.currentPage > 0) {
-                p.currentPage--;
+                p.pagedItems = [];
+                p.currentPage = 0;
+                if (p.itemsPerPage === undefined) {
+                    p.itemsPerPage = 5;
                 }
-            };
-            p.nextPage = function () {
-                if (p.currentPage < p.pagedItems.length - 1) {
-                p.currentPage++;
-                }
-            };
-            init = function () {
-                for (var i = 0; i < p.items.length; i++) {
-                if (i % p.itemsPerPage === 0) {
-                    p.pagedItems[Math.floor(i / p.itemsPerPage)] = [p.items[i]];
-                } else {
-                    p.pagedItems[Math.floor(i / p.itemsPerPage)].push(p.items[i]);
-                }
-                }
-            };
-            init();
+
+                p.prevPage = function () {
+                if (p.currentPage > 0) {
+                    p.currentPage--;
+                    }
+                };
+
+                p.nextPage = function () {
+                    if (p.currentPage < p.pagedItems.length - 1) {
+                    p.currentPage++;
+                    }
+                };
+
+                init = function () {
+                    for (var i = 0; i < p.items.length; i++) {
+                    if (i % p.itemsPerPage === 0) {
+                        p.pagedItems[Math.floor(i / p.itemsPerPage)] = [p.items[i]];
+                    } else {
+                        p.pagedItems[Math.floor(i / p.itemsPerPage)].push(p.items[i]);
+                    }
+                    }
+                };
+
+                init();
             }
 
             function odstranit_checkbox_vsechno() {
                 if(document.getElementById("vsechno") !== null) {
                     document.getElementById("vsechno").remove()
-                    faze0.querySelector("label").remove()
+                    MarkO.querySelector("label").remove()
                 }
             }
         </script>
