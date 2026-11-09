@@ -67,7 +67,7 @@ router.post('/okrskove-mapy', (req, res, next) => {
     if(info["druh"] == "komunální") {
         if(fs.existsSync(`${cwd()}/volby/${volby}/obce/${obec}/volebni_okrsky-topo.json`)) {
             let zprava = `Mapa okrskových vítězů pro tyto volby už existuje. Pro zobrazení klikněte <a href="/volby/${volby}/obce/${obec}/vitez" target="_blank">sem</a>.`
-            return res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, obec})
+            return res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, info, zprava, obec, jizexistuje: true})
         }
 
         return exec(`cd "${cwd()}/../obce/" && bash ./volebni_mapy.sh -n "${volby}" "" ${obec}`, (error, stdout, stderr) => {
@@ -90,7 +90,7 @@ router.post('/okrskove-mapy', (req, res, next) => {
 
     if(fs.existsSync(`${cwd()}/volby/${volby}/${prezident}/volebni_okrsky-simple-topo.json`)) {
         let zprava = `Mapa okrskových vítězů pro tyto volby už existuje. Pro zobrazení klikněte <a href="/volby/${volby}/${prezident}/" target="_blank">sem</a>.`
-        return res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo})
+        return res.render(`${cwd()}/webMarko/druhafaze.ejs`, {volby, zprava, info, kolo, jizexistuje: true})
     }
         
     return exec(`cd "${cwd()}/../${verzeprogramu}/${prezident}" && bash ./volebni_mapy.sh -n "${volby}"`, (error, stdout, stderr) => {
