@@ -9,7 +9,7 @@ def seznam(volby, dosouboru = False):
     bezregistrace = f[~f["STAVREG"].astype('str').str.contains("0")].index.astype(str).to_list()
     keep_col = ['KSTRANA','VSTRANA','ZKRATKAK30','ZKRATKAK8']
     new_f = f[keep_col]
-    new_f.drop_duplicates(inplace = True)
+    new_f = new_f.drop_duplicates()
     new_f["KSTRANA"] = range(1, len(new_f.index) + 1)
 
     if not dosouboru:

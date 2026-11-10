@@ -111,7 +111,7 @@ def statistiky(zpracovani):
     odevz_obalky = statistika.pop("ODEVZ_OBAL")
     pocet_vs = statistika.pop("POCET_VS")
 
-    statistika.rename(columns={x:y for x,y in zip(statistika.columns, range(1, len(statistika.columns) + 1))}, inplace=True) # přečíslování
+    statistika = statistika.rename(columns={x:y for x,y in zip(statistika.columns, range(1, len(statistika.columns) + 1))}) # přečíslování
 
     statistika.insert(0, id.name, id)
     statistika.insert(len(statistika.columns), vol_seznam.name, vol_seznam)

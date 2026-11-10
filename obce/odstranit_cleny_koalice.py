@@ -41,7 +41,7 @@ statistika["POCET_VS"] = statistika["POCET_VS"] - len(koalice)
 for f in koalice:
     statistika.pop(f) # odstranění členů koalice
 for strana in range(len(cislastran)):
-    statistika.rename(columns={str(cislastran[strana]): str(strana + 1)}, inplace=True) # přejmenování sloupců, aby bylo správné číslování
+    statistika = statistika.rename(columns={str(cislastran[strana]): str(strana + 1)}) # přejmenování sloupců, aby bylo správné číslování
 
 data['POR_STR_HL'] = range(1,statistika["POCET_VS"].loc[0].tolist() + 1)
 

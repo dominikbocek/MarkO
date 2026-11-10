@@ -22,7 +22,7 @@ export function vyhledat(text, odkazy = false) {
                 document.getElementById('hledatobec').value = this.innerText
                 document.getElementById('vytvorit_mapu_obce').querySelector(".obec").value = this.getAttribute("data-kod")
                 document.getElementById("vytvorit_mapu_obce").querySelector("button").disabled = false
-                document.querySelector(".vybrana_obec").innerHTML = "vybraná obec " + this.innerText
+                document.querySelector(".vybrana_obec").innerHTML = "vybraná obec: " + this.innerText
                 if(vysledky[i]["NADRZASTUP"] == "") {// statutární města
                     document.getElementById("mistni_casti").style.display = "block"
                     let celemesto = document.createElement("option")

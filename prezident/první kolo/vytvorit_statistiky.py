@@ -31,7 +31,7 @@ neplatni_kandidati = parties.index[(parties['PLATNOST'] == "N")].tolist()
 
 for bunka in results.columns:
     if bunka.startswith("HLASY_"): # HLASY_  je šest písmen, která budou odstraněna
-        results.rename(columns={bunka: str(int(bunka[6:]))}, inplace=True)
+        results = results.rename(columns={bunka: str(int(bunka[6:]))})
 
 for bunka in results.columns: # smazání přebytečných sloupečků, které byly navíc
     if results[bunka].sum() == 0:
@@ -45,7 +45,7 @@ pl_hl_celk = results.pop("PL_HL_CELK")
 
 odevz_obalky = results.pop("ODEVZ_OBAL")
 
-results.rename(columns={x:y for x,y in zip(results.columns, range(1, len(results.columns) + 1))}, inplace=True) # přečíslování
+results = results.rename(columns={x:y for x,y in zip(results.columns, range(1, len(results.columns) + 1))}) # přečíslování
 
 results.insert(0, id.name, id)
 results.insert(len(results.columns), vol_seznam.name, vol_seznam)

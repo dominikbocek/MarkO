@@ -31,7 +31,7 @@ neplatni_kandidati = parties.index[(parties['PLATNOST'] == "N")].tolist()
 
 for bunka in results.columns:
     if bunka.startswith("HLASY_"): # HLASY_  je šest písmen, která budou odstraněna
-        results.rename(columns={bunka: str(int(bunka[6:]))}, inplace=True)
+        results = results.rename(columns={bunka: str(int(bunka[6:]))})
 
 for bunka in results.columns: # smazání přebytečných sloupečků, které byly navíc
     if results[bunka].sum() == 0:
@@ -51,7 +51,7 @@ results.insert(len(results.columns), col.name, col)
 col = results.pop("ODEVZ_OBAL")
 results.insert(len(results.columns), col.name, col)
 
-results.rename(columns={results.columns[1]: "1", results.columns[2]: "2"}, inplace=True) # přečíslování
+results = results.rename(columns={results.columns[1]: "1", results.columns[2]: "2"}) # přečíslování
 
 os.chdir(f"{os.path.dirname(os.path.realpath(__file__))}/../../public/volby/{volby}/druhé kolo")
 results.to_csv("statistics.csv", index=False)
