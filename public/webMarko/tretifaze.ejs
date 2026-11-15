@@ -11,6 +11,7 @@
     <form id="koalice" hx-post="/koalice" hx-target="#faze0" hx-target-error="#selhani" hx-trigger="click from:#vytvorit">
         <input type="hidden" name="volby" value="<%- volby %>">
         <% if(info["druh"] == "prezidentské") {%><input type="hidden" name="kolo" value="<%= kolo %>"><%} %>
+        <% if(info["druh"] == "komunální") {%><input type="hidden" name="obec" value="<%= obec %>"><%} %>
         <input type="hidden" name="druh_map" value="<%- druh_map %>">
         <input type="hidden" name="cisla">
         <input type="text" name="nazev_koalice" id="zkratkak30" class="form-control" maxlength="30" placeholder="zadejte název koalice (max. 30 písmen)">
