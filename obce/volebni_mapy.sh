@@ -294,7 +294,6 @@ if [ "$1" == "-k" ]; then
    elif (( $kodstatut == 0 )); then
       cd "$adresar_voleb/obce/$3/" || exit
    fi
-   python3 "$adresar_instalace/vytvorit_seznam_subjektu.py" --volby "$2" --obec "$3" --koalice "$4"
    zpracovani_dat_k "$2" "$3"
    echo "-k" > .zpracováno
    if [ "$7" == "auto" ]; then
